@@ -1,7 +1,8 @@
 package de.telekom.test.steps;
 
-import de.telekom.test.interaction.ScenarioInteraction;
+import de.telekom.test.frontend.selenium.BrowserDriverUpdater;
 import de.telekom.test.frontend.selenium.WebDriverWrapper;
+import de.telekom.test.interaction.ScenarioInteraction;
 import de.telekom.test.interaction.StoryInteraction;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,14 @@ public class LifecyleSteps {
 
 	@Autowired
 	private WebDriverWrapper webDriverWrapper;
+
+	@Autowired
+	private BrowserDriverUpdater browserDriverUpdater;
+
+	@BeforeStories
+	public void updateDriver() {
+		browserDriverUpdater.updateDriver();
+	}
 
 	@BeforeStory
 	public void startStoryInteraction() {

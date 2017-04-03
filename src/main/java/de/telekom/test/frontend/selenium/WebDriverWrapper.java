@@ -1,9 +1,5 @@
 package de.telekom.test.frontend.selenium;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.EdgeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.web.selenium.WebDriverProvider;
@@ -50,8 +46,6 @@ public class WebDriverWrapper implements WebDriverProvider {
 	private WebDriver driver;
 
 	public void loadWebdriver() {
-		setProxy();
-
 		String browser = getBrowser();
 
 		log.info("Brower set to: " + browser);
@@ -85,11 +79,6 @@ public class WebDriverWrapper implements WebDriverProvider {
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 	}
 
-	private void setProxy() {
-		System.setProperty("http.proxyHost", proxyHost);
-		System.setProperty("http.proxyPort", proxyPort);
-	}
-
 	private String getBrowser() {
 		String browser = System.getProperty("browser");
 		if (StringUtils.isBlank(browser)) {
@@ -100,21 +89,10 @@ public class WebDriverWrapper implements WebDriverProvider {
 	}
 
 	private void initFirefox() {
-		if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
-			FirefoxDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-		}
-		FirefoxDriverManager.getInstance().setup();
-
 		driver = new FirefoxDriver();
 	}
 
 	private void initChrome() {
-		System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
-		if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
-			ChromeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-		}
-		ChromeDriverManager.getInstance().setup();
-
 		DesiredCapabilities caps = DesiredCapabilities.chrome();
 		caps.setCapability("disable-restore-session-state", true);
 		caps.setCapability("disable-application-cache", true);
@@ -127,16 +105,10 @@ public class WebDriverWrapper implements WebDriverProvider {
 	}
 
 	private void initSafari() {
-
 		driver = new SafariDriver();
 	}
 
 	private void initInternetExplorer() {
-		if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
-			InternetExplorerDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-		}
-		InternetExplorerDriverManager.getInstance().setup();
-
 		DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
 		ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 		ieCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
@@ -152,11 +124,6 @@ public class WebDriverWrapper implements WebDriverProvider {
 	}
 
 	private void initEdge() {
-		if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
-			EdgeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-		}
-		EdgeDriverManager.getInstance().setup();
-
 		driver = new EdgeDriver();
 	}
 
