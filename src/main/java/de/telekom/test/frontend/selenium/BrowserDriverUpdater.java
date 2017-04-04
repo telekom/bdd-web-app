@@ -27,6 +27,12 @@ public class BrowserDriverUpdater {
 	@Value("${yeti.systest.webdriver.proxy.port}")
 	private String proxyPort;
 
+	/*
+	 * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded
+	 *
+	 * https://github.com/bonigarcia/webdrivermanager
+	 * https://developer.github.com/v3/#rate-limiting
+	 */
 	public void updateDriver() {
 		String browser = getBrowser();
 
