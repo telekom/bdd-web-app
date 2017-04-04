@@ -89,7 +89,10 @@ public class WebDriverWrapper implements WebDriverProvider {
 	}
 
 	private void initFirefox() {
-		driver = new FirefoxDriver();
+		DesiredCapabilities caps = DesiredCapabilities.firefox();
+		caps.setCapability("overlappingCheckDisabled", true);
+
+		driver = new FirefoxDriver(caps);
 	}
 
 	private void initChrome() {
