@@ -28,7 +28,8 @@ public class BrowserDriverUpdater {
 	private String proxyPort;
 
 	/*
-	 * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded
+	 * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
+	 * This applies to the driver for firefox and opera.
 	 *
 	 * https://github.com/bonigarcia/webdrivermanager
 	 * https://developer.github.com/v3/#rate-limiting
