@@ -120,6 +120,11 @@ public class WebElementEnhanced implements WebElement, LazyElement {
 		return webElement.getScreenshotAs(outputType);
 	}
 
+	public void waitForDisplayed(int maxWaitTimeInSeconds) {
+		String errorMessage = "Element: \"" + getWebElement() + "\" is still not displayed!";
+		waitUntil(webElement::isDisplayed, errorMessage, maxWaitTimeInSeconds);
+	}
+
 	public void scrollTo() {
 		((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(false);", webElement);
 		Wait<WebDriver> wait = new WebDriverWait(webDriver, 1);
