@@ -1,5 +1,6 @@
 package de.telekom.test.frontend.element.decorator;
 
+import de.telekom.test.frontend.element.WebElementEnhanced;
 import net.sf.cglib.proxy.Enhancer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

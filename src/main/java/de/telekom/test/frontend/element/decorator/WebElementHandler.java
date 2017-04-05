@@ -1,5 +1,6 @@
 package de.telekom.test.frontend.element.decorator;
 
+import de.telekom.test.frontend.element.WebElementEnhanced;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import org.openqa.selenium.WebDriver;
@@ -44,12 +45,12 @@ public class WebElementHandler implements MethodInterceptor {
 	}
 
 	private Object invokeWebElementEnhanced(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-		if (!method.getName().equals("setElement")
-				&& !method.getName().equals("getElement")
+		if (!method.getName().equals("setWebElement")
+				&& !method.getName().equals("getWebElement")
 				&& !method.getName().equals("setWebDriver")) {
-			WebElement element = locator.findElement();
 			WebElementEnhanced webElementEnhanced = (WebElementEnhanced) o;
-			webElementEnhanced.setElement(element);
+			WebElement element = locator.findElement();
+			webElementEnhanced.setWebElement(element);
 			webElementEnhanced.setWebDriver(webDriver);
 		}
 		try {
@@ -64,10 +65,11 @@ public class WebElementHandler implements MethodInterceptor {
 		List<WebElement> elements = locator.findElements();
 		for (int i = 0; i < elements.size(); i++) {
 			WebElementEnhanced webElementEnhanced = new WebElementEnhanced();
-			webElementEnhanced.setElement(elements.get(i));
+			webElementEnhanced.setWebElement(elements.get(i));
 			webElementEnhanced.setWebDriver(webDriver);
 			list.add(webElementEnhanced);
 		}
+
 		try {
 			return methodProxy.invoke(list, objects);
 		} catch (InvocationTargetException e) {

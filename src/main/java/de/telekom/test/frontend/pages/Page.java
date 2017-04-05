@@ -1,6 +1,8 @@
 package de.telekom.test.frontend.pages;
 
+import de.telekom.test.frontend.element.WebElementEnhanced;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
@@ -32,16 +34,14 @@ public abstract class Page {
 		driver.navigate().refresh();
 	}
 
-	protected void setValue(WebElement element, String value) {
-		element.clear();
-		element.sendKeys(value);
-	}
-
 	public boolean elementExists(WebElement element) {
+		if (element instanceof WebElementEnhanced) {
+			element = ((WebElementEnhanced) element).getWebElement();
+		}
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		try {
 			element.getLocation();
-		} catch (NoSuchElementException e) {
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
 			return false;
 		} finally {
 			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);

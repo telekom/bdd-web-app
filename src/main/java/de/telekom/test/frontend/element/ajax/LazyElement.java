@@ -1,9 +1,9 @@
-package de.telekom.test.frontend.pages.ajax;
+package de.telekom.test.frontend.element.ajax;
 
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-public interface LazyElements {
+public interface LazyElement {
 
 	default void waitUntil(WaitFor waitFor, String errorMessage, int maxWaitTimeInSeconds) {
 		int attemptWaitTime = 250;
@@ -31,9 +31,11 @@ public interface LazyElements {
 		throw new RuntimeException(errorMessage, latestException);
 	}
 
-	default void waitForDisplayed(WebElement element, int maxWaitTimeInSeconds) {
-		String errorMessage = "Element: \"" + element + "\" is still not displayed!";
-		waitUntil(element::isDisplayed, errorMessage, maxWaitTimeInSeconds);
+	default void waitForDisplayed(int maxWaitTimeInSeconds) {
+		String errorMessage = "Element: \"" + getWebElement() + "\" is still not displayed!";
+		waitUntil(getWebElement()::isDisplayed, errorMessage, maxWaitTimeInSeconds);
 	}
+
+	WebElement getWebElement();
 
 }
