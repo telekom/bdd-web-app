@@ -1,7 +1,7 @@
 package de.telekom.test.frontend.steps;
 
 import com.google.common.collect.Maps;
-import de.telekom.test.frontend.element.decorator.ElementDecorator;
+import de.telekom.test.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.frontend.pages.Page;
 import de.telekom.test.interaction.ScenarioInteraction;
@@ -40,7 +40,7 @@ public abstract class SeleniumSteps {
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		}
-		initElements(new ElementDecorator(driver), page);
+		initElements(new WebElementDecorator(driver), page);
 		storyInteraction.remember(LifecyleSteps.CURRENT_PAGE, page);
 		return page;
 	}

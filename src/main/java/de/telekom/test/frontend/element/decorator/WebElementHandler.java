@@ -18,14 +18,14 @@ import static java.util.Arrays.asList;
 /**
  * Created by d.keiss on 05.04.2017.
  */
-public class ElementHandler implements MethodInterceptor {
+public class WebElementHandler implements MethodInterceptor {
 
 	private static final List<String> IGNORED_METHODS = asList("toString", "hashCode");
 
 	private final ElementLocator locator;
 	private final WebDriver webDriver;
 
-	public ElementHandler(WebDriver webDriver, Field field) {
+	public WebElementHandler(WebDriver webDriver, Field field) {
 		this.locator = new DefaultElementLocatorFactory(webDriver).createLocator(field);
 		this.webDriver = webDriver;
 	}

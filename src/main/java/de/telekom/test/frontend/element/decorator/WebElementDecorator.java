@@ -14,11 +14,11 @@ import java.util.List;
 /**
  * Created by d.keiss on 05.04.2017.
  */
-public class ElementDecorator implements FieldDecorator {
+public class WebElementDecorator implements FieldDecorator {
 
 	private final WebDriver webDriver;
 
-	public ElementDecorator(WebDriver webDriver) {
+	public WebElementDecorator(WebDriver webDriver) {
 		this.webDriver = webDriver;
 	}
 
@@ -45,8 +45,8 @@ public class ElementDecorator implements FieldDecorator {
 
 	private Object getEnhancedObject(Field field) {
 		Enhancer e = new Enhancer();
-		e.setSuperclass(field.getClass());
-		e.setCallback(new ElementHandler(webDriver, field));
+		e.setSuperclass(field.getType());
+		e.setCallback(new WebElementHandler(webDriver, field));
 		return e.create();
 	}
 
