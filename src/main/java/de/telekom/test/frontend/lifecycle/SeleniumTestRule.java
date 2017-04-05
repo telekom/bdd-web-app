@@ -1,4 +1,4 @@
-package de.telekom.test.frontend.selenium;
+package de.telekom.test.frontend.lifecycle;
 
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;

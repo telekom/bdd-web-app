@@ -1,4 +1,4 @@
-package de.telekom.test.frontend.selenium.screenshot;
+package de.telekom.test.frontend.screenshot;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.reporters.StoryReporterBuilder;

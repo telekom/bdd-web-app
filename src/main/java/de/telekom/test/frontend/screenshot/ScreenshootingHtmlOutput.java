@@ -1,4 +1,4 @@
-package de.telekom.test.frontend.selenium.screenshot;
+package de.telekom.test.frontend.screenshot;
 
 import org.jbehave.core.failures.UUIDExceptionWrapper;
 import org.jbehave.core.model.Story;

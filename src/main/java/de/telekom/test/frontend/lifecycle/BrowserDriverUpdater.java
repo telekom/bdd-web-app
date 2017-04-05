@@ -1,4 +1,4 @@
-package de.telekom.test.frontend.selenium;
+package de.telekom.test.frontend.lifecycle;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.EdgeDriverManager;

@@ -1,7 +1,7 @@
 package de.telekom.test.steps;
 
-import de.telekom.test.frontend.selenium.BrowserDriverUpdater;
-import de.telekom.test.frontend.selenium.WebDriverWrapper;
+import de.telekom.test.frontend.lifecycle.BrowserDriverUpdater;
+import de.telekom.test.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.interaction.ScenarioInteraction;
 import de.telekom.test.interaction.StoryInteraction;
 import org.jbehave.core.annotations.*;

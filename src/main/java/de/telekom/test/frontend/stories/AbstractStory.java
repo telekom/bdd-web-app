@@ -2,7 +2,7 @@ package de.telekom.test.frontend.stories;
 
 import com.google.common.collect.Lists;
 import de.codecentric.jbehave.junit.monitoring.JUnitReportingRunner;
-import de.telekom.test.frontend.selenium.screenshot.ScreenshootingHtmlFormat;
+import de.telekom.test.frontend.screenshot.ScreenshootingHtmlFormat;
 import de.telekom.test.steps.Steps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;

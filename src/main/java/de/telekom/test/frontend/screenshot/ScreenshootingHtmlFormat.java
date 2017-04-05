@@ -1,6 +1,6 @@
-package de.telekom.test.frontend.selenium.screenshot;
+package de.telekom.test.frontend.screenshot;
 
-import de.telekom.test.frontend.selenium.WebDriverWrapper;
+import de.telekom.test.frontend.lifecycle.WebDriverWrapper;
 import org.jbehave.core.reporters.FilePrintStreamFactory;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporter;

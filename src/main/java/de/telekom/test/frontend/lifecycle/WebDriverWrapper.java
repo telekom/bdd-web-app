@@ -1,4 +1,4 @@
-package de.telekom.test.frontend.selenium;
+package de.telekom.test.frontend.lifecycle;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
