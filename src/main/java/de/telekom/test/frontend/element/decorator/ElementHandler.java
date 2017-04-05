@@ -33,37 +33,46 @@ public class ElementHandler implements MethodInterceptor {
 	public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
 		if (IGNORED_METHODS.contains(method.getName())) {
 			return methodProxy.invokeSuper(o, objects);
-		} else if (o instanceof WebElementEnhanced) {
-			if (!method.getName().equals("setElement")
-					&& !method.getName().equals("getElement")
-					&& !method.getName().equals("setWebDriver")) {
-				WebElement element = locator.findElement();
-				WebElementEnhanced webElementEnhanced = (WebElementEnhanced) o;
-				webElementEnhanced.setElement(element);
-				webElementEnhanced.setWebDriver(webDriver);
-			}
-			try {
-				return methodProxy.invokeSuper(o, objects);
-			} catch (InvocationTargetException e) {
-				throw e.getCause();
-			}
-		} else if (o instanceof List) {
-			List<Object> list = new ArrayList<>();
-			List<WebElement> elements = locator.findElements();
-			for (int i = 0; i < elements.size(); i++) {
-				WebElementEnhanced webElementEnhanced = new WebElementEnhanced();
-				webElementEnhanced.setElement(elements.get(i));
-				webElementEnhanced.setWebDriver(webDriver);
-				list.add(webElementEnhanced);
-			}
-			try {
-				return methodProxy.invoke(list, objects);
-			} catch (InvocationTargetException e) {
-				throw e.getCause();
-			}
 		}
-
+		if (o instanceof WebElementEnhanced) {
+			return invokeWebElementEnhanced(o, method, objects, methodProxy);
+		}
+		if (o instanceof List) {
+			return invokeListContainingWebElementEnhanced(objects, methodProxy);
+		}
 		return null;
+	}
+
+	private Object invokeWebElementEnhanced(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+		if (!method.getName().equals("setElement")
+				&& !method.getName().equals("getElement")
+				&& !method.getName().equals("setWebDriver")) {
+			WebElement element = locator.findElement();
+			WebElementEnhanced webElementEnhanced = (WebElementEnhanced) o;
+			webElementEnhanced.setElement(element);
+			webElementEnhanced.setWebDriver(webDriver);
+		}
+		try {
+			return methodProxy.invokeSuper(o, objects);
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
+		}
+	}
+
+	private Object invokeListContainingWebElementEnhanced(Object[] objects, MethodProxy methodProxy) throws Throwable {
+		List<Object> list = new ArrayList<>();
+		List<WebElement> elements = locator.findElements();
+		for (int i = 0; i < elements.size(); i++) {
+			WebElementEnhanced webElementEnhanced = new WebElementEnhanced();
+			webElementEnhanced.setElement(elements.get(i));
+			webElementEnhanced.setWebDriver(webDriver);
+			list.add(webElementEnhanced);
+		}
+		try {
+			return methodProxy.invoke(list, objects);
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
+		}
 	}
 
 }

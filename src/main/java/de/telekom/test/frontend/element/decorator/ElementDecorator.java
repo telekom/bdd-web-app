@@ -1,7 +1,6 @@
 package de.telekom.test.frontend.element.decorator;
 
 import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
@@ -18,34 +17,37 @@ import java.util.List;
 public class ElementDecorator implements FieldDecorator {
 
 	private final WebDriver webDriver;
-	private final DefaultFieldDecorator defaultFieldDecorator;
 
 	public ElementDecorator(WebDriver webDriver) {
 		this.webDriver = webDriver;
-		this.defaultFieldDecorator = new DefaultFieldDecorator(new DefaultElementLocatorFactory(webDriver));
 	}
 
 	public Object decorate(ClassLoader loader, Field field) {
-		if (WebElementEnhanced.class.isAssignableFrom(field.getType()) && field.isAnnotationPresent(FindBy.class)) {
-			return getEnhancedObject(field.getType(), new ElementHandler(webDriver, field));
-		} else if (List.class.isAssignableFrom(field.getType())
-				&& WebElementEnhanced.class.isAssignableFrom(getFirstGenericTypeOfList(field))
-				&& field.isAnnotationPresent(FindBy.class)) {
-			return getEnhancedObject(field.getType(), new ElementHandler(webDriver, field));
-		} else {
-			return defaultFieldDecorator.decorate(loader, field);
+		if (isWebElementEnhanced(field)) {
+			return getEnhancedObject(field);
 		}
+		if (isListWithWebElementEnhanced(field)) {
+			return getEnhancedObject(field);
+		}
+		return new DefaultFieldDecorator(new DefaultElementLocatorFactory(webDriver)).decorate(loader, field);
 	}
 
-	private Object getEnhancedObject(Class clzz, MethodInterceptor methodInterceptor) {
+	private boolean isWebElementEnhanced(Field field) {
+		return WebElementEnhanced.class.isAssignableFrom(field.getType()) && field.isAnnotationPresent(FindBy.class);
+	}
+
+	private boolean isListWithWebElementEnhanced(Field field) {
+		return List.class.isAssignableFrom(field.getType())
+				&& WebElementEnhanced.class.isAssignableFrom(
+				(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0])
+				&& field.isAnnotationPresent(FindBy.class);
+	}
+
+	private Object getEnhancedObject(Field field) {
 		Enhancer e = new Enhancer();
-		e.setSuperclass(clzz);
-		e.setCallback(methodInterceptor);
+		e.setSuperclass(field.getClass());
+		e.setCallback(new ElementHandler(webDriver, field));
 		return e.create();
-	}
-
-	private Class<?> getFirstGenericTypeOfList(Field field) {
-		return (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
 	}
 
 }
