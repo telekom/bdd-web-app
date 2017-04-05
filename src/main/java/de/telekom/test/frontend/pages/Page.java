@@ -1,8 +1,7 @@
 package de.telekom.test.frontend.pages;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -35,6 +34,24 @@ public abstract class Page {
     protected void setValue(WebElement element, String value) {
         element.clear();
         element.sendKeys(value);
+    }
+
+    protected WebElement scrollTo(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+        ExpectedCondition<Boolean> expectation = arg0 -> {
+            try {
+                return element.isDisplayed();
+            } catch (WebDriverException e) {
+                return true;
+            }
+        };
+        Wait<WebDriver> wait = new WebDriverWait(driver, 1);
+        wait.until(expectation);
+        return element;
+    }
+
+    protected void scrollToAndClick(WebElement element) {
+        scrollTo(element).click();
     }
 
     public boolean elementExists(WebElement element) {
