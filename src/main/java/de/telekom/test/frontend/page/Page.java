@@ -1,4 +1,4 @@
-package de.telekom.test.frontend.pages;
+package de.telekom.test.frontend.page;
 
 import de.telekom.test.frontend.element.WebElementEnhanced;
 import org.openqa.selenium.NoSuchElementException;

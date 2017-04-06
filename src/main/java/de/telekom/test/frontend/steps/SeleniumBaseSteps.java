@@ -1,6 +1,6 @@
 package de.telekom.test.frontend.steps;
 
-import de.telekom.test.frontend.pages.UrlMatchesExpectation;
+import de.telekom.test.frontend.page.UrlMatchesExpectation;
 import de.telekom.test.steps.Steps;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;

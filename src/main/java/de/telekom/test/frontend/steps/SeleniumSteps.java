@@ -3,7 +3,7 @@ package de.telekom.test.frontend.steps;
 import com.google.common.collect.Maps;
 import de.telekom.test.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.frontend.lifecycle.WebDriverWrapper;
-import de.telekom.test.frontend.pages.Page;
+import de.telekom.test.frontend.page.Page;
 import de.telekom.test.interaction.ScenarioInteraction;
 import de.telekom.test.interaction.StoryInteraction;
 import de.telekom.test.steps.LifecyleSteps;
@@ -99,11 +99,11 @@ public abstract class SeleniumSteps {
 		return url;
 	}
 
-	public Map<String, String> mapQueryParam() {
+	protected Map<String, String> mapQueryParam() {
 		return getMapFromStoryInteraction();
 	}
 
-	public <T> Map<String, T> getMapFromStoryInteraction() {
+	protected <T> Map<String, T> getMapFromStoryInteraction() {
 		Object body = scenarioInteraction.recall(SeleniumSteps.QUERY_PARAMS);
 		if (body == null) {
 			scenarioInteraction.remember(SeleniumSteps.QUERY_PARAMS, Maps.newHashMap());
