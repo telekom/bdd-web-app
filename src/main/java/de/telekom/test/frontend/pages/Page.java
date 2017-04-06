@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 /**
  * Base class for page objects. Page objects represent a certain page of a certain YETI module. It models test relevant interactions and state as an easy to use
@@ -35,21 +36,17 @@ public abstract class Page {
 	}
 
 	public boolean elementExists(WebElementEnhanced element) {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		try {
-			element.getLocation();
-		} catch (NoSuchElementException | StaleElementReferenceException e) {
-			return false;
-		} finally {
-			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		}
-		return true;
+		return elementExists(o -> element.getLocation());
 	}
 
 	public boolean elementExists(WebElement element) {
+		return elementExists(o -> element.getLocation());
+	}
+
+	private boolean elementExists(Function function) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		try {
-			element.getLocation();
+			function.apply(Void.TYPE);
 		} catch (NoSuchElementException | StaleElementReferenceException e) {
 			return false;
 		} finally {

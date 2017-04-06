@@ -18,6 +18,10 @@ public class WebElementEnhanced implements LazyElement {
 	public WebElementEnhanced() {
 	}
 
+	public WebElementEnhanced(WebElement webElement) {
+		this.webElement = webElement;
+	}
+
 	public WebElementEnhanced(WebElement webElement, WebDriver webDriver) {
 		this.webElement = webElement;
 		this.webDriver = webDriver;
@@ -109,6 +113,9 @@ public class WebElementEnhanced implements LazyElement {
 	}
 
 	public void scrollTo() {
+		if (webDriver == null) {
+			throw new IllegalStateException("Webdriver must be set to use this method!");
+		}
 		((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(false);", webElement);
 		Wait<WebDriver> wait = new WebDriverWait(webDriver, 1);
 		wait.until(driver -> {
