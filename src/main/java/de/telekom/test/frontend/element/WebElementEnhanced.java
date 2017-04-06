@@ -68,7 +68,7 @@ public class WebElementEnhanced implements LazyElement {
 	}
 
 	public Rectangle getRect() {
-		return null;
+		return webElement.getRect();
 	}
 
 	public List<WebElement> findElements(By by) {

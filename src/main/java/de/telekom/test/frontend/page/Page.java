@@ -19,7 +19,7 @@ import java.util.function.Function;
  */
 public abstract class Page {
 
-	protected WebDriver driver;
+	protected final WebDriver driver;
 
 	protected Page(WebDriver driver) {
 		this.driver = driver;

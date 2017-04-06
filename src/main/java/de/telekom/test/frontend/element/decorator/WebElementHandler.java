@@ -63,9 +63,9 @@ public class WebElementHandler implements MethodInterceptor {
 	private Object invokeListContainingWebElementEnhanced(Object[] objects, MethodProxy methodProxy) throws Throwable {
 		List<Object> list = new ArrayList<>();
 		List<WebElement> elements = locator.findElements();
-		for (int i = 0; i < elements.size(); i++) {
+		for (WebElement element : elements) {
 			WebElementEnhanced webElementEnhanced = new WebElementEnhanced();
-			webElementEnhanced.setWebElement(elements.get(i));
+			webElementEnhanced.setWebElement(element);
 			webElementEnhanced.setWebDriver(webDriver);
 			list.add(webElementEnhanced);
 		}

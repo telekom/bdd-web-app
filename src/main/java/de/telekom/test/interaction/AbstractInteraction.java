@@ -26,8 +26,6 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
 		}
 	}
 
-	;
-
 	public void setInteraction(T interaction) {
 		threadLocal.set(interaction);
 	}
@@ -53,7 +51,7 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
 
 	public void rememberToList(String key, String value) {
 		List<String> list = recallList(key);
-		if(list == null) {
+		if (list == null) {
 			list = new ArrayList<>();
 			remember(key, list);
 		}
@@ -76,7 +74,6 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
 	public List<String> recallList(String key) {
 		return recall(key);
 	}
-
 
 	/**
 	 * Get some data in the interaction context.

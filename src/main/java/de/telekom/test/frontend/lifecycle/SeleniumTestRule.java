@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SeleniumTestRule implements MethodRule {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private WebDriverWrapper webDriverWrapper;

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BrowserDriverUpdater {
 
-	private Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
+	private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
 	@Value("${yeti.systest.browser}")
 	private String defaultBrowser;

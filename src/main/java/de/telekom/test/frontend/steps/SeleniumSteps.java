@@ -82,20 +82,22 @@ public abstract class SeleniumSteps {
 	}
 
 	protected String appendUrl(String url, String... appenders) {
+		StringBuilder urlBuilder = new StringBuilder(url);
 		for (String appender : appenders) {
 			boolean alreadyAppended = false;
-			if (url.endsWith("/") && appender.startsWith("/")) {
-				url += StringUtils.substring(appender, 1);
+			if (urlBuilder.toString().endsWith("/") && appender.startsWith("/")) {
+				urlBuilder.append(StringUtils.substring(appender, 1));
 				alreadyAppended = true;
 			}
 			if (!alreadyAppended) {
-				if (url.endsWith("/") || appender.startsWith("/")) {
-					url += appender;
+				if (urlBuilder.toString().endsWith("/") || appender.startsWith("/")) {
+					urlBuilder.append(appender);
 				} else {
-					url += "/" + appender;
+					urlBuilder.append("/").append(appender);
 				}
 			}
 		}
+		url = urlBuilder.toString();
 		return url;
 	}
 

@@ -7,8 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 public class UrlMatchesExpectation implements ExpectedCondition<Boolean> {
 
 	private final String detail;
-	private String urlToMatch;
-	private WebDriver driver;
+	private final String urlToMatch;
+	private final WebDriver driver;
 
 	public UrlMatchesExpectation(WebDriver driver, String urlToMatch, String detail) {
 		this.urlToMatch = urlToMatch;

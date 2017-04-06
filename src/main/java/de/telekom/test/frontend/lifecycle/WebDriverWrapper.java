@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class WebDriverWrapper implements WebDriverProvider {
 
-	private Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
+	private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
 	@Value("${yeti.systest.browser}")
 	private String defaultBrowser;

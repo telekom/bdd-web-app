@@ -78,7 +78,7 @@ public class CompareUtils {
 
 			assertThat(actualAsBoolean, is(expectedAsBoolean));
 			return;
-		} else if (actual instanceof BigDecimal || actual instanceof Double || actual instanceof Float) {
+		} else if (actual instanceof Double || actual instanceof Float) {
 			// try BigDecimal
 			try {
 				BigDecimal actualBigDecimal = new BigDecimal(actual.toString());
