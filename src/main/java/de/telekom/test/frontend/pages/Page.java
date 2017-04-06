@@ -34,10 +34,19 @@ public abstract class Page {
 		driver.navigate().refresh();
 	}
 
-	public boolean elementExists(WebElement element) {
-		if (element instanceof WebElementEnhanced) {
-			element = ((WebElementEnhanced) element).getWebElement();
+	public boolean elementExists(WebElementEnhanced element) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		try {
+			element.getLocation();
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+			return false;
+		} finally {
+			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		}
+		return true;
+	}
+
+	public boolean elementExists(WebElement element) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		try {
 			element.getLocation();
