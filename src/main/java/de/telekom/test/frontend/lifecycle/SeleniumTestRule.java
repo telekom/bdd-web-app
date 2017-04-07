@@ -1,5 +1,7 @@
 package de.telekom.test.frontend.lifecycle;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
@@ -9,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SeleniumTestRule implements MethodRule {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	private WebDriverWrapper webDriverWrapper;
+	private final @NonNull WebDriverWrapper webDriverWrapper;
 
 	@Override
 	public Statement apply(Statement statement, FrameworkMethod frameworkMethod, Object o) {

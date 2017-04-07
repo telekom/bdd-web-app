@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Created by d.keiss on 08.11.2016.
  */
 @Steps
-public class SeleniumBaseSteps extends SeleniumSteps {
+public final class SeleniumBaseSteps extends SeleniumSteps {
 
 	@When("run browserback")
 	public void runBrowserback() {

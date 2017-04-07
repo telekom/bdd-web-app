@@ -23,7 +23,7 @@ import java.util.Map;
 @Component
 public class RequestBuilder {
 
-	private final RestAssuredConfig BASIC_REST_CONFIG = new RestAssuredConfig().decoderConfig(new DecoderConfig("UTF-8"))
+	private final RestAssuredConfig basicRestConfig = new RestAssuredConfig().decoderConfig(new DecoderConfig("UTF-8"))
 			.encoderConfig(new EncoderConfig("UTF-8", "UTF-8"))
 			.objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
 
@@ -58,7 +58,7 @@ public class RequestBuilder {
 				requestSpecification.proxy(proxyHost, new Integer(proxyPort));
 			}
 
-			requestSpecification.config(BASIC_REST_CONFIG);
+			requestSpecification.config(basicRestConfig);
 			requestSpecification.header("Accept", ContentType.JSON.toString());
 			requestSpecification.header("Content-Type", ContentType.JSON.toString());
 		} catch (Exception ex) {

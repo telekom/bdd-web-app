@@ -1,14 +1,14 @@
 package de.telekom.test.frontend.element.decorator;
 
 import de.telekom.test.frontend.element.WebElementEnhanced;
+import lombok.RequiredArgsConstructor;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -19,17 +19,13 @@ import static java.util.Arrays.asList;
 /**
  * Created by d.keiss on 05.04.2017.
  */
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebElementHandler implements MethodInterceptor {
 
 	private static final List<String> IGNORED_METHODS = asList("toString", "hashCode");
 
-	private final ElementLocator locator;
 	private final WebDriver webDriver;
-
-	public WebElementHandler(WebDriver webDriver, Field field) {
-		this.locator = new DefaultElementLocatorFactory(webDriver).createLocator(field);
-		this.webDriver = webDriver;
-	}
+	private final ElementLocator locator;
 
 	public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
 		if (IGNORED_METHODS.contains(method.getName())) {

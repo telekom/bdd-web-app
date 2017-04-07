@@ -3,6 +3,8 @@ package de.telekom.test.api;
 import com.jayway.restassured.response.Response;
 import de.telekom.test.interaction.ScenarioInteraction;
 import de.telekom.test.steps.Steps;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +14,11 @@ import static org.hamcrest.Matchers.isEmptyString;
 import static org.junit.Assert.assertThat;
 
 @Steps
-public class ApiBaseSteps {
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public final class ApiBaseSteps {
 
-	@Autowired
-	private ScenarioInteraction scenarioInteraction;
-
-	@Autowired
-	private RequestBuilder requestBuilder;
+	private final @NonNull ScenarioInteraction scenarioInteraction;
+	private final @NonNull RequestBuilder requestBuilder;
 
 	@Given("path param $attribute $value")
 	public void pathParamAttributeWithValue(String attribute, String value) {

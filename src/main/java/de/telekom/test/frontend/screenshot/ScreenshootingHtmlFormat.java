@@ -1,6 +1,7 @@
 package de.telekom.test.frontend.screenshot;
 
 import de.telekom.test.frontend.lifecycle.WebDriverWrapper;
+import lombok.NonNull;
 import org.jbehave.core.reporters.FilePrintStreamFactory;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporter;
@@ -12,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScreenshootingHtmlFormat extends Format {
 
-	@Autowired
-	private WebDriverWrapper webDriverWrapper;
+	private final @NonNull WebDriverWrapper webDriverWrapper;
 
 	@Value("${yeti.systest.screenshot.onsuccess}")
 	private boolean screenshotsOnSuccess;
 
-	public ScreenshootingHtmlFormat() {
+	public ScreenshootingHtmlFormat(@Autowired WebDriverWrapper webDriverWrapper) {
 		super("HTML");
+		this.webDriverWrapper = webDriverWrapper;
 	}
 
 	@Override

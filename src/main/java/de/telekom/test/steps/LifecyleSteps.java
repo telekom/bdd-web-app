@@ -4,6 +4,8 @@ import de.telekom.test.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.interaction.ScenarioInteraction;
 import de.telekom.test.interaction.StoryInteraction;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by d.keiss on 18.08.2016.
  */
 @Steps
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class LifecyleSteps {
 
 	/*
@@ -20,17 +23,11 @@ public class LifecyleSteps {
 	 */
 	public static final String CURRENT_PAGE = "CURRENT_PAGE";
 
-	@Autowired
-	protected ScenarioInteraction scenarioInteraction;
+	protected final @NonNull ScenarioInteraction scenarioInteraction;
+	protected final @NonNull StoryInteraction storyInteraction;
 
-	@Autowired
-	protected StoryInteraction storyInteraction;
-
-	@Autowired
-	private WebDriverWrapper webDriverWrapper;
-
-	@Autowired
-	private BrowserDriverUpdater browserDriverUpdater;
+	private final @NonNull WebDriverWrapper webDriverWrapper;
+	private final @NonNull BrowserDriverUpdater browserDriverUpdater;
 
 	@BeforeStories
 	public void updateDriver() {
