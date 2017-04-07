@@ -5,12 +5,16 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by d.keiss on 05.04.2017.
  */
 public class WebElementEnhanced implements LazyElement {
+
+	public final static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "elementExists");
 
 	protected WebElement webElement;
 	protected WebDriver webDriver;
@@ -130,6 +134,18 @@ public class WebElementEnhanced implements LazyElement {
 	public void setValue(String value) {
 		clear();
 		sendKeys(value);
+	}
+
+	public boolean elementExists() {
+		webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		try {
+			getWebElement(); // invoke web element
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+			return false;
+		} finally {
+			webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		}
+		return true;
 	}
 
 }

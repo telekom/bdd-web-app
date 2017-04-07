@@ -41,12 +41,13 @@ public class WebElementHandler implements MethodInterceptor {
 	}
 
 	private Object invokeWebElementEnhanced(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-		if (!method.getName().equals("setWebElement")
-				&& !method.getName().equals("setWebDriver")) {
-			WebElementEnhanced webElementEnhanced = (WebElementEnhanced) o;
+		WebElementEnhanced webElementEnhanced = (WebElementEnhanced) o;
+		if (!"setWebDriver".equals(method.getName())) {
+			webElementEnhanced.setWebDriver(webDriver);
+		}
+		if (!WebElementEnhanced.NOT_INVOKE_WEB_ELEMENT_METHODS.contains(method.getName())) {
 			WebElement element = locator.findElement();
 			webElementEnhanced.setWebElement(element);
-			webElementEnhanced.setWebDriver(webDriver);
 		}
 		try {
 			return methodProxy.invokeSuper(o, objects);
