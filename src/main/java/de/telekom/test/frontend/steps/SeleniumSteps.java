@@ -45,6 +45,10 @@ public abstract class SeleniumSteps {
 		return page;
 	}
 
+	protected String getUrlWithHost(String hostIncludingPort,String path) {
+		return appendUrl(hostIncludingPort, path);
+	}
+
 	protected String getUrlWithHost(String hostIncludingPort, String contextPath, String path) {
 		return appendUrl(hostIncludingPort, contextPath, path);
 	}
