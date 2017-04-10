@@ -4,30 +4,32 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.EdgeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Created by d.keiss on 03.04.2017.
  */
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BrowserDriverUpdater {
 
 	private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
-
-	@Value("${default.browser:@null}")
-	private String defaultBrowser;
 
 	@Value("${webdriver.proxy.host:@null}")
 	private String proxyHost;
 
 	@Value("${webdriver.proxy.port:@null}")
 	private String proxyPort;
+
+	private final @NonNull WebDriverWrapper webDriverWrapper;
 
 	/*
 	 * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
@@ -37,7 +39,7 @@ public class BrowserDriverUpdater {
 	 * https://developer.github.com/v3/#rate-limiting
 	 */
 	public void updateDriver() {
-		String browser = getBrowser();
+		String browser = webDriverWrapper.getBrowser();
 
 		switch (browser) {
 		case "firefox": {
@@ -75,17 +77,6 @@ public class BrowserDriverUpdater {
 		}
 
 		log.info("Updated instrumentalisation driver for browser: " + browser);
-	}
-
-	private String getBrowser() {
-		String browser = System.getProperty("browser");
-		if (isBlank(browser) && isNotBlank(defaultBrowser)) {
-			browser = defaultBrowser;
-		} else {
-			browser = "chrome";
-		}
-		browser = browser.toLowerCase();
-		return browser;
 	}
 
 }

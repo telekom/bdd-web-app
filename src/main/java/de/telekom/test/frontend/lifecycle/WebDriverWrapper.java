@@ -81,12 +81,14 @@ public class WebDriverWrapper implements WebDriverProvider {
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 	}
 
-	private String getBrowser() {
+	public String getBrowser() {
 		String browser = System.getProperty("browser");
-		if (isBlank(browser) && isNotBlank(defaultBrowser)) {
-			browser = defaultBrowser;
-		} else {
-			browser = "chrome";
+		if (isBlank(browser)) {
+			if (isNotBlank(defaultBrowser)) {
+				browser = defaultBrowser;
+			} else {
+				browser = "chrome";
+			}
 		}
 		browser = browser.toLowerCase();
 		return browser;
