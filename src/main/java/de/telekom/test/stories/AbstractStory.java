@@ -1,4 +1,4 @@
-package de.telekom.test.frontend.stories;
+package de.telekom.test.stories;
 
 import com.google.common.collect.Lists;
 import de.codecentric.jbehave.junit.monitoring.JUnitReportingRunner;

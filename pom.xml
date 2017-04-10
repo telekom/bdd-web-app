@@ -3,7 +3,7 @@
 	http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.telekom.keiss</groupId>
+    <groupId>de.telekom.test</groupId>
     <artifactId>jbehave-web</artifactId>
     <version>1.1-SNAPSHOT</version>
 

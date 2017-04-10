@@ -70,6 +70,11 @@ public class LifecyleSteps {
 		clearSequenceInteractionNormal();
 	}
 
+	@AfterStory
+	public void afterStory() {
+		webDriverWrapper.quit();
+	}
+
 	@AfterStories
 	public void afterStories() {
 		webDriverWrapper.quit();
