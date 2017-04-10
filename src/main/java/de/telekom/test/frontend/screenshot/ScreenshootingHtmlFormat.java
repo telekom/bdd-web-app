@@ -15,8 +15,8 @@ public class ScreenshootingHtmlFormat extends Format {
 
 	private final @NonNull WebDriverWrapper webDriverWrapper;
 
-	@Value("${yeti.systest.screenshot.onsuccess}")
-	private boolean screenshotsOnSuccess;
+	@Value("${screenshot.onsuccess:@null}")
+	private Boolean screenshotsOnSuccess;
 
 	public ScreenshootingHtmlFormat(@Autowired WebDriverWrapper webDriverWrapper) {
 		super("HTML");
@@ -29,6 +29,9 @@ public class ScreenshootingHtmlFormat extends Format {
 			StoryReporterBuilder builder) {
 		factory.useConfiguration(
 				builder.fileConfiguration("html"));
+		if(screenshotsOnSuccess == null){
+			screenshotsOnSuccess = false;
+		}
 		ScreenshootingHtmlOutput screenshootingHtmlOutput =
 				new ScreenshootingHtmlOutput(screenshotsOnSuccess, factory.createPrintStream(), builder, webDriverWrapper);
 		return screenshootingHtmlOutput
