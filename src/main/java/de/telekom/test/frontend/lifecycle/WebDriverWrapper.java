@@ -1,7 +1,6 @@
 package de.telekom.test.frontend.lifecycle;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -22,6 +21,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Create and manage WebDriver Instance for specific browser.
@@ -81,8 +83,10 @@ public class WebDriverWrapper implements WebDriverProvider {
 
 	private String getBrowser() {
 		String browser = System.getProperty("browser");
-		if (StringUtils.isBlank(browser)) {
+		if (isBlank(browser) && isNotBlank(defaultBrowser)) {
 			browser = defaultBrowser;
+		} else {
+			browser = "chrome";
 		}
 		browser = browser.toLowerCase();
 		return browser;
