@@ -34,13 +34,13 @@ public class WebDriverWrapper implements WebDriverProvider {
 
 	private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
-	@Value("${yeti.systest.browser}")
+	@Value("${default.browser:@null}")
 	private String defaultBrowser;
 
-	@Value("${yeti.systest.webdriver.proxy.host}")
+	@Value("${webdriver.proxy.host:@null}")
 	private String proxyHost;
 
-	@Value("${yeti.systest.webdriver.proxy.port}")
+	@Value("${webdriver.proxy.port:@null}")
 	private String proxyPort;
 
 	private WebDriver driver;
