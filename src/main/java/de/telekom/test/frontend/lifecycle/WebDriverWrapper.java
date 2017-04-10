@@ -36,13 +36,13 @@ public class WebDriverWrapper implements WebDriverProvider {
 
 	private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
-	@Value("${default.browser:@null}")
+	@Value("${default.browser:#{null}}")
 	private String defaultBrowser;
 
-	@Value("${webdriver.proxy.host:@null}")
+	@Value("${webdriver.proxy.host:#{null}}")
 	private String proxyHost;
 
-	@Value("${webdriver.proxy.port:@null}")
+	@Value("${webdriver.proxy.port:#{null}}")
 	private String proxyPort;
 
 	private WebDriver driver;
@@ -74,7 +74,7 @@ public class WebDriverWrapper implements WebDriverProvider {
 			break;
 		}
 		default:
-			throw new IllegalArgumentException("No browser defined!");
+			throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
 		}
 
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
