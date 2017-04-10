@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import static java.lang.Boolean.valueOf;
+
 @Component
 public class ScreenshootingHtmlFormat extends Format {
 
 	private final @NonNull WebDriverWrapper webDriverWrapper;
 
 	@Value("${screenshot.onsuccess:@null}")
-	private Boolean screenshotsOnSuccess;
+	private String screenshotsOnSuccess;
 
 	public ScreenshootingHtmlFormat(@Autowired WebDriverWrapper webDriverWrapper) {
 		super("HTML");
@@ -29,11 +31,8 @@ public class ScreenshootingHtmlFormat extends Format {
 			StoryReporterBuilder builder) {
 		factory.useConfiguration(
 				builder.fileConfiguration("html"));
-		if(screenshotsOnSuccess == null){
-			screenshotsOnSuccess = false;
-		}
 		ScreenshootingHtmlOutput screenshootingHtmlOutput =
-				new ScreenshootingHtmlOutput(screenshotsOnSuccess, factory.createPrintStream(), builder, webDriverWrapper);
+				new ScreenshootingHtmlOutput(valueOf(screenshotsOnSuccess), factory.createPrintStream(), builder, webDriverWrapper);
 		return screenshootingHtmlOutput
 				.doReportFailureTrace(builder.reportFailureTrace())
 				.doCompressFailureTrace(builder.compressFailureTrace());
