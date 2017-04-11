@@ -1,8 +1,6 @@
 package de.telekom.test.frontend.element;
 
-import de.telekom.test.frontend.element.ajax.LazyElement;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
@@ -12,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by d.keiss on 05.04.2017.
  */
-public class WebElementEnhanced implements LazyElement {
+public class WebElementEnhanced {
 
 	public final static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "elementExists");
 
@@ -112,8 +110,15 @@ public class WebElementEnhanced implements LazyElement {
 	}
 
 	public void waitForDisplayed(int maxWaitTimeInSeconds) {
-		String errorMessage = "Element: \"" + getWebElement() + "\" is still not displayed!";
-		waitUntil(webElement::isDisplayed, errorMessage, maxWaitTimeInSeconds);
+		WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
+		webDriverWait.withMessage("Element: \"" + webElement + "\" is still not displayed!");
+		webDriverWait.until(driver -> {
+			try {
+				return webElement.isDisplayed();
+			} catch (WebDriverException e) {
+				return false;
+			}
+		});
 	}
 
 	public void scrollTo() {
@@ -121,14 +126,7 @@ public class WebElementEnhanced implements LazyElement {
 			throw new IllegalStateException("Webdriver must be set to use this method!");
 		}
 		((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(false);", webElement);
-		Wait<WebDriver> wait = new WebDriverWait(webDriver, 1);
-		wait.until(driver -> {
-			try {
-				return webElement.isDisplayed();
-			} catch (WebDriverException e) {
-				return true;
-			}
-		});
+		waitForDisplayed(1);
 	}
 
 	public void setValue(String value) {
