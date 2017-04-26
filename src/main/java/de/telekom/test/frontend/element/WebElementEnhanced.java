@@ -41,10 +41,6 @@ public class WebElementEnhanced {
 		this.webDriver = webDriver;
 	}
 
-	public void click() {
-		webElement.click();
-	}
-
 	public void sendKeys(CharSequence... keysToSend) {
 		webElement.sendKeys(keysToSend);
 	}
@@ -127,6 +123,11 @@ public class WebElementEnhanced {
 		}
 		((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(false);", webElement);
 		waitForDisplayed(1);
+	}
+
+	public void click() {
+		scrollTo();
+		webElement.click();
 	}
 
 	public void setValue(String value) {
