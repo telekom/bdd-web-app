@@ -137,17 +137,17 @@ public class WebElementEnhanced {
 	}
 
 	public boolean exists() {
-		return checkElement(o -> getWebElement() /* invoke web element */);
+		return check(o -> getWebElement() /* invoke web element */);
 	}
 
 	public boolean hasChildren(By by) {
-		return checkElement(o -> webElement.findElement(by));
+		return check(o -> webElement.findElement(by));
 	}
 
-	public boolean checkElement(Function checkFunction) {
+	public boolean check(Function check) {
 		webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		try {
-			checkFunction.apply(Void.TYPE);
+			check.apply(Void.TYPE);
 		} catch (NoSuchElementException | StaleElementReferenceException e) {
 			return false;
 		} finally {
