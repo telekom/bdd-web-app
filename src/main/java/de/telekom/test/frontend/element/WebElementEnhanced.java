@@ -135,10 +135,22 @@ public class WebElementEnhanced {
 		sendKeys(value);
 	}
 
-	public boolean elementExists() {
+	public boolean exists() {
 		webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		try {
 			getWebElement(); // invoke web element
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+			return false;
+		} finally {
+			webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		}
+		return true;
+	}
+
+	public boolean hasChildren(By by) {
+		webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		try {
+			webElement.findElement(by);
 		} catch (NoSuchElementException | StaleElementReferenceException e) {
 			return false;
 		} finally {
