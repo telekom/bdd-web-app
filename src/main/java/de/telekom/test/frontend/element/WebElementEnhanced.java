@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 /**
  * Created by d.keiss on 05.04.2017.
@@ -136,21 +137,17 @@ public class WebElementEnhanced {
 	}
 
 	public boolean exists() {
-		webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
-		try {
-			getWebElement(); // invoke web element
-		} catch (NoSuchElementException | StaleElementReferenceException e) {
-			return false;
-		} finally {
-			webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-		}
-		return true;
+		return checkElement(o -> getWebElement() /* invoke web element */);
 	}
 
 	public boolean hasChildren(By by) {
+		return checkElement(o -> webElement.findElement(by));
+	}
+
+	public boolean checkElement(Function checkFunction) {
 		webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
 		try {
-			webElement.findElement(by);
+			checkFunction.apply(Void.TYPE);
 		} catch (NoSuchElementException | StaleElementReferenceException e) {
 			return false;
 		} finally {
