@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class WebElementEnhanced {
 
-	public final static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "elementExists");
+	public final static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "exists");
 
 	protected WebElement webElement;
 	protected WebDriver webDriver;
