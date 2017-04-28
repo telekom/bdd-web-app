@@ -13,7 +13,7 @@ import java.util.function.Function;
  */
 public class WebElementEnhanced {
 
-	public final static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "exists");
+	public final static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "exists", "check");
 
 	protected WebElement webElement;
 	protected WebDriver webDriver;
