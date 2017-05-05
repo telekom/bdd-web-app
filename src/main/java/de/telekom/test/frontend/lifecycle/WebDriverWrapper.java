@@ -26,10 +26,9 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * Create and manage WebDriver Instance for specific browser.
+ * Manage the current WebDriver instance. Uses proven standard configurations for specific browsers. The lifecycle is determined by SeleniumTestRule.
  *
- * @author d.keiss
- * @version $Id: WebDriverWrapper.java 9695 2014-01-10 12:57:07Z d.keiss $
+ * @author Daniel Keiss
  */
 @Component
 public class WebDriverWrapper implements WebDriverProvider {

@@ -10,6 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Maintains the lifecycle of the WebDriver.
+ * The TestRule guarantees that before the JBehave lifecycle begins a WebDriver instance exists.
+ *
+ * @author Daniel Keiss
+ */
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SeleniumTestRule implements MethodRule {

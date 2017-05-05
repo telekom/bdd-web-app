@@ -5,10 +5,9 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Base class for page objects. Page objects represent a certain page of a certain YETI module. It models test relevant interactions and state as an easy to use
- * object.
- * <p>
- * Page objects should provide methods for interactions that return subsequent pages as page objects as well.
+ * Abstract base class for page objects. Checks the current url when creating.
+ *
+ * @author Daniel Keiss
  */
 public abstract class Page {
 
