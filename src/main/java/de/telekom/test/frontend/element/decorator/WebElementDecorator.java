@@ -17,7 +17,11 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
- * Created by d.keiss on 05.04.2017.
+ * Provides the extended WebElement via the WebElementHandler.
+ * The WebElementEnhanced is integrated into the page objects using the @FindBy Annotation.
+ * The use of WebElementEnhanced is not mandatory.
+ *
+ * @author Daniel Keiss (daniel.keiss@gmail.com)
  */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebElementDecorator implements FieldDecorator {

@@ -17,7 +17,12 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 /**
- * Created by d.keiss on 05.04.2017.
+ * Binds the WebElementEnhanced.
+ * Provides the same behavior as the WebElement for the WebElementEnhanced:
+ * The WebElementEnhanced is initially only created as a proxy. Only when accessing a method in the proxy object the element in the DOM is accessed.
+ * Thus, as in the WebElement, an exception occurs with a failed DOM access when a method is called.
+ *
+ * @author Daniel Keiss (daniel.keiss@gmail.com)
  */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebElementHandler implements MethodInterceptor {

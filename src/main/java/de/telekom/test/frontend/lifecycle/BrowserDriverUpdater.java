@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * Created by d.keiss on 03.04.2017.
+ * Pushes the WebDriver updates for several browser. Is integrated into the JBehave lifecycle via LifecylceSteps.
+ *
+ * @author Daniel Keiss (daniel.keiss@gmail.com)
  */
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

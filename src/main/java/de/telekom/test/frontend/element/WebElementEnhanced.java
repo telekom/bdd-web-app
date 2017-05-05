@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
- * Created by d.keiss on 05.04.2017.
+ * Extends WebElement by several helper methods.
+ *
+ * @author Daniel Keiss (daniel.keiss@gmail.com)
  */
 public class WebElementEnhanced {
 
