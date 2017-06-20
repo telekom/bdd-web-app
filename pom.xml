@@ -4,17 +4,17 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.telekom.test</groupId>
-    <artifactId>jbehave-web-reactor</artifactId>
+    <groupId>de.telekom.jbehave</groupId>
+    <artifactId>jbehave-web-app-reactor</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>jbehave-web-reactor</name>
+    <name>jbehave-web-app-reactor</name>
 
     <modules>
-        <module>jbehave-web</module>
-        <module>jbehave-web-demo/collective-taxi</module>
-        <module>jbehave-web-demo/collective-taxi-jbehave-test</module>
+        <module>jbehave-web-app</module>
+        <module>jbehave-web-app-demo/collective-taxi</module>
+        <module>jbehave-web-app-demo/collective-taxi-jbehave-test</module>
     </modules>
 
 </project>
