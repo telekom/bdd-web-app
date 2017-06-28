@@ -126,6 +126,11 @@
                 <version>${version.jbehave}</version>
             </dependency>
             <dependency>
+                <groupId>org.jbehave.web</groupId>
+                <artifactId>jbehave-web-selenium</artifactId>
+                <version>${version.jbehave.web}</version>
+            </dependency>
+            <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>jbehave-junit-runner</artifactId>
                 <version>${version.jbehave.junit-runner}</version>
