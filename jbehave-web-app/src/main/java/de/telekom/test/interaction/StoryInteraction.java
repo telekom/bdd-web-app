@@ -13,26 +13,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class StoryInteraction extends AbstractInteraction<StoryInteraction> {
 
-	private AbstractInteraction scenarioInteraction;
+    private AbstractInteraction scenarioInteraction;
 
-	/**
-	 * Store some data in the interaction context for later use.
-	 */
-	public void remember(String key, Object value) {
-		super.remember(key, value);
-		scenarioInteraction.remember(key, value);
-	}
+    /**
+     * Store some data in the interaction context for later use.
+     */
+    public void remember(String key, Object value) {
+        super.remember(key, value);
+        if (scenarioInteraction != null) {
+            scenarioInteraction.remember(key, value);
+        }
+    }
 
-	/**
-	 * Store an object for an specific entity in the interaction context for later use. Recall this object with recallObject().
-	 */
-	public void rememberObject(String entityKey, String objectKey, Object value) {
-		super.rememberObject(entityKey, objectKey, value);
-		scenarioInteraction.rememberObject(entityKey, objectKey, value);
-	}
+    /**
+     * Store an object for an specific entity in the interaction context for later use. Recall this object with recallObject().
+     */
+    public void rememberObject(String entityKey, String objectKey, Object value) {
+        super.rememberObject(entityKey, objectKey, value);
+        if (scenarioInteraction != null) {
+            scenarioInteraction.rememberObject(entityKey, objectKey, value);
+        }
+    }
 
-	public void setSequenceInteraction(AbstractInteraction sequenceInteraction) {
-		this.scenarioInteraction = sequenceInteraction;
-	}
+    public void setSequenceInteraction(AbstractInteraction sequenceInteraction) {
+        this.scenarioInteraction = sequenceInteraction;
+    }
 
 }

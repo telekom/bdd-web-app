@@ -103,7 +103,7 @@ public class RequestBuilder {
 		return this;
 	}
 
-	public RequestBuilder queryParam(String key, String value) {
+	public RequestBuilder queryParam(String key, Object value) {
 		requestSpecification.queryParam(key, value);
 		return this;
 	}
