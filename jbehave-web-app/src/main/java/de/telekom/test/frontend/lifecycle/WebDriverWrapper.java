@@ -1,7 +1,6 @@
 package de.telekom.test.frontend.lifecycle;
 
 import org.apache.commons.io.FileUtils;
-import org.jbehave.web.selenium.WebDriverProvider;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -31,162 +30,147 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * @author Daniel Keiss
  */
 @Component
-public class WebDriverWrapper implements WebDriverProvider {
+public class WebDriverWrapper {
 
-	private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
+    private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
-	@Value("${default.browser:#{null}}")
-	private String defaultBrowser;
+    @Value("${default.browser:#{null}}")
+    private String defaultBrowser;
 
-	@Value("${webdriver.proxy.host:#{null}}")
-	private String proxyHost;
+    @Value("${webdriver.proxy.host:#{null}}")
+    private String proxyHost;
 
-	@Value("${webdriver.proxy.port:#{null}}")
-	private String proxyPort;
+    @Value("${webdriver.proxy.port:#{null}}")
+    private String proxyPort;
 
-	private WebDriver driver;
+    private WebDriver driver;
 
-	public void loadWebdriver() {
-		String browser = getBrowser();
+    public void loadWebdriver() {
+        String browser = getBrowser();
 
-		log.info("Brower set to: " + browser);
+        log.info("Brower set to: " + browser);
 
-		switch (browser) {
-		case "firefox": {
-			initFirefox();
-			break;
-		}
-		case "chrome": {
-			initChrome();
-			break;
-		}
-		case "edge": {
-			initEdge();
-			break;
-		}
-		case "ie": {
-			initInternetExplorer();
-			break;
-		}
-		case "safari": {
-			initSafari();
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
-		}
+        switch (browser) {
+            case "firefox": {
+                initFirefox();
+                break;
+            }
+            case "chrome": {
+                initChrome();
+                break;
+            }
+            case "edge": {
+                initEdge();
+                break;
+            }
+            case "ie": {
+                initInternetExplorer();
+                break;
+            }
+            case "safari": {
+                initSafari();
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
+        }
 
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-	}
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+    }
 
-	public String getBrowser() {
-		String browser = System.getProperty("browser");
-		if (isBlank(browser)) {
-			if (isNotBlank(defaultBrowser)) {
-				browser = defaultBrowser;
-			} else {
-				browser = "chrome";
-			}
-		}
-		browser = browser.toLowerCase();
-		return browser;
-	}
+    public String getBrowser() {
+        String browser = System.getProperty("browser");
+        if (isBlank(browser)) {
+            if (isNotBlank(defaultBrowser)) {
+                browser = defaultBrowser;
+            } else {
+                browser = "chrome";
+            }
+        }
+        browser = browser.toLowerCase();
+        return browser;
+    }
 
-	private void initFirefox() {
-		DesiredCapabilities caps = DesiredCapabilities.firefox();
-		caps.setCapability("overlappingCheckDisabled", true);
+    private void initFirefox() {
+        DesiredCapabilities caps = DesiredCapabilities.firefox();
+        caps.setCapability("overlappingCheckDisabled", true);
 
-		driver = new FirefoxDriver(caps);
-	}
+        driver = new FirefoxDriver(caps);
+    }
 
-	private void initChrome() {
-		DesiredCapabilities caps = DesiredCapabilities.chrome();
-		caps.setCapability("disable-restore-session-state", true);
-		caps.setCapability("disable-application-cache", true);
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-extensions");
-		options.addArguments("--start-maximized");
-		caps.setCapability(ChromeOptions.CAPABILITY, options);
+    private void initChrome() {
+        DesiredCapabilities caps = DesiredCapabilities.chrome();
+        caps.setCapability("disable-restore-session-state", true);
+        caps.setCapability("disable-application-cache", true);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-extensions");
+        options.addArguments("--start-maximized");
+        caps.setCapability(ChromeOptions.CAPABILITY, options);
 
-		driver = new ChromeDriver(caps);
-	}
+        driver = new ChromeDriver(caps);
+    }
 
-	private void initSafari() {
-		driver = new SafariDriver();
-	}
+    private void initSafari() {
+        driver = new SafariDriver();
+    }
 
-	private void initInternetExplorer() {
-		DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-		ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-		ieCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-		ieCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
-		ieCapabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
-		ieCapabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
-		ieCapabilities.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
-		ieCapabilities.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
-		ieCapabilities.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
-		ieCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+    private void initInternetExplorer() {
+        DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
+        ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+        ieCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
+        ieCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
+        ieCapabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
+        ieCapabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
+        ieCapabilities.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
+        ieCapabilities.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
+        ieCapabilities.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
+        ieCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 
-		driver = new InternetExplorerDriver(ieCapabilities);
-	}
+        driver = new InternetExplorerDriver(ieCapabilities);
+    }
 
-	private void initEdge() {
-		driver = new EdgeDriver();
-	}
+    private void initEdge() {
+        driver = new EdgeDriver();
+    }
 
-	public WebDriver getDriver() {
-		return driver;
-	}
+    public WebDriver getDriver() {
+        return driver;
+    }
 
-	public void setDriver(WebDriver driver) {
-		this.driver = driver;
-	}
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
 
-	public void quit() {
-		if (driver != null) {
-			try {
-				driver.quit();
-			} catch (UnreachableBrowserException unreachableBrowserException) {
-				log.error(unreachableBrowserException.getMessage());
-			}
-		}
-		driver = null;
-	}
+    public void quit() {
+        if (driver != null) {
+            try {
+                driver.quit();
+            } catch (UnreachableBrowserException unreachableBrowserException) {
+                log.error(unreachableBrowserException.getMessage());
+            }
+        }
+        driver = null;
+    }
 
-	public boolean isClosed() {
-		return driver == null;
-	}
+    public boolean isClosed() {
+        return driver == null;
+    }
 
-	@Override
-	public WebDriver get() {
-		return driver;
-	}
+    public boolean saveScreenshotTo(String path) {
+        try {
+            log.info("Create screenshot to '{}'", path);
+            if (driver == null) {
+                log.error("Can not create screenshot because webdriver is null!");
+                return false;
+            }
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenshot, new File(path));
+            return true;
+        } catch (Exception e) {
+            log.error("Exception at capture screenshot", e);
+            return false;
+        }
+    }
 
-	@Override
-	public void initialize() {
-		loadWebdriver();
-	}
-
-	@Override
-	public boolean saveScreenshotTo(String path) {
-		try {
-			log.info("Create screenshot to '{}'", path);
-			if (driver == null) {
-				log.error("Can not create screenshot because webdriver is null!");
-				return false;
-			}
-			File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(screenshot, new File(path));
-			return true;
-		} catch (Exception e) {
-			log.error("Exception at capture screenshot", e);
-			return false;
-		}
-	}
-
-	@Override
-	public void end() {
-		quit();
-	}
 }

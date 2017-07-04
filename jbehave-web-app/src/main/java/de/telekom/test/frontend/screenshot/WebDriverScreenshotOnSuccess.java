@@ -1,8 +1,11 @@
 package de.telekom.test.frontend.screenshot;
 
+import de.telekom.test.frontend.lifecycle.WebDriverWrapper;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.reporters.StoryReporterBuilder;
-import org.jbehave.web.selenium.WebDriverProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,25 +17,15 @@ import java.util.Date;
 
 import static java.text.MessageFormat.format;
 
-/**
- * Created by d.keiss on 12.01.2017.
- */
+@AllArgsConstructor
 public class WebDriverScreenshotOnSuccess {
 
-	public static final String DEFAULT_SCREENSHOT_PATH_PATTERN = "{0}/screenshots/{1}/{2}.png";
-
 	private final StoryReporterBuilder reporterBuilder;
-	private final WebDriverProvider webDriverProvider;
-
-	public WebDriverScreenshotOnSuccess(StoryReporterBuilder reporterBuilder,
-			WebDriverProvider webDriverProvider) {
-		this.reporterBuilder = reporterBuilder;
-		this.webDriverProvider = webDriverProvider;
-	}
+	private final WebDriverWrapper webDriverWrapper;
 
 	public void makeScreenshot(String storyFolder, String step) {
 		long timestamp = new Date().getTime();
-		String currentUrl = webDriverProvider.get().getCurrentUrl();
+		String currentUrl = webDriverWrapper.getDriver().getCurrentUrl();
 		if (StringUtils.isBlank(currentUrl)) {
 			return;
 		}
@@ -41,8 +34,8 @@ public class WebDriverScreenshotOnSuccess {
 			URL url = new URL(currentUrl);
 			String contextPath = url.getPath();
 			String screenshotName = getScreenshotName(contextPath, timestamp);
-			String screenshotPath = format(DEFAULT_SCREENSHOT_PATH_PATTERN, reporterBuilder.outputDirectory(), storyFolder, screenshotName);
-			webDriverProvider.saveScreenshotTo(screenshotPath);
+			String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
+			webDriverWrapper.saveScreenshotTo(screenshotPath);
 			if (screenshotIsBlank(screenshotPath)) {
 				System.out.println(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
 			}

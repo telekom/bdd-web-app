@@ -23,7 +23,6 @@
         <version.spring>4.3.7.RELEASE</version.spring>
         <version.slf4j>1.6.1</version.slf4j>
         <version.jbehave>4.1.1</version.jbehave>
-        <version.jbehave.web>3.5.5</version.jbehave.web>
         <version.jbehave.junit-runner>1.2.0</version.jbehave.junit-runner>
         <version.webdrivermanager>1.6.2</version.webdrivermanager>
         <version.lombok>1.16.16</version.lombok>
@@ -121,11 +120,6 @@
                 <version>${version.jbehave}</version>
             </dependency>
             <dependency>
-                <groupId>org.jbehave.web</groupId>
-                <artifactId>jbehave-web-selenium</artifactId>
-                <version>${version.jbehave.web}</version>
-            </dependency>
-            <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>jbehave-junit-runner</artifactId>
                 <version>${version.jbehave.junit-runner}</version>
@@ -205,10 +199,6 @@
         <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jbehave.web</groupId>
-            <artifactId>jbehave-web-selenium</artifactId>
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
