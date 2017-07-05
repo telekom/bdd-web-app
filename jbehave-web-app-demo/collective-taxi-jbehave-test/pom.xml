@@ -16,11 +16,11 @@
 
         <version.spring>4.3.7.RELEASE</version.spring>
         <lombok.version>1.16.6</lombok.version>
-        <jbehave-web.version>1.1-SNAPSHOT</jbehave-web.version>
+        <jbehave-web-app.version>1.0-SNAPSHOT</jbehave-web-app.version>
 
         <version.surefire>2.19.1</version.surefire>
-        <version.jbehave.site-resources>3.3</version.jbehave.site-resources>
         <version.jbehave>4.1</version.jbehave>
+        <version.jbehave.site-resources>3.3</version.jbehave.site-resources>
     </properties>
 
     <build>
@@ -99,40 +99,10 @@
         <dependencies>
 
             <dependency>
-                <groupId>de.telekom.test</groupId>
-                <artifactId>jbehave-web</artifactId>
-                <version>${jbehave-web.version}</version>
+                <groupId>de.telekom.jbehave</groupId>
+                <artifactId>jbehave-web-app</artifactId>
+                <version>${jbehave-web-app.version}</version>
             </dependency>
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Spring -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-orm</artifactId>
-                <version>${version.spring}</version>
-            </dependency>
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- DB -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-            <dependency>
-                <groupId>com.oracle</groupId>
-                <artifactId>ojdbc6</artifactId>
-                <version>11.2.0.3.0</version>
-            </dependency>
-            <dependency>
-                <groupId>hsqldb</groupId>
-                <artifactId>hsqldb</artifactId>
-                <version>1.8.0.10</version>
-            </dependency>
-
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- MISC -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -146,39 +116,17 @@
     <dependencies>
 
         <dependency>
-            <groupId>de.telekom.test</groupId>
-            <artifactId>jbehave-web</artifactId>
+            <groupId>de.telekom.jbehave</groupId>
+            <artifactId>jbehave-web-app</artifactId>
         </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Spring -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-        </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- DB -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-        </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- MISC -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.telekom.jbehave</groupId>
+            <artifactId>jbehave-web-app</artifactId>
         </dependency>
 
     </dependencies>
