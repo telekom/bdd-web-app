@@ -13,7 +13,7 @@ public abstract class Page {
 
 	protected final WebDriver driver;
 
-	protected Page(WebDriver driver) {
+	public Page(WebDriver driver) {
 		this.driver = driver;
 		checkUrl();
 	}
