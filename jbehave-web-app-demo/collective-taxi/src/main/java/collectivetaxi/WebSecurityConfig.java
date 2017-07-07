@@ -1,9 +1,9 @@
 //package collectivetaxi;
 //
 //import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.de.telekom.yeti.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.de.telekom.yeti.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.de.telekom.yeti.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//import org.springframework.security.de.telekom.yeti.test.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.de.telekom.yeti.test.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.de.telekom.yeti.test.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 //
 ///**
 // * Created by Daniel Keiss on 13.06.2017.
