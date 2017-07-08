@@ -23,15 +23,18 @@ public class IndexController {
         return login(principal, model);
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(Principal principal, Model model) {
-        return login(principal, model);
+    @RequestMapping(value = "/reservation", method = RequestMethod.GET)
+    public String reservation(Principal principal, Model model) {
+        if (authenticationValidator.isAuthenticated(principal, model)) {
+            return "reservation";
+        }
+        return "redirect:login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Principal principal, Model model) {
         if (authenticationValidator.isAuthenticated(principal, model)) {
-            return "reservation";
+            return "redirect:reservation";
         }
         return "login";
     }
