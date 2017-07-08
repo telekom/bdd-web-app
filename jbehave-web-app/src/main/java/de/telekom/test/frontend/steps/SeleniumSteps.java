@@ -45,6 +45,10 @@ public abstract class SeleniumSteps {
 		return page;
 	}
 
+	protected <T extends Page> T getCurrentPage(){
+		return storyInteraction.recall(LifecyleSteps.CURRENT_PAGE);
+	}
+
 	protected String getUrlWithHost(String hostIncludingPort,String path) {
 		return appendUrl(hostIncludingPort, path);
 	}
