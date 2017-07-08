@@ -9,17 +9,26 @@
 </head>
 <body>
 
-<form id="login-form" th:action="@{/login}" method="post">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="email" class="form-control" id="username" name="username" placeholder="E-Mail" />
+<nav th:replace="fragments/header :: header">&nbsp;</nav>
+
+<div class="container" style="min-height: 500px">
+    <div class="starter-template">
+        <h1>Login</h1>
+        <form id="login-form" th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="email" class="form-control" id="username" name="username" placeholder="E-Mail"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Passwort"/>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Anmelden</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Passwort" />
-    </div>
-    <button type="submit" class="btn btn-default">Anmelden</button>
-</form>
+</div>
+
+<footer th:replace="fragments/footer :: footer">&nbsp;</footer>
 
 </body>
 </html>
