@@ -10,6 +10,10 @@ $(document).ready(function () {
 
 });
 
+function isActive() {
+    return $.active > 0;
+}
+
 function reserve() {
 
     var reservation = {}
@@ -38,11 +42,11 @@ function reserve() {
                 var reservationPrice = data.reservationPrices[index];
                 reservationHtml += "<div class='row'>";
                 reservationHtml += "<div class='col-md-2'>Startzeitpunkt</div>";
-                reservationHtml += "<div class='col-md-2'>"+ reservationPrice.startTime +"</div>";
+                reservationHtml += "<div class='col-md-2'>" + reservationPrice.startTime + "</div>";
                 reservationHtml += "<div class='col-md-2'>Ankunftszeitpunkt</div>";
-                reservationHtml += "<div class='col-md-2'>"+ reservationPrice.endTime +"</div>";
+                reservationHtml += "<div class='col-md-2'>" + reservationPrice.endTime + "</div>";
                 reservationHtml += "<div class='col-md-2'>Preis</div>";
-                reservationHtml += "<div class='col-md-2'>"+ reservationPrice.price +"</div>";
+                reservationHtml += "<div class='col-md-2'>" + reservationPrice.price + "</div>";
                 reservationHtml += "</div>";
             });
             $('#reservation').html(reservationHtml);

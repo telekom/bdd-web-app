@@ -2,10 +2,15 @@ package de.telekom.pages;
 
 import de.telekom.test.frontend.element.WebElementEnhanced;
 import de.telekom.test.frontend.page.Page;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ReservationPage extends Page {
+public class ReservationPage extends AbstractCollectiveTaxiPage {
 
     public static final String URL = "reservation";
 
@@ -52,6 +57,7 @@ public class ReservationPage extends Page {
     }
 
     public boolean isReservationSuccess() {
+        waitForAjaxToComplete();
         return reservationDiv.getText().contains("erfolgreich");
     }
 

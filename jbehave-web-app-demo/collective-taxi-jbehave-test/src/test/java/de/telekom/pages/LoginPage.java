@@ -5,7 +5,7 @@ import de.telekom.test.frontend.page.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends Page {
+public class LoginPage extends AbstractCollectiveTaxiPage {
 
     public static final String URL = "login";
 
