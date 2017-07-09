@@ -7,6 +7,8 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
+import static org.junit.Assert.assertTrue;
+
 @Steps
 public class ReservationSteps extends SeleniumSteps {
 
@@ -27,11 +29,13 @@ public class ReservationSteps extends SeleniumSteps {
         ReservationPage reservationPage = getCurrentPage();
         reservationPage.setStartTime(startTime);
         reservationPage.setEndTime(endTime);
+        reservationPage.submitReservation();
     }
 
     @Then("ist die Reservierung erfolgreich")
     public void theReservationIsSuccessful() {
-
+        ReservationPage reservationPage = getCurrentPage();
+        assertTrue(reservationPage.isReservationSuccess());
     }
 
     @Then("der Preis beträgt $price € zwischen $startTime und $endTime Uhr")

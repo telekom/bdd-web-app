@@ -30,23 +30,33 @@ function reserve() {
         timeout: 600000,
         success: function (data) {
 
-            var json = "<h4>Ajax Response</h4><pre>"
+            $('#reserve').removeClass("btn-primary btn-warning");
+            $('#reserve').addClass("btn-success");
+
+            var reservationHtml = "<h4>Reservierung erfolgreich!</h4>";
+            $('#reservation').html(reservationHtml);
+
+            var responseHtml = "<h4>Ajax Response</h4><pre>"
                 + JSON.stringify(data, null, 4) + "</pre>";
-            $('#reservation').html(json);
+            $('#ajaxResponse').html(responseHtml);
 
             console.log("SUCCESS : ", data);
             $("#reserve").prop("disabled", false);
-
         },
         error: function (e) {
 
-            var json = "<h4>Ajax Response</h4><pre>"
+            $('#reserve').removeClass("btn-primary btn-success");
+            $('#reserve').addClass("btn-warning");
+
+            var reservationHtml = "<h4>Reservierung nicht möglich!</h4>";
+            $('#reservation').html(reservationHtml);
+
+            var responseHtml = "<h4>Ajax Response</h4><pre>"
                 + e.responseText + "</pre>";
-            $('#reservation').html(json);
+            $('#ajaxResponse').html(responseHtml);
 
             console.log("ERROR : ", e);
             $("#reserve").prop("disabled", false);
-
         }
     });
 

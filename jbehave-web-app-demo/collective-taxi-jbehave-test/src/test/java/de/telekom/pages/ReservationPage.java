@@ -21,6 +21,12 @@ public class ReservationPage extends Page {
     @FindBy(id = "endTime")
     private WebElementEnhanced endTimeInput;
 
+    @FindBy(id = "reserve")
+    private WebElementEnhanced reserveButton;
+
+    @FindBy(id = "reservation")
+    private WebElementEnhanced reservationDiv;
+
     public ReservationPage(WebDriver driver) {
         super(driver);
     }
@@ -41,9 +47,16 @@ public class ReservationPage extends Page {
         endTimeInput.setValue(endTime);
     }
 
+    public void submitReservation() {
+        reserveButton.click();
+    }
+
+    public boolean isReservationSuccess() {
+        return reservationDiv.getText().contains("erfolgreich");
+    }
+
     @Override
     public String getURL() {
         return URL;
     }
-
 }
