@@ -32,7 +32,7 @@ public abstract class SeleniumSteps {
 	@Autowired
 	protected ScenarioInteraction scenarioInteraction;
 
-	protected <T extends Page> T createExpectedPage(Class<T> expectedPage) {
+	protected synchronized <T extends Page> T createExpectedPage(Class<T> expectedPage) {
 		WebDriver driver = webDriverWrapper.getDriver();
 		T page;
 		try {
