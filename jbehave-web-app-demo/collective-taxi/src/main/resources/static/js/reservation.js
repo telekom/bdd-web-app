@@ -37,18 +37,13 @@ function reserve() {
             $('#reserve').removeClass("btn-primary btn-warning");
             $('#reserve').addClass("btn-success");
 
-            var reservationHtml = "<h4>Reservierung erfolgreich!</h4>";
+            var reservationHtml = "<h2>Reservierung erfolgreich!</h2>";
+            reservationHtml += "<div class='list-group'>";
             $(data.reservationPrices).each(function (index) {
                 var reservationPrice = data.reservationPrices[index];
-                reservationHtml += "<div class='row'>";
-                reservationHtml += "<div class='col-md-2'>Startzeitpunkt</div>";
-                reservationHtml += "<div class='col-md-2'>" + reservationPrice.startTime + "</div>";
-                reservationHtml += "<div class='col-md-2'>Ankunftszeitpunkt</div>";
-                reservationHtml += "<div class='col-md-2'>" + reservationPrice.endTime + "</div>";
-                reservationHtml += "<div class='col-md-2'>Preis</div>";
-                reservationHtml += "<div class='col-md-2'>" + reservationPrice.price + "</div>";
-                reservationHtml += "</div>";
+                reservationHtml += " <a href='#' class='list-group-item'><p>Zeitraum: " + reservationPrice.startTime + " - " + reservationPrice.endTime + "<p>Preis: <strong>" + reservationPrice.price + " €</strong></p></a>";
             });
+            reservationHtml += "</div>";
             $('#reservation').html(reservationHtml);
 
             console.log("SUCCESS : ", data);

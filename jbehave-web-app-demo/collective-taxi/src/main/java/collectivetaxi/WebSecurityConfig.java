@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**").permitAll()
                 .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and().
                 authorizeRequests();
-        http.csrf().disable(); // TODO find a way for crsf token with javascript!
+        http.csrf().disable(); // TODO crsf token + ajax
     }
 
     @Override
