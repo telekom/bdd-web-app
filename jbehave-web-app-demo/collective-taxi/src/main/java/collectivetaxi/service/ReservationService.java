@@ -13,7 +13,7 @@ public class ReservationService {
     public ReservationPricesVO reserve(ReservationVO reservation) {
 
         // fake it until you make it
-//        if (reservation.getDeparture().equals("OrtA") && reservation.getDestination().equals("OrtB") && reservation.getStartTime().equals("10:00") && reservation.getEndTime().equals("11:00")) {
+        if (reservation.getDeparture().equals("OrtA") && reservation.getDestination().equals("OrtB") && reservation.getStartTime().equals("10:00") && reservation.getEndTime().equals("11:00")) {
             ReservationPricesVO reservationPrices = new ReservationPricesVO();
             reservationPrices.setMessage("reservation possible");
             ReservationPriceVO reservationPrice = new ReservationPriceVO();
@@ -22,11 +22,11 @@ public class ReservationService {
             reservationPrice.setEndTime("11:00");
             reservationPrices.setReservationPrices(singletonList(reservationPrice));
             return reservationPrices;
-//        }
-//
-//        ReservationPricesVO noReservationPossible = new ReservationPricesVO();
-//        noReservationPossible.setMessage("no reservation possible");
-//        return noReservationPossible;
+        }
+
+        ReservationPricesVO noReservationPossible = new ReservationPricesVO();
+        noReservationPossible.setMessage("no reservation possible");
+        return noReservationPossible;
     }
 
 }
