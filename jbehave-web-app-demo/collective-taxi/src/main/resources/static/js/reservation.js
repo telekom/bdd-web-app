@@ -51,10 +51,6 @@ function reserve() {
             });
             $('#reservation').html(reservationHtml);
 
-            var responseHtml = "<h4>Ajax Response</h4><pre>"
-                + JSON.stringify(data, null, 4) + "</pre>";
-            $('#ajaxResponse').html(responseHtml);
-
             console.log("SUCCESS : ", data);
             $("#reserve").prop("disabled", false);
         },
@@ -65,10 +61,6 @@ function reserve() {
 
             var reservationHtml = "<h4>Reservierung nicht möglich!</h4>";
             $('#reservation').html(reservationHtml);
-
-            var responseHtml = "<h4>Ajax Response</h4><pre>"
-                + e.responseText + "</pre>";
-            $('#ajaxResponse').html(responseHtml);
 
             console.log("ERROR : ", e);
             $("#reserve").prop("disabled", false);
