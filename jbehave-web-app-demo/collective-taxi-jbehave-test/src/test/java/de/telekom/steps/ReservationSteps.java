@@ -7,6 +7,9 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @Steps
@@ -38,9 +41,12 @@ public class ReservationSteps extends SeleniumSteps {
         assertTrue(reservationPage.isReservationSuccess());
     }
 
-    @Then("der Preis beträgt $price € zwischen $startTime und $endTime Uhr")
+    @Then("der Preis beträgt $price zwischen $startTime und $endTime Uhr")
     public void thePriceIsBetweenAnd(String price, String startTime, String endTime) {
-
+        ReservationPage reservationPage = getCurrentPage();
+        String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
+        assertNotNull(price);
+        assertThat(currentPrice, is(price));
     }
 
 }
