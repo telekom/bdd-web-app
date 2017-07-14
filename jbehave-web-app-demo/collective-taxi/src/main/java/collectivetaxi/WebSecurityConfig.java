@@ -22,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and().
                 authorizeRequests();
         http.csrf().disable(); // TODO crsf token + ajax
+
+        // to use H2 web console
+        http.headers().frameOptions().disable();
     }
 
     @Override

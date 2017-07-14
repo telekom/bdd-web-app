@@ -22,7 +22,6 @@
     <dependencies>
 
         <!-- Spring -->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -63,7 +62,6 @@
         </dependency>
 
         <!-- Database -->
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
