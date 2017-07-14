@@ -122,15 +122,19 @@ public class WebElementEnhanced {
     }
 
     public void scrollTo() {
-        if (webElement.isDisplayed()) {
-            return;
-        }
-        ((JavascriptExecutor) webDriver).executeScript("window.scrollTo(0, arguments[0]);", webElement.getLocation().getY());
+        String js = "window.scrollTo(0, $(arguments[0]).offset().top - (window.innerHeight / 2))";
+        ((JavascriptExecutor) webDriver).executeScript(js, webElement);
         waitForDisplayed(1);
     }
 
     public void click() {
-        scrollTo();
+        click(true);
+    }
+
+    public void click(boolean scrollTo) {
+        if (scrollTo) {
+            scrollTo();
+        }
         new Actions(webDriver).click(webElement).perform();
     }
 
