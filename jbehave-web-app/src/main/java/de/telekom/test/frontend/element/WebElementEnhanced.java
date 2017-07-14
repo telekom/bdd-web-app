@@ -122,8 +122,8 @@ public class WebElementEnhanced {
     }
 
     public void scrollTo() {
-        if (webDriver == null) {
-            throw new IllegalStateException("Webdriver must be set to use this method!");
+        if (webElement.isDisplayed()) {
+            return;
         }
         ((JavascriptExecutor) webDriver).executeScript("window.scrollTo(0, arguments[0]);", webElement.getLocation().getY());
         waitForDisplayed(1);
