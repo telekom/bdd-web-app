@@ -6,6 +6,7 @@ import de.telekom.test.steps.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
@@ -27,12 +28,22 @@ public class ReservationSteps extends SeleniumSteps {
         reservationPage.setDestination(destination);
     }
 
+    @Given("ein Kunde der bereits eine Reservierung zwischen $startTime und $endTime Uhr vorgenommen hat")
+    public void aCustomerWhoHasAlreadyMadeReservationBetween(String startTime, String endTime){
+
+    }
+
     @When("ein Sammeltaxi zwischen $startTime und $endTime Uhr reserviert wird")
     public void aSharedTaxiIsReservedBetween(String startTime, String endTime) {
         ReservationPage reservationPage = getCurrentPage();
         reservationPage.setStartTime(startTime);
         reservationPage.setEndTime(endTime);
         reservationPage.submitReservation();
+    }
+
+    @Then("öffnet sich die Reservierungsseite")
+    public void theReservationPageOpens(){
+
     }
 
     @Then("ist die Reservierung erfolgreich")

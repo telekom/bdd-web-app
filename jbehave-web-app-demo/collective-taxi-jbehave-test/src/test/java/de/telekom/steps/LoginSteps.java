@@ -5,9 +5,10 @@ import de.telekom.pages.ReservationPage;
 import de.telekom.test.frontend.steps.SeleniumSteps;
 import de.telekom.test.steps.Steps;
 import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.When;
 
 @Steps
-public class UserSessionSteps extends SeleniumSteps {
+public class LoginSteps extends SeleniumSteps {
 
     @Given("ein eingeloggter Kunde $customer")
     public void loggedInCustomer(String customer) {
@@ -21,9 +22,9 @@ public class UserSessionSteps extends SeleniumSteps {
         createExpectedPage(ReservationPage.class);
     }
 
-    @Given("ein ausgeloggter Kunde $customer")
-    public void loggedOutCustomer(String customer) {
-        webDriverWrapper.getDriver().manage().deleteAllCookies();
+    @When("der Anwender sich einloggt")
+    public void theUserLogsIn() {
+
     }
 
 }
