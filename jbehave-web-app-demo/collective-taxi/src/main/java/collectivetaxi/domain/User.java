@@ -16,7 +16,7 @@ public class User {
     private Integer userId;
 
     @Column(unique = true)
-    private String userName;
+    private String username;
 
     private String password;
 

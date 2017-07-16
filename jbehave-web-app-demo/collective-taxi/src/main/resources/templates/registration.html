@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login - Sammeltaxi</title>
+    <title>Registrierung - Sammeltaxi</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css"
@@ -14,35 +14,27 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <h1>Login</h1>
-        </div>
-    </div>
-    <br/>
-    <div th:if="${registration}" class="row">
-        <div class="col-lg-6">
-            <div class="alert alert-success">Sie haben sich erfolgreich registriert!</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <form id="login-form" th:action="@{/login}" method="post">
+            <h1>Registrieren</h1>
+            <br />
+            <form id="registration-form" th:action="@{/registration}" method="post">
+                <div class="form-group">
+                    <label for="firstname">Vorname</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Vorname"/>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Nachname</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Nachname"/>
+                </div>
                 <div class="form-group">
                     <label for="username">Benutzername</label>
-                    <input type="email" class="form-control" id="username" name="username" th:value="${username}"
-                           placeholder="E-Mail"/>
+                    <input type="email" class="form-control" id="username" name="username" placeholder="E-Mail"/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Passwort"/>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">Anmelden</button>
+                <button type="submit" class="btn btn-primary btn-lg">Registrieren</button>
             </form>
-        </div>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-lg-6">
-            <p>Noch keinen Account? Hier <a href="/registration">Registrieren</a></p>
         </div>
     </div>
 </div>
