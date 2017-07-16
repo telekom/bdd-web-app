@@ -43,7 +43,7 @@ public class ReservationSteps extends SeleniumSteps {
 
     @Then("öffnet sich die Reservierungsseite")
     public void theReservationPageOpens(){
-
+        createExpectedPage(ReservationPage.class);
     }
 
     @Then("ist die Reservierung erfolgreich")

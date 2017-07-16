@@ -1,5 +1,6 @@
 package de.telekom.steps;
 
+import de.telekom.pages.LoginPage;
 import de.telekom.test.frontend.steps.SeleniumSteps;
 import de.telekom.test.steps.Steps;
 import org.jbehave.core.annotations.Given;
@@ -16,22 +17,9 @@ public class HomepageSteps extends SeleniumSteps {
 
     @When("der Nutzer die Startseite öffnet")
     public void theUserOpensTheHomePage() {
-
+        open(getUrlWithHost("localhost:8080", "", LoginPage.URL));
     }
 
-    @When("der Nutzer den Link zur Registrierung anklickt")
-    public void userClicksTheLinkToTheRegistration() {
 
-    }
-
-    @Then("dann ist die Startseite geöffnet")
-    public void theStartPageIsOpen() {
-
-    }
-
-    @Then("die Startseite enthält einen Link zur Registrierung")
-    public void startPageContainsLinkToTheRegistration() {
-
-    }
 
 }

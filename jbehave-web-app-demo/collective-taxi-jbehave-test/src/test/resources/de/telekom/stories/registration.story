@@ -7,8 +7,7 @@ um Reservierungen von Sammeltaxis vornehmen zu können.
 
 Scenario: Startseite aufrufen
 When der Nutzer die Startseite öffnet
-Then dann ist die Startseite geöffnet
-And die Startseite enthält einen Link zur Registrierung
+Then dann ist die Loginseite geöffnet
 
 Scenario: Registrierungsseite öffnen
 When der Nutzer den Link zur Registrierung anklickt
@@ -16,4 +15,5 @@ Then öffnet sich die Registrierungsseite
 
 Scenario: Registrierung
 When der Nutzer die Registrierung erfolgreich durchführt
-Then ist der Anwender registriert
+Then dann ist die Loginseite geöffnet
+And der Anwender erhält die Nachricht, dass er registriert ist

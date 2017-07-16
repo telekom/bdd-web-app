@@ -4,9 +4,15 @@ import de.telekom.test.frontend.element.WebElementEnhanced;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends AbstractCollectiveTaxiPage {
+public class RegistrationPage extends AbstractCollectiveTaxiPage {
 
-    public static final String URL = "login";
+    public static final String URL = "registration";
+
+    @FindBy(id = "firstName")
+    private WebElementEnhanced firstNameInput;
+
+    @FindBy(id = "lastName")
+    private WebElementEnhanced lastNameInput;
 
     @FindBy(id = "username")
     private WebElementEnhanced usernameInput;
@@ -17,14 +23,16 @@ public class LoginPage extends AbstractCollectiveTaxiPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementEnhanced submitButton;
 
-    @FindBy(partialLinkText = "Registrieren")
-    private WebElementEnhanced registrationLink;
-
-    @FindBy(className = "alert-success")
-    private WebElementEnhanced alertSuccessDiv;
-
-    public LoginPage(WebDriver driver) {
+    public RegistrationPage(WebDriver driver) {
         super(driver);
+    }
+
+    public void setFirstName(String firstName) {
+        firstNameInput.setValue(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        lastNameInput.setValue(lastName);
     }
 
     public void setUsername(String username) {
@@ -35,19 +43,8 @@ public class LoginPage extends AbstractCollectiveTaxiPage {
         passwordInput.setValue(password);
     }
 
-    public void submitLogin() {
+    public void submitRegistration() {
         submitButton.click();
-    }
-
-    public void clickRegistration() {
-        registrationLink.click();
-    }
-
-    public boolean registeredMessageIsShown() {
-        if (alertSuccessDiv.exists()) {
-            return alertSuccessDiv.getText().contains("registriert");
-        }
-        return false;
     }
 
     @Override
