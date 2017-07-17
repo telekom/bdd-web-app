@@ -36,10 +36,10 @@ public class ReservationSimulatorController {
     }
 
     @PostMapping("/config/reservation")
-    public ReservationConfigVO reservationPrice(
-            @Valid @RequestBody ReservationConfigVO reservationConfig) {
+    public ResponseEntity<?> reservationPrice(
+            @Valid @RequestBody ReservationConfigVO reservationConfig, Errors errors) {
         reservationSimulatorConfig.addReservationConfig(reservationConfig);
-        return reservationConfig;
+        return ok(reservationConfig);
     }
 
     @DeleteMapping("/config/reservation")
