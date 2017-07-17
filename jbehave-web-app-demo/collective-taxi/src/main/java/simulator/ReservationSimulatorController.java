@@ -1,9 +1,9 @@
-package collectivetaxi.api;
+package simulator;
 
-import collectivetaxi.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-public class ReservationController {
+public class ReservationSimulatorController {
 
     @Autowired
-    private ReservationService reservationService;
+    private ReservationSimulatorConfig reservationSimulatorConfig;
 
     @PostMapping("/api/reservation")
     public ResponseEntity<?> reservation(
@@ -31,8 +31,21 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(reservationPrices);
         }
 
-        ReservationPricesVO reservationPrices = reservationService.reserve(reservation);
+        ReservationPricesVO reservationPrices = reservationSimulatorConfig.reserve(reservation);
         return ok(reservationPrices);
     }
+
+    @PostMapping("/config/reservation")
+    public ReservationConfigVO reservationPrice(
+            @Valid @RequestBody ReservationConfigVO reservationConfig) {
+        reservationSimulatorConfig.addReservationConfig(reservationConfig);
+        return reservationConfig;
+    }
+
+    @DeleteMapping("/config/reservation")
+    public void reservationPrice() {
+        reservationSimulatorConfig.clearReservationConfigs();
+    }
+
 
 }

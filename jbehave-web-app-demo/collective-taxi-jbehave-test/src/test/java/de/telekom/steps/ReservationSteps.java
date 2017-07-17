@@ -20,33 +20,53 @@ public class ReservationSteps extends SeleniumSteps {
     @Autowired
     private RegistrationSteps registrationSteps;
 
-    @Given("als Startort ist $departure angegeben")
-    public void theDepartureIs(String departure) {
-        ReservationPage reservationPage = getCurrentPage();
-        reservationPage.setDeparture(departure);
-    }
-
-    @Given("als Zielort ist $destination angegeben")
-    public void theDestinationPointIs(String destination) {
-        ReservationPage reservationPage = getCurrentPage();
-        reservationPage.setDestination(destination);
-    }
-
     @Given("ein Kunde der bereits eine Reservierung zwischen $startTime und $endTime Uhr vorgenommen hat")
-    public void aCustomerWhoHasAlreadyMadeReservationBetween(String startTime, String endTime){
+    public void aCustomerWhoHasAlreadyMadeReservationBetween(String startTime, String endTime) {
         registrationSteps.registeredUser("kunde");
     }
 
-    @When("ein Sammeltaxi zwischen $startTime und $endTime Uhr reserviert wird")
-    public void aSharedTaxiIsReservedBetween(String startTime, String endTime) {
+    @Given("ist der Startort $departure")
+    public void theDeparture(String departure) {
+        scenarioInteraction.remember("departure", departure);
+    }
+
+    @Given("ist der Zielort $destination")
+    public void theDestination(String destination) {
+        scenarioInteraction.remember("destination", destination);
+    }
+
+    @Given("ist der früheste Startzeitpunkt $earliestStartTime Uhr")
+    public void earliestStartTime(String earliestStartTime) {
+        scenarioInteraction.remember("earliestStartTime", earliestStartTime);
+    }
+
+    @Given("ist der späteste Startzeitpunkt $latestStartTime Uhr")
+    public void latestStartTime(String latestStartTime) {
+        scenarioInteraction.remember("latestStartTime", latestStartTime);
+    }
+
+    @When("die Reservierung im Simulator hinterlegt wird")
+    public void theReservationIsSetInTheSimulator() {
+
+    }
+
+    @When("ein Sammeltaxi reserviert wird")
+    public void aSharedTaxiIsReservedBetween() {
         ReservationPage reservationPage = getCurrentPage();
-        reservationPage.setStartTime(startTime);
-        reservationPage.setEndTime(endTime);
+        reservationPage.setDeparture(scenarioInteraction.recall("departure"));
+        reservationPage.setDestination(scenarioInteraction.recall("destination"));
+        reservationPage.setEarliestStartTime(scenarioInteraction.recall("earliestStartTime"));
+        reservationPage.setLatestStartTime(scenarioInteraction.recall("latestStartTime"));
         reservationPage.submitReservation();
     }
 
+    @Then("gibt der Simulator eine Erfolgsmeldung zurück")
+    public void theSimulatorReturnsSuccessMessage() {
+
+    }
+
     @Then("öffnet sich die Reservierungsseite")
-    public void theReservationPageOpens(){
+    public void theReservationPageOpens() {
         createExpectedPage(ReservationPage.class);
     }
 

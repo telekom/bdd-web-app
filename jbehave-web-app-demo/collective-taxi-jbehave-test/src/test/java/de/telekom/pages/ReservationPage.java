@@ -17,14 +17,14 @@ public class ReservationPage extends AbstractCollectiveTaxiPage {
     @FindBy(id = "departure")
     private WebElementEnhanced departureInput;
 
-    @FindBy(id = "startTime")
-    private WebElementEnhanced startTimeInput;
+    @FindBy(id = "earliestStartTime")
+    private WebElementEnhanced earliestStartTimeInput;
 
     @FindBy(id = "destination")
     private WebElementEnhanced destinationInput;
 
-    @FindBy(id = "endTime")
-    private WebElementEnhanced endTimeInput;
+    @FindBy(id = "latestStartTime")
+    private WebElementEnhanced latestStartTimeInput;
 
     @FindBy(id = "reserve")
     private WebElementEnhanced reserveButton;
@@ -40,16 +40,16 @@ public class ReservationPage extends AbstractCollectiveTaxiPage {
         departureInput.setValue(departure);
     }
 
-    public void setStartTime(String startTime) {
-        startTimeInput.setValue(startTime);
+    public void setEarliestStartTime(String earliestStartTime) {
+        earliestStartTimeInput.setValue(earliestStartTime);
     }
 
     public void setDestination(String destination) {
         destinationInput.setValue(destination);
     }
 
-    public void setEndTime(String endTime) {
-        endTimeInput.setValue(endTime);
+    public void setLatestStartTime(String latestStartTime) {
+        latestStartTimeInput.setValue(latestStartTime);
     }
 
     public void submitReservation() {

@@ -1,4 +1,4 @@
-package collectivetaxi.api;
+package simulator;
 
 import lombok.Data;
 

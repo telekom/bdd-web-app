@@ -20,11 +20,11 @@ public class Reservation {
 
     private String departure;
 
-    private Date startTime;
+    private Date earliestStartTime;
 
     private String destination;
 
-    private Date endTime;
+    private Date latestStartTime;
 
     private Date creationDate;
 
