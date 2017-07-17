@@ -10,16 +10,9 @@ import org.jbehave.core.annotations.When;
 @Steps
 public class HomepageSteps extends SeleniumSteps {
 
-    @Given("eine geöffnete Startseite")
-    public void homePageIsOpen(){
-
-    }
-
     @When("der Nutzer die Startseite öffnet")
     public void theUserOpensTheHomePage() {
         open(getUrlWithHost("localhost:8080", "", LoginPage.URL));
     }
-
-
 
 }

@@ -14,6 +14,7 @@ When der Nutzer den Link zur Registrierung anklickt
 Then öffnet sich die Registrierungsseite
 
 Scenario: Registrierung
-When der Nutzer die Registrierung erfolgreich durchführt
+Given valide Registrierungsdaten für Nutzer benutzer
+When der Nutzer benutzer die Registrierung durchführt
 Then dann ist die Loginseite geöffnet
 And der Anwender erhält die Nachricht, dass er registriert ist

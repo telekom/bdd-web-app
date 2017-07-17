@@ -6,7 +6,7 @@ möchte ich Reservierungen von Sammeltaxis für bestimmte Strecken in bestimmten
 um etwaige Rabatte nutzen zu können.
 
 Scenario: Reservierung einer Sammeltaxifahrt
-Given ein eingeloggter Kunde a@kunde.de
+Given ein eingeloggter Kunde kunde
 And als Startort ist OrtA angegeben
 And als Zielort ist OrtB angegeben
 When ein Sammeltaxi zwischen 10:00 und 12:00 Uhr reserviert wird

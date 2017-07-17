@@ -7,6 +7,7 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
@@ -15,6 +16,9 @@ import static org.junit.Assert.assertTrue;
 
 @Steps
 public class ReservationSteps extends SeleniumSteps {
+
+    @Autowired
+    private RegistrationSteps registrationSteps;
 
     @Given("als Startort ist $departure angegeben")
     public void theDepartureIs(String departure) {
@@ -30,7 +34,7 @@ public class ReservationSteps extends SeleniumSteps {
 
     @Given("ein Kunde der bereits eine Reservierung zwischen $startTime und $endTime Uhr vorgenommen hat")
     public void aCustomerWhoHasAlreadyMadeReservationBetween(String startTime, String endTime){
-
+        registrationSteps.registeredUser("kunde");
     }
 
     @When("ein Sammeltaxi zwischen $startTime und $endTime Uhr reserviert wird")

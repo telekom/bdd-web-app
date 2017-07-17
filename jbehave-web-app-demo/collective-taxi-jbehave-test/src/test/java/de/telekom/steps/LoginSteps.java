@@ -20,19 +20,23 @@ public class LoginSteps extends SeleniumSteps {
     @Autowired
     private ReservationSteps reservationSteps;
 
-    @Given("ein eingeloggter Kunde $customer")
-    public void loggedInCustomer(String customer) {
+    @Autowired
+    private RegistrationSteps registrationSteps;
+
+    @Given("ein eingeloggter Kunde $user")
+    public void loggedInCustomer(String user) {
+        registrationSteps.registeredUser(user);
         homepageSteps.theUserOpensTheHomePage();
         theStartPageIsOpen();
-        theUserLogsIn();
+        theUserLogsIn(user);
         reservationSteps.theReservationPageOpens();
     }
 
-    @When("der Anwender sich einloggt")
-    public void theUserLogsIn() {
+    @When("der Anwender $user sich einloggt")
+    public void theUserLogsIn(String user) {
         LoginPage loginPage = getCurrentPage();
-        loginPage.setUsername("customer");
-        loginPage.setPassword("test1234");
+        loginPage.setUsername(storyInteraction.recallObject(user, "username"));
+        loginPage.setPassword(storyInteraction.recallObject(user, "password"));
         loginPage.submitLogin();
     }
 
@@ -46,6 +50,7 @@ public class LoginSteps extends SeleniumSteps {
     public void theStartPageIsOpen() {
         createExpectedPage(LoginPage.class);
     }
+
     @Then("der Anwender erhält die Nachricht, dass er registriert ist")
     public void theUserReceivesTheRegisteredMessage() {
         LoginPage loginPage = getCurrentPage();

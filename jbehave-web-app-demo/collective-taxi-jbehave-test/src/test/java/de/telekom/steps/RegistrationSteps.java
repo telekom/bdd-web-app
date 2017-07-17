@@ -4,17 +4,48 @@ import de.telekom.pages.LoginPage;
 import de.telekom.pages.RegistrationPage;
 import de.telekom.stories.Registration;
 import de.telekom.test.frontend.steps.SeleniumSteps;
+import de.telekom.test.interaction.ScenarioInteraction;
+import de.telekom.test.interaction.StoryInteraction;
 import de.telekom.test.steps.Steps;
+import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Random;
 
 @Steps
 public class RegistrationSteps extends SeleniumSteps {
 
-    @Given("ist ein registrierter Anwender")
-    public void registeredUser() {
+    private final Random random = new Random();
 
+    @Autowired
+    private StoryInteraction storyInteraction;
+
+    @Given("ist ein registrierter Anwender $user")
+    public void registeredUser(String user) {
+        theUserOpenTheRegistrationPage();
+        theRegistrationPageOpens();
+        validRegistrationDataForUser(user);
+        theUserSuccessfullyCompletedTheRegistration(user);
+    }
+
+    @Given("valide Registrierungsdaten für Nutzer $user")
+    public void validRegistrationDataForUser(String user) {
+        storyInteraction.rememberObject(user, "firstName", "Hans");
+        storyInteraction.rememberObject(user, "lastName", "Müller");
+        storyInteraction.rememberObject(user, "username", randomNumber() + "@user.de");
+        storyInteraction.rememberObject(user, "password", "pa55w0rd");
+    }
+
+    private String randomNumber() {
+        return StringUtils.leftPad("" + random.nextInt(Integer.MAX_VALUE), 12, "0");
+    }
+
+    @When("der Nutzer die Registrierungsseite öffnet")
+    private void theUserOpenTheRegistrationPage() {
+        open(getUrlWithHost("localhost:8080", "", RegistrationPage.URL));
     }
 
     @Then("öffnet sich die Registrierungsseite")
@@ -22,18 +53,13 @@ public class RegistrationSteps extends SeleniumSteps {
         createExpectedPage(RegistrationPage.class);
     }
 
-    @Then("ist der Anwender registriert")
-    public void theUserIsRegistered() {
-
-    }
-
-    @When("der Nutzer die Registrierung erfolgreich durchführt")
-    public void theUserSuccessfullyCompletedTheRegistration() {
+    @When("der Nutzer $user die Registrierung durchführt")
+    public void theUserSuccessfullyCompletedTheRegistration(String user) {
         RegistrationPage registrationPage = getCurrentPage();
-        registrationPage.setFirstName("Hans");
-        registrationPage.setLastName("Maulwurf");
-        registrationPage.setUsername("hans@mail.de");
-        registrationPage.setPassword("hans1234");
+        registrationPage.setFirstName(storyInteraction.recallObject(user, "firstName"));
+        registrationPage.setLastName(storyInteraction.recallObject(user, "lastName"));
+        registrationPage.setUsername(storyInteraction.recallObject(user, "username"));
+        registrationPage.setPassword(storyInteraction.recallObject(user, "password"));
         registrationPage.submitRegistration();
     }
 
