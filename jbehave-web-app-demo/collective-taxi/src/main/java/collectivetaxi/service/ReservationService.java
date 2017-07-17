@@ -13,7 +13,7 @@ public class ReservationService {
     public ReservationPricesVO reserve(ReservationVO reservation) {
 
         // fake it until you make it
-        if (reservation.getDeparture().equals("OrtA") && reservation.getDestination().equals("OrtB") && reservation.getStartTime().equals("10:00") && reservation.getEndTime().equals("11:00")) {
+        if (reservation.getDeparture().equals("OrtA") && reservation.getDestination().equals("OrtB") && reservation.getStartTime().equals("10:00") && reservation.getEndTime().equals("12:00")) {
             ReservationPricesVO reservationPrices = new ReservationPricesVO();
             reservationPrices.setMessage("reservation possible");
             ReservationPriceVO reservationPrice = new ReservationPriceVO();
