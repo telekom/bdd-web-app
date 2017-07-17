@@ -1,6 +1,7 @@
 package de.telekom.steps;
 
 import de.telekom.pages.ReservationPage;
+import de.telekom.test.api.RequestBuilder;
 import de.telekom.test.frontend.steps.SeleniumSteps;
 import de.telekom.test.steps.Steps;
 import org.jbehave.core.annotations.Given;
@@ -9,6 +10,11 @@ import org.jbehave.core.annotations.When;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -16,6 +22,9 @@ import static org.junit.Assert.assertTrue;
 
 @Steps
 public class ReservationSteps extends SeleniumSteps {
+
+    @Autowired
+    private RequestBuilder requestBuilder;
 
     @Autowired
     private RegistrationSteps registrationSteps;
@@ -47,7 +56,21 @@ public class ReservationSteps extends SeleniumSteps {
 
     @When("die Reservierung im Simulator hinterlegt wird")
     public void theReservationIsSetInTheSimulator() {
-
+        Map<String, Object> body = new HashMap<>();
+        Map<String, Object> reservation = new HashMap<>();
+        reservation.put("departure", scenarioInteraction.recall("departure"));
+        reservation.put("destination", scenarioInteraction.recall("destination"));
+        reservation.put("earliestStartTime", scenarioInteraction.recall("earliestStartTime"));
+        reservation.put("latestStartTime", scenarioInteraction.recall("latestStartTime"));
+        body.put("reservation", reservation);
+        List<Map<String, Object>> reservationPrices = new ArrayList<>();
+        Map<String, Object> reservationPrice = new HashMap<>();
+        reservationPrice.put("startTime", "10:00");
+        reservationPrice.put("endTime", "12:00");
+        reservationPrice.put("price", "15,50");
+        reservationPrices.add(reservationPrice);
+        body.put("reservationPrices", reservationPrices);
+        request().body(body).post("/config/reservation");
     }
 
     @When("ein Sammeltaxi reserviert wird")
@@ -82,6 +105,10 @@ public class ReservationSteps extends SeleniumSteps {
         String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
         assertNotNull(price);
         assertThat(currentPrice, is(price));
+    }
+
+    private RequestBuilder request() {
+        return requestBuilder.requestWithJsonConfig("http://localhost:8080", "", null, null);
     }
 
 }

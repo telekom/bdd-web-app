@@ -2,9 +2,12 @@ package simulator;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class ReservationConfigVO extends ReservationPricesVO {
+public class ReservationConfigVO {
 
     private ReservationVO reservation;
+    private List<ReservationPriceVO> reservationPrices;
 
 }

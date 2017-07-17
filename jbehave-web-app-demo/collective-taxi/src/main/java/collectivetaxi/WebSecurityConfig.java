@@ -20,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/registration").permitAll()
+                .antMatchers("/config/**").permitAll()
                 .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and().
                 authorizeRequests();
         http.csrf().disable(); // TODO crsf token + ajax
