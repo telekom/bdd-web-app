@@ -19,8 +19,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/config/**").permitAll()
+                .antMatchers("/registration/**").permitAll()
+                .antMatchers("/simulator/api/reservation/**").permitAll()
+                .antMatchers("/simulator/config/**").permitAll()
                 .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and().
                 authorizeRequests();
         http.csrf().disable(); // TODO crsf token + ajax

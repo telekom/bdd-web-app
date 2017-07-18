@@ -5,7 +5,7 @@ Als eingeloggter Anwender
 möchte ich Reservierungen von Sammeltaxis für bestimmte Strecken in bestimmten Zeiträumen vornehmen können
 um etwaige Rabatte nutzen zu können.
 
-Scenario: Reservierung möglich
+Scenario: Aktuelle Preise für Reservierung einstellen
 Given ist der Startort OrtA
 And ist der Zielort OrtB
 And ist der früheste Startzeitpunkt 10:00 Uhr

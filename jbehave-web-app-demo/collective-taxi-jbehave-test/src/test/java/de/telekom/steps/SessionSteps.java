@@ -7,8 +7,8 @@ import org.jbehave.core.annotations.Given;
 @Steps
 public class SessionSteps extends SeleniumSteps {
 
-    @Given("ein ausgeloggter Kunde $customer")
-    public void loggedOutCustomer(String customer) {
+    @Given("ein ausgeloggter Kunde")
+    public void loggedOutCustomer() {
         webDriverWrapper.getDriver().manage().deleteAllCookies();
     }
 

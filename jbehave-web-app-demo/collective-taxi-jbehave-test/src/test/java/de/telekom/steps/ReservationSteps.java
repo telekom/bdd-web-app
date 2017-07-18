@@ -73,7 +73,7 @@ public class ReservationSteps extends SeleniumSteps {
         reservation.put("latestStartTime", scenarioInteraction.recall("latestStartTime"));
         body.put("reservation", reservation);
         body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
-        request().body(body).post("/config/reservation");
+        request().body(body).post("/simulator/config/reservation");
     }
 
     @When("ein Sammeltaxi reserviert wird")

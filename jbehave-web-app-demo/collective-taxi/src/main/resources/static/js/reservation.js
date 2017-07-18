@@ -27,7 +27,7 @@ function reserve() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/api/reservation",
+        url: "/reservation",
         data: JSON.stringify(reservation),
         dataType: 'json',
         cache: false,

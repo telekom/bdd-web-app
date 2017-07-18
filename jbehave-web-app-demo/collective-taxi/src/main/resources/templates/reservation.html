@@ -5,11 +5,10 @@
     <title>Reservierung - Sammeltaxi</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
 
     <script type="text/javascript"
-            src="webjars/jquery/2.2.4/jquery.min.js"></script>
+            th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"/>
     <script type="text/javascript" src="js/reservation.js"></script>
 </head>
 <body>
@@ -26,7 +25,8 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="departure">Startort</label>
-                    <input type="text" class="form-control" id="departure" name="departure" placeholder="Startort"/>
+                    <input type="text" class="form-control" id="departure" name="departure" th:value="${reservation}"
+                           placeholder="Startort"/>
                 </div>
             </div>
             <div class="col-lg-6">

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 @Service
 public class RegistrationService {
 
@@ -16,9 +18,7 @@ public class RegistrationService {
 
     public void register(RegistrationVO registration) {
         User user = new User();
-        user.setFirstName(registration.getFirstName());
-        user.setLastName(registration.getLastName());
-        user.setUsername(registration.getUsername());
+        copyProperties(registration, user);
         user.setCreationDate(new Date());
         userRepository.save(user);
     }

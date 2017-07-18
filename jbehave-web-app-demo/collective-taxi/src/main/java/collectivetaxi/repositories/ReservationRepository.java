@@ -10,4 +10,6 @@ public interface ReservationRepository extends CrudRepository<Reservation, Integ
 
     List<Reservation> findByUser(User user);
 
+    void deleteByUser(User user);
+
 }

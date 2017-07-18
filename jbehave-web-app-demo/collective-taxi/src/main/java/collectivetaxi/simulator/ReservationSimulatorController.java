@@ -19,14 +19,14 @@ public class ReservationSimulatorController {
     @Autowired
     private ReservationSimulatorConfig reservationSimulatorConfig;
 
-    @PostMapping("/api/reservation")
+    @PostMapping("/simulator/api/reservation")
     public ReservationPricesVO reservation(
             @Valid @RequestBody ReservationVO reservation) {
         ReservationPricesVO reservationPrices = reservationSimulatorConfig.reserve(reservation);
         return reservationPrices;
     }
 
-    @PostMapping("/config/reservation")
+    @PostMapping("/simulator/config/reservation")
     public ReservationConfigVO reservationPrice(
             @Valid @RequestBody ReservationConfigVO reservationConfig) {
         reservationSimulatorConfig.addReservationConfig(reservationConfig);

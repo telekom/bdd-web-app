@@ -34,12 +34,4 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping(value = "/reservation", method = RequestMethod.GET)
-    public String reservation(Principal principal, Model model) {
-        if (authenticationValidator.isAuthenticated(principal, model)) {
-            return "reservation";
-        }
-        return "redirect:login";
-    }
-
 }
