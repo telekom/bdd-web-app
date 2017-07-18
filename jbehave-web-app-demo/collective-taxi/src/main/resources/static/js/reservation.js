@@ -18,9 +18,9 @@ function reserve() {
 
     var reservation = {}
     reservation["departure"] = $("#departure").val();
-    reservation["startTime"] = $("#startTime").val();
+    reservation["earliestStartTime"] = $("#earliestStartTime").val();
     reservation["destination"] = $("#destination").val();
-    reservation["endTime"] = $("#endTime").val();
+    reservation["latestStartTime"] = $("#latestStartTime").val();
 
     $("#reserve").prop("disabled", true);
 

@@ -20,26 +20,17 @@ public class ReservationSimulatorController {
     private ReservationSimulatorConfig reservationSimulatorConfig;
 
     @PostMapping("/api/reservation")
-    public ResponseEntity<?> reservation(
-            @Valid @RequestBody ReservationVO reservation, Errors errors) {
-
-        if (errors.hasErrors()) {
-            ReservationPricesVO reservationPrices = new ReservationPricesVO();
-            reservationPrices.setMessage(errors.getAllErrors()
-                    .stream().map(x -> x.getDefaultMessage())
-                    .collect(Collectors.joining(",")));
-            return ResponseEntity.badRequest().body(reservationPrices);
-        }
-
+    public ReservationPricesVO reservation(
+            @Valid @RequestBody ReservationVO reservation) {
         ReservationPricesVO reservationPrices = reservationSimulatorConfig.reserve(reservation);
-        return ok(reservationPrices);
+        return reservationPrices;
     }
 
     @PostMapping("/config/reservation")
-    public ResponseEntity<?> reservationPrice(
-            @Valid @RequestBody ReservationConfigVO reservationConfig, Errors errors) {
+    public ReservationConfigVO reservationPrice(
+            @Valid @RequestBody ReservationConfigVO reservationConfig) {
         reservationSimulatorConfig.addReservationConfig(reservationConfig);
-        return ok(reservationConfig);
+        return reservationConfig;
     }
 
     @DeleteMapping("/config/reservation")

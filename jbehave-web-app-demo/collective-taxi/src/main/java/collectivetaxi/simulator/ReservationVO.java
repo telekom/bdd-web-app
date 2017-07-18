@@ -26,19 +26,11 @@ public class ReservationVO {
 
         ReservationVO that = (ReservationVO) o;
 
-        if (!departure.equals(that.departure)) return false;
-        if (!earliestStartTime.equals(that.earliestStartTime)) return false;
-        if (!destination.equals(that.destination)) return false;
-        return latestStartTime.equals(that.latestStartTime);
+        if (departure != null ? !departure.equals(that.departure) : that.departure != null) return false;
+        if (earliestStartTime != null ? !earliestStartTime.equals(that.earliestStartTime) : that.earliestStartTime != null)
+            return false;
+        if (destination != null ? !destination.equals(that.destination) : that.destination != null) return false;
+        return latestStartTime != null ? latestStartTime.equals(that.latestStartTime) : that.latestStartTime == null;
     }
 
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + departure.hashCode();
-        result = 31 * result + earliestStartTime.hashCode();
-        result = 31 * result + destination.hashCode();
-        result = 31 * result + latestStartTime.hashCode();
-        return result;
-    }
 }
