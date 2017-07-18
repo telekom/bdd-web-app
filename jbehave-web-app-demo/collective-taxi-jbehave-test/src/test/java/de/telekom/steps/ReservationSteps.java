@@ -29,7 +29,7 @@ public class ReservationSteps extends SeleniumSteps {
     @Autowired
     private RegistrationSteps registrationSteps;
 
-    @Given("ein Kunde der bereits eine Reservierung zwischen $startTime und $endTime Uhr vorgenommen hat")
+    @Given("ein Kunde $user der bereits eine Reservierung vorgenommen hat")
     public void aCustomerWhoHasAlreadyMadeReservationBetween(String startTime, String endTime) {
         registrationSteps.registeredUser("kunde");
     }
@@ -54,6 +54,15 @@ public class ReservationSteps extends SeleniumSteps {
         scenarioInteraction.remember("latestStartTime", latestStartTime);
     }
 
+    @Given("zwischen $startTime Uhr und $endTime Uhr ist der Preis $price €")
+    public void betweenStartTimeAndEndTimeThePriceIs(String startTime, String endTime, String price) {
+        Map<String, String> reservationPrice = new HashMap<>();
+        reservationPrice.put("startTime", startTime);
+        reservationPrice.put("endTime", endTime);
+        reservationPrice.put("price", price);
+        scenarioInteraction.rememberToList("reservationPrices", reservationPrice);
+    }
+
     @When("die Reservierung im Simulator hinterlegt wird")
     public void theReservationIsSetInTheSimulator() {
         Map<String, Object> body = new HashMap<>();
@@ -63,13 +72,7 @@ public class ReservationSteps extends SeleniumSteps {
         reservation.put("earliestStartTime", scenarioInteraction.recall("earliestStartTime"));
         reservation.put("latestStartTime", scenarioInteraction.recall("latestStartTime"));
         body.put("reservation", reservation);
-        List<Map<String, Object>> reservationPrices = new ArrayList<>();
-        Map<String, Object> reservationPrice = new HashMap<>();
-        reservationPrice.put("startTime", "10:00");
-        reservationPrice.put("endTime", "12:00");
-        reservationPrice.put("price", "15,50");
-        reservationPrices.add(reservationPrice);
-        body.put("reservationPrices", reservationPrices);
+        body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
         request().body(body).post("/config/reservation");
     }
 
@@ -99,8 +102,8 @@ public class ReservationSteps extends SeleniumSteps {
         assertTrue(reservationPage.isReservationSuccess());
     }
 
-    @Then("der Preis beträgt $price zwischen $startTime und $endTime Uhr")
-    public void thePriceIsBetweenAnd(String price, String startTime, String endTime) {
+    @Then("zwischen $startTime und $endTime Uhr beträgt der Preis $price")
+    public void thePriceIsBetweenAnd(String startTime, String endTime, String price) {
         ReservationPage reservationPage = getCurrentPage();
         String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
         assertNotNull(price);
