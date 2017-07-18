@@ -1,11 +1,9 @@
-package simulator;
+package collectivetaxi.simulator;
 
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Collections.singletonList;
 
 @Service
 public class ReservationSimulatorConfig {

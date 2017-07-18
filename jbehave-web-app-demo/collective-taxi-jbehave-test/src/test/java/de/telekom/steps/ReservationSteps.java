@@ -85,7 +85,7 @@ public class ReservationSteps extends SeleniumSteps {
 
     @Then("gibt der Simulator eine Erfolgsmeldung zurück")
     public void theSimulatorReturnsSuccessMessage() {
-
+        requestBuilder.response().then().statusCode(200);
     }
 
     @Then("öffnet sich die Reservierungsseite")
