@@ -25,7 +25,8 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="departure">Startort</label>
-                    <input type="text" class="form-control" id="departure" name="departure" th:value="${reservation}"
+                    <input type="text" class="form-control" id="departure" name="departure"
+                           th:value="${reservation?.departure}"
                            placeholder="Startort"/>
                 </div>
             </div>
@@ -33,19 +34,22 @@
                 <div class="form-group">
                     <label for="earliestStartTime">Frühester Startzeitpunkt</label>
                     <input type="text" class="form-control" id="earliestStartTime" name="earliestStartTime"
+                           th:value="${reservation?.earliestStartTime}"
                            placeholder="Frühester Startzeitpunkt"/>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="destination">Zielort</label>
-                    <input type="text" class="form-control" id="destination" name="destination" placeholder="Zielort"/>
+                    <input type="text" class="form-control" id="destination" name="destination"
+                           th:value="${reservation?.destination}" placeholder="Zielort"/>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="latestStartTime">Spätester Startzeitpunkt</label>
                     <input type="text" class="form-control" id="latestStartTime" name="latestStartTime"
+                           th:value="${reservation?.latestStartTime}"
                            placeholder="Spätester Ankunftszeitpunkt"/>
                 </div>
             </div>
@@ -60,6 +64,10 @@
 </div>
 
 <footer th:replace="fragments/footer :: footer">&nbsp;</footer>
+
+<script th:if="${reservation} != null">
+    $("#reserve-form").submit();
+</script>
 
 </body>
 </html>
