@@ -1,6 +1,6 @@
 package collectivetaxi.controller;
 
-import collectivetaxi.service.RegistrationService;
+import collectivetaxi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import java.security.Principal;
 public class RegistrationController {
 
     @Autowired
-    private RegistrationService registrationService;
+    private UserService userService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Principal principal, Model model) {
@@ -23,7 +23,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String addRegistration(RegistrationVO registration, HttpSession session) {
-        registrationService.register(registration);
+        userService.register(registration);
         session.setAttribute("registration", true);
         session.setAttribute("username", registration.getUsername());
         return "redirect:login";

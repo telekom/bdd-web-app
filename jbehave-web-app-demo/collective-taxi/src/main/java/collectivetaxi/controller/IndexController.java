@@ -26,7 +26,7 @@ public class IndexController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Principal principal, Model model, HttpSession session) {
-        if (authenticationValidator.isAuthenticated(principal, model)) {
+        if (authenticationValidator.isAuthenticated(principal)) {
             return "redirect:reservation";
         }
         model.addAttribute("registration", session.getAttribute("registration"));

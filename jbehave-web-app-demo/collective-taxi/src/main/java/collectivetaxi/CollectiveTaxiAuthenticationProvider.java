@@ -1,5 +1,7 @@
 package collectivetaxi;
 
+import collectivetaxi.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,9 @@ import java.util.List;
 public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvider {
 
     public final static SimpleGrantedAuthority ROLE_USER = new SimpleGrantedAuthority("ROLE_USER");
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -34,7 +39,7 @@ public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvi
         if (!StringUtils.hasText(password)) {
             return false;
         }
-        return true;
+        return userService.isUsernameAndPasswordValid(name, password);
     }
 
     private String getPassword(Authentication authentication) {

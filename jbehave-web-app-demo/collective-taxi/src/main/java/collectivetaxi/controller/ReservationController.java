@@ -29,7 +29,7 @@ public class ReservationController {
 
     @GetMapping("reservation")
     public String reservation(Principal principal, Model model) {
-        if (authenticationValidator.isAuthenticated(principal, model)) {
+        if (authenticationValidator.isAuthenticated(principal)) {
             model.addAttribute("reservation", reservationService.getReservation(principal.getName()));
             return "reservation";
         }
