@@ -66,7 +66,9 @@
 <footer th:replace="fragments/footer :: footer">&nbsp;</footer>
 
 <script th:if="${reservation} != null">
-    $("#reserve-form").submit();
+    window.onload = function(){
+        $("#reserve-form").submit();
+    }
 </script>
 
 </body>

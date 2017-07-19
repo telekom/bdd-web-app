@@ -27,6 +27,8 @@ And zwischen 10:00 und 11:00 Uhr beträgt der Preis 15,50 €
 And zwischen 11:00 und 12:00 Uhr beträgt der Preis 13,50 €
 
 Scenario: Preise aktualisieren
+When die Reservierung im Simulator gelöscht wird
+Then gibt der Simulator eine Erfolgsmeldung zurück
 Given ist der Startort OrtA
 And ist der Zielort OrtB
 And ist der früheste Startzeitpunkt 10:00 Uhr

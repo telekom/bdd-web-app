@@ -33,7 +33,7 @@ public class ReservationSimulatorController {
         return reservationConfig;
     }
 
-    @DeleteMapping("/config/reservation")
+    @DeleteMapping("/simulator/config/reservation")
     public void reservationPrice() {
         reservationSimulatorConfig.clearReservationConfigs();
     }

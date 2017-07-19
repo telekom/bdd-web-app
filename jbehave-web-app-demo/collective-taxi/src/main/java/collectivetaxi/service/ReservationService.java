@@ -8,6 +8,7 @@ import collectivetaxi.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Transactional
     public void saveReservation(String username, ReservationVO reservationVO) {
         User user = getUser(username);
 
@@ -49,7 +51,7 @@ public class ReservationService {
     }
 
     private User getUser(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.getByUsername(username);
     }
 
 }

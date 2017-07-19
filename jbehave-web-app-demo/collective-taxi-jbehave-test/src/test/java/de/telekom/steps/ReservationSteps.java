@@ -4,6 +4,7 @@ import de.telekom.pages.ReservationPage;
 import de.telekom.test.api.RequestBuilder;
 import de.telekom.test.frontend.steps.SeleniumSteps;
 import de.telekom.test.steps.Steps;
+import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -74,6 +75,12 @@ public class ReservationSteps extends SeleniumSteps {
         body.put("reservation", reservation);
         body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
         request().body(body).post("/simulator/config/reservation");
+    }
+
+    @BeforeStory
+    @When("die Reservierung im Simulator gelöscht wird")
+    public void theReservationIsDeletedInTheSimulator() {
+        request().delete("/simulator/config/reservation");
     }
 
     @When("ein Sammeltaxi reserviert wird")
