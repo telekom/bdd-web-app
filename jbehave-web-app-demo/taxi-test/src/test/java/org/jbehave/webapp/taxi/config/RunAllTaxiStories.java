@@ -3,7 +3,7 @@ package org.jbehave.webapp.taxi.config;
 import org.jbehave.webapp.stories.RunAllStories;
 import org.springframework.context.ApplicationContext;
 
-public class RunAllCollectiveTaxiStories extends RunAllStories {
+public class RunAllTaxiStories extends RunAllStories {
 
     @Override
     public ApplicationContext getApplicationContext() {

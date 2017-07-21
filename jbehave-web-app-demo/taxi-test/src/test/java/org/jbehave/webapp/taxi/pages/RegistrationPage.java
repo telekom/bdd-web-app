@@ -4,7 +4,7 @@ import org.jbehave.webapp.frontend.element.WebElementEnhanced;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class RegistrationPage extends AbstractCollectiveTaxiPage {
+public class RegistrationPage extends AbstractTaxiPage {
 
     public static final String URL = "registration";
 

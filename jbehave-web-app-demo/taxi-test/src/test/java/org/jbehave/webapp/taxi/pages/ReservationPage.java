@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ReservationPage extends AbstractCollectiveTaxiPage {
+public class ReservationPage extends AbstractTaxiPage {
 
     public static final String URL = "reservation";
 

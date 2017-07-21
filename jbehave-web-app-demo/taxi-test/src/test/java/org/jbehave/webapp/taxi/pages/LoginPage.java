@@ -4,7 +4,7 @@ import org.jbehave.webapp.frontend.element.WebElementEnhanced;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends AbstractCollectiveTaxiPage {
+public class LoginPage extends AbstractTaxiPage {
 
     public static final String URL = "login";
 

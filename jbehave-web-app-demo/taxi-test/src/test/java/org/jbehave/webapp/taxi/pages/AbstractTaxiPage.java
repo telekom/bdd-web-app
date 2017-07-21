@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class AbstractCollectiveTaxiPage extends Page {
+public abstract class AbstractTaxiPage extends Page {
 
-    public AbstractCollectiveTaxiPage(WebDriver driver) {
+    public AbstractTaxiPage(WebDriver driver) {
         super(driver);
     }
 
