@@ -17,6 +17,7 @@ function isActive() {
 function reserve() {
 
     var reservation = {}
+    reservation["date"] = $("#date").val();
     reservation["departure"] = $("#departure").val();
     reservation["earliestStartTime"] = $("#earliestStartTime").val();
     reservation["destination"] = $("#destination").val();

@@ -33,6 +33,11 @@ public class ReservationSteps extends SeleniumSteps {
         registrationSteps.registeredUser("kunde");
     }
 
+    @Given("ist das Datum $date")
+    public void theDate(String date) {
+        scenarioInteraction.remember("date", date);
+    }
+
     @Given("ist der Startort $departure")
     public void theDeparture(String departure) {
         scenarioInteraction.remember("departure", departure);
@@ -66,6 +71,7 @@ public class ReservationSteps extends SeleniumSteps {
     public void theReservationIsSetInTheSimulator() {
         Map<String, Object> body = new HashMap<>();
         Map<String, Object> reservation = new HashMap<>();
+        reservation.put("date", scenarioInteraction.recall("date"));
         reservation.put("departure", scenarioInteraction.recall("departure"));
         reservation.put("destination", scenarioInteraction.recall("destination"));
         reservation.put("earliestStartTime", scenarioInteraction.recall("earliestStartTime"));
@@ -84,6 +90,7 @@ public class ReservationSteps extends SeleniumSteps {
     @When("ein Sammeltaxi reserviert wird")
     public void aSharedTaxiIsReservedBetween() {
         ReservationPage reservationPage = getCurrentPage();
+        reservationPage.setDate(scenarioInteraction.recall("date"));
         reservationPage.setDeparture(scenarioInteraction.recall("departure"));
         reservationPage.setDestination(scenarioInteraction.recall("destination"));
         reservationPage.setEarliestStartTime(scenarioInteraction.recall("earliestStartTime"));

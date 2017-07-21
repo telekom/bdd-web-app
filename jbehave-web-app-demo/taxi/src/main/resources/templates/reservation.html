@@ -22,15 +22,15 @@
             <br/>
         </div>
         <form id="reserve-form">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="departure">Startort</label>
-                    <input type="text" class="form-control" id="departure" name="departure"
-                           th:value="${reservation?.departure}"
-                           placeholder="Startort"/>
+                    <label for="date">Datum</label>
+                    <input type="text" class="form-control" id="date" name="date"
+                           th:value="${reservation?.date}"
+                           placeholder="Datum"/>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="earliestStartTime">Frühester Startzeitpunkt</label>
                     <input type="text" class="form-control" id="earliestStartTime" name="earliestStartTime"
@@ -38,14 +38,7 @@
                            placeholder="Frühester Startzeitpunkt"/>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="destination">Zielort</label>
-                    <input type="text" class="form-control" id="destination" name="destination"
-                           th:value="${reservation?.destination}" placeholder="Zielort"/>
-                </div>
-            </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="latestStartTime">Spätester Startzeitpunkt</label>
                     <input type="text" class="form-control" id="latestStartTime" name="latestStartTime"
@@ -53,7 +46,22 @@
                            placeholder="Spätester Ankunftszeitpunkt"/>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="departure">Startort</label>
+                    <input type="text" class="form-control" id="departure" name="departure"
+                           th:value="${reservation?.departure}"
+                           placeholder="Startort"/>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="destination">Zielort</label>
+                    <input type="text" class="form-control" id="destination" name="destination"
+                           th:value="${reservation?.destination}" placeholder="Zielort"/>
+                </div>
+            </div>
+            <div class="col-lg-12">
                 <div class="form-group">
                     <button type="submit" id="reserve" class="btn btn-primary btn-lg">Reservieren</button>
                 </div>
@@ -66,7 +74,7 @@
 <footer th:replace="fragments/footer :: footer">&nbsp;</footer>
 
 <script th:if="${reservation} != null">
-    window.onload = function(){
+    window.onload = function () {
         $("#reserve-form").submit();
     }
 </script>

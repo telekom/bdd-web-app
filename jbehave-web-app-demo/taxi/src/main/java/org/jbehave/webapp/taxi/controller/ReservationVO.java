@@ -7,6 +7,9 @@ import org.hibernate.validator.constraints.NotBlank;
 public class ReservationVO {
 
     @NotBlank
+    private String date;
+
+    @NotBlank
     private String departure;
 
     @NotBlank
@@ -25,6 +28,7 @@ public class ReservationVO {
 
         ReservationVO that = (ReservationVO) o;
 
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (departure != null ? !departure.equals(that.departure) : that.departure != null) return false;
         if (earliestStartTime != null ? !earliestStartTime.equals(that.earliestStartTime) : that.earliestStartTime != null)
             return false;

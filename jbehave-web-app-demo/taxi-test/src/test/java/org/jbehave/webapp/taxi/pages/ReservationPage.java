@@ -12,6 +12,9 @@ public class ReservationPage extends AbstractCollectiveTaxiPage {
 
     public static final String URL = "reservation";
 
+    @FindBy(id = "date")
+    private WebElementEnhanced dateInput;
+
     @FindBy(id = "departure")
     private WebElementEnhanced departureInput;
 
@@ -32,6 +35,10 @@ public class ReservationPage extends AbstractCollectiveTaxiPage {
 
     public ReservationPage(WebDriver driver) {
         super(driver);
+    }
+
+    public void setDate(String date) {
+        dateInput.setValue(date);
     }
 
     public void setDeparture(String departure) {

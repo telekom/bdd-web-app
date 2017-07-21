@@ -4,7 +4,8 @@ möchte ich auf der Reservierungsseite Informationen über aktuelle Preise erhal
 damit ich diese kostenpflichtig buchen kann.
 
 Scenario: Aktuelle Preise für Reservierung einstellen
-Given ist der Startort OrtA
+Given ist das Datum 10.10.2017
+And ist der Startort OrtA
 And ist der Zielort OrtB
 And ist der früheste Startzeitpunkt 10:00 Uhr
 And ist der späteste Startzeitpunkt 12:00 Uhr
@@ -15,6 +16,7 @@ Then gibt der Simulator eine Erfolgsmeldung zurück
 
 Scenario: Reservierung einer Sammeltaxifahrt
 Given ein eingeloggter Kunde kunde
+And ist das Datum 10.10.2017
 And ist der Startort OrtA
 And ist der Zielort OrtB
 And ist der früheste Startzeitpunkt 10:00 Uhr
@@ -27,7 +29,8 @@ And zwischen 11:00 und 12:00 Uhr beträgt der Preis 13,50 €
 Scenario: Preise aktualisieren
 When die Reservierung im Simulator gelöscht wird
 Then gibt der Simulator eine Erfolgsmeldung zurück
-Given ist der Startort OrtA
+Given ist das Datum 10.10.2017
+And ist der Startort OrtA
 And ist der Zielort OrtB
 And ist der früheste Startzeitpunkt 10:00 Uhr
 And ist der späteste Startzeitpunkt 12:00 Uhr

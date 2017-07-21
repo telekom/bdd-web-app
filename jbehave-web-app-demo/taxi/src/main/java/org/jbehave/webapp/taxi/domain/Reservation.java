@@ -18,6 +18,8 @@ public class Reservation {
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    private String date;
+
     private String departure;
 
     private String earliestStartTime;
