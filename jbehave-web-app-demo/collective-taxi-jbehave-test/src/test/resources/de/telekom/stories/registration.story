@@ -1,5 +1,3 @@
-Meta:
-
 Narrative:
 Als Anwender
 möchte ich mich registrieren können,

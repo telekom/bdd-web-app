@@ -1,5 +1,3 @@
-Meta:
-
 Narrative:
 Als eingeloggter Anwender, der bereits eine Reservierung vorgenommen hat,
 möchte ich auf der Reservierungsseite Informationen über aktuelle Preise erhalten,

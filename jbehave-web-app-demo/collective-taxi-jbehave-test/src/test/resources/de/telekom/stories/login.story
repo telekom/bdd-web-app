@@ -1,5 +1,3 @@
-Meta:
-
 Narrative:
 Als Anwender
 möchte ich mich mit einem bereits vorhandenen Accout einloggen,

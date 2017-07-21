@@ -1,5 +1,3 @@
-Meta:
-
 Narrative:
 Als eingeloggter Anwender
 möchte ich Reservierungen von Sammeltaxis für bestimmte Strecken in bestimmten Zeiträumen vornehmen können
