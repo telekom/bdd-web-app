@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // submit reserve form
     $("#reserve-form").submit(function (event) {
 
         //stop submit the form, we will post it manually.
@@ -7,7 +8,6 @@ $(document).ready(function () {
 
         reserve();
     });
-
 });
 
 function isActive() {

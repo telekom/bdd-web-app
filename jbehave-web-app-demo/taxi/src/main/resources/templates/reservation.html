@@ -25,40 +25,41 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="date">Datum</label>
-                    <input type="text" class="form-control" id="date" name="date"
-                           th:value="${reservation?.date}"
+                    <input class="form-control" id="date" name="date"
+                           th:value="${reservation?.date}" required="true"
                            placeholder="Datum"/>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="earliestStartTime">Frühester Startzeitpunkt</label>
-                    <input type="text" class="form-control" id="earliestStartTime" name="earliestStartTime"
-                           th:value="${reservation?.earliestStartTime}"
+                    <input class="form-control" id="earliestStartTime" name="earliestStartTime"
+                           th:value="${reservation?.earliestStartTime}" required="true"
                            placeholder="Frühester Startzeitpunkt"/>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="latestStartTime">Spätester Startzeitpunkt</label>
-                    <input type="text" class="form-control" id="latestStartTime" name="latestStartTime"
-                           th:value="${reservation?.latestStartTime}"
+                    <input class="form-control" id="latestStartTime" name="latestStartTime"
+                           th:value="${reservation?.latestStartTime}" required="true"
                            placeholder="Spätester Ankunftszeitpunkt"/>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="form-group">
                     <label for="departure">Startort</label>
-                    <input type="text" class="form-control" id="departure" name="departure"
-                           th:value="${reservation?.departure}"
+                    <input class="form-control" id="departure" name="departure"
+                           th:value="${reservation?.departure}" required="true"
                            placeholder="Startort"/>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="form-group">
                     <label for="destination">Zielort</label>
-                    <input type="text" class="form-control" id="destination" name="destination"
-                           th:value="${reservation?.destination}" placeholder="Zielort"/>
+                    <input class="form-control" id="destination" name="destination"
+                           th:value="${reservation?.destination}" required="true"
+                           placeholder="Zielort"/>
                 </div>
             </div>
             <div class="col-lg-12">
