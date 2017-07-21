@@ -4,17 +4,17 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.telekom.jbehave</groupId>
+    <groupId>org.jbehave.webapp</groupId>
     <artifactId>jbehave-web-app-reactor</artifactId>
-    <version>1.0.0</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>jbehave-web-app-reactor</name>
+    <name>jbehave web app reactor</name>
 
     <modules>
         <module>jbehave-web-app</module>
-        <module>jbehave-web-app-demo/collective-taxi</module>
-        <module>jbehave-web-app-demo/collective-taxi-jbehave-test</module>
+        <module>jbehave-web-app-demo/taxi</module>
+        <module>jbehave-web-app-demo/taxi-test</module>
     </modules>
 
 </project>
