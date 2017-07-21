@@ -1,7 +1,7 @@
 package org.jbehave.webapp.taxi.stories;
 
-import org.jbehave.webapp.taxi.config.CollectiveTaxiStory;
+import org.jbehave.webapp.taxi.config.AbstractTaxiStory;
 
-public class Registration extends CollectiveTaxiStory {
+public class Registration extends AbstractTaxiStory {
 }
 

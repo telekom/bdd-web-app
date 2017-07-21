@@ -10,4 +10,9 @@ public class RunAllTaxiStories extends RunAllStories {
         return ApplicationContextProvider.getApplicationContext();
     }
 
+    @Override
+    public String storiesBasePath() {
+        return "org.jbehave.webapp.taxi.stories";
+    }
+
 }
