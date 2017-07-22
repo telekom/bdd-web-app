@@ -29,7 +29,7 @@
                 <version>${version.surefire}</version>
                 <configuration>
                     <includes>
-                        <include>**/RunAllYetiStories.java</include>
+                        <include>**/RunAllTaxiStories.java</include>
                     </includes>
                 </configuration>
             </plugin>
