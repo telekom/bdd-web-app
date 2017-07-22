@@ -36,29 +36,37 @@ function reserve() {
         success: function (data) {
 
             $('#reserve').removeClass("btn-primary btn-warning");
-            $('#reserve').addClass("btn-success");
+            $('#reserve').removeClass("btn-primary btn-success");
 
-            var reservationHtml = "<h2>Reservierung erfolgreich!</h2>";
-            reservationHtml += "<table class='table table-striped'>";
-            reservationHtml += "<thead><tr><th>Zeitraum</th><th>Mitfahrer</th><th>Preis</th></tr></thead>";
-            reservationHtml += "<tbody>";
-            $(data.reservationPrices).each(function (index) {
-                var reservationPrice = data.reservationPrices[index];
-                reservationHtml += "<tr><td>" + reservationPrice.startTime + " - " + reservationPrice.endTime + " Uhr</td><td>" + reservationPrice.passengers + "</td><td><strong>" + reservationPrice.price + " € </strong></td></tr>";
-            });
-            reservationHtml += "</tbody>";
-            reservationHtml += "</table>";
-            $('#reservation').html(reservationHtml);
+            if (data.reservationPrices == null || data.reservationPrices.length == 0) {
+                $('#reserve').addClass("btn-warning");
+                var reservationHtml = "<h4>Die Reservierung ist nicht möglich!</h4>";
+                $('#reservation').html(reservationHtml);
+            } else {
+                $('#reserve').addClass("btn-success");
+                var reservationHtml = "<h2>Reservierung erfolgreich!</h2>";
+                reservationHtml += "<table class='table table-striped'>";
+                reservationHtml += "<thead><tr><th>Zeitraum</th><th>Mitfahrer</th><th>Preis</th></tr></thead>";
+                reservationHtml += "<tbody>";
+                $(data.reservationPrices).each(function (index) {
+                    var reservationPrice = data.reservationPrices[index];
+                    reservationHtml += "<tr><td>" + reservationPrice.startTime + " - " + reservationPrice.endTime + " Uhr</td><td>" + reservationPrice.passengers + "</td><td><strong>" + reservationPrice.price + " € </strong></td></tr>";
+                });
+                reservationHtml += "</tbody>";
+                reservationHtml += "</table>";
+                $('#reservation').html(reservationHtml);
+            }
 
             console.log("SUCCESS : ", data);
             $("#reserve").prop("disabled", false);
         },
         error: function (e) {
 
+            $('#reserve').removeClass("btn-primary btn-warning");
             $('#reserve').removeClass("btn-primary btn-success");
             $('#reserve').addClass("btn-warning");
 
-            var reservationHtml = "<h4>Reservierung nicht möglich!</h4>";
+            var reservationHtml = "<h4>Leider ist ein Fehler aufgetreten!</h4>";
             $('#reservation').html(reservationHtml);
 
             console.log("ERROR : ", e);

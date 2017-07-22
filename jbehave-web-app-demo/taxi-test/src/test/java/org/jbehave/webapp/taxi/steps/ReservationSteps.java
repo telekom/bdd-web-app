@@ -109,6 +109,12 @@ public class ReservationSteps extends SeleniumSteps {
         assertTrue(reservationPage.isReservationSuccess());
     }
 
+    @Then("ist die Reservierung nicht erfolgreich")
+    public void theReservationIsNotSuccessful() {
+        ReservationPage reservationPage = getCurrentPage();
+        assertTrue(reservationPage.isReservationNotPossible());
+    }
+
     @Then("zwischen $startTime und $endTime Uhr beträgt der Preis $price bei $passengers Mitfahrern")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();

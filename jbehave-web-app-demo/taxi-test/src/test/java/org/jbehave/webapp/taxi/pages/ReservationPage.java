@@ -66,6 +66,11 @@ public class ReservationPage extends AbstractTaxiPage {
         return reservationDiv.getText().contains("erfolgreich");
     }
 
+    public boolean isReservationNotPossible() {
+        waitForAjaxToComplete();
+        return reservationDiv.getText().contains("nicht möglich");
+    }
+
     public String getPriceBetweenStartAndEndTime(String startTime, String endTime, String passengers) {
         WebElement reservationTable = reservationDiv.findElement(By.className("table"));
         List<WebElement> tableRows = reservationTable.findElements(By.tagName("tr"));
