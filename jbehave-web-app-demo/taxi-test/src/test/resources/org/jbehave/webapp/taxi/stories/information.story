@@ -42,7 +42,7 @@ Then gibt der Simulator eine Erfolgsmeldung zurück
 Scenario: Ausloggen und Startseite öffnen
 Given ein ausgeloggter Kunde
 When der Nutzer die Startseite öffnet
-Then dann ist die Loginseite geöffnet
+Then ist die Loginseite geöffnet
 
 Scenario: Einloggen und Aktualisierte Preise anschauen
 When der Anwender kunde sich einloggt

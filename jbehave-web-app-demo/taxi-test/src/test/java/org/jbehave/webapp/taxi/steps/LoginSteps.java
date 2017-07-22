@@ -45,7 +45,7 @@ public class LoginSteps extends SeleniumSteps {
         loginPage.clickRegistration();
     }
 
-    @Then("dann ist die Loginseite geöffnet")
+    @Then("ist die Loginseite geöffnet")
     public void theStartPageIsOpen() {
         createExpectedPage(LoginPage.class);
     }

@@ -6,7 +6,7 @@ um Reservierungen von Sammeltaxis vornehmen zu können.
 Scenario: Startseite öffnen
 Given ist ein registrierter Anwender benutzer
 When der Nutzer die Startseite öffnet
-Then dann ist die Loginseite geöffnet
+Then ist die Loginseite geöffnet
 
 Scenario: Einloggen
 When der Anwender benutzer sich einloggt

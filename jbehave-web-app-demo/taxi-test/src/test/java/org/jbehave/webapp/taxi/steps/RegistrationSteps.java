@@ -20,10 +20,16 @@ public class RegistrationSteps extends SeleniumSteps {
     @Autowired
     private StoryInteraction storyInteraction;
 
+    @Given("die geöffnete Registrierungsseite")
+    public void theOpenRegistrationPage() {
+        theUserOpenTheRegistrationPage();
+        theRegistrationPageIsOpen();
+    }
+
     @Given("ist ein registrierter Anwender $user")
     public void registeredUser(String user) {
         theUserOpenTheRegistrationPage();
-        theRegistrationPageOpens();
+        theRegistrationPageIsOpen();
         validRegistrationDataForUser(user);
         theUserSuccessfullyCompletedTheRegistration(user);
     }
@@ -40,13 +46,29 @@ public class RegistrationSteps extends SeleniumSteps {
         return StringUtils.leftPad("" + random.nextInt(Integer.MAX_VALUE), 12, "0");
     }
 
+    @Given("valide Registrierungsdaten mit Kontrollflussfehler für Nutzer $user")
+    public void validRegistrationDataWithErrorForUser(String user) {
+        storyInteraction.rememberObject(user, "firstName", "Hans");
+        storyInteraction.rememberObject(user, "lastName", "Müller");
+        storyInteraction.rememberObject(user, "username", "fehler@test.de");
+        storyInteraction.rememberObject(user, "password", "pa55w0rd");
+    }
+
+    @Given("invalide Registrierungsdaten für Nutzer $user")
+    public void invalidRegistrationDataForUser(String user) {
+        storyInteraction.rememberObject(user, "firstName", "Hans");
+        storyInteraction.rememberObject(user, "lastName", "Müller");
+        storyInteraction.rememberObject(user, "username", "user");
+        storyInteraction.rememberObject(user, "password", "pa55w0rd");
+    }
+
     @When("der Nutzer die Registrierungsseite öffnet")
     private void theUserOpenTheRegistrationPage() {
         open(getUrlWithHost("localhost:8080", "", RegistrationPage.URL));
     }
 
-    @Then("öffnet sich die Registrierungsseite")
-    public void theRegistrationPageOpens() {
+    @Then("ist die Registrierungsseite geöffnet")
+    public void theRegistrationPageIsOpen() {
         createExpectedPage(RegistrationPage.class);
     }
 
