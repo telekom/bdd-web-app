@@ -7,6 +7,7 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.webapp.api.RequestBuilder;
 import org.jbehave.webapp.frontend.steps.SeleniumSteps;
 import org.jbehave.webapp.steps.Steps;
+import org.jbehave.webapp.taxi.pages.RegistrationPage;
 import org.jbehave.webapp.taxi.pages.ReservationPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,6 +30,11 @@ public class ReservationSteps extends SeleniumSteps {
     @Autowired
     private RequestBuilder requestBuilder;
 
+    @BeforeStory
+    public void theReservationIsDeletedInTheSimulator() {
+        request().delete("/simulator/config/reservation");
+    }
+
     @Given("ist eine valide Reservierung zwischen $earliestStartTime und $latestStartTime Uhr")
     public void validReservation(String earliestStartTime, String latestStartTime) {
         Date tomorrow = new Date(new Date().getTime() + 86400000l);
@@ -48,6 +54,11 @@ public class ReservationSteps extends SeleniumSteps {
         scenarioInteraction.rememberToList("reservationPrices", reservationPrice);
     }
 
+    @When("der Nutzer die Reservierungsseite öffnet")
+    private void theUserOpenTheReservationPage() {
+        open(getUrlWithHost("localhost:8080", "", ReservationPage.URL));
+    }
+
     @When("die Reservierung im Simulator hinterlegt wird")
     public void theReservationIsSetInTheSimulator() {
         Map<String, Object> body = new HashMap<>();
@@ -62,10 +73,12 @@ public class ReservationSteps extends SeleniumSteps {
         request().body(body).post("/simulator/config/reservation");
     }
 
-    @BeforeStory
-    @When("die Reservierung im Simulator gelöscht wird")
-    public void theReservationIsDeletedInTheSimulator() {
-        request().delete("/simulator/config/reservation");
+    @When("die Reservierung im Simulator aktualisiert wird")
+    public void theReservationIsUpdateInTheSimulator() {
+        theReservationIsDeletedInTheSimulator();
+        theSimulatorReturnsSuccessMessage();
+        theReservationIsSetInTheSimulator();
+        theSimulatorReturnsSuccessMessage();
     }
 
     @When("ein Sammeltaxi reserviert wird")
