@@ -11,11 +11,13 @@ import org.jbehave.webapp.taxi.pages.RegistrationPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 @Steps
 public class RegistrationSteps extends SeleniumSteps {
 
     private final Random random = new Random();
+    private final Logger logger = Logger.getGlobal();
 
     @Autowired
     private StoryInteraction storyInteraction;
@@ -38,8 +40,10 @@ public class RegistrationSteps extends SeleniumSteps {
     public void validRegistrationDataForUser(String user) {
         storyInteraction.rememberObject(user, "firstName", "Hans");
         storyInteraction.rememberObject(user, "lastName", "Müller");
-        storyInteraction.rememberObject(user, "username", randomNumber() + "@user.de");
-        storyInteraction.rememberObject(user, "password", "pa55w0rd");
+        String username = randomNumber() + "@user.de";
+        storyInteraction.rememberObject(user, "username", username);
+        logger.info("Generate user: " + username);
+        storyInteraction.rememberObject(user, "password", "passwort");
     }
 
     private String randomNumber() {
@@ -51,7 +55,7 @@ public class RegistrationSteps extends SeleniumSteps {
         storyInteraction.rememberObject(user, "firstName", "Hans");
         storyInteraction.rememberObject(user, "lastName", "Müller");
         storyInteraction.rememberObject(user, "username", "fehler@test.de");
-        storyInteraction.rememberObject(user, "password", "pa55w0rd");
+        storyInteraction.rememberObject(user, "password", "passwort");
     }
 
     @Given("invalide Registrierungsdaten für Nutzer $user")
@@ -59,7 +63,7 @@ public class RegistrationSteps extends SeleniumSteps {
         storyInteraction.rememberObject(user, "firstName", "Hans");
         storyInteraction.rememberObject(user, "lastName", "Müller");
         storyInteraction.rememberObject(user, "username", "user");
-        storyInteraction.rememberObject(user, "password", "pa55w0rd");
+        storyInteraction.rememberObject(user, "password", "passwort");
     }
 
     @When("der Nutzer die Registrierungsseite öffnet")

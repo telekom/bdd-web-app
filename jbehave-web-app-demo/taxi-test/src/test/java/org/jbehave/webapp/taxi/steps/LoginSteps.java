@@ -40,7 +40,7 @@ public class LoginSteps extends SeleniumSteps {
     @Given("invalide Logindaten für Nutzer $user")
     public void invalidLogInDataForUser(String user) {
         storyInteraction.rememberObject(user, "username", "invalid@user.de");
-        storyInteraction.rememberObject(user, "password", "password");
+        storyInteraction.rememberObject(user, "password", "passwort");
     }
 
     @When("der Nutzer die Startseite öffnet")
