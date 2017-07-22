@@ -22,16 +22,33 @@ public class LoginSteps extends SeleniumSteps {
     @Autowired
     private RegistrationSteps registrationSteps;
 
-    @Given("ein eingeloggter Kunde $user")
+    @Given("die geöffnete Loginseite")
+    public void theOpenLoginPage() {
+        theUserOpensTheLoginPage();
+        theLoginPageIsOpen();
+    }
+
+    @Given("ein eingeloggter Nutzer $user")
     public void loggedInCustomer(String user) {
         registrationSteps.registeredUser(user);
         homepageSteps.theUserOpensTheHomePage();
-        theStartPageIsOpen();
+        theLoginPageIsOpen();
         theUserLogsIn(user);
         reservationSteps.theReservationPageOpens();
     }
 
-    @When("der Anwender $user sich einloggt")
+    @Given("invalide Logindaten für Nutzer $user")
+    public void invalidLogInDataForUser(String user) {
+        storyInteraction.rememberObject(user, "username", "invalid@user.de");
+        storyInteraction.rememberObject(user, "password", "password");
+    }
+
+    @When("der Nutzer die Startseite öffnet")
+    public void theUserOpensTheLoginPage() {
+        open(getUrlWithHost("localhost:8080", "", LoginPage.URL));
+    }
+
+    @When("der Nutzer $user sich einloggt")
     public void theUserLogsIn(String user) {
         LoginPage loginPage = getCurrentPage();
         loginPage.setUsername(storyInteraction.recallObject(user, "username"));
@@ -46,14 +63,20 @@ public class LoginSteps extends SeleniumSteps {
     }
 
     @Then("ist die Loginseite geöffnet")
-    public void theStartPageIsOpen() {
+    public void theLoginPageIsOpen() {
         createExpectedPage(LoginPage.class);
     }
 
-    @Then("der Anwender erhält die Nachricht, dass er registriert ist")
+    @Then("der Nutzer erhält die Nachricht, dass er registriert ist")
     public void theUserReceivesTheRegisteredMessage() {
         LoginPage loginPage = getCurrentPage();
         assertTrue(loginPage.registeredMessageIsShown());
+    }
+
+    @Then("der Nutzer erhält die Nachricht, dass die Logindaten ungültig sind")
+    public void theUserReceivesTheMessageThatTheLogindataIsInvalid() {
+        LoginPage loginPage = getCurrentPage();
+        assertTrue(loginPage.logindataIsInvalidMessageIsShown());
     }
 
 }

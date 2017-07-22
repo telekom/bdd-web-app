@@ -1,6 +1,6 @@
 package org.jbehave.webapp.taxi.service;
 
-import org.jbehave.webapp.taxi.controller.RegistrationVO;
+import org.jbehave.webapp.taxi.controller.vo.RegistrationVO;
 import org.jbehave.webapp.taxi.domain.User;
 import org.jbehave.webapp.taxi.repositories.UserRepository;
 import org.bouncycastle.jcajce.provider.digest.SHA3;

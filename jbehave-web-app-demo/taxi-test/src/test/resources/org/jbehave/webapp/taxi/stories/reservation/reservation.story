@@ -15,7 +15,7 @@ When die Reservierung im Simulator hinterlegt wird
 Then gibt der Simulator eine Erfolgsmeldung zurück
 
 Scenario: Reservierung einer Sammeltaxifahrt
-Given ein eingeloggter Kunde kunde
+Given ein eingeloggter Nutzer testnutzer
 And ist das Datum 10.10.2017
 And ist der Startort OrtA
 And ist der Zielort OrtB

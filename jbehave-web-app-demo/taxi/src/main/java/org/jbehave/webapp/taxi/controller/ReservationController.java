@@ -1,6 +1,8 @@
 package org.jbehave.webapp.taxi.controller;
 
 import org.jbehave.webapp.taxi.controller.validator.AuthenticationValidator;
+import org.jbehave.webapp.taxi.controller.vo.ReservationPricesVO;
+import org.jbehave.webapp.taxi.controller.vo.ReservationVO;
 import org.jbehave.webapp.taxi.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ public class ReservationController {
 
     @GetMapping("reservation")
     public String reservation(Principal principal, Model model) {
-        if (authenticationValidator.isAuthenticated(principal)) {
+        if (authenticationValidator.isAuthenticated(principal, model)) {
             model.addAttribute("reservation", reservationService.getReservation(principal.getName()));
             return "reservation";
         }

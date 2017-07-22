@@ -1,4 +1,4 @@
-package org.jbehave.webapp.taxi.stories;
+package org.jbehave.webapp.taxi.stories.login;
 
 import org.jbehave.webapp.taxi.config.AbstractTaxiStory;
 

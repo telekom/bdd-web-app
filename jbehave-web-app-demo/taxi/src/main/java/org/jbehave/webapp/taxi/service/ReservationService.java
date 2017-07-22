@@ -3,7 +3,7 @@ package org.jbehave.webapp.taxi.service;
 import org.jbehave.webapp.taxi.domain.Reservation;
 import org.jbehave.webapp.taxi.domain.User;
 import org.jbehave.webapp.taxi.repositories.UserRepository;
-import org.jbehave.webapp.taxi.controller.ReservationVO;
+import org.jbehave.webapp.taxi.controller.vo.ReservationVO;
 import org.jbehave.webapp.taxi.repositories.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

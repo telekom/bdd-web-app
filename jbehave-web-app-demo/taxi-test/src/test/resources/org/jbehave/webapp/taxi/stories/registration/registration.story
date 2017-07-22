@@ -5,7 +5,7 @@ um Reservierungen von Sammeltaxis vornehmen zu können.
 
 Scenario: Registrierung
 Given die geöffnete Registrierungsseite
-And valide Registrierungsdaten für Nutzer benutzer
-When der Nutzer benutzer die Registrierung durchführt
+And valide Registrierungsdaten für Nutzer testnutzer
+When der Nutzer testnutzer die Registrierung durchführt
 Then ist die Loginseite geöffnet
-And der Anwender erhält die Nachricht, dass er registriert ist
+And der Nutzer erhält die Nachricht, dass er registriert ist

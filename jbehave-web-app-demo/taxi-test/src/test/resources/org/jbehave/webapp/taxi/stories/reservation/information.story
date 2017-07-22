@@ -15,7 +15,7 @@ When die Reservierung im Simulator hinterlegt wird
 Then gibt der Simulator eine Erfolgsmeldung zurück
 
 Scenario: Reservierung einer Sammeltaxifahrt
-Given ein eingeloggter Kunde kunde
+Given ein eingeloggter Nutzer testnutzer
 And ist das Datum 10.10.2017
 And ist der Startort OrtA
 And ist der Zielort OrtB
@@ -40,12 +40,12 @@ When die Reservierung im Simulator hinterlegt wird
 Then gibt der Simulator eine Erfolgsmeldung zurück
 
 Scenario: Ausloggen und Startseite öffnen
-Given ein ausgeloggter Kunde
+Given ein ausgeloggter Nutzer
 When der Nutzer die Startseite öffnet
 Then ist die Loginseite geöffnet
 
 Scenario: Einloggen und Aktualisierte Preise anschauen
-When der Anwender kunde sich einloggt
+When der Nutzer testnutzer sich einloggt
 Then öffnet sich die Reservierungsseite
 And ist die Reservierung erfolgreich
 And zwischen 10:00 und 11:00 Uhr beträgt der Preis 12,50 €

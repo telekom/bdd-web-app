@@ -23,6 +23,9 @@ public class LoginPage extends AbstractTaxiPage {
     @FindBy(className = "alert-success")
     private WebElementEnhanced alertSuccessDiv;
 
+    @FindBy(className = "alert-warning")
+    private WebElementEnhanced alertWarningDiv;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
@@ -50,8 +53,16 @@ public class LoginPage extends AbstractTaxiPage {
         return false;
     }
 
+    public boolean logindataIsInvalidMessageIsShown() {
+        if (alertWarningDiv.exists()) {
+            return alertWarningDiv.getText().contains("ungültig");
+        }
+        return false;
+    }
+
     @Override
     public String getURL() {
         return URL;
     }
+
 }

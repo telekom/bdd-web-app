@@ -7,8 +7,8 @@ import org.jbehave.webapp.steps.Steps;
 @Steps
 public class SessionSteps extends SeleniumSteps {
 
-    @Given("ein ausgeloggter Kunde")
-    public void loggedOutCustomer() {
+    @Given("ein ausgeloggter Nutzer")
+    public void loggedOutUser() {
         webDriverWrapper.getDriver().manage().deleteAllCookies();
     }
 

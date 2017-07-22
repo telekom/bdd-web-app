@@ -1,5 +1,6 @@
 package org.jbehave.webapp.taxi.controller;
 
+import org.jbehave.webapp.taxi.controller.vo.RegistrationVO;
 import org.jbehave.webapp.taxi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

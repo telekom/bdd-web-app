@@ -5,6 +5,6 @@ um keine inkonsistenten Daten zu haben.
 
 Scenario: Registrierung
 Given die geöffnete Registrierungsseite
-And invalide Registrierungsdaten für Nutzer benutzer
-When der Nutzer benutzer die Registrierung durchführt
+And invalide Registrierungsdaten für Nutzer testnutzer
+When der Nutzer testnutzer die Registrierung durchführt
 Then ist die Registrierungsseite geöffnet

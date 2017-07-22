@@ -18,15 +18,19 @@ public class IndexController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root(Principal principal, Model model, HttpSession session) {
-        return login(principal, model, session);
+        if (authenticationValidator.isAuthenticated(principal, model)) {
+            return "redirect:reservation";
+        }
+        return "redirect:login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Principal principal, Model model, HttpSession session) {
-        if (authenticationValidator.isAuthenticated(principal)) {
+        if (authenticationValidator.isAuthenticated(principal, model)) {
             return "redirect:reservation";
         }
         model.addAttribute("registration", session.getAttribute("registration"));
+        model.addAttribute("invalid", session.getAttribute("invalid"));
         model.addAttribute("username", session.getAttribute("username"));
         return "login";
     }

@@ -1,4 +1,4 @@
-package org.jbehave.webapp.taxi.simulator;
+package org.jbehave.webapp.taxi.simulator.vo;
 
 import lombok.Data;
 

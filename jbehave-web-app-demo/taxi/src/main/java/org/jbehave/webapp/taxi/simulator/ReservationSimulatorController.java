@@ -1,5 +1,8 @@
 package org.jbehave.webapp.taxi.simulator;
 
+import org.jbehave.webapp.taxi.simulator.vo.ReservationConfigVO;
+import org.jbehave.webapp.taxi.simulator.vo.ReservationPricesVO;
+import org.jbehave.webapp.taxi.simulator.vo.ReservationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -22,6 +22,11 @@
             <div class="alert alert-success">Sie haben sich erfolgreich registriert!</div>
         </div>
     </div>
+    <div th:if="${usernamePasswordInvalid}" class="row">
+        <div class="col-lg-6">
+            <div class="alert alert-warning">Ihre Logindaten sind ungültig!</div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <form id="login-form" th:action="@{/login}" method="post">
