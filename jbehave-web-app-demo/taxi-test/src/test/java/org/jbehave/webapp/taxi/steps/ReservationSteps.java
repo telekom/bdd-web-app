@@ -10,9 +10,13 @@ import org.jbehave.webapp.steps.Steps;
 import org.jbehave.webapp.taxi.pages.ReservationPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.time.LocalDateTime.from;
+import static java.time.format.DateTimeFormatter.ofPattern;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,36 +29,13 @@ public class ReservationSteps extends SeleniumSteps {
     @Autowired
     private RequestBuilder requestBuilder;
 
-    @Autowired
-    private RegistrationSteps registrationSteps;
-
-    @Given("ein Kunde $user der bereits eine Reservierung vorgenommen hat")
-    public void aCustomerWhoHasAlreadyMadeReservationBetween(String startTime, String endTime) {
-        registrationSteps.registeredUser("kunde");
-    }
-
-    @Given("ist das Datum $date")
-    public void theDate(String date) {
-        scenarioInteraction.remember("date", date);
-    }
-
-    @Given("ist der Startort $departure")
-    public void theDeparture(String departure) {
-        scenarioInteraction.remember("departure", departure);
-    }
-
-    @Given("ist der Zielort $destination")
-    public void theDestination(String destination) {
-        scenarioInteraction.remember("destination", destination);
-    }
-
-    @Given("ist der früheste Startzeitpunkt $earliestStartTime Uhr")
-    public void earliestStartTime(String earliestStartTime) {
+    @Given("ist eine valide Reservierung zwischen $earliestStartTime und $latestStartTime Uhr")
+    public void validReservation(String earliestStartTime, String latestStartTime) {
+        Date tomorrow = new Date(new Date().getTime() + 86400000l);
+        scenarioInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
+        scenarioInteraction.remember("departure", "Alexanderplatz, Berlin");
+        scenarioInteraction.remember("destination", "Flughafen Berlin-Tegel");
         scenarioInteraction.remember("earliestStartTime", earliestStartTime);
-    }
-
-    @Given("ist der späteste Startzeitpunkt $latestStartTime Uhr")
-    public void latestStartTime(String latestStartTime) {
         scenarioInteraction.remember("latestStartTime", latestStartTime);
     }
 
