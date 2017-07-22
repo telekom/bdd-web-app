@@ -45,12 +45,13 @@ public class ReservationSteps extends SeleniumSteps {
         scenarioInteraction.remember("latestStartTime", latestStartTime);
     }
 
-    @Given("zwischen $startTime Uhr und $endTime Uhr ist der Preis $price €")
-    public void betweenStartTimeAndEndTimeThePriceIs(String startTime, String endTime, String price) {
+    @Given("zwischen $startTime Uhr und $endTime Uhr ist der Preis $price € bei $passengers Mitfahrern")
+    public void betweenStartTimeAndEndTimeThePriceIs(String startTime, String endTime, String price, String passengers) {
         Map<String, String> reservationPrice = new HashMap<>();
         reservationPrice.put("startTime", startTime);
         reservationPrice.put("endTime", endTime);
         reservationPrice.put("price", price);
+        reservationPrice.put("passengers", passengers);
         scenarioInteraction.rememberToList("reservationPrices", reservationPrice);
     }
 
@@ -108,11 +109,11 @@ public class ReservationSteps extends SeleniumSteps {
         assertTrue(reservationPage.isReservationSuccess());
     }
 
-    @Then("zwischen $startTime und $endTime Uhr beträgt der Preis $price")
-    public void thePriceIsBetweenAnd(String startTime, String endTime, String price) {
+    @Then("zwischen $startTime und $endTime Uhr beträgt der Preis $price bei $passengers Mitfahrern")
+    public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
-        String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
-        assertNotNull(price);
+        String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);
+        assertNotNull(currentPrice);
         assertThat(currentPrice, is(price));
     }
 

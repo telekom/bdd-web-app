@@ -40,11 +40,11 @@ function reserve() {
 
             var reservationHtml = "<h2>Reservierung erfolgreich!</h2>";
             reservationHtml += "<table class='table table-striped'>";
-            reservationHtml += "<thead><tr><th>Startzeitpunkt</th><th>Ankunftszeitpunkt</th><th>Preis</th></tr></thead>";
+            reservationHtml += "<thead><tr><th>Zeitraum</th><th>Mitfahrer</th><th>Preis</th></tr></thead>";
             reservationHtml += "<tbody>";
             $(data.reservationPrices).each(function (index) {
                 var reservationPrice = data.reservationPrices[index];
-                reservationHtml += "<tr><td>" + reservationPrice.startTime + "</td><td>" + reservationPrice.endTime + "</td><td><strong>" + reservationPrice.price + " €</strong></td></tr>";
+                reservationHtml += "<tr><td>" + reservationPrice.startTime + " - " + reservationPrice.endTime + " Uhr</td><td>" + reservationPrice.passengers + "</td><td><strong>" + reservationPrice.price + " € </strong></td></tr>";
             });
             reservationHtml += "</tbody>";
             reservationHtml += "</table>";
