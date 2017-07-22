@@ -31,6 +31,7 @@ public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvi
         UsernamePasswordAuthenticationToken passwordAuthenticationToken = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
         if (!isPasswordValid(name, password)) {
             passwordAuthenticationToken.setAuthenticated(false);
+            passwordAuthenticationToken.setDetails("username_password_invalid");
         }
         return passwordAuthenticationToken;
     }

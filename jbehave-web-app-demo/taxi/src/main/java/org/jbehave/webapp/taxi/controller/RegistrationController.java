@@ -18,7 +18,7 @@ public class RegistrationController {
     private UserService userService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Principal principal, Model model) {
+    public String registration() {
         return "registration";
     }
 

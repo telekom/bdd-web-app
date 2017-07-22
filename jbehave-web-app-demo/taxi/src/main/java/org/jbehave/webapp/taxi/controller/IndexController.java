@@ -17,7 +17,7 @@ public class IndexController {
     private AuthenticationValidator authenticationValidator;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String root(Principal principal, Model model, HttpSession session) {
+    public String root(Principal principal, Model model) {
         if (authenticationValidator.isAuthenticated(principal, model)) {
             return "redirect:reservation";
         }
@@ -30,7 +30,7 @@ public class IndexController {
             return "redirect:reservation";
         }
         model.addAttribute("registration", session.getAttribute("registration"));
-        model.addAttribute("invalid", session.getAttribute("invalid"));
+        session.setAttribute("registration", null);
         model.addAttribute("username", session.getAttribute("username"));
         return "login";
     }

@@ -17,7 +17,7 @@ public class AuthenticationValidator {
         }
         boolean authenticated = authenticationToken.isAuthenticated();
         if(!authenticated){
-            model.addAttribute("usernamePasswordInvalid", true);
+            model.addAttribute("usernamePasswordInvalid", authenticationToken.getDetails() != null && authenticationToken.getDetails().toString().contains("username_password_invalid"));
         }
         return authenticated;
     }
