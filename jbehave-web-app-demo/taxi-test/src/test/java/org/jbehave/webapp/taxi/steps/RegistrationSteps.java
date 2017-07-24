@@ -9,6 +9,7 @@ import org.jbehave.webapp.interaction.StoryInteraction;
 import org.jbehave.webapp.steps.Steps;
 import org.jbehave.webapp.taxi.pages.RegistrationPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Random;
 import java.util.logging.Logger;
@@ -18,6 +19,9 @@ public class RegistrationSteps extends SeleniumSteps {
 
     private final Random random = new Random();
     private final Logger logger = Logger.getGlobal();
+
+    @Value("${hostIncludingPort}")
+    private String hostIncludingPort;
 
     @Autowired
     private StoryInteraction storyInteraction;
@@ -68,7 +72,7 @@ public class RegistrationSteps extends SeleniumSteps {
 
     @When("der Nutzer die Registrierungsseite öffnet")
     private void theUserOpenTheRegistrationPage() {
-        open(getUrlWithHost("localhost:8080", "", RegistrationPage.URL));
+        open(getUrlWithHost(hostIncludingPort, RegistrationPage.URL));
     }
 
     @Then("ist die Registrierungsseite geöffnet")

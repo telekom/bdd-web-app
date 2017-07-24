@@ -10,6 +10,7 @@ import org.jbehave.webapp.steps.Steps;
 import org.jbehave.webapp.taxi.pages.RegistrationPage;
 import org.jbehave.webapp.taxi.pages.ReservationPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +27,9 @@ import static org.junit.Assert.assertNotNull;
 
 @Steps
 public class ReservationSteps extends SeleniumSteps {
+
+    @Value("${hostIncludingPort}")
+    private String hostIncludingPort;
 
     @Autowired
     private RequestBuilder requestBuilder;
@@ -57,7 +61,7 @@ public class ReservationSteps extends SeleniumSteps {
 
     @When("der Nutzer die Reservierungsseite öffnet")
     private void theUserOpenTheReservationPage() {
-        open(getUrlWithHost("localhost:8080", "", ReservationPage.URL));
+        open(getUrlWithHost(hostIncludingPort, ReservationPage.URL));
     }
 
     @When("die Reservierung im Simulator hinterlegt wird")
@@ -124,7 +128,7 @@ public class ReservationSteps extends SeleniumSteps {
     }
 
     private RequestBuilder request() {
-        return requestBuilder.requestWithJsonConfig("http://localhost:8080", "", null, null);
+        return requestBuilder.requestWithJsonConfig(hostIncludingPort, "", null, null);
     }
 
 }

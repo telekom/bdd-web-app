@@ -7,11 +7,15 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import static org.junit.Assert.assertTrue;
 
 @Steps
 public class LoginSteps extends SeleniumSteps {
+
+    @Value("${hostIncludingPort}")
+    private String hostIncludingPort;
 
     @Autowired
     private HomepageSteps homepageSteps;
@@ -45,7 +49,7 @@ public class LoginSteps extends SeleniumSteps {
 
     @When("der Nutzer die Startseite öffnet")
     public void theUserOpensTheLoginPage() {
-        open(getUrlWithHost("localhost:8080", "", LoginPage.URL));
+        open(getUrlWithHost(hostIncludingPort, LoginPage.URL));
     }
 
     @When("der Nutzer $user sich einloggt")
