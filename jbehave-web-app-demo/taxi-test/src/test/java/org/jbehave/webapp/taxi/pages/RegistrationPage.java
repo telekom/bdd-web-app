@@ -1,10 +1,11 @@
 package org.jbehave.webapp.taxi.pages;
 
 import org.jbehave.webapp.frontend.element.WebElementEnhanced;
+import org.jbehave.webapp.frontend.page.JQueryPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class RegistrationPage extends AbstractTaxiPage {
+public class RegistrationPage extends JQueryPage {
 
     public static final String URL = "registration";
 

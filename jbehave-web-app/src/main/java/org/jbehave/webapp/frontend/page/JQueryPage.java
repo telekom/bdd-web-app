@@ -1,6 +1,5 @@
-package org.jbehave.webapp.taxi.pages;
+package org.jbehave.webapp.frontend.page;
 
-import org.jbehave.webapp.frontend.page.Page;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -8,9 +7,14 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class AbstractTaxiPage extends Page {
+/**
+ * Abstract base class for page objects for jquery frontends.
+ *
+ * @author Daniel Keiss
+ */
+public abstract class JQueryPage extends Page {
 
-    public AbstractTaxiPage(WebDriver driver) {
+    public JQueryPage(WebDriver driver) {
         super(driver);
     }
 

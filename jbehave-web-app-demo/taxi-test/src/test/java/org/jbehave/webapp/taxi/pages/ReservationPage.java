@@ -1,6 +1,7 @@
 package org.jbehave.webapp.taxi.pages;
 
 import org.jbehave.webapp.frontend.element.WebElementEnhanced;
+import org.jbehave.webapp.frontend.page.JQueryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ReservationPage extends AbstractTaxiPage {
+public class ReservationPage extends JQueryPage {
 
     public static final String URL = "reservation";
 
@@ -90,4 +91,5 @@ public class ReservationPage extends AbstractTaxiPage {
     public String getURL() {
         return URL;
     }
+
 }
