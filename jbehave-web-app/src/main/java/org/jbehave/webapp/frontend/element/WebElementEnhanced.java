@@ -122,9 +122,13 @@ public class WebElementEnhanced {
     }
 
     public void scrollTo() {
-        String js = "window.scrollTo(0, $(arguments[0]).offset().top - (window.innerHeight / 2))";
-        ((JavascriptExecutor) webDriver).executeScript(js, webElement);
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(false);", webElement);
         waitForDisplayed(1);
+        // try it with a different strategy
+        if (!isDisplayed()) {
+            ((JavascriptExecutor) webDriver).executeScript("window.scrollTo(0, arguments[0]);", webElement);
+            waitForDisplayed(1);
+        }
     }
 
     public void click() {
