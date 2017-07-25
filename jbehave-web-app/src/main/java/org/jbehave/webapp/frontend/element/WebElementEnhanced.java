@@ -122,9 +122,9 @@ public class WebElementEnhanced {
     }
 
     public void scrollTo() {
-//        String js = "window.scrollTo(0, $(arguments[0]).offset().top - (window.innerHeight / 2))";
-//        ((JavascriptExecutor) webDriver).executeScript(js, webElement);
-//        waitForDisplayed(1);
+        String js = "window.scrollTo(0, $(arguments[0]).offset().top - (window.innerHeight / 2))";
+        ((JavascriptExecutor) webDriver).executeScript(js, webElement);
+        waitForDisplayed(1);
     }
 
     public void click() {
