@@ -57,6 +57,7 @@ public class ReservationSteps extends SeleniumSteps {
         reservationPrice.put("price", price);
         reservationPrice.put("passengers", passengers);
         scenarioInteraction.rememberToList("reservationPrices", reservationPrice);
+        theReservationIsSetInTheSimulator();
     }
 
     @When("der Nutzer die Reservierungsseite öffnet")
@@ -64,36 +65,27 @@ public class ReservationSteps extends SeleniumSteps {
         open(getUrlWithHost(hostIncludingPort, ReservationPage.URL));
     }
 
-    @When("die Reservierung im Simulator hinterlegt wird")
-    public void theReservationIsSetInTheSimulator() {
+    private void theReservationIsSetInTheSimulator() {
         Map<String, Object> body = new HashMap<>();
         Map<String, Object> reservation = new HashMap<>();
-        reservation.put("date", scenarioInteraction.recall("date"));
-        reservation.put("departure", scenarioInteraction.recall("departure"));
-        reservation.put("destination", scenarioInteraction.recall("destination"));
-        reservation.put("earliestStartTime", scenarioInteraction.recall("earliestStartTime"));
-        reservation.put("latestStartTime", scenarioInteraction.recall("latestStartTime"));
+        reservation.put("date", scenarioInteraction.recallNotNull("date"));
+        reservation.put("departure", scenarioInteraction.recallNotNull("departure"));
+        reservation.put("destination", scenarioInteraction.recallNotNull("destination"));
+        reservation.put("earliestStartTime", scenarioInteraction.recallNotNull("earliestStartTime"));
+        reservation.put("latestStartTime", scenarioInteraction.recallNotNull("latestStartTime"));
         body.put("reservation", reservation);
         body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
-        request().body(body).post("/simulator/config/reservation");
-    }
-
-    @When("die Reservierung im Simulator aktualisiert wird")
-    public void theReservationIsUpdateInTheSimulator() {
-        theReservationIsDeletedInTheSimulator();
-        theSimulatorReturnsSuccessMessage();
-        theReservationIsSetInTheSimulator();
-        theSimulatorReturnsSuccessMessage();
+        request().body(body).put("/simulator/config/reservation");
     }
 
     @When("ein Sammeltaxi reserviert wird")
     public void aSharedTaxiIsReservedBetween() {
         ReservationPage reservationPage = getCurrentPage();
-        reservationPage.setDate(scenarioInteraction.recall("date"));
-        reservationPage.setDeparture(scenarioInteraction.recall("departure"));
-        reservationPage.setDestination(scenarioInteraction.recall("destination"));
-        reservationPage.setEarliestStartTime(scenarioInteraction.recall("earliestStartTime"));
-        reservationPage.setLatestStartTime(scenarioInteraction.recall("latestStartTime"));
+        reservationPage.setDate(scenarioInteraction.recallNotNull("date"));
+        reservationPage.setDeparture(scenarioInteraction.recallNotNull("departure"));
+        reservationPage.setDestination(scenarioInteraction.recallNotNull("destination"));
+        reservationPage.setEarliestStartTime(scenarioInteraction.recallNotNull("earliestStartTime"));
+        reservationPage.setLatestStartTime(scenarioInteraction.recallNotNull("latestStartTime"));
         reservationPage.submitReservation();
     }
 

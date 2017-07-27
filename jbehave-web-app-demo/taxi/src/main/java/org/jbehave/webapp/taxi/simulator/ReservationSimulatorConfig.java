@@ -29,7 +29,8 @@ public class ReservationSimulatorConfig {
         return noReservationPossible;
     }
 
-    public void addReservationConfig(ReservationConfigVO reservationConfig) {
+    public void addOrUpdateReservationConfig(ReservationConfigVO reservationConfig) {
+        reservationConfigs.remove(reservationConfig);
         reservationConfigs.add(reservationConfig);
     }
 

@@ -4,10 +4,7 @@ import org.jbehave.webapp.taxi.simulator.vo.ReservationConfigVO;
 import org.jbehave.webapp.taxi.simulator.vo.ReservationPricesVO;
 import org.jbehave.webapp.taxi.simulator.vo.ReservationVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -26,11 +23,10 @@ public class ReservationSimulatorController {
         return reservationPrices;
     }
 
-    @PostMapping("/simulator/config/reservation")
-    public ReservationConfigVO reservationPrice(
+    @PutMapping("/simulator/config/reservation")
+    public void reservationPrice(
             @Valid @RequestBody ReservationConfigVO reservationConfig) {
-        reservationSimulatorConfig.addReservationConfig(reservationConfig);
-        return reservationConfig;
+        reservationSimulatorConfig.addOrUpdateReservationConfig(reservationConfig);
     }
 
     @DeleteMapping("/simulator/config/reservation")
