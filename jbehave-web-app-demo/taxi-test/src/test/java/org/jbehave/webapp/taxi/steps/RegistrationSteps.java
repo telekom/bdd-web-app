@@ -40,7 +40,7 @@ public class RegistrationSteps extends SeleniumSteps {
         theUserSuccessfullyCompletedTheRegistration();
     }
 
-    @Given("valide Registrierungsdaten für Nutzer")
+    @Given("gültige Registrierungsdaten")
     public void validRegistrationDataForUser() {
         storyInteraction.remember("firstName", "Hans");
         storyInteraction.remember("lastName", "Müller");
@@ -54,7 +54,7 @@ public class RegistrationSteps extends SeleniumSteps {
         return StringUtils.leftPad("" + random.nextInt(Integer.MAX_VALUE), 12, "0");
     }
 
-    @Given("valide Registrierungsdaten mit Kontrollflussfehler für Nutzer")
+    @Given("gültige Registrierungsdaten mit Kontrollflussfehler in der Anwendung")
     public void validRegistrationDataWithErrorForUser() {
         storyInteraction.remember("firstName", "Hans");
         storyInteraction.remember("lastName", "Müller");
@@ -62,7 +62,7 @@ public class RegistrationSteps extends SeleniumSteps {
         storyInteraction.remember("password", "passwort");
     }
 
-    @Given("invalide Registrierungsdaten für Nutzer")
+    @Given("ungültige Registrierungsdaten")
     public void invalidRegistrationDataForUser() {
         storyInteraction.remember("firstName", "Hans");
         storyInteraction.remember("lastName", "Müller");

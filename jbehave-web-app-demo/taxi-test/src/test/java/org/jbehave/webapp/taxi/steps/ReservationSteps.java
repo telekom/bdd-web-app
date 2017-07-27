@@ -39,8 +39,8 @@ public class ReservationSteps extends SeleniumSteps {
         request().delete("/simulator/config/reservation");
     }
 
-    @Given("ist eine valide Reservierung zwischen $earliestStartTime und $latestStartTime Uhr")
-    public void validReservation(String earliestStartTime, String latestStartTime) {
+    @Given("ist eine mögliche Reservierung zwischen $earliestStartTime und $latestStartTime Uhr")
+    public void possibleReservation(String earliestStartTime, String latestStartTime) {
         Date tomorrow = new Date(new Date().getTime() + 86400000l);
         scenarioInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
         scenarioInteraction.remember("departure", "Alexanderplatz, Berlin");
