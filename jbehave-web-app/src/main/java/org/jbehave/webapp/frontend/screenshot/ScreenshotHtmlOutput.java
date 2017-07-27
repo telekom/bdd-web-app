@@ -8,16 +8,16 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import java.io.PrintStream;
 import java.util.Date;
 
-public class ScreenshootingHtmlOutput extends HtmlOutput {
+public class ScreenshotHtmlOutput extends HtmlOutput {
 
     private final boolean screenshotsOnSuccess;
-    private final WebDriverScreenshotOnFailure screenshotMakerOnFailure;
-    private final WebDriverScreenshotOnSuccess screenshotMakerOnSuccess;
+    private final ScreenshotOnFailure screenshotMakerOnFailure;
+    private final ScreenshotOnSuccess screenshotMakerOnSuccess;
 
     private String currentStoryFolder;
 
-    public ScreenshootingHtmlOutput(PrintStream output,
-                                    StoryReporterBuilder reporterBuilder, boolean screenshotsOnSuccess, WebDriverScreenshotOnFailure screenshotMakerOnFailure, WebDriverScreenshotOnSuccess screenshotMakerOnSuccess) {
+    public ScreenshotHtmlOutput(PrintStream output,
+                                StoryReporterBuilder reporterBuilder, boolean screenshotsOnSuccess, ScreenshotOnFailure screenshotMakerOnFailure, ScreenshotOnSuccess screenshotMakerOnSuccess) {
         super(output, reporterBuilder.keywords());
         this.screenshotsOnSuccess = screenshotsOnSuccess;
         this.screenshotMakerOnFailure = screenshotMakerOnFailure;

@@ -16,7 +16,7 @@ import java.util.Date;
 import static java.text.MessageFormat.format;
 
 @AllArgsConstructor
-public class WebDriverScreenshotOnSuccess {
+public class ScreenshotOnSuccess {
 
 	private final StoryReporterBuilder reporterBuilder;
 	private final WebDriverWrapper webDriverWrapper;

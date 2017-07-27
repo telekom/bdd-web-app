@@ -14,7 +14,7 @@ import java.text.MessageFormat;
 import java.util.UUID;
 
 @AllArgsConstructor
-public class WebDriverScreenshotOnFailure {
+public class ScreenshotOnFailure {
 
     private final StoryReporterBuilder reporterBuilder;
     private final WebDriverWrapper webDriverWrapper;

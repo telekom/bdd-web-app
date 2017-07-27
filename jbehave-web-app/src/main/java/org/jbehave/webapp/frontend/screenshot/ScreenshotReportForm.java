@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ScreenshootingHtmlFormat extends Format {
+public class ScreenshotReportForm extends Format {
 
     @Value("${screenshot.onsuccess:@null}")
     private String screenshotsOnSuccess;
@@ -18,7 +18,7 @@ public class ScreenshootingHtmlFormat extends Format {
     @Autowired
     private WebDriverWrapper webDriverWrapper;
 
-    public ScreenshootingHtmlFormat() {
+    public ScreenshotReportForm() {
         super("HTML");
     }
 
@@ -27,12 +27,10 @@ public class ScreenshootingHtmlFormat extends Format {
             FilePrintStreamFactory factory,
             StoryReporterBuilder builder) {
         factory.useConfiguration(builder.fileConfiguration("html"));
-        WebDriverScreenshotOnFailure screenshotMakerOnFailure = new WebDriverScreenshotOnFailure(builder, webDriverWrapper);
-        WebDriverScreenshotOnSuccess screenshotMakerOnSuccess = new WebDriverScreenshotOnSuccess(builder, webDriverWrapper);
-        ScreenshootingHtmlOutput screenshootingHtmlOutput = new ScreenshootingHtmlOutput(factory.createPrintStream(), builder, Boolean.valueOf(screenshotsOnSuccess), screenshotMakerOnFailure, screenshotMakerOnSuccess);
-        return screenshootingHtmlOutput
-                .doReportFailureTrace(builder.reportFailureTrace())
-                .doCompressFailureTrace(builder.compressFailureTrace());
+        ScreenshotOnFailure screenshotMakerOnFailure = new ScreenshotOnFailure(builder, webDriverWrapper);
+        ScreenshotOnSuccess screenshotMakerOnSuccess = new ScreenshotOnSuccess(builder, webDriverWrapper);
+        ScreenshotHtmlOutput screenshotHtmlOutput = new ScreenshotHtmlOutput(factory.createPrintStream(), builder, Boolean.valueOf(screenshotsOnSuccess), screenshotMakerOnFailure, screenshotMakerOnSuccess);
+        return screenshotHtmlOutput.doReportFailureTrace(builder.reportFailureTrace()).doCompressFailureTrace(builder.compressFailureTrace());
     }
 
 }
