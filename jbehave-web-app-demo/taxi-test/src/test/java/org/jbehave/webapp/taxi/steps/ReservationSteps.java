@@ -60,7 +60,7 @@ public class ReservationSteps extends SeleniumSteps {
     }
 
     @When("der Nutzer die Reservierungsseite öffnet")
-    private void theUserOpenTheReservationPage() {
+    public void theUserOpenTheReservationPage() {
         open(getUrlWithHost(hostIncludingPort, ReservationPage.URL));
     }
 
