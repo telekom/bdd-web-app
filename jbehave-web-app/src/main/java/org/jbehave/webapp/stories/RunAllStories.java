@@ -2,7 +2,7 @@ package org.jbehave.webapp.stories;
 
 import com.google.common.collect.Lists;
 import de.codecentric.jbehave.junit.monitoring.JUnitReportingRunner;
-import org.jbehave.webapp.frontend.screenshot.ScreenshootingHtmlFormat;
+import org.jbehave.webapp.frontend.screenshot.ScreenshotReportForm;
 import org.jbehave.webapp.steps.Steps;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 
 import java.util.ArrayList;
@@ -29,19 +28,27 @@ import java.util.Set;
 @RunWith(JUnitReportingRunner.class)
 public abstract class RunAllStories extends JUnitStories {
 
-    private Configuration createConfiguration() {
+    public Configuration defaultConfiguration() {
         Configuration configuration = new MostUsefulConfiguration();
-        Format screenshootingHtmlFormat = getApplicationContext().getBean(ScreenshootingHtmlFormat.class);
-        configuration.useStoryReporterBuilder(new StoryReporterBuilder().withCrossReference(new CrossReference())
-                .withFormats(Format.TXT, Format.CONSOLE, Format.STATS, screenshootingHtmlFormat)
-                .withCodeLocation(CodeLocations.codeLocationFromClass(getClass())).withFailureTrace(true));
-        configuration.useStoryPathResolver(new UnderscoredCamelCaseResolver().removeFromClassName("Story"));
+        configuration.useStoryReporterBuilder(defaultStoryReporterBuilder());
+        configuration.useStoryPathResolver(defaultStoryPathResolver());
         return configuration;
+    }
+
+    public StoryReporterBuilder defaultStoryReporterBuilder() {
+        Format screenshootingHtmlFormat = getApplicationContext().getBean(ScreenshotReportForm.class);
+        return new StoryReporterBuilder().withCrossReference(new CrossReference())
+                .withFormats(Format.TXT, Format.CONSOLE, Format.STATS, screenshootingHtmlFormat)
+                .withCodeLocation(CodeLocations.codeLocationFromClass(getClass())).withFailureTrace(true);
+    }
+
+    public StoryPathResolver defaultStoryPathResolver() {
+        return new UnderscoredCamelCaseResolver().removeFromClassName("Story");
     }
 
     @Override
     public Configuration configuration() {
-        return createConfiguration();
+        return defaultConfiguration();
     }
 
     @Override

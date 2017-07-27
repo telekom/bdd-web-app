@@ -1,11 +1,11 @@
-Narrative:
+Erzählung:
 Als Anwender
-möchte ich mich mit einem bereits vorhandenen Accout einloggen,
+möchte ich mich mit einem bereits vorhUndenen Accout einloggen,
 um Reservierungen von Sammeltaxis vornehmen zu können.
 
-Scenario: Einloggen
-Given invalide Logindaten für Nutzer testnutzer
-And die geöffnete Loginseite
-When der Nutzer testnutzer sich einloggt
-Then ist die Loginseite geöffnet
-And der Nutzer erhält die Nachricht, dass die Logindaten ungültig sind
+Szenario: Einloggen
+Gegeben invalide Logindaten für Nutzer
+Und die geöffnete Loginseite
+Wenn der Nutzer sich einloggt
+Dann ist die Loginseite geöffnet
+Und der Nutzer erhält die Nachricht, dass die Logindaten ungültig sind

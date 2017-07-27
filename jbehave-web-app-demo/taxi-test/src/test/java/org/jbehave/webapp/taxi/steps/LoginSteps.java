@@ -32,19 +32,19 @@ public class LoginSteps extends SeleniumSteps {
         theLoginPageIsOpen();
     }
 
-    @Given("ein eingeloggter Nutzer $user")
-    public void loggedInCustomer(String user) {
-        registrationSteps.registeredUser(user);
+    @Given("ein eingeloggter Nutzer")
+    public void loggedInCustomer() {
+        registrationSteps.registeredUser();
         homepageSteps.theUserOpensTheHomePage();
         theLoginPageIsOpen();
-        theUserLogsIn(user);
+        theUserLogsIn();
         reservationSteps.theReservationPageOpens();
     }
 
-    @Given("invalide Logindaten für Nutzer $user")
-    public void invalidLogInDataForUser(String user) {
-        storyInteraction.rememberObject(user, "username", "invalid@user.de");
-        storyInteraction.rememberObject(user, "password", "passwort");
+    @Given("invalide Logindaten für Nutzer")
+    public void invalidLogInDataForUser() {
+        storyInteraction.remember("username", "invalid@user.de");
+        storyInteraction.remember("password", "passwort");
     }
 
     @When("der Nutzer die Startseite öffnet")
@@ -52,11 +52,11 @@ public class LoginSteps extends SeleniumSteps {
         open(getUrlWithHost(hostIncludingPort, LoginPage.URL));
     }
 
-    @When("der Nutzer $user sich einloggt")
-    public void theUserLogsIn(String user) {
+    @When("der Nutzer sich einloggt")
+    public void theUserLogsIn() {
         LoginPage loginPage = getCurrentPage();
-        loginPage.setUsername(storyInteraction.recallObject(user, "username"));
-        loginPage.setPassword(storyInteraction.recallObject(user, "password"));
+        loginPage.setUsername(storyInteraction.recall("username"));
+        loginPage.setPassword(storyInteraction.recall("password"));
         loginPage.submitLogin();
     }
 

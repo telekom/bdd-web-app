@@ -32,42 +32,42 @@ public class RegistrationSteps extends SeleniumSteps {
         theRegistrationPageIsOpen();
     }
 
-    @Given("ist ein registrierter Anwender $user")
-    public void registeredUser(String user) {
+    @Given("ist ein registrierter Anwender")
+    public void registeredUser() {
         theUserOpenTheRegistrationPage();
         theRegistrationPageIsOpen();
-        validRegistrationDataForUser(user);
-        theUserSuccessfullyCompletedTheRegistration(user);
+        validRegistrationDataForUser();
+        theUserSuccessfullyCompletedTheRegistration();
     }
 
-    @Given("valide Registrierungsdaten für Nutzer $user")
-    public void validRegistrationDataForUser(String user) {
-        storyInteraction.rememberObject(user, "firstName", "Hans");
-        storyInteraction.rememberObject(user, "lastName", "Müller");
+    @Given("valide Registrierungsdaten für Nutzer")
+    public void validRegistrationDataForUser() {
+        storyInteraction.remember("firstName", "Hans");
+        storyInteraction.remember("lastName", "Müller");
         String username = randomNumber() + "@user.de";
-        storyInteraction.rememberObject(user, "username", username);
+        storyInteraction.remember("username", username);
         logger.info("Generate user: " + username);
-        storyInteraction.rememberObject(user, "password", "passwort");
+        storyInteraction.remember("password", "passwort");
     }
 
     private String randomNumber() {
         return StringUtils.leftPad("" + random.nextInt(Integer.MAX_VALUE), 12, "0");
     }
 
-    @Given("valide Registrierungsdaten mit Kontrollflussfehler für Nutzer $user")
-    public void validRegistrationDataWithErrorForUser(String user) {
-        storyInteraction.rememberObject(user, "firstName", "Hans");
-        storyInteraction.rememberObject(user, "lastName", "Müller");
-        storyInteraction.rememberObject(user, "username", "fehler@test.de");
-        storyInteraction.rememberObject(user, "password", "passwort");
+    @Given("valide Registrierungsdaten mit Kontrollflussfehler für Nutzer")
+    public void validRegistrationDataWithErrorForUser() {
+        storyInteraction.remember("firstName", "Hans");
+        storyInteraction.remember("lastName", "Müller");
+        storyInteraction.remember("username", "fehler@test.de");
+        storyInteraction.remember("password", "passwort");
     }
 
-    @Given("invalide Registrierungsdaten für Nutzer $user")
-    public void invalidRegistrationDataForUser(String user) {
-        storyInteraction.rememberObject(user, "firstName", "Hans");
-        storyInteraction.rememberObject(user, "lastName", "Müller");
-        storyInteraction.rememberObject(user, "username", "user");
-        storyInteraction.rememberObject(user, "password", "passwort");
+    @Given("invalide Registrierungsdaten für Nutzer")
+    public void invalidRegistrationDataForUser() {
+        storyInteraction.remember("firstName", "Hans");
+        storyInteraction.remember("lastName", "Müller");
+        storyInteraction.remember("username", "user");
+        storyInteraction.remember("password", "passwort");
     }
 
     @When("der Nutzer die Registrierungsseite öffnet")
@@ -80,13 +80,13 @@ public class RegistrationSteps extends SeleniumSteps {
         createExpectedPage(RegistrationPage.class);
     }
 
-    @When("der Nutzer $user die Registrierung durchführt")
-    public void theUserSuccessfullyCompletedTheRegistration(String user) {
+    @When("der Nutzer die Registrierung durchführt")
+    public void theUserSuccessfullyCompletedTheRegistration() {
         RegistrationPage registrationPage = getCurrentPage();
-        registrationPage.setFirstName(storyInteraction.recallObject(user, "firstName"));
-        registrationPage.setLastName(storyInteraction.recallObject(user, "lastName"));
-        registrationPage.setUsername(storyInteraction.recallObject(user, "username"));
-        registrationPage.setPassword(storyInteraction.recallObject(user, "password"));
+        registrationPage.setFirstName(storyInteraction.recall("firstName"));
+        registrationPage.setLastName(storyInteraction.recall("lastName"));
+        registrationPage.setUsername(storyInteraction.recall("username"));
+        registrationPage.setPassword(storyInteraction.recall("password"));
         registrationPage.submitRegistration();
     }
 

@@ -1,12 +1,12 @@
-Narrative:
+Erzählung:
 Als Anwender
 möchte ich über die Startseite auf die Registrierung gelangen,
 damit eine Registrierung vornehmen kann.
 
-Scenario: Startseite aufrufen
-When der Nutzer die Startseite öffnet
-Then ist die Loginseite geöffnet
+Szenario: Startseite aufrufen
+Wenn der Nutzer die Startseite öffnet
+Dann ist die Loginseite geöffnet
 
-Scenario: Registrierungsseite öffnen
-When der Nutzer den Link zur Registrierung anklickt
-Then ist die Registrierungsseite geöffnet
+Szenario: Registrierungsseite öffnen
+Wenn der Nutzer den Link zur Registrierung anklickt
+Dann ist die Registrierungsseite geöffnet

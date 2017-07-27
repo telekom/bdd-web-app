@@ -1,10 +1,10 @@
-Narrative:
+Erzählung:
 Als Anwender
-möchte ich mich mit einem bereits vorhandenen Accout einloggen,
+möchte ich mich mit einem bereits vorhUndenen Accout einloggen,
 um Reservierungen von Sammeltaxis vornehmen zu können.
 
-Scenario: Einloggen
-Given ist ein registrierter Anwender testnutzer
-And die geöffnete Loginseite
-When der Nutzer testnutzer sich einloggt
-Then öffnet sich die Reservierungsseite
+Szenario: Einloggen
+Gegeben ist ein registrierter Anwender
+Und die geöffnete Loginseite
+Wenn der Nutzer sich einloggt
+Dann öffnet sich die Reservierungsseite
