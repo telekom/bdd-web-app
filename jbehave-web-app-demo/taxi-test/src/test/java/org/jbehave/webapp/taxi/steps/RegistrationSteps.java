@@ -40,6 +40,10 @@ public class RegistrationSteps extends SeleniumSteps {
         theUserSuccessfullyCompletedTheRegistration();
     }
 
+    private void theUserOpenTheRegistrationPage() {
+        open(getUrlWithHost(hostIncludingPort, RegistrationPage.URL));
+    }
+
     @Given("gültige Registrierungsdaten")
     public void validRegistrationDataForUser() {
         storyInteraction.remember("firstName", "Hans");
@@ -68,11 +72,6 @@ public class RegistrationSteps extends SeleniumSteps {
         storyInteraction.remember("lastName", "Müller");
         storyInteraction.remember("username", "user");
         storyInteraction.remember("password", "passwort");
-    }
-
-    @When("der Nutzer die Registrierungsseite öffnet")
-    private void theUserOpenTheRegistrationPage() {
-        open(getUrlWithHost(hostIncludingPort, RegistrationPage.URL));
     }
 
     @Then("wird die Registrierungsseite angezeigt")

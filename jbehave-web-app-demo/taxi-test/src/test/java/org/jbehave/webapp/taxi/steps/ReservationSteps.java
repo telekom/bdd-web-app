@@ -39,43 +39,40 @@ public class ReservationSteps extends SeleniumSteps {
         request().delete("/simulator/config/reservation");
     }
 
-    @Given("ist eine mögliche Reservierung zwischen $earliestStartTime und $latestStartTime Uhr")
-    public void possibleReservation(String earliestStartTime, String latestStartTime) {
+    @Given("eine valide Reservierung")
+    public void possibleReservation() {
         Date tomorrow = new Date(new Date().getTime() + 86400000l);
-        scenarioInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
-        scenarioInteraction.remember("departure", "Alexanderplatz, Berlin");
-        scenarioInteraction.remember("destination", "Flughafen Berlin-Tegel");
-        scenarioInteraction.remember("earliestStartTime", earliestStartTime);
-        scenarioInteraction.remember("latestStartTime", latestStartTime);
+        storyInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
+        storyInteraction.remember("departure", "Alexanderplatz, Berlin");
+        storyInteraction.remember("destination", "Flughafen Berlin-Tegel");
+        storyInteraction.remember("earliestStartTime", "10:00");
+        storyInteraction.remember("latestStartTime", "10:30");
     }
 
     @Given("zwischen $startTime Uhr und $endTime Uhr ist der Preis $price € bei $passengers Mitfahrern")
     public void betweenStartTimeAndEndTimeThePriceIs(String startTime, String endTime, String price, String passengers) {
+        Map<String, Object> body = new HashMap<>();
+        Map<String, Object> reservation = new HashMap<>();
+        reservation.put("date", storyInteraction.recallNotNull("date"));
+        reservation.put("departure", storyInteraction.recallNotNull("departure"));
+        reservation.put("destination", storyInteraction.recallNotNull("destination"));
+        reservation.put("earliestStartTime", storyInteraction.recallNotNull("earliestStartTime"));
+        reservation.put("latestStartTime", storyInteraction.recallNotNull("latestStartTime"));
+        body.put("reservation", reservation);
         Map<String, String> reservationPrice = new HashMap<>();
         reservationPrice.put("startTime", startTime);
         reservationPrice.put("endTime", endTime);
         reservationPrice.put("price", price);
         reservationPrice.put("passengers", passengers);
         scenarioInteraction.rememberToList("reservationPrices", reservationPrice);
-        theReservationIsSetInTheSimulator();
+        body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
+        request().body(body).put("/simulator/config/reservation");
+        requestBuilder.response().then().statusCode(200);
     }
 
     @When("der Nutzer die Reservierungsseite öffnet")
     public void theUserOpenTheReservationPage() {
         open(getUrlWithHost(hostIncludingPort, ReservationPage.URL));
-    }
-
-    private void theReservationIsSetInTheSimulator() {
-        Map<String, Object> body = new HashMap<>();
-        Map<String, Object> reservation = new HashMap<>();
-        reservation.put("date", scenarioInteraction.recallNotNull("date"));
-        reservation.put("departure", scenarioInteraction.recallNotNull("departure"));
-        reservation.put("destination", scenarioInteraction.recallNotNull("destination"));
-        reservation.put("earliestStartTime", scenarioInteraction.recallNotNull("earliestStartTime"));
-        reservation.put("latestStartTime", scenarioInteraction.recallNotNull("latestStartTime"));
-        body.put("reservation", reservation);
-        body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
-        request().body(body).put("/simulator/config/reservation");
     }
 
     @When("ein Sammeltaxi reserviert wird")
@@ -87,11 +84,6 @@ public class ReservationSteps extends SeleniumSteps {
         reservationPage.setEarliestStartTime(scenarioInteraction.recallNotNull("earliestStartTime"));
         reservationPage.setLatestStartTime(scenarioInteraction.recallNotNull("latestStartTime"));
         reservationPage.submitReservation();
-    }
-
-    @Then("gibt der Simulator eine Erfolgsmeldung zurück")
-    public void theSimulatorReturnsSuccessMessage() {
-        requestBuilder.response().then().statusCode(200);
     }
 
     @Then("wird die Reservierungsseite angezeigt")
