@@ -46,12 +46,12 @@ public class RegistrationSteps extends SeleniumSteps {
 
     @Given("gültige Registrierungsdaten")
     public void validRegistrationDataForUser() {
-        storyInteraction.remember("firstName", "Hans");
-        storyInteraction.remember("lastName", "Müller");
+        scenarioInteraction.remember("firstName", "Hans");
+        scenarioInteraction.remember("lastName", "Müller");
         String username = randomNumber() + "@user.de";
-        storyInteraction.remember("username", username);
+        scenarioInteraction.remember("username", username);
         logger.info("Generate user: " + username);
-        storyInteraction.remember("password", "passwort");
+        scenarioInteraction.remember("password", "passwort");
     }
 
     private String randomNumber() {
@@ -60,18 +60,18 @@ public class RegistrationSteps extends SeleniumSteps {
 
     @Given("gültige Registrierungsdaten mit Kontrollflussfehler in der Anwendung")
     public void validRegistrationDataWithErrorForUser() {
-        storyInteraction.remember("firstName", "Hans");
-        storyInteraction.remember("lastName", "Müller");
-        storyInteraction.remember("username", "fehler@test.de");
-        storyInteraction.remember("password", "passwort");
+        scenarioInteraction.remember("firstName", "Hans");
+        scenarioInteraction.remember("lastName", "Müller");
+        scenarioInteraction.remember("username", "fehler@test.de");
+        scenarioInteraction.remember("password", "passwort");
     }
 
     @Given("ungültige Registrierungsdaten")
     public void invalidRegistrationDataForUser() {
-        storyInteraction.remember("firstName", "Hans");
-        storyInteraction.remember("lastName", "Müller");
-        storyInteraction.remember("username", "user");
-        storyInteraction.remember("password", "passwort");
+        scenarioInteraction.remember("firstName", "Hans");
+        scenarioInteraction.remember("lastName", "Müller");
+        scenarioInteraction.remember("username", "user");
+        scenarioInteraction.remember("password", "passwort");
     }
 
     @Then("wird die Registrierungsseite angezeigt")
@@ -82,10 +82,10 @@ public class RegistrationSteps extends SeleniumSteps {
     @When("der Nutzer die Registrierung durchführt")
     public void theUserSuccessfullyCompletedTheRegistration() {
         RegistrationPage registrationPage = getCurrentPage();
-        registrationPage.setFirstName(storyInteraction.recall("firstName"));
-        registrationPage.setLastName(storyInteraction.recall("lastName"));
-        registrationPage.setUsername(storyInteraction.recall("username"));
-        registrationPage.setPassword(storyInteraction.recall("password"));
+        registrationPage.setFirstName(scenarioInteraction.recall("firstName"));
+        registrationPage.setLastName(scenarioInteraction.recall("lastName"));
+        registrationPage.setUsername(scenarioInteraction.recall("username"));
+        registrationPage.setPassword(scenarioInteraction.recall("password"));
         registrationPage.submitRegistration();
     }
 

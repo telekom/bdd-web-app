@@ -40,8 +40,8 @@ public class LoginSteps extends SeleniumSteps {
 
     @Given("ungültige Logindaten")
     public void invalidLogInDataForUser() {
-        storyInteraction.remember("username", "invalid@user.de");
-        storyInteraction.remember("password", "passwort");
+        scenarioInteraction.remember("username", "invalid@user.de");
+        scenarioInteraction.remember("password", "passwort");
     }
 
     @When("der Nutzer die Startseite öffnet")
@@ -52,8 +52,8 @@ public class LoginSteps extends SeleniumSteps {
     @When("der Nutzer sich einloggt")
     public void theUserLogsIn() {
         LoginPage loginPage = getCurrentPage();
-        loginPage.setUsername(storyInteraction.recall("username"));
-        loginPage.setPassword(storyInteraction.recall("password"));
+        loginPage.setUsername(scenarioInteraction.recall("username"));
+        loginPage.setPassword(scenarioInteraction.recall("password"));
         loginPage.submitLogin();
     }
 
