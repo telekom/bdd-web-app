@@ -94,8 +94,8 @@ public class ReservationSteps extends SeleniumSteps {
         requestBuilder.response().then().statusCode(200);
     }
 
-    @Then("öffnet sich die Reservierungsseite")
-    public void theReservationPageOpens() {
+    @Then("wird die Reservierungsseite angezeigt")
+    public void theReservationPageIsShown() {
         createExpectedPage(ReservationPage.class);
     }
 

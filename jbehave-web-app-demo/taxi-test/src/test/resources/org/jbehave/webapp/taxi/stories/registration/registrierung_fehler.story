@@ -7,5 +7,5 @@ Szenario: Registrierung
 Gegeben die geöffnete Registrierungsseite
 Und gültige Registrierungsdaten mit Kontrollflussfehler in der Anwendung
 Wenn der Nutzer die Registrierung durchführt
-Dann ist die Loginseite geöffnet
+Dann wird die Loginseite angezeigt
 Und der Nutzer erhält die Nachricht, dass er registriert ist

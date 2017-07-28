@@ -18,9 +18,6 @@ public class LoginSteps extends SeleniumSteps {
     private String hostIncludingPort;
 
     @Autowired
-    private HomepageSteps homepageSteps;
-
-    @Autowired
     private ReservationSteps reservationSteps;
 
     @Autowired
@@ -29,19 +26,19 @@ public class LoginSteps extends SeleniumSteps {
     @Given("die geöffnete Loginseite")
     public void theOpenLoginPage() {
         theUserOpensTheLoginPage();
-        theLoginPageIsOpen();
+        theLoginPageIsShown();
     }
 
     @Given("ein eingeloggter Nutzer")
     public void loggedInCustomer() {
         registrationSteps.registeredUser();
-        homepageSteps.theUserOpensTheHomePage();
-        theLoginPageIsOpen();
+        theUserOpensTheLoginPage();
+        theLoginPageIsShown();
         theUserLogsIn();
-        reservationSteps.theReservationPageOpens();
+        reservationSteps.theReservationPageIsShown();
     }
 
-    @Given("invalide Logindaten für Nutzer")
+    @Given("ungültige Logindaten")
     public void invalidLogInDataForUser() {
         storyInteraction.remember("username", "invalid@user.de");
         storyInteraction.remember("password", "passwort");
@@ -66,8 +63,8 @@ public class LoginSteps extends SeleniumSteps {
         loginPage.clickRegistration();
     }
 
-    @Then("ist die Loginseite geöffnet")
-    public void theLoginPageIsOpen() {
+    @Then("wird die Loginseite angezeigt")
+    public void theLoginPageIsShown() {
         createExpectedPage(LoginPage.class);
     }
 

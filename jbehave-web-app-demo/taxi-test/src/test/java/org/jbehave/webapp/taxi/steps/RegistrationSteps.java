@@ -29,13 +29,13 @@ public class RegistrationSteps extends SeleniumSteps {
     @Given("die geöffnete Registrierungsseite")
     public void theOpenRegistrationPage() {
         theUserOpenTheRegistrationPage();
-        theRegistrationPageIsOpen();
+        theRegistrationPageIsShown();
     }
 
-    @Given("ist ein registrierter Anwender")
+    @Given("ein registrierter Nutzer")
     public void registeredUser() {
         theUserOpenTheRegistrationPage();
-        theRegistrationPageIsOpen();
+        theRegistrationPageIsShown();
         validRegistrationDataForUser();
         theUserSuccessfullyCompletedTheRegistration();
     }
@@ -75,8 +75,8 @@ public class RegistrationSteps extends SeleniumSteps {
         open(getUrlWithHost(hostIncludingPort, RegistrationPage.URL));
     }
 
-    @Then("ist die Registrierungsseite geöffnet")
-    public void theRegistrationPageIsOpen() {
+    @Then("wird die Registrierungsseite angezeigt")
+    public void theRegistrationPageIsShown() {
         createExpectedPage(RegistrationPage.class);
     }
 

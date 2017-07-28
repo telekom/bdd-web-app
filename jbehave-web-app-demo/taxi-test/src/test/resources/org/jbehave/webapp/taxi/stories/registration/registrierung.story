@@ -3,9 +3,19 @@ Als Anwender
 möchte ich mich registrieren können,
 um Reservierungen von Sammeltaxis vornehmen zu können.
 
-Szenario: Registrierung
+Szenario: Registrierungsseite über die Startseite öffnen
+Gegeben die geöffnete Loginseite
+Wenn der Nutzer den Link zur Registrierung anklickt
+Dann wird die Registrierungsseite angezeigt
+
+Szenario: Eingabe von ungültigen Registrierungsdaten
 Gegeben die geöffnete Registrierungsseite
-Und gültige Registrierungsdaten
+Und ungültige Registrierungsdaten
 Wenn der Nutzer die Registrierung durchführt
-Dann ist die Loginseite geöffnet
+Dann wird die Registrierungsseite angezeigt
+
+Szenario: Registrierung
+Gegeben gültige Registrierungsdaten
+Wenn der Nutzer die Registrierung durchführt
+Dann wird die Loginseite angezeigt
 Und der Nutzer erhält die Nachricht, dass er registriert ist
