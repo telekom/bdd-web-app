@@ -54,7 +54,7 @@ public class LoginPage extends JQueryPage {
         return false;
     }
 
-    public boolean logindataIsInvalidMessageIsShown() {
+    public boolean loginDataIsInvalidMessageIsShown() {
         if (alertWarningDiv.exists()) {
             return alertWarningDiv.getText().contains("ungültig");
         }

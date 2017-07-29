@@ -2,7 +2,9 @@ package org.jbehave.webapp.taxi.pages;
 
 import org.jbehave.webapp.frontend.element.WebElementEnhanced;
 import org.jbehave.webapp.frontend.page.JQueryPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class RegistrationPage extends JQueryPage {
@@ -48,8 +50,14 @@ public class RegistrationPage extends JQueryPage {
         submitButton.click();
     }
 
+    public boolean registrationDataIsInvalidMessageIsShown() {
+        WebElement invalid = driver.findElement(By.cssSelector("input:invalid"));
+        return invalid != null && invalid.isDisplayed();
+    }
+
     @Override
     public String getURL() {
         return URL;
     }
+
 }

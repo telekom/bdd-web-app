@@ -7,12 +7,15 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.webapp.frontend.steps.SeleniumSteps;
 import org.jbehave.webapp.interaction.StoryInteraction;
 import org.jbehave.webapp.steps.Steps;
+import org.jbehave.webapp.taxi.pages.LoginPage;
 import org.jbehave.webapp.taxi.pages.RegistrationPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Random;
 import java.util.logging.Logger;
+
+import static org.junit.Assert.assertTrue;
 
 @Steps
 public class RegistrationSteps extends SeleniumSteps {
@@ -74,11 +77,6 @@ public class RegistrationSteps extends SeleniumSteps {
         scenarioInteraction.remember("password", "passwort");
     }
 
-    @Then("wird die Registrierungsseite angezeigt")
-    public void theRegistrationPageIsShown() {
-        createExpectedPage(RegistrationPage.class);
-    }
-
     @When("der Nutzer die Registrierung durchführt")
     public void theUserSuccessfullyCompletedTheRegistration() {
         RegistrationPage registrationPage = getCurrentPage();
@@ -87,6 +85,17 @@ public class RegistrationSteps extends SeleniumSteps {
         registrationPage.setUsername(scenarioInteraction.recall("username"));
         registrationPage.setPassword(scenarioInteraction.recall("password"));
         registrationPage.submitRegistration();
+    }
+
+    @Then("wird die Registrierungsseite angezeigt")
+    public void theRegistrationPageIsShown() {
+        createExpectedPage(RegistrationPage.class);
+    }
+
+    @Then("der Nutzer erhält die Nachricht, dass die Registrierungsdaten ungültig sind")
+    public void theUserReceivesTheMessageThatTheRegistrationDataIsInvalid() {
+        RegistrationPage registrationPage = getCurrentPage();
+        assertTrue(registrationPage.registrationDataIsInvalidMessageIsShown());
     }
 
 }

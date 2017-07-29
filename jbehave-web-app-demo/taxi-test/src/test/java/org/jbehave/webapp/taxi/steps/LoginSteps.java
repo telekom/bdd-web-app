@@ -75,9 +75,9 @@ public class LoginSteps extends SeleniumSteps {
     }
 
     @Then("der Nutzer erhält die Nachricht, dass die Logindaten ungültig sind")
-    public void theUserReceivesTheMessageThatTheLogindataIsInvalid() {
+    public void theUserReceivesTheMessageThatTheLoginDataIsInvalid() {
         LoginPage loginPage = getCurrentPage();
-        assertTrue(loginPage.logindataIsInvalidMessageIsShown());
+        assertTrue(loginPage.loginDataIsInvalidMessageIsShown());
     }
 
 }

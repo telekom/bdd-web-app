@@ -13,6 +13,7 @@ Gegeben die geöffnete Registrierungsseite
 Und ungültige Registrierungsdaten
 Wenn der Nutzer die Registrierung durchführt
 Dann wird die Registrierungsseite angezeigt
+Und der Nutzer erhält die Nachricht, dass die Registrierungsdaten ungültig sind
 
 Szenario: Registrierung
 Gegeben gültige Registrierungsdaten
