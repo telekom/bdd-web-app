@@ -3,7 +3,7 @@ Als eingeloggter Anwender
 möchte ich Reservierungen von Sammeltaxis für bestimmte Strecken in bestimmten Zeiträumen vornehmen können
 um etwaige Rabatte nutzen zu können.
 
-Szenario: Reservierung für angebenen Zeitraum nicht möglich, da keine Angebote vorhanden sind
+Szenario: Reservierung für angegebenen Zeitraum nicht möglich, da keine Angebote vorhanden sind
 Gegeben ein eingeloggter Nutzer
 Und eine valide Reservierung
 Wenn ein Sammeltaxi reserviert wird
