@@ -20,6 +20,8 @@ import java.util.Map;
 @Component
 public class ScenarioInteraction extends AbstractInteraction<ScenarioInteraction> {
 
+	private AbstractInteraction storyInteraction;
+
 	private static final String BODY = "BODY";
 	private static final String PATH_PARAMS = "PATH_PARAMS";
 	private static final String QUERY_PARAMS = "QUERY_PARAMS";
@@ -63,4 +65,23 @@ public class ScenarioInteraction extends AbstractInteraction<ScenarioInteraction
 		}
 		return (Map<String, T>) recallNotNull(queryParams);
 	}
+
+	/**
+	 * Store some data from story interaction to the scenario interaction context
+	 */
+	public void rememberFromStoryInteraction(String key) {
+		super.remember(key, storyInteraction.recallNotNull(key));
+	}
+
+	/**
+	 * Store an object from story interaction for an specific entity in the scenario interaction context. Recall this object with recallObject().
+	 */
+	public void rememberObjectFromStoryInteraction(String entityKey, String objectKey) {
+		super.rememberObject(entityKey, objectKey, storyInteraction.recallObjectNotNull(entityKey, objectKey));
+	}
+
+	public void setStoryInteraction(AbstractInteraction storyInteraction) {
+		this.storyInteraction = storyInteraction;
+	}
+
 }

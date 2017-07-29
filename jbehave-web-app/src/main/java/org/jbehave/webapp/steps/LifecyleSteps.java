@@ -62,6 +62,7 @@ public class LifecyleSteps {
     private void setupSequenceInteraction() {
         scenarioInteraction.startInteraction();
         storyInteraction.setSequenceInteraction(scenarioInteraction);
+        scenarioInteraction.setStoryInteraction(storyInteraction);
     }
 
     @AfterScenario(uponType = ScenarioType.NORMAL)

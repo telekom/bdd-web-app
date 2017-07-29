@@ -42,22 +42,22 @@ public class ReservationSteps extends SeleniumSteps {
     @Given("eine valide Reservierung")
     public void possibleReservation() {
         Date tomorrow = new Date(new Date().getTime() + 86400000l);
-        storyInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
-        storyInteraction.remember("departure", "Alexanderplatz, Berlin");
-        storyInteraction.remember("destination", "Flughafen Berlin-Tegel");
-        storyInteraction.remember("earliestStartTime", "10:00");
-        storyInteraction.remember("latestStartTime", "10:30");
+        scenarioInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
+        scenarioInteraction.remember("departure", "Alexanderplatz, Berlin");
+        scenarioInteraction.remember("destination", "Flughafen Berlin-Tegel");
+        scenarioInteraction.remember("earliestStartTime", "10:00");
+        scenarioInteraction.remember("latestStartTime", "10:30");
     }
 
-    @Given("zwischen $startTime Uhr und $endTime Uhr ist der Preis $price € bei $passengers Mitfahrern")
+    @Given("zwischen $startTime Uhr und $endTime Uhr beträgt der Preis $price € bei $passengers Mitfahrern")
     public void betweenStartTimeAndEndTimeThePriceIs(String startTime, String endTime, String price, String passengers) {
         Map<String, Object> body = new HashMap<>();
         Map<String, Object> reservation = new HashMap<>();
-        reservation.put("date", storyInteraction.recallNotNull("date"));
-        reservation.put("departure", storyInteraction.recallNotNull("departure"));
-        reservation.put("destination", storyInteraction.recallNotNull("destination"));
-        reservation.put("earliestStartTime", storyInteraction.recallNotNull("earliestStartTime"));
-        reservation.put("latestStartTime", storyInteraction.recallNotNull("latestStartTime"));
+        reservation.put("date", scenarioInteraction.recallNotNull("date"));
+        reservation.put("departure", scenarioInteraction.recallNotNull("departure"));
+        reservation.put("destination", scenarioInteraction.recallNotNull("destination"));
+        reservation.put("earliestStartTime", scenarioInteraction.recallNotNull("earliestStartTime"));
+        reservation.put("latestStartTime", scenarioInteraction.recallNotNull("latestStartTime"));
         body.put("reservation", reservation);
         Map<String, String> reservationPrice = new HashMap<>();
         reservationPrice.put("startTime", startTime);
@@ -68,6 +68,15 @@ public class ReservationSteps extends SeleniumSteps {
         body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
         request().body(body).put("/simulator/config/reservation");
         requestBuilder.response().then().statusCode(200);
+    }
+
+    @Given("die bereits getätigte Reservierung")
+    public void theReservationAlreadyMade(){
+        scenarioInteraction.rememberFromStoryInteraction("date");
+        scenarioInteraction.rememberFromStoryInteraction("departure");
+        scenarioInteraction.rememberFromStoryInteraction("destination");
+        scenarioInteraction.rememberFromStoryInteraction("earliestStartTime");
+        scenarioInteraction.rememberFromStoryInteraction("latestStartTime");
     }
 
     @When("der Nutzer die Reservierungsseite öffnet")
@@ -95,6 +104,11 @@ public class ReservationSteps extends SeleniumSteps {
     public void theReservationIsSuccessful() {
         ReservationPage reservationPage = getCurrentPage();
         assertTrue(reservationPage.isReservationSuccess());
+        storyInteraction.rememberFromScenarioInteraction("date");
+        storyInteraction.rememberFromScenarioInteraction("departure");
+        storyInteraction.rememberFromScenarioInteraction("destination");
+        storyInteraction.rememberFromScenarioInteraction("earliestStartTime");
+        storyInteraction.rememberFromScenarioInteraction("latestStartTime");
     }
 
     @Then("ist die Reservierung nicht erfolgreich")
