@@ -7,6 +7,11 @@ import org.springframework.util.StringUtils;
 
 import java.security.Principal;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Component
 public class AuthenticationValidator {
 
@@ -16,7 +21,7 @@ public class AuthenticationValidator {
             return false;
         }
         boolean authenticated = authenticationToken.isAuthenticated();
-        if(!authenticated){
+        if (!authenticated) {
             model.addAttribute("usernamePasswordInvalid", authenticationToken.getDetails() != null && authenticationToken.getDetails().toString().contains("username_password_invalid"));
         }
         return authenticated;

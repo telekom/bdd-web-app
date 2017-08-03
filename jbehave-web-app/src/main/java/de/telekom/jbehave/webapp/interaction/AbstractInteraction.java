@@ -12,13 +12,14 @@ import static org.junit.Assert.assertNotNull;
  * Abstract class for test data management.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 public abstract class AbstractInteraction<T extends AbstractInteraction> {
 
     private final static String OBJECT_KEY_SEPARATOR = ".";
-
-    private final ThreadLocal<T> threadLocal = new ThreadLocal<>();
     protected final HashMap<String, Object> context = Maps.newHashMap();
+    private final ThreadLocal<T> threadLocal = new ThreadLocal<>();
 
     public void startInteraction() {
         try {

@@ -3,6 +3,11 @@ package de.telekom.jbehave.webapp.taxi.controller.vo;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Data
 public class ReservationVO {
 

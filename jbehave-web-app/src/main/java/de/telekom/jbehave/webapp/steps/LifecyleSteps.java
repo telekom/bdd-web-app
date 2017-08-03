@@ -1,18 +1,20 @@
 package de.telekom.jbehave.webapp.steps;
 
+import de.telekom.jbehave.webapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.jbehave.webapp.frontend.lifecycle.WebDriverWrapper;
+import de.telekom.jbehave.webapp.interaction.ScenarioInteraction;
 import de.telekom.jbehave.webapp.interaction.StoryInteraction;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
-import de.telekom.jbehave.webapp.frontend.lifecycle.BrowserDriverUpdater;
-import de.telekom.jbehave.webapp.interaction.ScenarioInteraction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @Steps
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

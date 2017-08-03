@@ -13,6 +13,13 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.UUID;
 
+/**
+ * Add failure screenshot to report
+ *
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @AllArgsConstructor
 public class ScreenshotOnFailure {
 

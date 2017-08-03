@@ -22,40 +22,43 @@ import java.util.List;
  * The use of WebElementEnhanced is not mandatory.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebElementDecorator implements FieldDecorator {
 
-	private final @NonNull WebDriver webDriver;
+    private final @NonNull
+    WebDriver webDriver;
 
-	public Object decorate(ClassLoader loader, Field field) {
-		DefaultElementLocatorFactory defaultElementLocatorFactory = new DefaultElementLocatorFactory(webDriver);
-		if (isWebElementEnhanced(field)) {
-			return getEnhancedObject(field, defaultElementLocatorFactory);
-		}
-		if (isListWithWebElementEnhanced(field)) {
-			return getEnhancedObject(field, defaultElementLocatorFactory);
-		}
-		return new DefaultFieldDecorator(defaultElementLocatorFactory).decorate(loader, field);
-	}
+    public Object decorate(ClassLoader loader, Field field) {
+        DefaultElementLocatorFactory defaultElementLocatorFactory = new DefaultElementLocatorFactory(webDriver);
+        if (isWebElementEnhanced(field)) {
+            return getEnhancedObject(field, defaultElementLocatorFactory);
+        }
+        if (isListWithWebElementEnhanced(field)) {
+            return getEnhancedObject(field, defaultElementLocatorFactory);
+        }
+        return new DefaultFieldDecorator(defaultElementLocatorFactory).decorate(loader, field);
+    }
 
-	private boolean isWebElementEnhanced(Field field) {
-		return WebElementEnhanced.class.isAssignableFrom(field.getType()) && field.isAnnotationPresent(FindBy.class);
-	}
+    private boolean isWebElementEnhanced(Field field) {
+        return WebElementEnhanced.class.isAssignableFrom(field.getType()) && field.isAnnotationPresent(FindBy.class);
+    }
 
-	private boolean isListWithWebElementEnhanced(Field field) {
-		return List.class.isAssignableFrom(field.getType())
-				&& WebElementEnhanced.class.isAssignableFrom(
-				(Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0])
-				&& field.isAnnotationPresent(FindBy.class);
-	}
+    private boolean isListWithWebElementEnhanced(Field field) {
+        return List.class.isAssignableFrom(field.getType())
+                && WebElementEnhanced.class.isAssignableFrom(
+                (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0])
+                && field.isAnnotationPresent(FindBy.class);
+    }
 
-	private Object getEnhancedObject(Field field, DefaultElementLocatorFactory defaultElementLocatorFactory) {
-		Enhancer e = new Enhancer();
-		e.setSuperclass(field.getType());
-		ElementLocator locator = defaultElementLocatorFactory.createLocator(field);
-		e.setCallback(new WebElementHandler(webDriver, locator));
-		return e.create();
-	}
+    private Object getEnhancedObject(Field field, DefaultElementLocatorFactory defaultElementLocatorFactory) {
+        Enhancer e = new Enhancer();
+        e.setSuperclass(field.getType());
+        ElementLocator locator = defaultElementLocatorFactory.createLocator(field);
+        e.setCallback(new WebElementHandler(webDriver, locator));
+        return e.create();
+    }
 
 }

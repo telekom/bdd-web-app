@@ -11,6 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 import java.sql.SQLException;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @SpringBootApplication
 public class Application {
 
@@ -33,7 +38,7 @@ public class Application {
     }
 
     /*
-	 * Path: jdbc:h2:tcp://localhost:9090/./db/pizza
+     * Path: jdbc:h2:tcp://localhost:9090/./db/pizza
      */
     @Bean
     @ConditionalOnExpression("${h2.tcp.enabled:true}")

@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Abstract base class for page objects for jquery frontends.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 public abstract class JQueryPage extends Page {
 

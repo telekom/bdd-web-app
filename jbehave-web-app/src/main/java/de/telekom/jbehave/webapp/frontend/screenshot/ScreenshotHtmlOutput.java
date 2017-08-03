@@ -8,6 +8,13 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import java.io.PrintStream;
 import java.util.Date;
 
+/**
+ * Render screenshots for success and error at report
+ *
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 public class ScreenshotHtmlOutput extends HtmlOutput {
 
     private final boolean screenshotsOnSuccess;

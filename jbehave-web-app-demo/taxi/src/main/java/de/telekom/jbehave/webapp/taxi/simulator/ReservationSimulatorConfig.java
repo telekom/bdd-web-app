@@ -1,13 +1,18 @@
 package de.telekom.jbehave.webapp.taxi.simulator;
 
 import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationConfigVO;
-import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationVO;
 import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationPricesVO;
+import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationVO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Service
 public class ReservationSimulatorConfig {
 

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
  * Interaction is setup and torn down before and after every specification execution.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
 public class StoryInteraction extends AbstractInteraction<StoryInteraction> {

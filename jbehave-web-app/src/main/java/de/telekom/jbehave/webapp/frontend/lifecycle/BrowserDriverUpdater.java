@@ -18,67 +18,67 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Pushes the WebDriver updates for several browser. Is integrated into the JBehave lifecycle via LifecylceSteps.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BrowserDriverUpdater {
 
-	private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
+    private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
+    private final @NonNull
+    WebDriverWrapper webDriverWrapper;
+    @Value("${webdriver.proxy.host:#{null}}")
+    private String proxyHost;
+    @Value("${webdriver.proxy.port:#{null}}")
+    private String proxyPort;
 
-	@Value("${webdriver.proxy.host:#{null}}")
-	private String proxyHost;
+    /*
+     * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
+     * This applies to the driver for firefox and opera.
+     *
+     * https://github.com/bonigarcia/webdrivermanager
+     * https://developer.github.com/v3/#rate-limiting
+     */
+    public void updateDriver() {
+        String browser = webDriverWrapper.getBrowser();
 
-	@Value("${webdriver.proxy.port:#{null}}")
-	private String proxyPort;
+        switch (browser) {
+            case "firefox": {
+                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+                    FirefoxDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+                }
+                FirefoxDriverManager.getInstance().setup();
+                break;
+            }
+            case "chrome": {
+                System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
+                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+                    ChromeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+                }
+                ChromeDriverManager.getInstance().setup();
+                break;
+            }
+            case "edge": {
+                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+                    EdgeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+                }
+                EdgeDriverManager.getInstance().setup();
+                break;
+            }
+            case "ie": {
+                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+                    InternetExplorerDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+                }
+                InternetExplorerDriverManager.getInstance().setup();
+                break;
+            }
+            default: {
+                return;
+            }
+        }
 
-	private final @NonNull WebDriverWrapper webDriverWrapper;
-
-	/*
-	 * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
-	 * This applies to the driver for firefox and opera.
-	 *
-	 * https://github.com/bonigarcia/webdrivermanager
-	 * https://developer.github.com/v3/#rate-limiting
-	 */
-	public void updateDriver() {
-		String browser = webDriverWrapper.getBrowser();
-
-		switch (browser) {
-		case "firefox": {
-			if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-				FirefoxDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-			}
-			FirefoxDriverManager.getInstance().setup();
-			break;
-		}
-		case "chrome": {
-			System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
-			if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-				ChromeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-			}
-			ChromeDriverManager.getInstance().setup();
-			break;
-		}
-		case "edge": {
-			if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-				EdgeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-			}
-			EdgeDriverManager.getInstance().setup();
-			break;
-		}
-		case "ie": {
-			if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-				InternetExplorerDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-			}
-			InternetExplorerDriverManager.getInstance().setup();
-			break;
-		}
-		default: {
-			return;
-		}
-		}
-
-		log.info("Updated instrumentalisation driver for browser: " + browser);
-	}
+        log.info("Updated instrumentalisation driver for browser: " + browser);
+    }
 
 }

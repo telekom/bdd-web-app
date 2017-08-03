@@ -14,6 +14,11 @@ import java.util.Date;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Service
 public class UserService {
 

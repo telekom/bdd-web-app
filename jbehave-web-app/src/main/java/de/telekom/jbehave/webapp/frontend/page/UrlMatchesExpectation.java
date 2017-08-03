@@ -9,6 +9,8 @@ import static org.apache.commons.lang3.StringUtils.contains;
  * ExpectedCondition for url matching.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 public class UrlMatchesExpectation implements ExpectedCondition<Boolean> {
 

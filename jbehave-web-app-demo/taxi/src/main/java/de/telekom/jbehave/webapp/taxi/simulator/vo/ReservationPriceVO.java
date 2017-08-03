@@ -2,6 +2,11 @@ package de.telekom.jbehave.webapp.taxi.simulator.vo;
 
 import lombok.Data;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Data
 public class ReservationPriceVO {
 

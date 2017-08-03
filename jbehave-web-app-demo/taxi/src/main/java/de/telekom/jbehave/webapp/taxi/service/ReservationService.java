@@ -1,10 +1,10 @@
 package de.telekom.jbehave.webapp.taxi.service;
 
+import de.telekom.jbehave.webapp.taxi.controller.vo.ReservationVO;
 import de.telekom.jbehave.webapp.taxi.domain.Reservation;
 import de.telekom.jbehave.webapp.taxi.domain.User;
 import de.telekom.jbehave.webapp.taxi.repositories.ReservationRepository;
 import de.telekom.jbehave.webapp.taxi.repositories.UserRepository;
-import de.telekom.jbehave.webapp.taxi.controller.vo.ReservationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,11 @@ import java.util.List;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Service
 public class ReservationService {
 

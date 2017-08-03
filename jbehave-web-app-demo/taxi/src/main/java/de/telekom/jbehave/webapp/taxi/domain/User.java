@@ -5,6 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Entity
 @Data
 public class User {

@@ -13,6 +13,8 @@ import java.util.function.Function;
  * Extends WebElement by several helper methods.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 public class WebElementEnhanced {
 
@@ -33,12 +35,12 @@ public class WebElementEnhanced {
         this.webDriver = webDriver;
     }
 
-    public void setWebElement(WebElement webElement) {
-        this.webElement = webElement;
-    }
-
     public WebElement getWebElement() {
         return webElement;
+    }
+
+    public void setWebElement(WebElement webElement) {
+        this.webElement = webElement;
     }
 
     public void setWebDriver(WebDriver webDriver) {

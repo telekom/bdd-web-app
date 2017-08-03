@@ -28,6 +28,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Manage the current WebDriver instance. Uses proven standard configurations for specific browsers. The lifecycle is determined by SeleniumTestRule.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
 public class WebDriverWrapper {

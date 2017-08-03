@@ -14,6 +14,11 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Component
 public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvider {
 

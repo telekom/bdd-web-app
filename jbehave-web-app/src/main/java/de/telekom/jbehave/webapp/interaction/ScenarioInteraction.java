@@ -16,72 +16,72 @@ import java.util.Map;
  * Interaction is setup and torn down before and after every specification execution.
  *
  * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
 public class ScenarioInteraction extends AbstractInteraction<ScenarioInteraction> {
 
-	private AbstractInteraction storyInteraction;
+    private static final String BODY = "BODY";
+    private static final String PATH_PARAMS = "PATH_PARAMS";
+    private static final String QUERY_PARAMS = "QUERY_PARAMS";
+    private AbstractInteraction storyInteraction;
+    @Autowired
+    private RequestBuilder requestBuilder;
 
-	private static final String BODY = "BODY";
-	private static final String PATH_PARAMS = "PATH_PARAMS";
-	private static final String QUERY_PARAMS = "QUERY_PARAMS";
+    /**
+     * Initializes this interaction with an Array JSON body.
+     */
+    public List<Object> arrayBody() {
+        Object body = recall(BODY);
+        if (body == null) {
+            remember(BODY, Lists.newArrayList());
+        }
+        return (List<Object>) recallNotNull(BODY);
+    }
 
-	@Autowired
-	private RequestBuilder requestBuilder;
+    @Override
+    public void startInteraction() {
+        super.startInteraction();
+        requestBuilder.clearRequest();
+    }
 
-	/**
-	 * Initializes this interaction with an Array JSON body.
-	 */
-	public List<Object> arrayBody() {
-		Object body = recall(BODY);
-		if (body == null) {
-			remember(BODY, Lists.newArrayList());
-		}
-		return (List<Object>) recallNotNull(BODY);
-	}
+    public Map<String, Object> mapBody() {
+        return getMapFromStoryInteraction(BODY);
+    }
 
-	@Override
-	public void startInteraction() {
-		super.startInteraction();
-		requestBuilder.clearRequest();
-	}
+    public Map<String, String> mapPathParam() {
+        return getMapFromStoryInteraction(PATH_PARAMS);
+    }
 
-	public Map<String, Object> mapBody() {
-		return getMapFromStoryInteraction(BODY);
-	}
+    public Map<String, String> mapQueryParam() {
+        return getMapFromStoryInteraction(QUERY_PARAMS);
+    }
 
-	public Map<String, String> mapPathParam() {
-		return getMapFromStoryInteraction(PATH_PARAMS);
-	}
+    public <T> Map<String, T> getMapFromStoryInteraction(String queryParams) {
+        Object body = recall(queryParams);
+        if (body == null) {
+            remember(queryParams, Maps.newHashMap());
+        }
+        return (Map<String, T>) recallNotNull(queryParams);
+    }
 
-	public Map<String, String> mapQueryParam() {
-		return getMapFromStoryInteraction(QUERY_PARAMS);
-	}
+    /**
+     * Store some data from story interaction to the scenario interaction context
+     */
+    public void rememberFromStoryInteraction(String key) {
+        super.remember(key, storyInteraction.recallNotNull(key));
+    }
 
-	public <T> Map<String, T> getMapFromStoryInteraction(String queryParams) {
-		Object body = recall(queryParams);
-		if (body == null) {
-			remember(queryParams, Maps.newHashMap());
-		}
-		return (Map<String, T>) recallNotNull(queryParams);
-	}
+    /**
+     * Store an object from story interaction for an specific entity in the scenario interaction context. Recall this object with recallObject().
+     */
+    public void rememberObjectFromStoryInteraction(String entityKey, String objectKey) {
+        super.rememberObject(entityKey, objectKey, storyInteraction.recallObjectNotNull(entityKey, objectKey));
+    }
 
-	/**
-	 * Store some data from story interaction to the scenario interaction context
-	 */
-	public void rememberFromStoryInteraction(String key) {
-		super.remember(key, storyInteraction.recallNotNull(key));
-	}
-
-	/**
-	 * Store an object from story interaction for an specific entity in the scenario interaction context. Recall this object with recallObject().
-	 */
-	public void rememberObjectFromStoryInteraction(String entityKey, String objectKey) {
-		super.rememberObject(entityKey, objectKey, storyInteraction.recallObjectNotNull(entityKey, objectKey));
-	}
-
-	public void setStoryInteraction(AbstractInteraction storyInteraction) {
-		this.storyInteraction = storyInteraction;
-	}
+    public void setStoryInteraction(AbstractInteraction storyInteraction) {
+        this.storyInteraction = storyInteraction;
+    }
 
 }

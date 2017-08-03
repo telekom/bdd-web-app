@@ -20,6 +20,11 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.List;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @RunWith(JUnitReportingRunner.class)
 public abstract class AbstractStory extends JUnitStory {
 

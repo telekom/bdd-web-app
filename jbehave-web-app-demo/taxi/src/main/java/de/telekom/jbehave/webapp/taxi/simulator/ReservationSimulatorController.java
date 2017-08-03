@@ -1,15 +1,18 @@
 package de.telekom.jbehave.webapp.taxi.simulator;
 
 import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationConfigVO;
-import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationVO;
 import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationPricesVO;
+import de.telekom.jbehave.webapp.taxi.simulator.vo.ReservationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.ResponseEntity.ok;
-
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @RestController
 public class ReservationSimulatorController {
 
