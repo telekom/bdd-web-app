@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.jbehave.webapp</groupId>
+    <groupId>de.telekom.jbehave</groupId>
     <artifactId>jbehave-web-app-reactor</artifactId>
     <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
