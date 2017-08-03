@@ -5,12 +5,12 @@ um etwaige Rabatte nutzen zu können.
 
 Szenario: Reservierung für angegebenen Zeitraum nicht möglich, da keine Angebote vorhanden sind
 Gegeben ein eingeloggter Nutzer
-Und eine valide Reservierung
+Und eine valide Reservierung zwischen 10:00 Uhr und 10:30 Uhr
 Wenn ein Sammeltaxi reserviert wird
 Dann ist die Reservierung nicht erfolgreich
 
 Szenario: Reservierung einer Sammeltaxifahrt
-Gegeben eine valide Reservierung
+Gegeben eine valide Reservierung zwischen 10:00 Uhr und 10:30 Uhr
 Und zwischen 10:00 Uhr und 10:30 Uhr beträgt der Preis 30,50 € bei 0 Mitfahrern
 Wenn ein Sammeltaxi reserviert wird
 Dann ist die Reservierung erfolgreich

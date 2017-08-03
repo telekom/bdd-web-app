@@ -5,9 +5,9 @@ import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.jbehave.webapp.api.RequestBuilder;
-import org.jbehave.webapp.frontend.steps.SeleniumSteps;
-import org.jbehave.webapp.steps.Steps;
+import de.telekom.jbehave.webapp.api.RequestBuilder;
+import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
+import de.telekom.jbehave.webapp.steps.Steps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -38,14 +38,14 @@ public class ReservationSteps extends SeleniumSteps {
         request().delete("/simulator/config/reservation");
     }
 
-    @Given("eine valide Reservierung")
-    public void possibleReservation() {
+    @Given("eine valide Reservierung zwischen $earliestStartTime Uhr und $latestStartTime Uhr")
+    public void possibleReservation(String earliestStartTime, String latestStartTime) {
         Date tomorrow = new Date(new Date().getTime() + 86400000l);
         scenarioInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
         scenarioInteraction.remember("departure", "Alexanderplatz, Berlin");
         scenarioInteraction.remember("destination", "Flughafen Berlin-Tegel");
-        scenarioInteraction.remember("earliestStartTime", "10:00");
-        scenarioInteraction.remember("latestStartTime", "10:30");
+        scenarioInteraction.remember("earliestStartTime", earliestStartTime);
+        scenarioInteraction.remember("latestStartTime", latestStartTime);
     }
 
     @Given("zwischen $startTime Uhr und $endTime Uhr beträgt der Preis $price € bei $passengers Mitfahrern")

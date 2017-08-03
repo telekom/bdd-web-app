@@ -6,7 +6,7 @@ import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.core.model.TableTransformers;
 import org.jbehave.core.parsers.RegexStoryParser;
 import org.jbehave.core.steps.MarkUnmatchedStepsAsPending;
-import org.jbehave.webapp.stories.AbstractStory;
+import de.telekom.jbehave.webapp.stories.AbstractStory;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Locale;

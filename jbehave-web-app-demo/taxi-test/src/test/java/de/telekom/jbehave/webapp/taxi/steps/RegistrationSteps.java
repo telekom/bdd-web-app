@@ -5,9 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.jbehave.webapp.frontend.steps.SeleniumSteps;
-import org.jbehave.webapp.interaction.StoryInteraction;
-import org.jbehave.webapp.steps.Steps;
+import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
+import de.telekom.jbehave.webapp.interaction.StoryInteraction;
+import de.telekom.jbehave.webapp.steps.Steps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 

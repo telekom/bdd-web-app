@@ -6,7 +6,7 @@ import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.core.model.TableTransformers;
 import org.jbehave.core.parsers.RegexStoryParser;
 import org.jbehave.core.steps.MarkUnmatchedStepsAsPending;
-import org.jbehave.webapp.stories.RunAllStories;
+import de.telekom.jbehave.webapp.stories.RunAllStories;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Locale;
@@ -20,7 +20,7 @@ public class RunAllTaxiStories extends RunAllStories {
 
     @Override
     public String storiesBasePath() {
-        return "org.jbehave.webapp.taxi.stories";
+        return "de.telekom.jbehave.webapp.taxi.stories";
     }
 
     @Override

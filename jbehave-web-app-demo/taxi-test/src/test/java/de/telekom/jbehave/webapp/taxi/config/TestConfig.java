@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 @PropertySource("test.properties")
-@ComponentScan({"org.jbehave.webapp", "org.jbehave.webapp.taxi"})
+@ComponentScan({"de.telekom.jbehave.webapp", "de.telekom.jbehave.webapp.taxi"})
 public class TestConfig {
 
     @Autowired

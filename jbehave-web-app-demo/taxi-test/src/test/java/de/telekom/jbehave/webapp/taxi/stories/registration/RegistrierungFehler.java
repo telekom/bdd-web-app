@@ -1,4 +1,4 @@
-//package org.jbehave.webapp.taxi.stories.registration;
+//package de.telekom.jbehave.webapp.taxi.stories.registration;
 //
 //import AbstractTaxiStory;
 //
