@@ -7,6 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 public class RegistrationPage extends JQueryPage {
 
     public static final String URL = "registration";

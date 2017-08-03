@@ -1,9 +1,9 @@
 package de.telekom.jbehave.webapp.taxi.steps;
 
-import de.telekom.jbehave.webapp.taxi.pages.LoginPage;
 import de.telekom.jbehave.webapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
 import de.telekom.jbehave.webapp.steps.Steps;
+import de.telekom.jbehave.webapp.taxi.pages.LoginPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -12,20 +12,22 @@ import org.springframework.beans.factory.annotation.Value;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Steps
 public class LoginSteps extends SeleniumSteps {
 
-    @Value("${hostIncludingPort}")
-    private String hostIncludingPort;
-
-    @Autowired
-    private ReservationSteps reservationSteps;
-
-    @Autowired
-    private RegistrationSteps registrationSteps;
-
     @Autowired
     protected WebDriverWrapper webDriverWrapper;
+    @Value("${hostIncludingPort}")
+    private String hostIncludingPort;
+    @Autowired
+    private ReservationSteps reservationSteps;
+    @Autowired
+    private RegistrationSteps registrationSteps;
 
     @Given("die geöffnete Loginseite")
     public void theOpenLoginPage() {

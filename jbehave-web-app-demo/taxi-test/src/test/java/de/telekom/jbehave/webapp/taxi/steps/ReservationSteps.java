@@ -1,13 +1,13 @@
 package de.telekom.jbehave.webapp.taxi.steps;
 
+import de.telekom.jbehave.webapp.api.RequestBuilder;
+import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
+import de.telekom.jbehave.webapp.steps.Steps;
 import de.telekom.jbehave.webapp.taxi.pages.ReservationPage;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import de.telekom.jbehave.webapp.api.RequestBuilder;
-import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
-import de.telekom.jbehave.webapp.steps.Steps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,14 +16,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.time.LocalDateTime.from;
-import static java.time.format.DateTimeFormatter.ofPattern;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Steps
 public class ReservationSteps extends SeleniumSteps {
 
@@ -70,7 +73,7 @@ public class ReservationSteps extends SeleniumSteps {
     }
 
     @Given("die bereits getätigte Reservierung")
-    public void theReservationAlreadyMade(){
+    public void theReservationAlreadyMade() {
         scenarioInteraction.rememberFromStoryInteraction("date");
         scenarioInteraction.rememberFromStoryInteraction("departure");
         scenarioInteraction.rememberFromStoryInteraction("destination");

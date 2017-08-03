@@ -1,13 +1,13 @@
 package de.telekom.jbehave.webapp.taxi.steps;
 
+import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
+import de.telekom.jbehave.webapp.interaction.StoryInteraction;
+import de.telekom.jbehave.webapp.steps.Steps;
 import de.telekom.jbehave.webapp.taxi.pages.RegistrationPage;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
-import de.telekom.jbehave.webapp.interaction.StoryInteraction;
-import de.telekom.jbehave.webapp.steps.Steps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,6 +16,11 @@ import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 @Steps
 public class RegistrationSteps extends SeleniumSteps {
 

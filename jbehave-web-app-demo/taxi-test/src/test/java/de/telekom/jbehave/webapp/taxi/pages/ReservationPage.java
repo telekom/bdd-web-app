@@ -9,6 +9,11 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 public class ReservationPage extends JQueryPage {
 
     public static final String URL = "reservation";

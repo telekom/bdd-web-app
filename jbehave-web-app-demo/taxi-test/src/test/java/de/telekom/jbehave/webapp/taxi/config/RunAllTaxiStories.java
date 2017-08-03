@@ -1,16 +1,21 @@
 package de.telekom.jbehave.webapp.taxi.config;
 
+import de.telekom.jbehave.webapp.stories.RunAllStories;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.core.model.TableTransformers;
 import org.jbehave.core.parsers.RegexStoryParser;
 import org.jbehave.core.steps.MarkUnmatchedStepsAsPending;
-import de.telekom.jbehave.webapp.stories.RunAllStories;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Locale;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 public class RunAllTaxiStories extends RunAllStories {
 
     @Override

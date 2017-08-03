@@ -5,6 +5,11 @@ import de.telekom.jbehave.webapp.frontend.page.JQueryPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * @author Daniel Keiss
+ * <p>
+ * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ */
 public class LoginPage extends JQueryPage {
 
     public static final String URL = "login";
