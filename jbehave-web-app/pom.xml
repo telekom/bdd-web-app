@@ -26,19 +26,22 @@
         <version.jbehave.junit-runner>1.2.0</version.jbehave.junit-runner>
         <version.webdrivermanager>1.6.2</version.webdrivermanager>
         <version.lombok>1.16.16</version.lombok>
+
+        <snapshotUrl></snapshotUrl>
+        <releaseUrl></releaseUrl>
     </properties>
 
     <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>Nexus Staging Repo</name>
-            <url>http://cp-wbench.psst.t-online.corp/nexus/content/repositories/snapshots/</url>
+            <url>${snapshotUrl}</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
         <repository>
             <id>nexus-releases</id>
             <name>Nexus Release Repo</name>
-            <url>http://cp-wbench.psst.t-online.corp/nexus/content/repositories/2ndparty/</url>
+            <url>${releaseUrl}</url>
         </repository>
     </distributionManagement>
 
