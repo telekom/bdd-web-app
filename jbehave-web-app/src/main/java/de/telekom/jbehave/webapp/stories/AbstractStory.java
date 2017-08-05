@@ -21,6 +21,8 @@ import org.springframework.context.ApplicationContext;
 import java.util.List;
 
 /**
+ * Basis story
+ *
  * @author Daniel Keiss
  * <p>
  * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG

@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Run all stories
+ *
  * @author Daniel Keiss
  * <p>
  * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG

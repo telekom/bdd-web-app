@@ -14,6 +14,9 @@ import java.util.Map;
  * <p/>
  * An Interaction is a spring bean which keeps ThreadLocal state information of a single specification execution available across different steps. The
  * Interaction is setup and torn down before and after every specification execution.
+ * <p>
+ * After a first implementation of scenario interaction by Sven Schomaker, working for Deutsche Telekom AG in 2013.
+ * <p>
  *
  * @author Daniel Keiss
  * <p>

@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * Extends WebElement by several helper methods.
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss, Tim Jödicke
  * <p>
  * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
