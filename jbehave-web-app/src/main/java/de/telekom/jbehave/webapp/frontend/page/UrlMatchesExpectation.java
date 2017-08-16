@@ -3,8 +3,6 @@ package de.telekom.jbehave.webapp.frontend.page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-import static org.apache.commons.lang3.StringUtils.contains;
-
 /**
  * ExpectedCondition for url matching.
  *
@@ -24,7 +22,8 @@ public class UrlMatchesExpectation implements ExpectedCondition<Boolean> {
 
     @Override
     public Boolean apply(WebDriver driver) {
-        return contains(driver.getCurrentUrl(), urlToMatch);
+        String regex = ".*" + urlToMatch + ".*"; // contains
+        return driver.getCurrentUrl().matches(regex);
     }
 
     @Override
