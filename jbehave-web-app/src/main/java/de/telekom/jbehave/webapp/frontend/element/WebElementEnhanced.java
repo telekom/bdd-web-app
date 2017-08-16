@@ -124,6 +124,23 @@ public class WebElementEnhanced {
     }
 
     public void scrollTo() {
+        if (isJQueryAvailable()) {
+            scrollToWithJQuery();
+        } else {
+            scrollToWithDefaultJavaScript();
+        }
+    }
+
+    public boolean isJQueryAvailable() {
+        return (boolean) ((JavascriptExecutor) webDriver).executeScript("return typeof jQuery != 'undefined'", webElement);
+    }
+
+    public void scrollToWithJQuery() {
+        ((JavascriptExecutor) webDriver).executeScript("window.scrollTo(0, $(arguments[0]).offset().top - (window.innerHeight / 2))", webElement);
+        waitForDisplayed(1);
+    }
+
+    public void scrollToWithDefaultJavaScript() {
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(false);", webElement);
         waitForDisplayed(1);
         // try it with a different strategy
