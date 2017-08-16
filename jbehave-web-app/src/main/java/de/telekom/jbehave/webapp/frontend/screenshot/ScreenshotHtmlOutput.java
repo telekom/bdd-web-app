@@ -33,7 +33,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
     }
 
     private void changeALine() {
-        super.overwritePattern("failed", "<div class=\"step failed\">{0} <span class=\"keyword failed\">({1})</span><br/><span class=\"message failed\">{2}</span><br/><a color=\"black\" target=\"jb_scn_shot\" href=\"../screenshots/failed-scenario-{3}.png\"><img src=\"images/failing_screenshot.png\" alt=\"failing screenshot\"/></a></div>\n");
+        super.overwritePattern("failed", "<div class=\"step failed\">{0}<span class=\"keyword failed\">({1})</span><br/><span class=\"message failed\">{2}</span><br/><a style=\"color: darkmagenta; font-weight: none; text-decoration: underline;\" target=\"_blank\" href=\"../screenshots/failed-scenario-{3}.png\">Screenshot</a></div>\n");
     }
 
     @Override
