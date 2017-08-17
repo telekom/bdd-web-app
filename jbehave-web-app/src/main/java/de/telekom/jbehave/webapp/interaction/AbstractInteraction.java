@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -41,6 +42,9 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
      * Store some data in the interaction context for later use.
      */
     public void remember(String key, Object value) {
+        if (value instanceof Map) {
+            ((Map) value).forEach((key1, value1) -> remember(key + OBJECT_KEY_SEPARATOR + key1.toString(), value1));
+        }
         threadLocal.get().context.put(key, value);
     }
 
@@ -50,6 +54,13 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
     public void rememberObject(String entityKey, String objectKey, Object value) {
         String key = entityKey + OBJECT_KEY_SEPARATOR + objectKey;
         remember(key, value);
+    }
+
+    /**
+     * Store an object for an specific entity in the interaction context for later use. Recall this object with recallObject().
+     */
+    public void rememberObject(String entityKey, Map<String, Object> object) {
+        remember(entityKey, object);
     }
 
     public <S> void rememberToList(String key, S value) {
