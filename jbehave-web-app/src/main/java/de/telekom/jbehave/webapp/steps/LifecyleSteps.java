@@ -42,13 +42,9 @@ public class LifecyleSteps {
 
     @BeforeStory
     public void startStoryInteraction() {
+        storyInteraction.stopInteraction();
         storyInteraction.startInteraction();
         webDriverWrapper.loadWebdriver();
-    }
-
-    @AfterStory
-    public void clearStoryInteraction() {
-        storyInteraction.stopInteraction();
     }
 
     @BeforeScenario(uponType = ScenarioType.NORMAL)
@@ -62,19 +58,10 @@ public class LifecyleSteps {
     }
 
     private void setupSequenceInteraction() {
+        scenarioInteraction.stopInteraction();
         scenarioInteraction.startInteraction();
         storyInteraction.setSequenceInteraction(scenarioInteraction);
         scenarioInteraction.setStoryInteraction(storyInteraction);
-    }
-
-    @AfterScenario(uponType = ScenarioType.NORMAL)
-    public void clearSequenceInteractionNormal() {
-        scenarioInteraction.stopInteraction();
-    }
-
-    @AfterScenario(uponType = ScenarioType.EXAMPLE)
-    public void clearSequenceInteractionExample() {
-        clearSequenceInteractionNormal();
     }
 
     @AfterStory
