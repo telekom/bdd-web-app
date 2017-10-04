@@ -18,14 +18,15 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <version.selenium>3.4.0</version.selenium>
+        <version.selenium>3.6.0</version.selenium>
         <version.restassured>2.9.0</version.restassured>
-        <version.spring>4.3.7.RELEASE</version.spring>
-        <version.slf4j>1.6.1</version.slf4j>
+        <version.spring>4.3.11.RELEASE</version.spring>
+        <version.cglib>3.2.5</version.cglib>
+        <version.slf4j>1.7.25</version.slf4j>
         <version.jbehave>4.1.1</version.jbehave>
         <version.jbehave.junit-runner>1.2.0</version.jbehave.junit-runner>
-        <version.webdrivermanager>1.6.2</version.webdrivermanager>
-        <version.lombok>1.16.16</version.lombok>
+        <version.webdrivermanager>1.7.2</version.webdrivermanager>
+        <version.lombok>1.16.18</version.lombok>
 
         <snapshotUrl></snapshotUrl>
         <releaseUrl></releaseUrl>
@@ -101,6 +102,16 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${version.spring}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Cglib  -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${version.cglib}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -184,6 +195,15 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Cglib  -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
