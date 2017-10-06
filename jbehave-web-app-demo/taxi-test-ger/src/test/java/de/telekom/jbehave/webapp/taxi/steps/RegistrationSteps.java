@@ -33,13 +33,13 @@ public class RegistrationSteps extends SeleniumSteps {
     @Autowired
     private StoryInteraction storyInteraction;
 
-    @Given("the openend registration page")
+    @Given("die geöffnete Registrierungsseite")
     public void theOpenRegistrationPage() {
         theUserOpenTheRegistrationPage();
         theRegistrationPageIsShown();
     }
 
-    @Given("registered user")
+    @Given("ein registrierter Nutzer")
     public void registeredUser() {
         theUserOpenTheRegistrationPage();
         theRegistrationPageIsShown();
@@ -51,7 +51,7 @@ public class RegistrationSteps extends SeleniumSteps {
         open(getUrlWithHost(hostIncludingPort, RegistrationPage.URL));
     }
 
-    @Given("valid registration data for user")
+    @Given("gültige Registrierungsdaten")
     public void validRegistrationDataForUser() {
         scenarioInteraction.remember("firstName", "Hans");
         scenarioInteraction.remember("lastName", "Müller");
@@ -65,7 +65,7 @@ public class RegistrationSteps extends SeleniumSteps {
         return StringUtils.leftPad("" + random.nextInt(Integer.MAX_VALUE), 12, "0");
     }
 
-    @Given("valid registration data with error for user")
+    @Given("gültige Registrierungsdaten mit Kontrollflussfehler in der Anwendung")
     public void validRegistrationDataWithErrorForUser() {
         scenarioInteraction.remember("firstName", "Hans");
         scenarioInteraction.remember("lastName", "Müller");
@@ -73,7 +73,7 @@ public class RegistrationSteps extends SeleniumSteps {
         scenarioInteraction.remember("password", "passwort");
     }
 
-    @Given("invalid registration data for user")
+    @Given("ungültige Registrierungsdaten")
     public void invalidRegistrationDataForUser() {
         scenarioInteraction.remember("firstName", "Hans");
         scenarioInteraction.remember("lastName", "Müller");
@@ -81,7 +81,7 @@ public class RegistrationSteps extends SeleniumSteps {
         scenarioInteraction.remember("password", "passwort");
     }
 
-    @When("the user successfully completed the registration")
+    @When("der Nutzer die Registrierung durchführt")
     public void theUserSuccessfullyCompletedTheRegistration() {
         RegistrationPage registrationPage = getCurrentPage();
         registrationPage.setFirstName(scenarioInteraction.recall("firstName"));
@@ -91,12 +91,12 @@ public class RegistrationSteps extends SeleniumSteps {
         registrationPage.submitRegistration();
     }
 
-    @Then("the registration page is shown")
+    @Then("wird die Registrierungsseite angezeigt")
     public void theRegistrationPageIsShown() {
         createExpectedPage(RegistrationPage.class);
     }
 
-    @Then("the user receives the message that the registration data is invalid")
+    @Then("der Nutzer erhält die Nachricht, dass die Registrierungsdaten ungültig sind")
     public void theUserReceivesTheMessageThatTheRegistrationDataIsInvalid() {
         RegistrationPage registrationPage = getCurrentPage();
         assertTrue(registrationPage.registrationDataIsInvalidMessageIsShown());

@@ -20,25 +20,22 @@ import static org.junit.Assert.assertTrue;
 @Steps
 public class LoginSteps extends SeleniumSteps {
 
-    @Value("${hostIncludingPort}")
-    private String hostIncludingPort;
-
     @Autowired
     protected WebDriverWrapper webDriverWrapper;
-
+    @Value("${hostIncludingPort}")
+    private String hostIncludingPort;
     @Autowired
     private ReservationSteps reservationSteps;
-
     @Autowired
     private RegistrationSteps registrationSteps;
 
-    @Given("the opened login page")
-    public void theOpenedLoginPage() {
+    @Given("die geöffnete Loginseite")
+    public void theOpenLoginPage() {
         theUserOpensTheLoginPage();
         theLoginPageIsShown();
     }
 
-    @Given("logged in customer")
+    @Given("ein eingeloggter Nutzer")
     public void loggedInCustomer() {
         registrationSteps.registeredUser();
         theUserOpensTheLoginPage();
@@ -47,18 +44,18 @@ public class LoginSteps extends SeleniumSteps {
         reservationSteps.theReservationPageIsShown();
     }
 
-    @Given("invalid log in data for user")
+    @Given("ungültige Logindaten")
     public void invalidLogInDataForUser() {
         scenarioInteraction.remember("username", "invalid@user.de");
         scenarioInteraction.remember("password", "passwort");
     }
 
-    @When("the user opens the login page")
+    @When("der Nutzer die Startseite öffnet")
     public void theUserOpensTheLoginPage() {
         open(getUrlWithHost(hostIncludingPort, LoginPage.URL));
     }
 
-    @When("the user logs in")
+    @When("der Nutzer sich einloggt")
     public void theUserLogsIn() {
         LoginPage loginPage = getCurrentPage();
         loginPage.setUsername(scenarioInteraction.recall("username"));
@@ -66,24 +63,24 @@ public class LoginSteps extends SeleniumSteps {
         loginPage.submitLogin();
     }
 
-    @When("user clicks the link to the registration")
+    @When("der Nutzer den Link zur Registrierung anklickt")
     public void userClicksTheLinkToTheRegistration() {
         LoginPage loginPage = getCurrentPage();
         loginPage.clickRegistration();
     }
 
-    @Then("the login page is shown")
+    @Then("wird die Loginseite angezeigt")
     public void theLoginPageIsShown() {
         createExpectedPage(LoginPage.class);
     }
 
-    @Then("the user receives the registered message")
+    @Then("der Nutzer erhält die Nachricht, dass er registriert ist")
     public void theUserReceivesTheRegisteredMessage() {
         LoginPage loginPage = getCurrentPage();
         assertTrue(loginPage.registeredMessageIsShown());
     }
 
-    @Then("the user receives the message that the login data is invalid")
+    @Then("der Nutzer erhält die Nachricht, dass die Logindaten ungültig sind")
     public void theUserReceivesTheMessageThatTheLoginDataIsInvalid() {
         LoginPage loginPage = getCurrentPage();
         assertTrue(loginPage.loginDataIsInvalidMessageIsShown());

@@ -1,24 +1,24 @@
-Erzählung:
-Als Anwender
-möchte ich mich mit einem bereits vorhandenen Account einloggen,
-um Reservierungen von Sammeltaxis vornehmen zu können.
+Narrative:
+As a user
+I would like to log in with an existing account,
+to make reservations for collective taxis.
 
-Szenario: Umleitung auf die Loginseite bei nicht vorhandener Session
-Wenn der Nutzer die Startseite öffnet
-Dann wird die Loginseite angezeigt
+Scenario: Redirect to the login page if the session is not present
+When the user opens the login page
+Then the login page is shown
 
-Szenario: Eingabe von ungültigen Logindaten
-Gegeben ungültige Logindaten
-Wenn der Nutzer sich einloggt
-Dann wird die Loginseite angezeigt
-Und der Nutzer erhält die Nachricht, dass die Logindaten ungültig sind
+Scenario: Input of invalid log data
+Given invalid log in data for user
+When the user logs in
+Then the login page is shown
+And the user receives the message that the login data is invalid
 
-Szenario: Erfolgreiches einloggen
-Gegeben ein registrierter Nutzer
-Und die geöffnete Loginseite
-Wenn der Nutzer sich einloggt
-Dann wird die Reservierungsseite angezeigt
+Scenario: Successful login
+Given registered user
+And the opened login page
+When the user logs in
+Then the reservation page is shown
 
-Szenario: Umleitung auf die Loginseite bei vorhandener Session
-Wenn der Nutzer die Startseite öffnet
-Dann wird die Reservierungsseite angezeigt
+Scenario: Redirect to the log-in with existing session
+When the user opens the login page
+Then the reservation page is shown

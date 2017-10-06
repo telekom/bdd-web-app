@@ -41,7 +41,7 @@ public class ReservationSteps extends SeleniumSteps {
         request().delete("/simulator/config/reservation");
     }
 
-    @Given("possible reservation between $earliestStartTime and $latestStartTime")
+    @Given("eine valide Reservierung zwischen $earliestStartTime Uhr und $latestStartTime Uhr")
     public void possibleReservation(String earliestStartTime, String latestStartTime) {
         Date tomorrow = new Date(new Date().getTime() + 86400000l);
         scenarioInteraction.remember("date", new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
@@ -51,7 +51,7 @@ public class ReservationSteps extends SeleniumSteps {
         scenarioInteraction.remember("latestStartTime", latestStartTime);
     }
 
-    @Given("between $startTime and $endTime the price is $price € with $passengers passengers")
+    @Given("zwischen $startTime Uhr und $endTime Uhr beträgt der Preis $price € bei $passengers Mitfahrern")
     public void betweenStartTimeAndEndTimeThePriceIs(String startTime, String endTime, String price, String passengers) {
         Map<String, Object> body = new HashMap<>();
         Map<String, Object> reservation = new HashMap<>();
@@ -72,8 +72,8 @@ public class ReservationSteps extends SeleniumSteps {
         requestBuilder.response().then().statusCode(200);
     }
 
-    @Given("reservation already made")
-    public void reservationAlreadyMade() {
+    @Given("die bereits getätigte Reservierung")
+    public void theReservationAlreadyMade() {
         scenarioInteraction.rememberFromStoryInteraction("date");
         scenarioInteraction.rememberFromStoryInteraction("departure");
         scenarioInteraction.rememberFromStoryInteraction("destination");
@@ -81,12 +81,12 @@ public class ReservationSteps extends SeleniumSteps {
         scenarioInteraction.rememberFromStoryInteraction("latestStartTime");
     }
 
-    @When("the user open the reservation page")
+    @When("der Nutzer die Reservierungsseite öffnet")
     public void theUserOpenTheReservationPage() {
         open(getUrlWithHost(hostIncludingPort, ReservationPage.URL));
     }
 
-    @When("reserve a shared taxi")
+    @When("ein Sammeltaxi reserviert wird")
     public void aSharedTaxiIsReservedBetween() {
         ReservationPage reservationPage = getCurrentPage();
         reservationPage.setDate(scenarioInteraction.recallNotNull("date"));
@@ -97,12 +97,12 @@ public class ReservationSteps extends SeleniumSteps {
         reservationPage.submitReservation();
     }
 
-    @Then("the reservation page is shown")
+    @Then("wird die Reservierungsseite angezeigt")
     public void theReservationPageIsShown() {
         createExpectedPage(ReservationPage.class);
     }
 
-    @Then("the reservation is successful")
+    @Then("ist die Reservierung erfolgreich")
     public void theReservationIsSuccessful() {
         ReservationPage reservationPage = getCurrentPage();
         assertTrue(reservationPage.isReservationSuccess());
@@ -113,13 +113,13 @@ public class ReservationSteps extends SeleniumSteps {
         storyInteraction.rememberFromScenarioInteraction("latestStartTime");
     }
 
-    @Then("the reservation is not successful")
+    @Then("ist die Reservierung nicht erfolgreich")
     public void theReservationIsNotSuccessful() {
         ReservationPage reservationPage = getCurrentPage();
         assertTrue(reservationPage.isReservationNotPossible());
     }
 
-    @Then("between $startTime and $endTime the price is $price € at $passengers passengers")
+    @Then("zwischen $startTime und $endTime Uhr beträgt der Preis $price bei $passengers Mitfahrern")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
         String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);

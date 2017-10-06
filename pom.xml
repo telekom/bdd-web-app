@@ -15,6 +15,7 @@
         <module>jbehave-web-app</module>
         <module>jbehave-web-app-demo/taxi</module>
         <module>jbehave-web-app-demo/taxi-test</module>
+        <module>jbehave-web-app-demo/taxi-test-ger</module>
     </modules>
 
 </project>
