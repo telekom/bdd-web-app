@@ -119,7 +119,7 @@ public class ReservationSteps extends SeleniumSteps {
         assertTrue(reservationPage.isReservationNotPossible());
     }
 
-    @Then("between $startTime and $endTime the price is $price € at $passengers passengers")
+    @Then("between $startTime and $endTime the price is $price at $passengers passengers")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
         String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);

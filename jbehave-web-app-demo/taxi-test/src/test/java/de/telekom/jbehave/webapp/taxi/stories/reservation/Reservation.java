@@ -7,5 +7,5 @@ import de.telekom.jbehave.webapp.taxi.config.AbstractTaxiStory;
  * <p>
  * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
-public class Reservierung extends AbstractTaxiStory {
+public class Reservation extends AbstractTaxiStory {
 }

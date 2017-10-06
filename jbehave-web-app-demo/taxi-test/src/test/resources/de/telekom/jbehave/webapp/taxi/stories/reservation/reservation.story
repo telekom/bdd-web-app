@@ -18,7 +18,7 @@ And between 10:00 and 10:30 the price is 30,50 € at 0 passengers
 
 Scenario: View updated prices for already booked reservations
 Given reservation already made
-And between 10:00 and 10:15 the price is 30,50 € € with 0 passengers
+And between 10:00 and 10:15 the price is 30,50 € with 0 passengers
 And between 10:15 and 10:30 the price is 15,50 € with 2 passengers
 When the user open the reservation page
 Then the reservation is successful
