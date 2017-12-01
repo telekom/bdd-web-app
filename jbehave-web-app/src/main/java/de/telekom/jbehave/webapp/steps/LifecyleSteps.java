@@ -77,7 +77,7 @@ public class LifecyleSteps {
     @AsParameterConverter
     public String checkForStoryInteractionKeyAndGetValue(String possibleStoryInteractionKeyOrValue) {
         if (possibleStoryInteractionKeyOrValue.startsWith("$")) {
-            return storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1));
+            return "" + storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1));
         }
         return possibleStoryInteractionKeyOrValue; // regular test value
     }
