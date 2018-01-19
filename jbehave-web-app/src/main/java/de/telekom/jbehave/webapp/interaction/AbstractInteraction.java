@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -19,6 +21,8 @@ import static org.junit.Assert.assertNotNull;
 public abstract class AbstractInteraction<T extends AbstractInteraction> {
 
     private final static String OBJECT_KEY_SEPARATOR = ".";
+    private final static Pattern LIST_ATTRIBUTE = Pattern.compile("\\[\\d+\\]");
+
     protected final HashMap<String, Object> context = Maps.newHashMap();
     private final ThreadLocal<T> threadLocal = new ThreadLocal<>();
 
@@ -76,7 +80,21 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
      * Get some data in the interaction context.
      */
     public <S> S recall(String key) {
+        // get value from list
+        Matcher matcher = LIST_ATTRIBUTE.matcher(key);
+        if (matcher.find()) {
+            return recallFromList(matcher);
+        }
+
         return (S) threadLocal.get().getContext().get(key);
+    }
+
+    private <S> S recallFromList(Matcher matcher) {
+        String item = matcher.group(0);
+        Integer itemNo = Integer.valueOf(item.subSequence(1, item.length() - 1).toString());
+        String attributeKey = matcher.replaceFirst("");
+        List<S> list = recallList(attributeKey);
+        return list.get(itemNo);
     }
 
     public <S> S recallNotNull(String key) {
