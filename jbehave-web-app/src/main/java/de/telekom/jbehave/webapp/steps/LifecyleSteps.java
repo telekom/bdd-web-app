@@ -76,10 +76,33 @@ public class LifecyleSteps {
 
     @AsParameterConverter
     public String checkForStoryInteractionKeyAndGetValue(String possibleStoryInteractionKeyOrValue) {
-        if (possibleStoryInteractionKeyOrValue.startsWith("$")) {
-            return storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1)).toString();
+        // concatenated string with story interaction value
+        if (possibleStoryInteractionKeyOrValue.contains("$") && possibleStoryInteractionKeyOrValue.contains("+")) {
+            return concatenatedStringWithStoryInteractionValue(possibleStoryInteractionKeyOrValue);
         }
-        return possibleStoryInteractionKeyOrValue; // regular test value
+        // only story interaction value
+        else if (possibleStoryInteractionKeyOrValue.startsWith("$")) {
+            return getStoryInteractionValue(possibleStoryInteractionKeyOrValue);
+        }
+        // regular test value
+        return possibleStoryInteractionKeyOrValue;
+    }
+
+    private String concatenatedStringWithStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {
+        String[] split = possibleStoryInteractionKeyOrValue.split("\\+");
+        String concatedValue = "";
+        for (String s : split) {
+            if (s.startsWith("$")) {
+                concatedValue += getStoryInteractionValue(s);
+            } else {
+                concatedValue += s;
+            }
+        }
+        return concatedValue;
+    }
+
+    private String getStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {
+        return storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1)).toString();
     }
 
 }
