@@ -47,7 +47,7 @@ public class ScreenshotOnSuccess {
             screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
             if (StringUtils.isNoneBlank(screenshotPath) && screenshotIsNotBlank(screenshotPath)) {
                 LOGGER.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
-                return screenshotPath;
+                return format("../screenshots/{0}/{1}.png", storyFolder, screenshotName);
             }
         } catch (Exception e) {
             LOGGER.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
