@@ -4,6 +4,8 @@ import de.telekom.jbehave.webapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.reporters.StoryReporterBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -25,6 +27,8 @@ import static java.text.MessageFormat.format;
 @AllArgsConstructor
 public class ScreenshotOnSuccess {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(ScreenshotOnSuccess.class);
+
     private final StoryReporterBuilder reporterBuilder;
     private final WebDriverWrapper webDriverWrapper;
 
@@ -35,18 +39,18 @@ public class ScreenshotOnSuccess {
             return null;
         }
         try {
-            System.out.println(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\" timestamp: \"{2}", storyFolder, step, timestamp));
+            LOGGER.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
             URL url = new URL(currentUrl);
             String contextPath = url.getPath();
             String screenshotName = getScreenshotName(contextPath, timestamp);
             String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
             screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
             if (StringUtils.isNoneBlank(screenshotPath) && screenshotIsNotBlank(screenshotPath)) {
-                System.out.println(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
+                LOGGER.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
                 return screenshotPath;
             }
         } catch (Exception e) {
-            System.out.println(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\" timestamp: \"{2}", storyFolder, step, timestamp));
+            LOGGER.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
         }
         return null;
     }

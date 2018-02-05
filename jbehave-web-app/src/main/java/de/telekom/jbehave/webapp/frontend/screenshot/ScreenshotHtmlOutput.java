@@ -61,12 +61,8 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
     @Override
     public void failed(String step, Throwable storyFailure) {
         super.failed(step, storyFailure);
-        try {
-            UUIDExceptionWrapper uuidWrappedFailure = (UUIDExceptionWrapper) storyFailure;
-            screenshotMakerOnFailure.afterScenarioFailure(uuidWrappedFailure);
-        } catch (Exception e) {
-            System.out.println("Screenshot failed");
-        }
+        UUIDExceptionWrapper uuidWrappedFailure = (UUIDExceptionWrapper) storyFailure;
+        screenshotMakerOnFailure.afterScenarioFailure(uuidWrappedFailure);
     }
 
 }

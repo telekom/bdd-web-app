@@ -90,15 +90,15 @@ public class LifecyleSteps {
 
     private String concatenatedStringWithStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {
         String[] split = possibleStoryInteractionKeyOrValue.split("\\+");
-        String concatedValue = "";
+        StringBuilder concatedValue = new StringBuilder();
         for (String s : split) {
             if (s.startsWith("$")) {
-                concatedValue += getStoryInteractionValue(s);
+                concatedValue.append(getStoryInteractionValue(s));
             } else {
-                concatedValue += s;
+                concatedValue.append(s);
             }
         }
-        return concatedValue;
+        return concatedValue.toString();
     }
 
     private String getStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {

@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Objects;
+
 /**
  * Abstract base class for page objects for jquery frontends.
  *
@@ -23,7 +25,7 @@ public abstract class JQueryPage extends Page {
     protected synchronized void waitForAjaxToComplete() {
         ExpectedCondition<Boolean> noAjaxRequestActive = (WebDriver webDriver) -> {
             try {
-                return (Boolean) ((JavascriptExecutor) webDriver).executeScript("return jQuery.active == 0");
+                return (Boolean) ((JavascriptExecutor) Objects.requireNonNull(webDriver)).executeScript("return jQuery.active == 0");
             } catch (WebDriverException e) {
                 return true;
             }

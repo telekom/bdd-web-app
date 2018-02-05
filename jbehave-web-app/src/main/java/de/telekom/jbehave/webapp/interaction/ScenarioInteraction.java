@@ -29,6 +29,7 @@ public class ScenarioInteraction extends AbstractInteraction<ScenarioInteraction
     private static final String PATH_PARAMS = "PATH_PARAMS";
     private static final String QUERY_PARAMS = "QUERY_PARAMS";
     private AbstractInteraction storyInteraction;
+
     @Autowired
     private RequestBuilder requestBuilder;
 
