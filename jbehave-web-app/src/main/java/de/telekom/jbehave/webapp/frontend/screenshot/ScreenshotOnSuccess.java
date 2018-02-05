@@ -28,11 +28,11 @@ public class ScreenshotOnSuccess {
     private final StoryReporterBuilder reporterBuilder;
     private final WebDriverWrapper webDriverWrapper;
 
-    public void makeScreenshot(String storyFolder, String step) {
+    public String makeScreenshot(String storyFolder, String step) {
         long timestamp = new Date().getTime();
         String currentUrl = webDriverWrapper.getDriver().getCurrentUrl();
         if (StringUtils.isBlank(currentUrl)) {
-            return;
+            return null;
         }
         try {
             System.out.println(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\" timestamp: \"{2}", storyFolder, step, timestamp));
@@ -40,13 +40,15 @@ public class ScreenshotOnSuccess {
             String contextPath = url.getPath();
             String screenshotName = getScreenshotName(contextPath, timestamp);
             String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
-            webDriverWrapper.saveScreenshotTo(screenshotPath);
-            if (screenshotIsBlank(screenshotPath)) {
+            screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
+            if (StringUtils.isNoneBlank(screenshotPath) && screenshotIsNotBlank(screenshotPath)) {
                 System.out.println(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
+                return screenshotPath;
             }
         } catch (Exception e) {
             System.out.println(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\" timestamp: \"{2}", storyFolder, step, timestamp));
         }
+        return null;
     }
 
     private String getScreenshotName(String contextPath, long timestamp) {
@@ -56,7 +58,7 @@ public class ScreenshotOnSuccess {
         return "success-" + timestamp + "_" + screenshotName;
     }
 
-    private boolean screenshotIsBlank(String screenshotPath) {
+    private boolean screenshotIsNotBlank(String screenshotPath) {
         try {
             BufferedImage bufferedImage = ImageIO.read(new FileInputStream(screenshotPath));
             return isBlank(bufferedImage);

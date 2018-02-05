@@ -159,19 +159,20 @@ public class WebDriverWrapper {
         return driver == null;
     }
 
-    public boolean saveScreenshotTo(String path) {
+    public String saveScreenshotTo(String path) {
         try {
             log.info("Create screenshot to '{}'", path);
             if (driver == null) {
                 log.error("Can not create screenshot because webdriver is null!");
-                return false;
+                return null;
             }
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(screenshot, new File(path));
-            return true;
+            File destFile = new File(path);
+            FileUtils.copyFile(screenshot, destFile);
+            return destFile.getAbsolutePath();
         } catch (Exception e) {
             log.error("Exception at capture screenshot", e);
-            return false;
+            return null;
         }
     }
 

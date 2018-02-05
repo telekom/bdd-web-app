@@ -2,6 +2,7 @@ package de.telekom.jbehave.webapp.frontend.screenshot;
 
 import de.telekom.jbehave.webapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.annotations.AfterScenario;
 import org.jbehave.core.annotations.AfterScenario.Outcome;
 import org.jbehave.core.annotations.ScenarioType;
@@ -42,13 +43,12 @@ public class ScreenshotOnFailure {
             currentUrl = webDriverWrapper.getDriver().getCurrentUrl();
         } catch (Exception e) {
         }
-        boolean savedIt = false;
         try {
-            savedIt = webDriverWrapper.saveScreenshotTo(screenshotPath);
+            screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
         } catch (Exception e) {
             System.out.println("Screenshot of page '" + currentUrl + ". Cause: " + e.getMessage());
         }
-        if (savedIt) {
+        if (StringUtils.isNoneBlank(screenshotPath)) {
             System.out.println("Screenshot of page '" + currentUrl + "' has been saved to '" + screenshotPath + "' with " + new File(screenshotPath).length() + " bytes");
         } else {
             System.err.println("Screenshot of page '" + currentUrl + "' has **NOT** been saved. If there is no error, perhaps the WebDriver type you are using is not compatible with taking screenshots");
