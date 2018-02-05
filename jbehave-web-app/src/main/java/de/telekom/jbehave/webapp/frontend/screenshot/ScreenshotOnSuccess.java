@@ -45,9 +45,10 @@ public class ScreenshotOnSuccess {
             String screenshotName = getScreenshotName(contextPath, timestamp);
             String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
             screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
-            if (StringUtils.isNoneBlank(screenshotPath) && screenshotIsNotBlank(screenshotPath)) {
+            if (StringUtils.isNoneBlank(screenshotPath) && screenshotIsNotEmpty(screenshotPath)) {
                 LOGGER.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
-                return format("../screenshots/{0}/{1}.png", storyFolder, screenshotName);
+                String relativeScreenshotPath = format("../screenshots/{0}/{1}.png", storyFolder, screenshotName);
+                return relativeScreenshotPath;
             }
         } catch (Exception e) {
             LOGGER.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
@@ -62,46 +63,26 @@ public class ScreenshotOnSuccess {
         return "success-" + timestamp + "_" + screenshotName;
     }
 
-    private boolean screenshotIsNotBlank(String screenshotPath) {
+    private boolean screenshotIsNotEmpty(String screenshotPath) {
         try {
             BufferedImage bufferedImage = ImageIO.read(new FileInputStream(screenshotPath));
-            return isBlank(bufferedImage);
+            return !isEmpty(bufferedImage);
         } catch (IOException e) {
             e.printStackTrace();
-            return true;
+            return false;
         }
     }
 
-    private boolean isBlank(BufferedImage bufferedImage) {
-        Raster raster = bufferedImage.getAlphaRaster();
-        boolean returnT = true;
-        byte[][] pixels;
-        if (raster != null) {
-            pixels = new byte[bufferedImage.getWidth()][];
-            for (int x = 0; x < raster.getWidth(); x++) {
-                pixels[x] = new byte[raster.getHeight()];
-                for (int y = 0; y < raster.getHeight(); y++) {
-                    pixels[x][y] =
-                            (byte) (bufferedImage.getRGB(x, y) == 0xFFFFFFFF ? 0
-                                    : 1);
-                    returnT = true;
+    public boolean isEmpty(BufferedImage bufferedImage) {
+        Raster raster = bufferedImage.getData();
+        for (int x = 0; x < raster.getWidth(); x++) {
+            for (int y = 0; y < raster.getHeight(); y++) {
+                if (bufferedImage.getRGB(x, y) != 0xFFFFFFFF) {
+                    return false;
                 }
-            }
-
-            for (int x = 0; x < raster.getWidth(); x++) {
-                for (int y = 0; y < raster.getHeight(); y++) {
-                    if (pixels[x][y] != 0) {
-                        returnT = false;
-                        break;
-                    }
-                }
-                if (!returnT) {
-                    break;
-                }
-
             }
         }
-        return returnT;
+        return true;
     }
 
 }
