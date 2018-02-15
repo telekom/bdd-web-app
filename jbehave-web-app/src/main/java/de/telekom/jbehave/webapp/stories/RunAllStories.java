@@ -45,7 +45,7 @@ public abstract class RunAllStories extends JUnitStories {
     public StoryReporterBuilder defaultStoryReporterBuilder() {
         Format screenshootingHtmlFormat = getApplicationContext().getBean(ScreenshotReportForm.class);
         return new StoryReporterBuilder().withCrossReference(new CrossReference())
-                .withFormats(Format.TXT, Format.CONSOLE, Format.STATS, screenshootingHtmlFormat)
+                .withFormats(Format.TXT, Format.CONSOLE, Format.STATS, Format.XML, screenshootingHtmlFormat)
                 .withCodeLocation(CodeLocations.codeLocationFromClass(getClass())).withFailureTrace(true);
     }
 
