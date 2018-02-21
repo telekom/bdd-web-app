@@ -35,7 +35,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
 
     private void changeALine() {
         if (screenshotsOnSuccess) {
-            super.overwritePattern("successfulWithLink", "<div class=\"step successful\"><a target=\"_blank\" href=\"{1}\">{0}</a></div>");
+            super.overwritePattern("successfulWithLink", "<div class=\"step successful\"><a target=\"_blank\" href=\"{0}\">{1}</a></div>\n");
         }
         super.overwritePattern("failed", "<div class=\"step failed\">{0}<span class=\"keyword failed\">({1})</span><br/><span class=\"message failed\">{2}</span><br/><a style=\"color: darkmagenta; font-weight: none; text-decoration: underline;\" target=\"_blank\" href=\"../screenshots/failed-scenario-{3}.png\">Screenshot</a></div>\n");
     }
@@ -51,7 +51,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
         if (screenshotsOnSuccess && step.contains("Then")) {
             String screenshotOnSuccessPath = screenshotMakerOnSuccess.makeScreenshot(currentStoryFolder, step);
             if (StringUtils.isNoneBlank(screenshotOnSuccessPath)) {
-                this.print(this.format("successfulWithLink", "{0}", step, screenshotOnSuccessPath));
+                this.print(this.format("successfulWithLink", "{0} {1}\n", screenshotOnSuccessPath, step));
                 return;
             }
         }
