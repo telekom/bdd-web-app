@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Abstract base class for page objects. Checks the current url when creating.
  *
@@ -27,6 +29,14 @@ public abstract class Page {
 
     public void reload() {
         driver.navigate().refresh();
+    }
+
+    public void waitFor(long milliseconds){
+        try {
+            TimeUnit.MILLISECONDS.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public abstract String getURL();
