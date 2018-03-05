@@ -7,7 +7,11 @@ import de.telekom.jbehave.webapp.interaction.StoryInteraction;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
+import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -103,6 +107,14 @@ public class LifecyleSteps {
 
     private String getStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {
         return storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1)).toString();
+    }
+
+    public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
+        List<Map<String, String>> rows = examplesTable.getRows();
+        rows.stream()
+                .forEach(map -> map.entrySet()
+                        .forEach(entry -> entry.setValue(checkForStoryInteractionKeyAndGetValue(entry.getValue()))));
+        return rows;
     }
 
 }

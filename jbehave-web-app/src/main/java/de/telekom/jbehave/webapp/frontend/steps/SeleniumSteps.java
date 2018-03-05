@@ -35,6 +35,9 @@ public abstract class SeleniumSteps {
     @Autowired
     protected ScenarioInteraction scenarioInteraction;
 
+    @Autowired
+    protected LifecyleSteps lifecyleSteps;
+
     protected synchronized <T extends Page> T createExpectedPage(Class<T> expectedPage) {
         WebDriver driver = webDriverWrapper.getDriver();
         T page;
