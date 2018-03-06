@@ -27,10 +27,10 @@ import static java.text.MessageFormat.format;
 @AllArgsConstructor
 public class ScreenshotOnSuccess {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ScreenshotOnSuccess.class);
+    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnSuccess.class);
 
-    private final StoryReporterBuilder reporterBuilder;
-    private final WebDriverWrapper webDriverWrapper;
+    protected final StoryReporterBuilder reporterBuilder;
+    protected final WebDriverWrapper webDriverWrapper;
 
     public String makeScreenshot(String storyFolder, String step) {
         long timestamp = new Date().getTime();
@@ -39,30 +39,30 @@ public class ScreenshotOnSuccess {
             return null;
         }
         try {
-            LOGGER.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
+            logger.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
             URL url = new URL(currentUrl);
             String contextPath = url.getPath();
             String screenshotName = getScreenshotName(contextPath, timestamp);
             String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
             screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
             if (StringUtils.isNoneBlank(screenshotPath) && screenshotIsNotEmpty(screenshotPath)) {
-                LOGGER.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
+                logger.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
                 return format("../screenshots/{0}/{1}.png", storyFolder, screenshotName);
             }
         } catch (Exception e) {
-            LOGGER.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
+            logger.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
         }
         return null;
     }
 
-    private String getScreenshotName(String contextPath, long timestamp) {
+    protected String getScreenshotName(String contextPath, long timestamp) {
         String screenshotName = contextPath.replaceAll("/", ".");
         screenshotName = screenshotName.substring(1, screenshotName.length());
         screenshotName = screenshotName.replaceAll(".xhtml", "");
         return "success-" + timestamp + "_" + screenshotName;
     }
 
-    private boolean screenshotIsNotEmpty(String screenshotPath) {
+    protected boolean screenshotIsNotEmpty(String screenshotPath) {
         try {
             BufferedImage bufferedImage = ImageIO.read(new FileInputStream(screenshotPath));
             return !isEmpty(bufferedImage);
@@ -72,7 +72,7 @@ public class ScreenshotOnSuccess {
         }
     }
 
-    public boolean isEmpty(BufferedImage bufferedImage) {
+    protected boolean isEmpty(BufferedImage bufferedImage) {
         Raster raster = bufferedImage.getData();
         for (int x = 0; x < raster.getWidth(); x++) {
             for (int y = 0; y < raster.getHeight(); y++) {

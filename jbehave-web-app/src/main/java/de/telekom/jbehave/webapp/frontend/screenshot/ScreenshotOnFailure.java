@@ -26,10 +26,10 @@ import static java.text.MessageFormat.format;
 @AllArgsConstructor
 public class ScreenshotOnFailure {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ScreenshotOnFailure.class);
+    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnFailure.class);
 
-    private final StoryReporterBuilder reporterBuilder;
-    private final WebDriverWrapper webDriverWrapper;
+    protected final StoryReporterBuilder reporterBuilder;
+    protected final WebDriverWrapper webDriverWrapper;
 
     @AfterScenario(uponType = ScenarioType.EXAMPLE, uponOutcome = Outcome.FAILURE)
     public void afterScenarioWithExamplesFailure(UUIDExceptionWrapper uuidWrappedFailure) {
@@ -50,16 +50,16 @@ public class ScreenshotOnFailure {
         try {
             screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
         } catch (Exception e) {
-            LOGGER.error(format("Screenshot of page '{0}' failed", currentUrl), e);
+            logger.error(format("Screenshot of page '{0}' failed", currentUrl), e);
         }
         if (StringUtils.isNoneBlank(screenshotPath)) {
-            LOGGER.info(format("Screenshot of page '{0}' has been saved to '{1}'", currentUrl, screenshotPath));
+            logger.info(format("Screenshot of page '{0}' has been saved to '{1}'", currentUrl, screenshotPath));
         } else {
-            LOGGER.error(format("Screenshot of page '{0}' has **NOT** been saved'", currentUrl));
+            logger.error(format("Screenshot of page '{0}' has **NOT** been saved'", currentUrl));
         }
     }
 
-    private String screenshotPath(UUID uuid) {
+    protected String screenshotPath(UUID uuid) {
         return format("{0}/screenshots/failed-scenario-{1}.png", reporterBuilder.outputDirectory(), uuid);
     }
 

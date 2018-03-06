@@ -18,11 +18,11 @@ import java.util.Date;
  */
 public class ScreenshotHtmlOutput extends HtmlOutput {
 
-    private final boolean screenshotsOnSuccess;
-    private final ScreenshotOnFailure screenshotMakerOnFailure;
-    private final ScreenshotOnSuccess screenshotMakerOnSuccess;
+    protected final boolean screenshotsOnSuccess;
+    protected final ScreenshotOnFailure screenshotMakerOnFailure;
+    protected final ScreenshotOnSuccess screenshotMakerOnSuccess;
 
-    private String currentStoryFolder;
+    protected String currentStoryFolder;
 
     public ScreenshotHtmlOutput(PrintStream output,
                                 StoryReporterBuilder reporterBuilder, boolean screenshotsOnSuccess, ScreenshotOnFailure screenshotMakerOnFailure, ScreenshotOnSuccess screenshotMakerOnSuccess) {
