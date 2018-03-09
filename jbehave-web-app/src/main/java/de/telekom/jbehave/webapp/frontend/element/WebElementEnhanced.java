@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Extends WebElement by several helper methods.
@@ -79,6 +80,10 @@ public class WebElementEnhanced {
         return webElement.findElements(by);
     }
 
+    public List<WebElementEnhanced> findElementsEnhanced(By by) {
+        return webElement.findElements(by).stream().map(element -> new WebElementEnhanced(element, webDriver)).collect(Collectors.toList());
+    }
+
     public String getText() {
         return webElement.getText();
     }
@@ -93,6 +98,10 @@ public class WebElementEnhanced {
 
     public WebElement findElement(By by) {
         return webElement.findElement(by);
+    }
+
+    public WebElementEnhanced findElementEnhanced(By by) {
+        return new WebElementEnhanced(webElement.findElement(by), webDriver);
     }
 
     public boolean isEnabled() {

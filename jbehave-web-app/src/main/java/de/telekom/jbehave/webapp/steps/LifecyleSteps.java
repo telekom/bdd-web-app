@@ -111,9 +111,7 @@ public class LifecyleSteps {
 
     public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
         List<Map<String, String>> rows = examplesTable.getRows();
-        rows.stream()
-                .forEach(map -> map.entrySet()
-                        .forEach(entry -> entry.setValue(checkForStoryInteractionKeyAndGetValue(entry.getValue()))));
+        rows.forEach(map -> map.entrySet().forEach(entry -> entry.setValue(checkForStoryInteractionKeyAndGetValue(entry.getValue()))));
         return rows;
     }
 
