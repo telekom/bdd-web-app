@@ -27,7 +27,7 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
             <dependency>
                 <groupId>de.telekom.jbehave</groupId>
                 <artifactId>jbehave-web-app</artifactId>
-                <version>1.1-SNAPSHOT</version>
+                <version>1.2-SNAPSHOT</version>
             </dependency>
 ```
 
