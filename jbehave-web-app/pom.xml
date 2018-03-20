@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.jbehave</groupId>
     <artifactId>jbehave-web-app</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
 
     <name>jbehave-web-app testframework</name>
     <description>
@@ -18,15 +18,15 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <version.selenium>3.6.0</version.selenium>
+        <version.selenium>3.11.0</version.selenium>
         <version.restassured>2.9.0</version.restassured>
-        <version.spring>4.3.11.RELEASE</version.spring>
-        <version.cglib>3.2.5</version.cglib>
+        <version.spring>4.3.14.RELEASE</version.spring>
+        <version.cglib>3.2.6</version.cglib>
         <version.slf4j>1.7.25</version.slf4j>
-        <version.jbehave>4.1.1</version.jbehave>
+        <version.jbehave>4.1.3</version.jbehave>
         <version.jbehave.junit-runner>1.2.0</version.jbehave.junit-runner>
-        <version.webdrivermanager>1.7.2</version.webdrivermanager>
-        <version.lombok>1.16.18</version.lombok>
+        <version.webdrivermanager>2.1.0</version.webdrivermanager>
+        <version.lombok>1.16.20</version.lombok>
 
         <snapshotUrl></snapshotUrl>
         <releaseUrl></releaseUrl>

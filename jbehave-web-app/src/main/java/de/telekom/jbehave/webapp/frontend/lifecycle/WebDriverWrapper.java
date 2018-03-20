@@ -8,9 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.safari.SafariDriver;
 import org.slf4j.Logger;
@@ -19,6 +22,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -28,8 +33,9 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * Manage the current WebDriver instance. Uses proven standard configurations for specific browsers. The lifecycle is determined by SeleniumTestRule.
  *
  * @author Daniel Keiss
+ * @author Igor Cernopolc - Initially added support for RemoteWebDriver
  * <p>
- * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
 public class WebDriverWrapper {
@@ -49,36 +55,101 @@ public class WebDriverWrapper {
 
     public void loadWebdriver() {
         String browser = getBrowser();
+        String gridURL = getGridURL();
+        DesiredCapabilities capabilities = getCapabilities(browser);
 
-        log.info("Brower set to: " + browser);
+        if (isBlank(gridURL)) {
+            loadLocalWebdriver(browser, capabilities);
+        } else {
+            loadRemoteWebdriver(gridURL, capabilities);
+        }
 
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+    }
+
+    private void loadLocalWebdriver(String browser, DesiredCapabilities capabilities) {
+        log.info("Browser is set to: " + browser);
         switch (browser) {
             case "firefox": {
-                initFirefox();
+                FirefoxOptions firefoxOptions = new FirefoxOptions(capabilities);
+                driver = new FirefoxDriver(firefoxOptions);
                 break;
             }
             case "chrome": {
-                initChrome();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.merge(capabilities);
+                driver = new ChromeDriver(chromeOptions);
                 break;
             }
             case "edge": {
-                initEdge();
+                driver = new EdgeDriver();
                 break;
             }
             case "ie": {
-                initInternetExplorer();
+                InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions(capabilities);
+                driver = new InternetExplorerDriver(internetExplorerOptions);
                 break;
             }
             case "safari": {
-                initSafari();
+                driver = new SafariDriver();
                 break;
             }
             default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
         }
+    }
 
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+    private void loadRemoteWebdriver(String gridURL, DesiredCapabilities capabilities) {
+        log.info("Running on: " + gridURL);
+        try {
+            driver = new RemoteWebDriver(new URL(gridURL), capabilities);
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException("URL for remote webdriver is malformed!", e);
+        }
+    }
+
+    private DesiredCapabilities getCapabilities(String browser) {
+        DesiredCapabilities caps = null;
+
+        switch (browser) {
+            case "firefox": {
+                caps = DesiredCapabilities.firefox();
+                caps.setCapability("overlappingCheckDisabled", true);
+                break;
+            }
+            case "chrome": {
+                caps = DesiredCapabilities.chrome();
+                caps.setCapability("disable-restore-session-state", true);
+                caps.setCapability("disable-application-cache", true);
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--disable-extensions");
+                options.addArguments("--start-maximized");
+                caps.setCapability(ChromeOptions.CAPABILITY, options);
+                break;
+            }
+            case "ie": {
+                caps = DesiredCapabilities.internetExplorer();
+                caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
+                caps.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
+                caps.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
+                caps.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
+                caps.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
+                caps.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
+                caps.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
+                caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                break;
+            }
+            case "edge":
+            case "safari": {
+                break;
+            }
+            default: {
+                throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
+            }
+        }
+        return caps;
     }
 
     public String getBrowser() {
@@ -94,46 +165,12 @@ public class WebDriverWrapper {
         return browser;
     }
 
-    private void initFirefox() {
-        DesiredCapabilities caps = DesiredCapabilities.firefox();
-        caps.setCapability("overlappingCheckDisabled", true);
-
-        driver = new FirefoxDriver(caps);
-    }
-
-    private void initChrome() {
-        DesiredCapabilities caps = DesiredCapabilities.chrome();
-        caps.setCapability("disable-restore-session-state", true);
-        caps.setCapability("disable-application-cache", true);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-extensions");
-        options.addArguments("--start-maximized");
-        caps.setCapability(ChromeOptions.CAPABILITY, options);
-
-        driver = new ChromeDriver(caps);
-    }
-
-    private void initSafari() {
-        driver = new SafariDriver();
-    }
-
-    private void initInternetExplorer() {
-        DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-        ieCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        ieCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-        ieCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
-        ieCapabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
-        ieCapabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
-        ieCapabilities.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
-        ieCapabilities.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
-        ieCapabilities.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
-        ieCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-
-        driver = new InternetExplorerDriver(ieCapabilities);
-    }
-
-    private void initEdge() {
-        driver = new EdgeDriver();
+    private String getGridURL() {
+        String urlStr = System.getProperty("gridURL");
+        if (isNotBlank(urlStr)) {
+            return urlStr;
+        }
+        return null;
     }
 
     public WebDriver getDriver() {
