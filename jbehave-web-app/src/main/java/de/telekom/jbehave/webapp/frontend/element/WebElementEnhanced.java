@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 public class WebElementEnhanced {
 
-    public final static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "exists", "check");
+    public static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "exists", "check");
 
     protected WebElement webElement;
     protected WebDriver webDriver;
