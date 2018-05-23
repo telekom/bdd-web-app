@@ -80,6 +80,7 @@ public class WebDriverWrapper {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.merge(capabilities);
                 driver = new ChromeDriver(chromeOptions);
+                driver.manage().window().maximize();
                 break;
             }
             case "edge": {
@@ -124,7 +125,6 @@ public class WebDriverWrapper {
                 caps.setCapability("disable-application-cache", true);
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-extensions");
-                options.addArguments("--start-maximized");
                 caps.setCapability(ChromeOptions.CAPABILITY, options);
                 break;
             }
