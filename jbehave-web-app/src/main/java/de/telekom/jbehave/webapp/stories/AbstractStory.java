@@ -1,7 +1,7 @@
 package de.telekom.jbehave.webapp.stories;
 
+import com.github.valfirst.jbehave.junit.monitoring.JUnitReportingRunner;
 import com.google.common.collect.Lists;
-import de.codecentric.jbehave.junit.monitoring.JUnitReportingRunner;
 import de.telekom.jbehave.webapp.frontend.screenshot.ScreenshotReportForm;
 import de.telekom.jbehave.webapp.steps.Steps;
 import org.jbehave.core.configuration.Configuration;
