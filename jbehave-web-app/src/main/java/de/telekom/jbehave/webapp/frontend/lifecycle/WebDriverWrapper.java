@@ -80,7 +80,6 @@ public class WebDriverWrapper {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.merge(capabilities);
                 driver = new ChromeDriver(chromeOptions);
-                driver.manage().window().maximize();
                 break;
             }
             case "edge": {
