@@ -46,7 +46,7 @@ public class WebDriverWrapper {
 
     private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
-    @Value("${default.browser:#{null}}")
+    @Value("${default.browser:chrome}")
     private String defaultBrowser;
 
     @Value("${webdriver.proxy.host:#{null}}")
@@ -54,6 +54,9 @@ public class WebDriverWrapper {
 
     @Value("${webdriver.proxy.port:#{null}}")
     private String proxyPort;
+
+    @Value("${webdriver.maximize:false}")
+    private boolean maximizeBrowser;
 
     @Getter
     @Setter
@@ -223,6 +226,9 @@ public class WebDriverWrapper {
     protected void afterLoad() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        if (maximizeBrowser) {
+            driver.manage().window().maximize();
+        }
     }
 
     public void quit() {
