@@ -13,23 +13,9 @@ import org.springframework.stereotype.Component;
  * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
-public class StoryInteraction extends AbstractInteraction<StoryInteraction> {
+public class StoryInteraction extends FlatInteraction {
 
-    private AbstractInteraction scenarioInteraction;
-
-    /**
-     * Store some data in the story interaction context for later use.
-     */
-    public void remember(String key, Object value) {
-        super.remember(key, value);
-    }
-
-    /**
-     * Store an object for an specific entity in the story interaction context for later use. Recall this object with recallObject().
-     */
-    public void rememberObject(String entityKey, String objectKey, Object value) {
-        super.rememberObject(entityKey, objectKey, value);
-    }
+    private ScenarioInteraction scenarioInteraction;
 
     /**
      * Store some data from scenario interaction to the story interaction context for later use.
@@ -45,7 +31,7 @@ public class StoryInteraction extends AbstractInteraction<StoryInteraction> {
         super.rememberObject(entityKey, objectKey, scenarioInteraction.recallObjectNotNull(entityKey, objectKey));
     }
 
-    public void setSequenceInteraction(AbstractInteraction sequenceInteraction) {
+    public void setScenarioInteraction(ScenarioInteraction sequenceInteraction) {
         this.scenarioInteraction = sequenceInteraction;
     }
 

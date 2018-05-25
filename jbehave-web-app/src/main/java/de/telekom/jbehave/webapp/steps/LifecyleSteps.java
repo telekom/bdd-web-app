@@ -62,7 +62,7 @@ public class LifecyleSteps {
 
     private void setupSequenceInteraction() {
         scenarioInteraction.startInteraction();
-        storyInteraction.setSequenceInteraction(scenarioInteraction);
+        storyInteraction.setScenarioInteraction(scenarioInteraction);
         scenarioInteraction.setStoryInteraction(storyInteraction);
     }
 

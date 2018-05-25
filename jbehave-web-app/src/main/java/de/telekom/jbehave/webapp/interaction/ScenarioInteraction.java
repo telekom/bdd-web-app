@@ -23,12 +23,13 @@ import java.util.Map;
  * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
-public class ScenarioInteraction extends AbstractInteraction<ScenarioInteraction> {
+public class ScenarioInteraction extends FlatInteraction {
 
     private static final String BODY = "BODY";
     private static final String PATH_PARAMS = "PATH_PARAMS";
     private static final String QUERY_PARAMS = "QUERY_PARAMS";
-    private AbstractInteraction storyInteraction;
+
+    private StoryInteraction storyInteraction;
 
     @Autowired
     private RequestBuilder requestBuilder;
@@ -84,7 +85,7 @@ public class ScenarioInteraction extends AbstractInteraction<ScenarioInteraction
         super.rememberObject(entityKey, objectKey, storyInteraction.recallObjectNotNull(entityKey, objectKey));
     }
 
-    public void setStoryInteraction(AbstractInteraction storyInteraction) {
+    public void setStoryInteraction(StoryInteraction storyInteraction) {
         this.storyInteraction = storyInteraction;
     }
 
