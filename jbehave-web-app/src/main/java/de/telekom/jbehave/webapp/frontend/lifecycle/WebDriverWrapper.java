@@ -1,5 +1,7 @@
 package de.telekom.jbehave.webapp.frontend.lifecycle;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -7,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -16,6 +19,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,104 +55,148 @@ public class WebDriverWrapper {
     @Value("${webdriver.proxy.port:#{null}}")
     private String proxyPort;
 
+    @Getter
+    @Setter
     private WebDriver driver;
 
     public void loadWebdriver() {
         String browser = getBrowser();
-        String gridURL = getGridURL();
-        DesiredCapabilities capabilities = getCapabilities(browser);
 
+        DesiredCapabilities capabilities = capabilities(browser);
+        String gridURL = getGridURL();
         if (isBlank(gridURL)) {
             loadLocalWebdriver(browser, capabilities);
         } else {
             loadRemoteWebdriver(gridURL, capabilities);
         }
 
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        afterLoad();
     }
 
-    private void loadLocalWebdriver(String browser, DesiredCapabilities capabilities) {
+    protected DesiredCapabilities capabilities(String browser) {
+        switch (browser) {
+            case "firefox": {
+                return firefoxCapabilities();
+            }
+            case "chrome": {
+                return chromeCapabilities();
+            }
+            case "ie": {
+                return ieCapabilities();
+            }
+            case "edge": {
+                return edgeCapabilities();
+            }
+            case "safari": {
+                return safariCapabilities();
+            }
+            default: {
+                throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
+            }
+        }
+    }
+
+    private DesiredCapabilities ieCapabilities() {
+        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
+        caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+        caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
+        caps.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
+        caps.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
+        caps.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
+        caps.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
+        caps.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
+        caps.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
+        caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        return caps;
+    }
+
+    private DesiredCapabilities firefoxCapabilities() {
+        DesiredCapabilities caps = DesiredCapabilities.firefox();
+        caps.setCapability("overlappingCheckDisabled", true);
+        return caps;
+    }
+
+    private DesiredCapabilities chromeCapabilities() {
+        DesiredCapabilities caps = DesiredCapabilities.chrome();
+        caps.setCapability("disable-restore-session-state", true);
+        caps.setCapability("disable-application-cache", true);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-extensions");
+        caps.setCapability(ChromeOptions.CAPABILITY, options);
+        return caps;
+    }
+
+    private DesiredCapabilities edgeCapabilities() {
+        return null;
+    }
+
+    private DesiredCapabilities safariCapabilities() {
+        return null;
+    }
+
+    protected void loadLocalWebdriver(String browser, DesiredCapabilities capabilities) {
         log.info("Browser is set to: " + browser);
         switch (browser) {
             case "firefox": {
-                FirefoxOptions firefoxOptions = new FirefoxOptions(capabilities);
-                driver = new FirefoxDriver(firefoxOptions);
-                break;
+                loadFirefox(capabilities);
+                return;
             }
             case "chrome": {
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.merge(capabilities);
-                driver = new ChromeDriver(chromeOptions);
-                break;
+                loadChrome(capabilities);
+                return;
             }
             case "edge": {
-                driver = new EdgeDriver();
-                break;
+                loadEdge(capabilities);
+                return;
             }
             case "ie": {
-                InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions(capabilities);
-                driver = new InternetExplorerDriver(internetExplorerOptions);
-                break;
+                loadInternetExplorer(capabilities);
+                return;
             }
             case "safari": {
-                driver = new SafariDriver();
-                break;
+                loadSafari(capabilities);
+                return;
             }
             default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
         }
     }
 
-    private void loadRemoteWebdriver(String gridURL, DesiredCapabilities capabilities) {
+    private void loadFirefox(DesiredCapabilities capabilities) {
+        FirefoxOptions firefoxOptions = new FirefoxOptions(capabilities);
+        driver = new FirefoxDriver(firefoxOptions);
+    }
+
+    private void loadChrome(DesiredCapabilities capabilities) {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.merge(capabilities);
+        driver = new ChromeDriver(chromeOptions);
+    }
+
+    private void loadEdge(DesiredCapabilities capabilities) {
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.merge(capabilities);
+        driver = new EdgeDriver(edgeOptions);
+    }
+
+    private void loadInternetExplorer(DesiredCapabilities capabilities) {
+        InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions(capabilities);
+        driver = new InternetExplorerDriver(internetExplorerOptions);
+    }
+
+    private void loadSafari(DesiredCapabilities capabilities) {
+        SafariOptions safariOptions = new SafariOptions();
+        safariOptions.merge(capabilities);
+        driver = new SafariDriver();
+    }
+
+    protected void loadRemoteWebdriver(String gridURL, DesiredCapabilities capabilities) {
         log.info("Running on: " + gridURL);
         try {
             driver = new RemoteWebDriver(new URL(gridURL), capabilities);
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("URL for remote webdriver is malformed!", e);
         }
-    }
-
-    private DesiredCapabilities getCapabilities(String browser) {
-        DesiredCapabilities caps = null;
-
-        switch (browser) {
-            case "firefox": {
-                caps = DesiredCapabilities.firefox();
-                caps.setCapability("overlappingCheckDisabled", true);
-                break;
-            }
-            case "chrome": {
-                caps = DesiredCapabilities.chrome();
-                caps.setCapability("disable-restore-session-state", true);
-                caps.setCapability("disable-application-cache", true);
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--disable-extensions");
-                caps.setCapability(ChromeOptions.CAPABILITY, options);
-                break;
-            }
-            case "ie": {
-                caps = DesiredCapabilities.internetExplorer();
-                caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-                caps.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
-                caps.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
-                caps.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
-                caps.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
-                caps.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
-                caps.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
-                caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-                break;
-            }
-            case "edge":
-            case "safari": {
-                break;
-            }
-            default: {
-                throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
-            }
-        }
-        return caps;
     }
 
     public String getBrowser() {
@@ -164,7 +212,7 @@ public class WebDriverWrapper {
         return browser;
     }
 
-    private String getGridURL() {
+    protected String getGridURL() {
         String urlStr = System.getProperty("gridURL");
         if (isNotBlank(urlStr)) {
             return urlStr;
@@ -172,12 +220,9 @@ public class WebDriverWrapper {
         return null;
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
+    protected void afterLoad() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
     }
 
     public void quit() {

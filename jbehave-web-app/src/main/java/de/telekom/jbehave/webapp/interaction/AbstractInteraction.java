@@ -23,23 +23,10 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
     private final static String OBJECT_KEY_SEPARATOR = ".";
     private final static Pattern LIST_ATTRIBUTE = Pattern.compile("\\[\\d+\\]");
 
-    protected final HashMap<String, Object> context = Maps.newHashMap();
-    private final ThreadLocal<T> threadLocal = new ThreadLocal<>();
+    protected HashMap<String, Object> context = Maps.newHashMap();
 
     public void startInteraction() {
-        try {
-            setInteraction((T) this.getClass().newInstance());
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setInteraction(T interaction) {
-        threadLocal.set(interaction);
-    }
-
-    public void stopInteraction() {
-        threadLocal.remove();
+        context = Maps.newHashMap();
     }
 
     /**
@@ -49,7 +36,7 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
         if (value instanceof Map) {
             ((Map) value).forEach((key1, value1) -> remember(key + OBJECT_KEY_SEPARATOR + key1.toString(), value1));
         }
-        threadLocal.get().context.put(key, value);
+        getContext().put(key, value);
     }
 
     /**
@@ -86,7 +73,7 @@ public abstract class AbstractInteraction<T extends AbstractInteraction> {
             return recallFromList(matcher);
         }
 
-        return (S) threadLocal.get().getContext().get(key);
+        return (S) getContext().get(key);
     }
 
     private <S> S recallFromList(Matcher matcher) {

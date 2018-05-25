@@ -19,17 +19,20 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Daniel Keiss
  * <p>
- * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  */
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BrowserDriverUpdater {
 
     private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
+
     private final @NonNull
     WebDriverWrapper webDriverWrapper;
+
     @Value("${webdriver.proxy.host:#{null}}")
     private String proxyHost;
+
     @Value("${webdriver.proxy.port:#{null}}")
     private String proxyPort;
 
@@ -45,32 +48,19 @@ public class BrowserDriverUpdater {
 
         switch (browser) {
             case "firefox": {
-                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-                    FirefoxDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-                }
-                FirefoxDriverManager.getInstance().setup();
+                updateFirefox();
                 break;
             }
             case "chrome": {
-                System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
-                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-                    ChromeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-                }
-                ChromeDriverManager.getInstance().setup();
+                updateChrome();
                 break;
             }
             case "edge": {
-                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-                    EdgeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-                }
-                EdgeDriverManager.getInstance().setup();
+                updateEdge();
                 break;
             }
             case "ie": {
-                if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-                    InternetExplorerDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
-                }
-                InternetExplorerDriverManager.getInstance().setup();
+                updateInternetExplorer();
                 break;
             }
             default: {
@@ -78,7 +68,36 @@ public class BrowserDriverUpdater {
             }
         }
 
-        log.info("Updated instrumentalisation driver for browser: " + browser);
+        log.info("Updated driver for " + browser + " test instrumentalization.");
+    }
+
+    private void updateFirefox() {
+        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+            FirefoxDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+        }
+        FirefoxDriverManager.getInstance().setup();
+    }
+
+    private void updateChrome() {
+        System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
+        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+            ChromeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+        }
+        ChromeDriverManager.getInstance().setup();
+    }
+
+    private void updateEdge() {
+        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+            EdgeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+        }
+        EdgeDriverManager.getInstance().setup();
+    }
+
+    private void updateInternetExplorer() {
+        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+            InternetExplorerDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+        }
+        InternetExplorerDriverManager.getInstance().setup();
     }
 
 }

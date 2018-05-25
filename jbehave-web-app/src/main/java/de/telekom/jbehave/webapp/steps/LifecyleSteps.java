@@ -46,7 +46,6 @@ public class LifecyleSteps {
 
     @BeforeStory
     public void startStoryInteraction() {
-        storyInteraction.stopInteraction();
         storyInteraction.startInteraction();
         webDriverWrapper.loadWebdriver();
     }
@@ -62,7 +61,6 @@ public class LifecyleSteps {
     }
 
     private void setupSequenceInteraction() {
-        scenarioInteraction.stopInteraction();
         scenarioInteraction.startInteraction();
         storyInteraction.setSequenceInteraction(scenarioInteraction);
         scenarioInteraction.setStoryInteraction(storyInteraction);
