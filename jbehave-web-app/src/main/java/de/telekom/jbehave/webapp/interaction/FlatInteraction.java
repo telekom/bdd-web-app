@@ -18,8 +18,7 @@ import java.util.Map;
  * - remember("key", [["key": "value"]] = ["key": ["value"], "key[0].key", "value"]
  * Further examples can be found in @see FlatInteractionSpec.
  * <p>
- * The advantage of this approach is the safe and fast availability of the test data,
- * but be careful when saving large and deep maps as this approach increases the amount of data exponentially!
+ * The advantage of this approach is the safe and fast availability of the test data, but be careful when saving large and deep maps.
  *
  * @author Daniel Keiss
  * <p>

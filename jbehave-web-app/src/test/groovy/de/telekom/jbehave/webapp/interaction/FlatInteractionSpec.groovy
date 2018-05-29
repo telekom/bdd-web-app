@@ -61,7 +61,16 @@ class FlatInteractionSpec extends Specification {
         value == "value"
     }
 
-    def "test recall string from map in list"() {
+    def "test recall map from list"() {
+        given:
+        abstractInteraction.remember("key", [["key": "value"]])
+        when:
+        Map value = abstractInteraction.recall("key[0]")
+        then:
+        value == ["key": "value"]
+    }
+
+    def "test recall string from map from list"() {
         given:
         abstractInteraction.remember("key", [["key": "value"]])
         when:
