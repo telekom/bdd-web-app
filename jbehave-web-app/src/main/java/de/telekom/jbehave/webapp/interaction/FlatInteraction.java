@@ -1,11 +1,17 @@
 package de.telekom.jbehave.webapp.interaction;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import static java.util.stream.Collectors.toMap;
 
 /**
  * Save the data flat for the test execution.
@@ -25,6 +31,8 @@ import java.util.Map;
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  */
 public abstract class FlatInteraction implements Interaction {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private static String OBJECT_KEY_SEPARATOR = ".";
     private static String LIST_ITEM_FORMAT = "[%d]";
@@ -97,6 +105,38 @@ public abstract class FlatInteraction implements Interaction {
 
     public <S> List<S> recallList(String key) {
         return recall(key);
+    }
+
+    // -------------------------------------------------------------------------
+    // DEBUGGING
+    // -------------------------------------------------------------------------
+
+    /**
+     * Be careful with this method. The log can get very large. Use only for debugging purposes!
+     */
+    public void logAllPossibleKeysWithType() {
+        carefulHint("logAllPossibleKeysWithType()");
+        Map<String, Class> keysWithType = context.entrySet().stream()
+                .collect(toMap(Entry::getKey, entry -> entry.getValue().getClass()));
+        logger.info("\n" + mapToString(keysWithType));
+    }
+
+    /**
+     * Be careful with this method. The log can get very large. Use only for debugging purposes!
+     */
+    public void logAllPossibleKeysWithValue() {
+        carefulHint("logAllPossibleKeysWithValue()");
+        logger.info("\n" + mapToString(context));
+    }
+
+    private void carefulHint(String method) {
+        logger.info("\n==============================================================================================\n" +
+                "Be careful with " + method + ". The log can get very large. Use only for debugging purposes!\n" +
+                "==============================================================================================");
+    }
+
+    private String mapToString(Map<String, ?> map) {
+        return Joiner.on(",\n").withKeyValueSeparator("=").join(map);
     }
 
 }
