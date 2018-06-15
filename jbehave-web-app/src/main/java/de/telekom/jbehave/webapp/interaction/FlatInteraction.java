@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -68,8 +69,12 @@ public abstract class FlatInteraction implements Interaction {
     // -------------------------------------------------------------------------
 
     public void rememberObject(String entityKey, String objectKey, Object value) {
-        String key = entityKey + OBJECT_KEY_SEPARATOR + objectKey;
-        remember(key, value);
+        Map<String, Object> objectMap = recallMap(entityKey);
+        if (objectMap == null) {
+            objectMap = new HashMap<>();
+        }
+        objectMap.put(objectKey, value);
+        remember(entityKey, objectMap);
     }
 
     public void rememberObject(String entityKey, Map<String, Object> object) {
@@ -98,9 +103,9 @@ public abstract class FlatInteraction implements Interaction {
         List<Object> list = recallList(key);
         if (list == null) {
             list = new ArrayList<>();
-            remember(key, list);
         }
         list.add(value);
+        remember(key, list);
     }
 
     public <S> List<S> recallList(String key) {
