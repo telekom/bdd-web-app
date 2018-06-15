@@ -7,94 +7,53 @@ class FlatInteractionSpec extends Specification {
     FlatInteraction abstractInteraction = new FlatInteraction() {
     }
 
-    def "test recall string"() {
-        given:
+    def "test remember string"() {
+        when:
         abstractInteraction.remember("key", "value")
-        when:
-        String value = abstractInteraction.recall("key")
         then:
-        value == "value"
+        abstractInteraction.recall("key") == "value"
     }
 
-    def "test recall string with object separator"() {
-        given:
+    def "test remember string with object separator"() {
+        when:
         abstractInteraction.remember("key.key", "value")
-        when:
-        String value = abstractInteraction.recall("key.key")
         then:
-        value == "value"
+        abstractInteraction.recall("key.key") == "value"
     }
 
-    def "test recall map"() {
-        given:
+    def "test remember map"() {
+        when:
         abstractInteraction.remember("key", ["key": "value"])
-        when:
-        Map<String, String> value = abstractInteraction.recall("key")
         then:
-        value == ["key": "value"]
+        abstractInteraction.recall("key") == ["key": "value"]
+        abstractInteraction.recallMap("key") == ["key": "value"]
+        abstractInteraction.recall("key.key") == "value"
     }
 
-    def "test recall map with special method"() {
-        given:
-        abstractInteraction.remember("key", ["key": "value"])
+    def "test remember list"() {
         when:
-        Map<String, String> value = abstractInteraction.recallMap("key")
-        then:
-        value == ["key": "value"]
-    }
-
-    def "test recall string from map"() {
-        given:
-        abstractInteraction.remember("key", ["key": "value"])
-        when:
-        String value = abstractInteraction.recall("key.key")
-        then:
-        value == "value"
-    }
-
-    def "test recall list value"() {
-        given:
         abstractInteraction.remember("key", ["value"])
-        when:
-        String value = abstractInteraction.recall("key[0]")
         then:
-        value == "value"
+        abstractInteraction.recall("key") == ["value"]
+        abstractInteraction.recallList("key") == ["value"]
+        abstractInteraction.recall("key[0]") == "value"
     }
 
-    def "test recall map from list"() {
-        given:
+    def "test remember list with map"() {
+        when:
         abstractInteraction.remember("key", [["key": "value"]])
-        when:
-        Map value = abstractInteraction.recall("key[0]")
         then:
-        value == ["key": "value"]
+        abstractInteraction.recall("key[0].key") == "value"
+        abstractInteraction.recall("key[0]") == ["key": "value"]
+        abstractInteraction.recallList("key") == [["key": "value"]]
     }
 
-    def "test recall string from map from list"() {
-        given:
-        abstractInteraction.remember("key", [["key": "value"]])
+    def "test remember object"() {
         when:
-        String value = abstractInteraction.recall("key[0].key")
+        abstractInteraction.rememberObject("key", "attribute", "value")
         then:
-        value == "value"
-    }
-
-    def "test recall list"() {
-        given:
-        abstractInteraction.remember("key", ["value"])
-        when:
-        List<String> value = abstractInteraction.recall("key")
-        then:
-        value == ["value"]
-    }
-
-    def "test recall list with special method"() {
-        given:
-        abstractInteraction.remember("key", ["value"])
-        when:
-        List<String> value = abstractInteraction.recallList("key")
-        then:
-        value == ["value"]
+        abstractInteraction.recall("key") == ["attribute": "value"]
+        abstractInteraction.recall("key.attribute") == "value"
     }
 
 }
