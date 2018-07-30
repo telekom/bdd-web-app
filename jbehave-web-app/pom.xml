@@ -19,15 +19,15 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- Framework dependencies -->
-        <version.selenium>3.12.0</version.selenium>
+        <version.selenium>3.13.0</version.selenium>
         <version.restassured>2.9.0</version.restassured>
-        <version.spring>4.3.17.RELEASE</version.spring>
-        <version.cglib>3.2.6</version.cglib>
+        <version.spring>4.3.18.RELEASE</version.spring>
+        <version.cglib>3.2.7</version.cglib>
         <version.slf4j>1.7.25</version.slf4j>
-        <version.jbehave>4.3.3</version.jbehave>
-        <version.jbehave.junit-runner>2.1.4</version.jbehave.junit-runner>
-        <version.webdrivermanager>2.2.1</version.webdrivermanager>
-        <version.lombok>1.16.20</version.lombok>
+        <version.jbehave>4.3.5</version.jbehave>
+        <version.jbehave.junit-runner>2.2.0</version.jbehave.junit-runner>
+        <version.webdrivermanager>2.2.4</version.webdrivermanager>
+        <version.lombok>1.18.2</version.lombok>
 
         <!-- Test dependencies -->
         <groovy-all.version>2.4.12</groovy-all.version>
