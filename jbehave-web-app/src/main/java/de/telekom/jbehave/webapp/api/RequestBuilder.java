@@ -1,14 +1,14 @@
 package de.telekom.jbehave.webapp.api;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.config.DecoderConfig;
-import com.jayway.restassured.config.EncoderConfig;
-import com.jayway.restassured.config.ObjectMapperConfig;
-import com.jayway.restassured.config.RestAssuredConfig;
-import com.jayway.restassured.http.ContentType;
-import com.jayway.restassured.internal.mapper.ObjectMapperType;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.specification.RequestSpecification;
+import io.restassured.RestAssured;
+import io.restassured.config.DecoderConfig;
+import io.restassured.config.EncoderConfig;
+import io.restassured.config.ObjectMapperConfig;
+import io.restassured.config.RestAssuredConfig;
+import io.restassured.http.ContentType;
+import io.restassured.mapper.ObjectMapperType;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

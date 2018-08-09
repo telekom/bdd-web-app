@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.jbehave</groupId>
     <artifactId>jbehave-web-app</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
 
     <name>jbehave-web-app testframework</name>
     <description>
@@ -19,9 +19,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- Framework dependencies -->
-        <version.selenium>3.13.0</version.selenium>
-        <version.restassured>2.9.0</version.restassured>
-        <version.spring>4.3.18.RELEASE</version.spring>
+        <version.selenium>3.14.0</version.selenium>
+        <version.restassured>3.1.0</version.restassured>
+        <version.spring>5.0.8.RELEASE</version.spring>
         <version.cglib>3.2.7</version.cglib>
         <version.slf4j>1.7.25</version.slf4j>
         <version.jbehave>4.3.5</version.jbehave>
@@ -127,14 +127,19 @@
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Misc. -->
+            <!-- REST -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
-                <groupId>com.jayway.restassured</groupId>
+                <groupId>io.rest-assured</groupId>
                 <artifactId>rest-assured</artifactId>
                 <version>${version.restassured}</version>
             </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Misc. -->
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -240,14 +245,17 @@
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Misc. -->
+        <!-- REST -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>${version.restassured}</version>
         </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Misc. -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
