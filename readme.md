@@ -1,6 +1,6 @@
 # jbehave-web-app
 
-This JBehave extension should make web application behavior driven development much easier. It integrates Selenium and REST-assured into a spring lifecycle and help developing automated acceptance tests for frontends. 
+This JBehave extension make automated acceptance tests for web applications much more easier! It integrates Selenium for frontend testing and REST-assured for interface testing into a common test data life cylce. The included sample project allows a quick introduction to the test framework.
 
 ## Features
 
@@ -28,6 +28,7 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
                 <groupId>de.telekom.jbehave</groupId>
                 <artifactId>jbehave-web-app</artifactId>
                 <version>1.2-SNAPSHOT</version>
+                
             </dependency>
 ```
 
