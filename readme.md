@@ -1,15 +1,14 @@
 # jbehave-web-app
 
-This JBehave extension make automated acceptance tests for web applications much more easier! It integrates Selenium for frontend testing and REST-assured for interface testing into a common test data life cylce. The included sample project allows a quick introduction to the test framework.
+This JBehave extension make automated acceptance tests for web applications much easier! It integrates Selenium for frontend testing and REST-assured for interface testing into a common test data lifecycle. The included sample project allows a quick introduction to the test framework.
 
 ## Features
 
-- JBehave Steps are automatic loaded by Spring. You have just to add the annotation @Steps
-- Generic test data management integrated into the JBehave lifecycle by spring.
-- Access the WebDriver and Selenium-Page-Objects by Spring dependency injection.
-- Integration of WebDriver-manager for automatic WebDriver updates into the JBehave lifecycle.
-- Use an own extension of Selenium-Web-Elements if you want. The Extension include useful additional methods like scroll to element or element exist.
-- Integration of REST-assured which is also available by Spring dependency injection.
+- JBehave classes like stories or steps are automatic loaded by using annotations.
+- Access Selenium and REST-Assured in Spring context for uniform access. 
+- Enhanced test data management for web applications integrated into the JBehave lifecycle, so can easily use dynamic test data.
+- Integration of WebDriver-manager for automatic WebDriver updates.
+- Optional extension of Selenium-Web-Element with convenient functions and the possibility to add own extensions. 
 - Creation of screenshots in case of errors and if desired after each step.
 
 ## Example project
