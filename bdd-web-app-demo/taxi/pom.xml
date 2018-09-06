@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.jbehave</groupId>
-    <artifactId>jbehave-web-app-demo-taxi</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <artifactId>bdd-web-app-demo-taxi</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

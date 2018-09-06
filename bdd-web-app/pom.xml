@@ -3,11 +3,11 @@
 	http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.telekom.jbehave</groupId>
-    <artifactId>jbehave-web-app</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <groupId>de.telekom.test</groupId>
+    <artifactId>bdd-web-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-    <name>jbehave-web-app testframework</name>
+    <name>bdd-web-app testframework</name>
     <description>
         Test framework using JBehave, Spring Selenium and restAssured
     </description>

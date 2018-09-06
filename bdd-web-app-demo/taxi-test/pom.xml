@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.jbehave</groupId>
-    <artifactId>jbehave-web-app-demo-taxi-test-ger</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <artifactId>bdd-web-app-demo-taxi-test</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

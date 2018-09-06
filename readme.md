@@ -1,4 +1,4 @@
-# jbehave-web-app
+# bdd-web-app
 
 This JBehave extension make automated acceptance tests for web applications much easier! It integrates Selenium for frontend testing and REST-assured for interface testing into a common test data lifecycle. The included sample project allows a quick introduction to the test framework.
 

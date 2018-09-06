@@ -4,18 +4,18 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.telekom.jbehave</groupId>
-    <artifactId>jbehave-web-app-reactor</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <groupId>de.telekom.test</groupId>
+    <artifactId>bdd-web-app-reactor</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>jbehave web app reactor</name>
+    <name>bdd web-app reactor</name>
 
     <modules>
-        <module>jbehave-web-app</module>
-        <module>jbehave-web-app-demo/taxi</module>
-        <module>jbehave-web-app-demo/taxi-test</module>
-        <module>jbehave-web-app-demo/taxi-test-ger</module>
+        <module>bdd-web-app</module>
+        <module>bdd-web-app-demo/taxi</module>
+        <module>bdd-web-app-demo/taxi-test</module>
+        <module>bdd-web-app-demo/taxi-test-ger</module>
     </modules>
 
 </project>
