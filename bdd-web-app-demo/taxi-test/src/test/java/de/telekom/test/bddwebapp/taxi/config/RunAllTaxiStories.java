@@ -1,6 +1,6 @@
-package de.telekom.jbehave.webapp.taxi.config;
+package de.telekom.test.bddwebapp.taxi.config;
 
-import de.telekom.jbehave.webapp.stories.RunAllStories;
+import de.telekom.test.bddwebapp.stories.RunAllStories;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -17,7 +17,7 @@ public class RunAllTaxiStories extends RunAllStories {
 
     @Override
     public String storiesBasePath() {
-        return "de.telekom.jbehave.webapp.taxi.stories";
+        return "de.telekom.test.bddwebapp.taxi.stories";
     }
 
 }

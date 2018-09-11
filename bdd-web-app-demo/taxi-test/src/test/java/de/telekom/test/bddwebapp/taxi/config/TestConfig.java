@@ -1,4 +1,4 @@
-package de.telekom.jbehave.webapp.taxi.config;
+package de.telekom.test.bddwebapp.taxi.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import org.springframework.core.env.Environment;
  */
 @Configuration
 @PropertySource("test.properties")
-@ComponentScan({"de.telekom.jbehave.webapp", "de.telekom.jbehave.webapp.taxi"})
+@ComponentScan("de.telekom.test.bddwebapp")
 public class TestConfig {
 
     @Autowired

@@ -1,6 +1,6 @@
-package de.telekom.jbehave.webapp.taxi.stories.login;
+package de.telekom.test.bddwebapp.taxi.stories.login;
 
-import de.telekom.jbehave.webapp.taxi.config.AbstractTaxiStory;
+import de.telekom.test.bddwebapp.taxi.config.AbstractTaxiStory;
 
 /**
  * @author Daniel Keiss

@@ -15,7 +15,7 @@
         <version.surefire>2.21.0</version.surefire>
         <version.jbehave>4.3.3</version.jbehave>
         <version.jbehave.site-resources>3.3.1</version.jbehave.site-resources>
-        <version.jbehave-web-app>1.4-SNAPSHOT</version.jbehave-web-app>
+        <version.bdd-web-app>1.0-SNAPSHOT</version.bdd-web-app>
     </properties>
 
     <build>
@@ -78,17 +78,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>de.telekom.jbehave</groupId>
-                <artifactId>jbehave-web-app</artifactId>
-                <version>${version.jbehave-web-app}</version>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bdd-web-app</artifactId>
+                <version>${version.bdd-web-app}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
         <dependency>
-            <groupId>de.telekom.jbehave</groupId>
-            <artifactId>jbehave-web-app</artifactId>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bdd-web-app</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -1,4 +1,4 @@
-package de.telekom.jbehave.webapp.taxi.config;
+package de.telekom.test.bddwebapp.taxi.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

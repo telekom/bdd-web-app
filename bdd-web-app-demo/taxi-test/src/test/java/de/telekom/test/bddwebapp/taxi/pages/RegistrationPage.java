@@ -1,7 +1,7 @@
-package de.telekom.jbehave.webapp.taxi.pages;
+package de.telekom.test.bddwebapp.taxi.pages;
 
-import de.telekom.jbehave.webapp.frontend.element.WebElementEnhanced;
-import de.telekom.jbehave.webapp.frontend.page.JQueryPage;
+import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
+import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

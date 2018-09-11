@@ -1,9 +1,9 @@
-package de.telekom.jbehave.webapp.taxi.steps;
+package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.jbehave.webapp.frontend.lifecycle.WebDriverWrapper;
-import de.telekom.jbehave.webapp.frontend.steps.SeleniumSteps;
-import de.telekom.jbehave.webapp.steps.Steps;
-import de.telekom.jbehave.webapp.taxi.pages.LoginPage;
+import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
+import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
+import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.taxi.pages.LoginPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
