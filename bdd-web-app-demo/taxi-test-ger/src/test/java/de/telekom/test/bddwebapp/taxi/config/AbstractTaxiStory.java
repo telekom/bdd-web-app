@@ -1,6 +1,6 @@
-package de.telekom.jbehave.webapp.taxi.config;
+package de.telekom.test.bddwebapp.taxi.config;
 
-import de.telekom.jbehave.webapp.stories.AbstractStory;
+import de.telekom.test.bddwebapp.stories.AbstractStory;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.i18n.LocalizedKeywords;

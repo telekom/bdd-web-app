@@ -1,7 +1,4 @@
-package de.telekom.jbehave.webapp.taxi.stories.registration;
-
-import de.telekom.jbehave.webapp.taxi.config.AbstractTaxiStory;
-import org.junit.Ignore;
+package de.telekom.test.bddwebapp.taxi.stories.registration;
 
 /**
  * @author Daniel Keiss
