@@ -1,5 +1,6 @@
 package de.telekom.jbehave.webapp.interaction
 
+import de.telekom.bdd.webapp.interaction.FlatInteraction
 import spock.lang.Specification
 
 class FlatInteractionSpec extends Specification {
