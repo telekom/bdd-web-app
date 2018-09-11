@@ -1,21 +1,11 @@
 $(document).ready(function () {
-
-    // submit reserve form
     $("#reserve-form").submit(function (event) {
-
-        //stop submit the form, we will post it manually.
         event.preventDefault();
-
         reserve();
     });
 });
 
-function isActive() {
-    return $.active > 0;
-}
-
 function reserve() {
-
     var reservation = {}
     reservation["date"] = $("#date").val();
     reservation["departure"] = $("#departure").val();
@@ -40,17 +30,17 @@ function reserve() {
 
             if (data.reservationPrices == null || data.reservationPrices.length == 0) {
                 $('#reserve').addClass("btn-warning");
-                var reservationHtml = "<h4>Die Reservierung ist nicht möglich!</h4>";
+                var reservationHtml = "<h4>The reservation is not possible!</h4>";
                 $('#reservation').html(reservationHtml);
             } else {
                 $('#reserve').addClass("btn-success");
-                var reservationHtml = "<h2>Reservierung erfolgreich!</h2>";
+                var reservationHtml = "<h2>Reservation successful!</h2>";
                 reservationHtml += "<table class='table table-striped'>";
-                reservationHtml += "<thead><tr><th>Zeitraum</th><th>Mitfahrer</th><th>Preis</th></tr></thead>";
+                reservationHtml += "<thead><tr><th>Period</th><th>Passengers</th><th>Price</th></tr></thead>";
                 reservationHtml += "<tbody>";
                 $(data.reservationPrices).each(function (index) {
                     var reservationPrice = data.reservationPrices[index];
-                    reservationHtml += "<tr><td>" + reservationPrice.startTime + " - " + reservationPrice.endTime + " Uhr</td><td>" + reservationPrice.passengers + "</td><td><strong>" + reservationPrice.price + " € </strong></td></tr>";
+                    reservationHtml += "<tr><td>" + reservationPrice.startTime + "h - " + reservationPrice.endTime + "h</td><td>" + reservationPrice.passengers + "</td><td><strong>" + reservationPrice.price + " € </strong></td></tr>";
                 });
                 reservationHtml += "</tbody>";
                 reservationHtml += "</table>";
@@ -66,7 +56,7 @@ function reserve() {
             $('#reserve').removeClass("btn-primary btn-success");
             $('#reserve').addClass("btn-warning");
 
-            var reservationHtml = "<h4>Leider ist ein Fehler aufgetreten!</h4>";
+            var reservationHtml = "<h4>Sorry, an error has occurred!</h4>";
             $('#reservation').html(reservationHtml);
 
             console.log("ERROR : ", e);
