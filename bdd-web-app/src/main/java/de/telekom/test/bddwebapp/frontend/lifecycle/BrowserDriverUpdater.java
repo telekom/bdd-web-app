@@ -1,9 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.EdgeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import io.github.bonigarcia.wdm.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -45,7 +42,6 @@ public class BrowserDriverUpdater {
      */
     public void updateDriver() {
         String browser = webDriverWrapper.getBrowser();
-
         switch (browser) {
             case "firefox": {
                 updateFirefox();
@@ -73,31 +69,31 @@ public class BrowserDriverUpdater {
 
     private void updateFirefox() {
         if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            FirefoxDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+            FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).proxy(proxyHost + ":" + proxyPort);
         }
-        FirefoxDriverManager.getInstance().setup();
+        FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
     }
 
     private void updateChrome() {
         System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
         if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            ChromeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+            ChromeDriverManager.getInstance(DriverManagerType.CHROME).proxy(proxyHost + ":" + proxyPort);
         }
-        ChromeDriverManager.getInstance().setup();
+        ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
     }
 
     private void updateEdge() {
         if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            EdgeDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+            EdgeDriverManager.getInstance(DriverManagerType.EDGE).proxy(proxyHost + ":" + proxyPort);
         }
-        EdgeDriverManager.getInstance().setup();
+        EdgeDriverManager.getInstance(DriverManagerType.EDGE).setup();
     }
 
     private void updateInternetExplorer() {
         if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            InternetExplorerDriverManager.getInstance().proxy(proxyHost + ":" + proxyPort);
+            InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).proxy(proxyHost + ":" + proxyPort);
         }
-        InternetExplorerDriverManager.getInstance().setup();
+        InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).setup();
     }
 
 }

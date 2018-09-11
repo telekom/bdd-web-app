@@ -20,13 +20,13 @@
 
         <!-- Framework dependencies -->
         <version.selenium>3.14.0</version.selenium>
-        <version.restassured>3.1.0</version.restassured>
-        <version.spring>5.0.8.RELEASE</version.spring>
-        <version.cglib>3.2.7</version.cglib>
+        <version.restassured>3.1.1</version.restassured>
+        <version.spring>5.0.9.RELEASE</version.spring>
+        <version.cglib>3.2.8</version.cglib>
         <version.slf4j>1.7.25</version.slf4j>
         <version.jbehave>4.3.5</version.jbehave>
         <version.jbehave.junit-runner>2.2.0</version.jbehave.junit-runner>
-        <version.webdrivermanager>2.2.4</version.webdrivermanager>
+        <version.webdrivermanager>3.0.0</version.webdrivermanager>
         <version.lombok>1.18.2</version.lombok>
 
         <!-- Test dependencies -->
