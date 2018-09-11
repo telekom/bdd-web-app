@@ -69,12 +69,12 @@ public class ReservationPage extends JQueryPage {
 
     public boolean isReservationSuccess() {
         waitForAjaxToComplete();
-        return reservationDiv.getText().contains("erfolgreich");
+        return reservationDiv.getText().contains("successful");
     }
 
     public boolean isReservationNotPossible() {
         waitForAjaxToComplete();
-        return reservationDiv.getText().contains("nicht möglich");
+        return reservationDiv.getText().contains("not possible");
     }
 
     public String getPriceBetweenStartAndEndTime(String startTime, String endTime, String passengers) {

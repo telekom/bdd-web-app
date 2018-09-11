@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registrierung - Sammeltaxi</title>
+    <title>Registration - shared taxi</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
 </head>
 <body>
 
@@ -13,28 +13,28 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
-            <h1>Registrieren</h1>
+            <h1>Registering</h1>
             <br/>
             <form id="registration-form" th:action="@{/registration}" method="post">
                 <div class="form-group">
-                    <label for="firstName">Vorname</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Vorname"/>
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name"/>
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Nachname</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Nachname"/>
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name"/>
                 </div>
                 <div class="form-group">
-                    <label for="username">Benutzername</label>
+                    <label for="username">User name</label>
                     <input type="email" class="form-control" id="username" name="username" required="true"
                            placeholder="E-Mail"/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required="true"
-                           placeholder="Passwort"/>
+                           placeholder="Password"/>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">Registrieren</button>
+                <button type="submit" class="btn btn-primary btn-lg">Register</button>
             </form>
         </div>
     </div>

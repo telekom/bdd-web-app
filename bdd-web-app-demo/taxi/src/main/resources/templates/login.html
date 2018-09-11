@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login - Sammeltaxi</title>
+    <title>Login - shared taxi</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"/>
 </head>
 <body>
 
@@ -19,19 +19,19 @@
     <br/>
     <div th:if="${registration}" class="row">
         <div class="col-lg-6">
-            <div class="alert alert-success">Sie haben sich erfolgreich registriert!</div>
+            <div class="alert alert-success">You have successfully registered!</div>
         </div>
     </div>
     <div th:if="${usernamePasswordInvalid}" class="row">
         <div class="col-lg-6">
-            <div class="alert alert-warning">Ihre Logindaten sind ungültig!</div>
+            <div class="alert alert-warning">Your login data is invalid!</div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-6">
             <form id="login-form" th:action="@{/login}" method="post">
                 <div class="form-group">
-                    <label for="username">Benutzername</label>
+                    <label for="username">User name</label>
                     <input type="email" class="form-control" id="username" name="username"
                            th:value="${username}" required="true"
                            placeholder="E-Mail"/>
@@ -39,16 +39,16 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required="true"
-                           placeholder="Passwort"/>
+                           placeholder="Password"/>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg">Anmelden</button>
+                <button type="submit" class="btn btn-primary btn-lg">Log In</button>
             </form>
         </div>
     </div>
     <br/>
     <div class="row">
         <div class="col-lg-6">
-            <p>Noch keinen Account? Hier <a href="/registration">Registrieren</a></p>
+            <p>No account yet? <a href="/registration">Register here</a></p>
         </div>
     </div>
 </div>

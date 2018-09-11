@@ -23,7 +23,7 @@ public class LoginPage extends JQueryPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementEnhanced submitButton;
 
-    @FindBy(partialLinkText = "Registrieren")
+    @FindBy(partialLinkText = "Register")
     private WebElementEnhanced registrationLink;
 
     @FindBy(className = "alert-success")
@@ -54,14 +54,14 @@ public class LoginPage extends JQueryPage {
 
     public boolean registeredMessageIsShown() {
         if (alertSuccessDiv.exists()) {
-            return alertSuccessDiv.getText().contains("registriert");
+            return alertSuccessDiv.getText().contains("registered");
         }
         return false;
     }
 
     public boolean loginDataIsInvalidMessageIsShown() {
         if (alertWarningDiv.exists()) {
-            return alertWarningDiv.getText().contains("ungültig");
+            return alertWarningDiv.getText().contains("invalid");
         }
         return false;
     }
