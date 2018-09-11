@@ -81,7 +81,9 @@ public class WebElementEnhanced {
     }
 
     public List<WebElementEnhanced> findElementsEnhanced(By by) {
-        return webElement.findElements(by).stream().map(element -> new WebElementEnhanced(element, webDriver)).collect(Collectors.toList());
+        return webElement.findElements(by).stream()
+                .map(element -> new WebElementEnhanced(element, webDriver))
+                .collect(Collectors.toList());
     }
 
     public String getText() {

@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.Date;
 
 import static java.text.MessageFormat.format;
+import static java.util.stream.IntStream.range;
 
 /**
  * Take screenshot on success and save to file system
@@ -74,14 +75,8 @@ public class ScreenshotOnSuccess {
 
     protected boolean isEmpty(BufferedImage bufferedImage) {
         Raster raster = bufferedImage.getData();
-        for (int x = 0; x < raster.getWidth(); x++) {
-            for (int y = 0; y < raster.getHeight(); y++) {
-                if (bufferedImage.getRGB(x, y) != 0xFFFFFFFF) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return range(0, raster.getWidth()).noneMatch(x ->
+                range(0, raster.getHeight()).anyMatch(y -> bufferedImage.getRGB(x, y) != 0xFFFFFFFF));
     }
 
 }

@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -64,17 +64,16 @@ public class WebElementHandler implements MethodInterceptor {
     }
 
     private Object invokeListContainingWebElementEnhanced(Object[] objects, MethodProxy methodProxy) throws Throwable {
-        List<Object> list = new ArrayList<>();
-        List<WebElement> elements = locator.findElements();
-        for (WebElement element : elements) {
-            WebElementEnhanced webElementEnhanced = new WebElementEnhanced();
-            webElementEnhanced.setWebElement(element);
-            webElementEnhanced.setWebDriver(webDriver);
-            list.add(webElementEnhanced);
-        }
-
+        List<WebElementEnhanced> webElementEnhanceds = locator.findElements().stream()
+                .map(webElement -> {
+                    WebElementEnhanced webElementEnhanced = new WebElementEnhanced();
+                    webElementEnhanced.setWebElement(webElement);
+                    webElementEnhanced.setWebDriver(webDriver);
+                    return webElementEnhanced;
+                })
+                .collect(Collectors.toList());
         try {
-            return methodProxy.invoke(list, objects);
+            return methodProxy.invoke(webElementEnhanceds, objects);
         } catch (InvocationTargetException e) {
             throw e.getCause();
         }
