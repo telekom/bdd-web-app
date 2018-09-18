@@ -1,8 +1,8 @@
-package de.telekom.test.bddwebapp.taxi.simulator;
+package de.telekom.test.bddwebapp.reservationSimulator;
 
-import de.telekom.test.bddwebapp.taxi.simulator.vo.ReservationConfigVO;
-import de.telekom.test.bddwebapp.taxi.simulator.vo.ReservationPricesVO;
-import de.telekom.test.bddwebapp.taxi.simulator.vo.ReservationVO;
+import de.telekom.test.bddwebapp.reservationSimulator.vo.ReservationConfigVO;
+import de.telekom.test.bddwebapp.reservationSimulator.vo.ReservationPricesVO;
+import de.telekom.test.bddwebapp.reservationSimulator.vo.ReservationVO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

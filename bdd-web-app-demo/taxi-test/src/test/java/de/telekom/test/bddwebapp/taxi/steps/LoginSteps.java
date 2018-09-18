@@ -38,19 +38,14 @@ public class LoginSteps extends SeleniumSteps {
         theLoginPageIsShown();
     }
 
-    @Given("logged in customer")
-    public void loggedInCustomer() {
-        registrationSteps.registeredUser();
+    @Given("logged in customer $testobject")
+    public void loggedInCustomer(String testobject) {
+        registrationSteps.registeredUser(testobject);
         theUserOpensTheLoginPage();
         theLoginPageIsShown();
-        theUserLogsIn();
+        theUserLogsIn(storyInteraction.recallObjectNotNull(testobject, "username"),
+                storyInteraction.recallObjectNotNull(testobject, "password"));
         reservationSteps.theReservationPageIsShown();
-    }
-
-    @Given("invalid log in data for user")
-    public void invalidLogInDataForUser() {
-        scenarioInteraction.remember("username", "invalid@user.de");
-        scenarioInteraction.remember("password", "passwort");
     }
 
     @When("the user opens the login page")
@@ -58,11 +53,11 @@ public class LoginSteps extends SeleniumSteps {
         open(getUrlWithHost(hostIncludingPort, LoginPage.URL));
     }
 
-    @When("the user logs in")
-    public void theUserLogsIn() {
+    @When("the user logs in $username $password")
+    public void theUserLogsIn(String username, String password) {
         LoginPage loginPage = getCurrentPage();
-        loginPage.setUsername(scenarioInteraction.recall("username"));
-        loginPage.setPassword(scenarioInteraction.recall("password"));
+        loginPage.setUsername(username);
+        loginPage.setPassword(password);
         loginPage.submitLogin();
     }
 

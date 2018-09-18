@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi;
+package de.telekom.test.bddwebapp;
 
 import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +19,7 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) throws Throwable {
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
@@ -37,9 +37,6 @@ public class Application {
         return registration;
     }
 
-    /*
-     * Path: jdbc:h2:tcp://localhost:9090/./db/pizza
-     */
     @Bean
     @ConditionalOnExpression("${h2.tcp.enabled:true}")
     public Server h2TcpServer() throws SQLException {

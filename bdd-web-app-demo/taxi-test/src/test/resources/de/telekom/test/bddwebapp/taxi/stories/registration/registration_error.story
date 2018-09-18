@@ -5,7 +5,8 @@ in order to fix the errors quickly.
 
 Scenario: Registration with application error
 Given the openend registration page
-And valid registration data with error for user
-When the user successfully completed the registration
+When the user register with
+|firstName|lastName|userName|password|
+|Hans|Müller|error@test.de|password|
 Then the login page is shown
 And the user receives the registered message

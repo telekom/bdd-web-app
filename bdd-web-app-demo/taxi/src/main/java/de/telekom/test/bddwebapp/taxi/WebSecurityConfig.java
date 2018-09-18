@@ -24,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/registration/**").permitAll()
+                .antMatchers("/testData/user/**").permitAll()
                 .antMatchers("/simulator/api/reservation/**").permitAll()
                 .antMatchers("/simulator/config/**").permitAll()
                 .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and().
@@ -35,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider);
     }
 

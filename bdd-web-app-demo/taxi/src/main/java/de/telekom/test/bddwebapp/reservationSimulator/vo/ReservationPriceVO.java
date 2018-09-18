@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.simulator.vo;
+package de.telekom.test.bddwebapp.reservationSimulator.vo;
 
 import lombok.Data;
 

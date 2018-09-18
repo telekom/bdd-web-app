@@ -160,4 +160,12 @@ public class RequestBuilder {
         return this;
     }
 
+    public Map<String, Object> getResponseAsMap() {
+        try {
+            return response.getBody().as(Map.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Error converting rest response to map. Response: [" + response.getBody().asString() + "]", e);
+        }
+    }
+
 }

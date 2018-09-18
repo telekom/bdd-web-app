@@ -40,7 +40,7 @@ public class RegistrationStepsGer extends RegistrationSteps {
 
     @When("der Nutzer die Registrierung durchführt")
     public void theUserSuccessfullyCompletedTheRegistration() {
-        super.theUserSuccessfullyCompletedTheRegistration();
+        super.theUserRegister();
     }
 
     @Then("wird die Registrierungsseite angezeigt")

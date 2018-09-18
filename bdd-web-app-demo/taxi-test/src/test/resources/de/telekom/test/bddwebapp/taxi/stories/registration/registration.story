@@ -10,13 +10,16 @@ Then the registration page is shown
 
 Scenario: Entering invalid registration data
 Given the openend registration page
-And invalid registration data for user
-When the user successfully completed the registration
+When the user register with
+|firstName|lastName|userName|password|
+|Hans|Müller|userName+$RANDOM+@test.de||
+|Hans|Müller||password|
 Then the registration page is shown
 And the user receives the message that the registration data is invalid
 
 Scenario: Successful registration
-Given valid registration data for user
-When the user successfully completed the registration
+When the user register with
+|firstName|lastName|userName|password|
+|Hans|Müller|userName+$RANDOM+@test.de|password|
 Then the login page is shown
 And the user receives the registered message

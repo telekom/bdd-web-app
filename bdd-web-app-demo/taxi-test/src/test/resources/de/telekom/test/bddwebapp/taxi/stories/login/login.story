@@ -8,15 +8,14 @@ When the user opens the login page
 Then the login page is shown
 
 Scenario: Input of invalid log data
-Given invalid log in data for user
-When the user logs in
+When the user logs in invalid@user.de passwort
 Then the login page is shown
 And the user receives the message that the login data is invalid
 
 Scenario: Successful login
-Given registered user
+Given registered user as user
 And the opened login page
-When the user logs in
+When the user logs in $user.username $user.password
 Then the reservation page is shown
 
 Scenario: Redirect to the log-in with existing session

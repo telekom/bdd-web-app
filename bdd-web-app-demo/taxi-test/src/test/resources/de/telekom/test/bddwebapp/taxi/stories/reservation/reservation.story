@@ -4,7 +4,7 @@ I would like to be able to make reservations for collective tickets for certain 
 in order to use any discounts.
 
 Scenario: Reservation is not possible for the given period, because there are no offers available
-Given logged in customer
+Given logged in customer user
 And possible reservation between 10:00 and 10:30
 When reserve a shared taxi
 Then the reservation is not successful

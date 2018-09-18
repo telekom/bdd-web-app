@@ -27,7 +27,7 @@ public class UserService {
 
     public void register(RegistrationVO registration) {
         // error in the control flow to demonstrate the reporting
-        if ("fehler@test.de".equals(registration.getUsername())) {
+        if ("error@test.de".equals(registration.getUsername())) {
             throw new RuntimeException("unexpected error");
         }
         User user = new User();
