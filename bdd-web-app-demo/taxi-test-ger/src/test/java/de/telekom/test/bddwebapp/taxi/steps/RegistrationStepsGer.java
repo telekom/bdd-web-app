@@ -4,6 +4,7 @@ import de.telekom.test.bddwebapp.steps.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 
 /**
  * @author Daniel Keiss
@@ -18,29 +19,14 @@ public class RegistrationStepsGer extends RegistrationSteps {
         super.theOpenRegistrationPage();
     }
 
-    @Given("ein registrierter Nutzer")
-    public void registeredUser() {
-        super.registeredUser();
+    @Given("ein registrierter Nutzer als $testobject")
+    public void registeredUser(String testobject) {
+        super.registeredUser(testobject);
     }
 
-    @Given("gültige Registrierungsdaten")
-    public void validRegistrationDataForUser() {
-        super.validRegistrationDataForUser();
-    }
-
-    @Given("gültige Registrierungsdaten mit Kontrollflussfehler in der Anwendung")
-    public void validRegistrationDataWithErrorForUser() {
-        super.validRegistrationDataWithErrorForUser();
-    }
-
-    @Given("ungültige Registrierungsdaten")
-    public void invalidRegistrationDataForUser() {
-        super.invalidRegistrationDataForUser();
-    }
-
-    @When("der Nutzer die Registrierung durchführt")
-    public void theUserSuccessfullyCompletedTheRegistration() {
-        super.theUserRegister();
+    @When("der Nutzer die Registrierung durchführt $testData")
+    public void theUserSuccessfullyCompletedTheRegistration(ExamplesTable testData) {
+        super.theUserRegister(testData);
     }
 
     @Then("wird die Registrierungsseite angezeigt")

@@ -18,14 +18,9 @@ public class LoginStepsGer extends LoginSteps {
         super.theOpenedLoginPage();
     }
 
-    @Given("ein eingeloggter Nutzer")
-    public void loggedInCustomer() {
-        super.loggedInCustomer();
-    }
-
-    @Given("ungültige Logindaten")
-    public void invalidLogInDataForUser() {
-        super.invalidLogInDataForUser();
+    @Given("ein eingeloggter Nutzer $testobject")
+    public void loggedInCustomer(String testobject) {
+        super.loggedInCustomer(testobject);
     }
 
     @When("der Nutzer die Startseite öffnet")
@@ -33,9 +28,9 @@ public class LoginStepsGer extends LoginSteps {
         super.theUserOpensTheLoginPage();
     }
 
-    @When("der Nutzer sich einloggt")
-    public void theUserLogsIn() {
-        super.theUserLogsIn();
+    @When("der Nutzer sich einloggt $username $password")
+    public void theUserLogsIn(String username, String password) {
+        super.theUserLogsIn(username, password);
     }
 
     @When("der Nutzer den Link zur Registrierung anklickt")
