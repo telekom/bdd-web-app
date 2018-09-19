@@ -1,6 +1,7 @@
-package de.telekom.test.bddwebapp.taxi.steps;
+package de.telekom.test.bddwebapp.taxi.ger.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.taxi.steps.LoginSteps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -28,7 +29,7 @@ public class LoginStepsGer extends LoginSteps {
         super.theUserOpensTheLoginPage();
     }
 
-    @When("der Nutzer sich einloggt $username $password")
+    @When("der Nutzer sich mit $username $password einloggt")
     public void theUserLogsIn(String username, String password) {
         super.theUserLogsIn(username, password);
     }

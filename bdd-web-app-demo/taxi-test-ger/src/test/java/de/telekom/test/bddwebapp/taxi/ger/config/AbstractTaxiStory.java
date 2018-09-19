@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.taxi.config;
+package de.telekom.test.bddwebapp.taxi.ger.config;
 
-import de.telekom.test.bddwebapp.stories.RunAllStories;
+import de.telekom.test.bddwebapp.stories.AbstractStory;
 import org.jbehave.core.configuration.Configuration;
 import org.springframework.context.ApplicationContext;
 
@@ -9,16 +9,11 @@ import org.springframework.context.ApplicationContext;
  * <p>
  * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
  */
-public class RunAllTaxiStories extends RunAllStories implements GermanKeywordsConfiguration {
+public abstract class AbstractTaxiStory extends AbstractStory implements GermanKeywordsConfiguration {
 
     @Override
     public ApplicationContext getApplicationContext() {
         return ApplicationContextProvider.getApplicationContext();
-    }
-
-    @Override
-    public String storiesBasePath() {
-        return "de.telekom.test.bddwebapp.taxi.stories";
     }
 
     @Override

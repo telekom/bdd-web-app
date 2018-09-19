@@ -1,6 +1,7 @@
-package de.telekom.test.bddwebapp.taxi.steps;
+package de.telekom.test.bddwebapp.taxi.ger.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.taxi.steps.ReservationSteps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;

@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.config;
+package de.telekom.test.bddwebapp.taxi.ger.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

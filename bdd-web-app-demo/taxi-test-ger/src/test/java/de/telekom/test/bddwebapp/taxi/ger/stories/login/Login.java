@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.taxi.stories.login;
+package de.telekom.test.bddwebapp.taxi.ger.stories.login;
 
-import de.telekom.test.bddwebapp.taxi.config.AbstractTaxiStory;
+import de.telekom.test.bddwebapp.taxi.ger.config.AbstractTaxiStory;
 
 /**
  * @author Daniel Keiss

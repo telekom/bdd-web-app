@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.stories.registration;
+package de.telekom.test.bddwebapp.taxi.ger.stories.registration;
 
 /**
  * @author Daniel Keiss

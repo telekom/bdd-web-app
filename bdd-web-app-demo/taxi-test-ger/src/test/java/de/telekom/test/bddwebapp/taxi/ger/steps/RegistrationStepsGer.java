@@ -1,6 +1,7 @@
-package de.telekom.test.bddwebapp.taxi.steps;
+package de.telekom.test.bddwebapp.taxi.ger.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.taxi.steps.RegistrationSteps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -19,12 +20,12 @@ public class RegistrationStepsGer extends RegistrationSteps {
         super.theOpenRegistrationPage();
     }
 
-    @Given("ein registrierter Nutzer als $testobject")
+    @Given("ein registrierter Nutzer namens $testobject")
     public void registeredUser(String testobject) {
         super.registeredUser(testobject);
     }
 
-    @When("der Nutzer die Registrierung durchführt $testData")
+    @When("der Nutzer die Registrierung mit folgenden Daten durchführt $testData")
     public void theUserSuccessfullyCompletedTheRegistration(ExamplesTable testData) {
         super.theUserRegister(testData);
     }

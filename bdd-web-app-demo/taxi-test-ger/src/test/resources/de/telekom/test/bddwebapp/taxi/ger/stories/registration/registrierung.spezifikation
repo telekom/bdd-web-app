@@ -10,13 +10,16 @@ Dann wird die Registrierungsseite angezeigt
 
 Szenario: Eingabe von ungültigen Registrierungsdaten
 Gegeben die geöffnete Registrierungsseite
-Und ungültige Registrierungsdaten
-Wenn der Nutzer die Registrierung durchführt
+Wenn der Nutzer die Registrierung mit folgenden Daten durchführt
+|firstName|lastName|userName|password|
+|Hans|Müller|userName+$RANDOM+@test.de||
+|Hans|Müller||password|
 Dann wird die Registrierungsseite angezeigt
 Und der Nutzer erhält die Nachricht, dass die Registrierungsdaten ungültig sind
 
 Szenario: Registrierung
-Gegeben gültige Registrierungsdaten
-Wenn der Nutzer die Registrierung durchführt
+Wenn der Nutzer die Registrierung mit folgenden Daten durchführt
+|firstName|lastName|userName|password|
+|Hans|Müller|userName+$RANDOM+@test.de|password|
 Dann wird die Loginseite angezeigt
 Und der Nutzer erhält die Nachricht, dass er registriert ist

@@ -53,7 +53,7 @@ public class LoginSteps extends SeleniumSteps {
         open(getUrlWithHost(hostIncludingPort, LoginPage.URL));
     }
 
-    @When("the user logs in $username $password")
+    @When("the user logs in with $username $password")
     public void theUserLogsIn(String username, String password) {
         LoginPage loginPage = getCurrentPage();
         loginPage.setUsername(username);
