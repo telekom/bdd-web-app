@@ -68,7 +68,7 @@ public abstract class RunAllStories extends JUnitStories {
     public List<String> storyPaths() {
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
-        Set<BeanDefinition> components = provider.findCandidateComponents("");
+        Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
 
         List<String> storyPaths = new ArrayList<>();
         for (BeanDefinition component : components) {
