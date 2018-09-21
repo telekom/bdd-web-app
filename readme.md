@@ -13,8 +13,8 @@ This JBehave extension make automated acceptance tests for web applications much
 
 ## Example project
 
-At the jbehave-web-app-demo folder you will find the example web-application, including the test-project using jbehave-web-app. 
-Here you will find an complete example of jbehave-web-app integration. 
+At the bdd-web-app-demo folder you will find the example web-application, including the test-project using bdd-web-app. 
+Here you will find an complete example of bdd-web-app integration. 
 
 The next sections will describe the integration of the test framework in general.
 
@@ -24,9 +24,9 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
 
 ```xml
             <dependency>
-                <groupId>de.telekom.jbehave</groupId>
-                <artifactId>jbehave-web-app</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bdd-web-app</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 
             </dependency>
 ```
@@ -35,11 +35,11 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
 
 You need four java classes for configuration.
 
-First add the spring configuration. Note that the component scan at jbehave-web-app package "de.telekom.jbehave.webapp" is needed.
+First add the spring configuration. Note that the component scan at bdd-web-app package "de.telekom.jbehave.webapp" is needed.
 
 ```java
 @Configuration
-@ComponentScan({"de.telekom.jbehave.webapp", "your.package.structure"})
+@ComponentScan({"de.telekom.test.bddwebapp", "your.package.structure"})
 public class TestConfig {
 }
 
@@ -109,7 +109,7 @@ If you want to integrate the test execution into your maven-lifecycle, then add 
 
 To build your first test you need a story class with the application context (described at configuration). The class name must be the same like your jbehave story file. Put the story file to the resources and use the same package structure like the class.
 
-Then build a steps class with your jbehave test steps. Use the *@Steps* annotation so that the jbehave-web-app framework will find the class. If you want to use the class for selenium tests, you can extend the *SeleniumSteps* class from the test-framework:
+Then build a steps class with your jbehave test steps. Use the *@Steps* annotation so that the bdd-web-app framework will find the class. If you want to use the class for selenium tests, you can extend the *SeleniumSteps* class from the test-framework:
 
 ```java
 @Steps
