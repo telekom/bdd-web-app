@@ -21,9 +21,11 @@ import java.util.List;
  * The WebElementEnhanced is integrated into the page objects using the @FindBy Annotation.
  * The use of WebElementEnhanced is not mandatory.
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
  */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebElementDecorator implements FieldDecorator {

@@ -9,9 +9,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * Abstract base class for page objects. Checks the current url when creating.
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
  */
 public abstract class Page {
 
@@ -31,7 +33,7 @@ public abstract class Page {
         driver.navigate().refresh();
     }
 
-    public void waitFor(long milliseconds){
+    public void waitFor(long milliseconds) {
         try {
             TimeUnit.MILLISECONDS.sleep(milliseconds);
         } catch (InterruptedException e) {

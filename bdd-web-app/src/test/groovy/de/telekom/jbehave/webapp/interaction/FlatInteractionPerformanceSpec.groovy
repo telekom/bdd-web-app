@@ -109,7 +109,7 @@ class FlatInteractionPerformanceSpec extends Specification {
         return key
     }
 
-    Long duration(Date start){
+    Long duration(Date start) {
         return new Date().getTime() - start.getTime()
     }
 

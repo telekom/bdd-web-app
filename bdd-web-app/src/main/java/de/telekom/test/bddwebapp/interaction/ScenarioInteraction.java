@@ -18,9 +18,11 @@ import java.util.Map;
  * After a first implementation of scenario interaction by Sven Schomaker, working for Deutsche Telekom AG in 2013.
  * <p>
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
  */
 @Component
 public class ScenarioInteraction extends FlatInteraction {

@@ -22,9 +22,11 @@ import static java.util.Arrays.asList;
  * The WebElementEnhanced is initially only created as a proxy. Only when accessing a method in the proxy object the element in the DOM is accessed.
  * Thus, as in the WebElement, an exception occurs with a failed DOM access when a method is called.
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
  */
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebElementHandler implements MethodInterceptor {

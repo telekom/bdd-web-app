@@ -27,17 +27,17 @@ import static java.util.stream.Collectors.toMap;
  * <p>
  * The advantage of this approach is the safe and fast availability of the test data, but be careful when saving large and deep maps.
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
  */
 public abstract class FlatInteraction implements Interaction {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-
     private static String OBJECT_KEY_SEPARATOR = ".";
     private static String LIST_ITEM_FORMAT = "[%d]";
-
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Getter
     protected Map<String, Object> context = Maps.newHashMap();
 

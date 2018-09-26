@@ -36,10 +36,12 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 /**
  * Manage the current WebDriver instance. Uses proven standard configurations for specific browsers. The lifecycle is determined by SeleniumTestRule.
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Igor Cernopolc - Initially added support for RemoteWebDriver
  * <p>
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
  */
 @Component
 public class WebDriverWrapper {

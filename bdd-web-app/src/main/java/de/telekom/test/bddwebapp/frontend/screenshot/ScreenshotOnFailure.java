@@ -19,17 +19,18 @@ import static java.text.MessageFormat.format;
 /**
  * Add failure screenshot to report
  *
- * @author Daniel Keiss
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2017 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
  */
 @AllArgsConstructor
 public class ScreenshotOnFailure {
 
-    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnFailure.class);
-
     protected final StoryReporterBuilder reporterBuilder;
     protected final WebDriverWrapper webDriverWrapper;
+    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnFailure.class);
 
     @AfterScenario(uponType = ScenarioType.EXAMPLE, uponOutcome = Outcome.FAILURE)
     public void afterScenarioWithExamplesFailure(UUIDExceptionWrapper uuidWrappedFailure) {
