@@ -23,7 +23,7 @@ import static java.util.stream.Collectors.toList;
 public interface ScannedStepsFactory {
 
     default InjectableStepsFactory scannedStepsFactory() {
-        Collection<Object> steps = getApplicationContext().getBeansWithAnnotation(Steps.class).values();
+        List<Object> steps = new ArrayList(getApplicationContext().getBeansWithAnnotation(Steps.class).values());
         return new InstanceStepsFactory(configuration(), steps);
     }
 

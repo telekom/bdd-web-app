@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.stories;
+package de.telekom.test.bddwebapp.stories.config;
 
 import org.jbehave.core.io.StoryPathResolver;
 import org.jbehave.core.io.UnderscoredCamelCaseResolver;

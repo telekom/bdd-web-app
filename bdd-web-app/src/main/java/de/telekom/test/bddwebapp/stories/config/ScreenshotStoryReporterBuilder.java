@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.stories;
+package de.telekom.test.bddwebapp.stories.config;
 
 import de.telekom.test.bddwebapp.frontend.screenshot.ScreenshotReportForm;
 import org.jbehave.core.io.CodeLocations;
