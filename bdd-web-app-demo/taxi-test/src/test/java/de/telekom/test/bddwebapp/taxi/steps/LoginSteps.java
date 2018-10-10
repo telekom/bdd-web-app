@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.LoginPage;
@@ -22,10 +21,9 @@ import static org.junit.Assert.assertTrue;
 @Steps
 public class LoginSteps extends SeleniumSteps {
 
-    @Autowired
-    protected WebDriverWrapper webDriverWrapper;
     @Value("${hostIncludingPort}")
     private String hostIncludingPort;
+
     @Autowired
     private ReservationSteps reservationSteps;
 

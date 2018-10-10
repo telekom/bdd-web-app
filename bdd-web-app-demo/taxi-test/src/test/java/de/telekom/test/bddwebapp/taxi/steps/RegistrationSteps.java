@@ -2,7 +2,6 @@ package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.api.RequestBuilder;
 import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
-import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.RegistrationPage;
 import org.jbehave.core.annotations.Given;
@@ -33,9 +32,6 @@ public class RegistrationSteps extends SeleniumSteps {
 
     @Value("${hostIncludingPort}")
     private String hostIncludingPort;
-
-    @Autowired
-    private StoryInteraction storyInteraction;
 
     @Autowired
     private RequestBuilder requestBuilder;
