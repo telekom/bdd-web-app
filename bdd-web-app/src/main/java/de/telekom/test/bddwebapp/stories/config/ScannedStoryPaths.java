@@ -60,7 +60,7 @@ public interface ScannedStoryPaths {
 //        if(aClass.getDeclaredAnnotation(StoryRunner.class) == null){
 //            return containsTestLevel(testLevel, aClass.getSuperclass());
 //        }
-        return Arrays.asList(aClass.getDeclaredAnnotation(StoryRunner.class).testLevels()).contains(testLevel);
+        return Arrays.asList(aClass.getDeclaredAnnotation(TestLevel.class).testLevels()).contains(testLevel);
     }
 
     /*

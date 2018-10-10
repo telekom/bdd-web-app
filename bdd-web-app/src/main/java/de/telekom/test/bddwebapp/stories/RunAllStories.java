@@ -1,14 +1,15 @@
 package de.telekom.test.bddwebapp.stories;
 
+import com.github.valfirst.jbehave.junit.monitoring.JUnitReportingRunner;
 import de.telekom.test.bddwebapp.steps.ScannedStepsFactory;
 import de.telekom.test.bddwebapp.stories.config.FaultTolerantStoryPathResolver;
 import de.telekom.test.bddwebapp.stories.config.ScannedStoryPaths;
 import de.telekom.test.bddwebapp.stories.config.ScreenshotStoryReporterBuilder;
-import de.telekom.test.bddwebapp.stories.config.StoryRunner;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.steps.InjectableStepsFactory;
+import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@StoryRunner
+@RunWith(JUnitReportingRunner.class)
 public abstract class RunAllStories extends JUnitStories implements ScannedStepsFactory, ScreenshotStoryReporterBuilder, FaultTolerantStoryPathResolver, ScannedStoryPaths {
 
     @Override
