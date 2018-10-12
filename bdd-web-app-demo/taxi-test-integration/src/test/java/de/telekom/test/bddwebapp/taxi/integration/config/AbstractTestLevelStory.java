@@ -4,9 +4,7 @@ import de.telekom.test.bddwebapp.stories.AbstractStory;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.springframework.context.ApplicationContext;
 
-public class AbstractTestLevelStory extends AbstractStory {
-
-    private final int testLevel = 1;
+public abstract class AbstractTestLevelStory extends AbstractStory {
 
     @Override
     public ApplicationContext getApplicationContext() {
@@ -15,7 +13,7 @@ public class AbstractTestLevelStory extends AbstractStory {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return testLevelStepsFactory(testLevel);
+        return testLevelStepsFactory(getTestLevel());
     }
 
 }

@@ -22,6 +22,6 @@ import java.lang.annotation.*;
 @Component
 public @interface Steps {
 
-    int testlevel() default 0;
+    int testLevel() default 0;
 
 }

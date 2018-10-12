@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.lang.ClassLoader.getSystemClassLoader;
+import static java.util.stream.Collectors.toList;
 import static org.springframework.util.ClassUtils.resolveClassName;
 
 /**
@@ -36,7 +36,7 @@ public interface ScannedStoryPaths {
         return components.stream()
                 .map(beanDefinition -> resolveClassName(beanDefinition.getBeanClassName(), getSystemClassLoader()))
                 .map(aClass -> storyPathResolver.resolve((Class<? extends Embeddable>) aClass))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     default List<String> testLevelStoryPaths(int testLevel) {
@@ -47,20 +47,13 @@ public interface ScannedStoryPaths {
         List<String> list = new ArrayList<>();
         for (BeanDefinition beanDefinition : components) {
             Class<?> aClass = resolveClassName(beanDefinition.getBeanClassName(), getSystemClassLoader());
-            if (containsTestLevel(testLevel, aClass)) {
+            TestLevel testLevelAnnotation = aClass.getAnnotation(TestLevel.class);
+            if (testLevelAnnotation == null || Arrays.stream(testLevelAnnotation.testLevels()).anyMatch(annotationTestLevel -> annotationTestLevel == testLevel)) {
                 String resolve = storyPathResolver.resolve((Class<? extends Embeddable>) aClass);
                 list.add(resolve);
             }
         }
         return list;
-    }
-
-    // TODO this currently doesn't work
-    default boolean containsTestLevel(int testLevel, Class<?> aClass) {
-//        if(aClass.getDeclaredAnnotation(StoryRunner.class) == null){
-//            return containsTestLevel(testLevel, aClass.getSuperclass());
-//        }
-        return Arrays.asList(aClass.getDeclaredAnnotation(TestLevel.class).testLevels()).contains(testLevel);
     }
 
     /*

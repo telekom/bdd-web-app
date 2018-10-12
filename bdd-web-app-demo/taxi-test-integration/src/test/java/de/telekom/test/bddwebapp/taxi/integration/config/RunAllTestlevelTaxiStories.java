@@ -13,9 +13,7 @@ import java.util.List;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class RunAllSimulatedTaxiStories extends RunAllStories {
-
-    private final int testLevel = 0;
+public class RunAllTestlevelTaxiStories extends RunAllStories {
 
     @Override
     public ApplicationContext getApplicationContext() {
@@ -24,17 +22,20 @@ public class RunAllSimulatedTaxiStories extends RunAllStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return testLevelStepsFactory(testLevel);
+        return testLevelStepsFactory(getTestLevel());
     }
 
     @Override
     public List<String> storyPaths() {
-        return testLevelStoryPaths(testLevel);
+        return testLevelStoryPaths(getTestLevel());
     }
 
+    /*
+     * Empty base path for test level selection testing
+     */
     @Override
     public String storiesBasePath() {
-        return "de.telekom.test.bddwebapp.taxi.integration.stories";
+        return "de.telekom.test.bddwebapp.taxi.integration";
     }
 
 }

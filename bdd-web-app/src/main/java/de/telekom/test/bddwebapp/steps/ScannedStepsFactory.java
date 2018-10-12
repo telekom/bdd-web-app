@@ -32,16 +32,24 @@ public interface ScannedStepsFactory {
 
         List<Object> selectedSteps = new ArrayList<>();
         for (Object step : allSteps) {
-            int stepTestLevel = step.getClass().getAnnotation(Steps.class).testlevel();
+            int stepTestLevel = step.getClass().getAnnotation(Steps.class).testLevel();
             if (testLevel >= stepTestLevel) {
                 selectedSteps.add(step);
                 selectedSteps.removeAll(selectedSteps.stream()
                         .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()))
-                        .filter(selectedStep -> selectedStep.getClass().getAnnotation(Steps.class).testlevel() < stepTestLevel)
+                        .filter(selectedStep -> selectedStep.getClass().getAnnotation(Steps.class).testLevel() < stepTestLevel)
                         .collect(toList()));
             }
         }
         return new InstanceStepsFactory(configuration(), selectedSteps);
+    }
+
+    default int getTestLevel() {
+        Integer testLevel = getApplicationContext().getEnvironment().getProperty("testLevel", Integer.class);
+        if (testLevel == null) {
+            return 0;
+        }
+        return testLevel;
     }
 
     ApplicationContext getApplicationContext();

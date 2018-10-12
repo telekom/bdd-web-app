@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps(testlevel = 1)
+@Steps(testLevel = 1)
 public class RegistrationStepsIntegration extends RegistrationSteps {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
