@@ -8,7 +8,6 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -44,16 +43,15 @@ public interface ScannedStoryPaths {
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
         Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
         StoryPathResolver storyPathResolver = configuration().storyPathResolver();
-        List<String> list = new ArrayList<>();
-        for (BeanDefinition beanDefinition : components) {
-            Class<?> aClass = resolveClassName(beanDefinition.getBeanClassName(), getSystemClassLoader());
-            TestLevel testLevelAnnotation = aClass.getAnnotation(TestLevel.class);
-            if (testLevelAnnotation == null || Arrays.stream(testLevelAnnotation.testLevels()).anyMatch(annotationTestLevel -> annotationTestLevel == testLevel)) {
-                String resolve = storyPathResolver.resolve((Class<? extends Embeddable>) aClass);
-                list.add(resolve);
-            }
-        }
-        return list;
+        return components.stream()
+                .map(beanDefinition -> resolveClassName(beanDefinition.getBeanClassName(), getSystemClassLoader()))
+                .filter(aClass -> {
+                    TestLevel testLevelAnnotation = aClass.getAnnotation(TestLevel.class);
+                    return testLevelAnnotation == null || Arrays.stream(testLevelAnnotation.testLevels())
+                            .anyMatch(annotationTestLevel -> annotationTestLevel == testLevel);
+                })
+                .map(aClass -> storyPathResolver.resolve((Class<? extends Embeddable>) aClass))
+                .collect(toList());
     }
 
     /*

@@ -28,19 +28,19 @@ public interface ScannedStepsFactory {
     }
 
     default InjectableStepsFactory testLevelStepsFactory(int testLevel) {
-        Collection<Object> allSteps = getApplicationContext().getBeansWithAnnotation(Steps.class).values();
-
         List<Object> selectedSteps = new ArrayList<>();
-        for (Object step : allSteps) {
+        Collection<Object> allSteps = getApplicationContext().getBeansWithAnnotation(Steps.class).values();
+        allSteps.forEach(step -> {
             int stepTestLevel = step.getClass().getAnnotation(Steps.class).testLevel();
             if (testLevel >= stepTestLevel) {
                 selectedSteps.add(step);
+                // remove parents with lower test level
                 selectedSteps.removeAll(selectedSteps.stream()
                         .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()))
                         .filter(selectedStep -> selectedStep.getClass().getAnnotation(Steps.class).testLevel() < stepTestLevel)
                         .collect(toList()));
             }
-        }
+        });
         return new InstanceStepsFactory(configuration(), selectedSteps);
     }
 
