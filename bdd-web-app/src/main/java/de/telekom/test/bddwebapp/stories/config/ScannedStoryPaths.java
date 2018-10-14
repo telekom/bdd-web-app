@@ -46,9 +46,9 @@ public interface ScannedStoryPaths {
         return components.stream()
                 .map(beanDefinition -> resolveClassName(beanDefinition.getBeanClassName(), getSystemClassLoader()))
                 .filter(aClass -> {
-                    TestLevel testLevelAnnotation = aClass.getAnnotation(TestLevel.class);
-                    return testLevelAnnotation == null || Arrays.stream(testLevelAnnotation.testLevels())
-                            .anyMatch(annotationTestLevel -> annotationTestLevel == testLevel);
+                    TestLevel atl = aClass.getAnnotation(TestLevel.class);
+                    return (atl == null && testLevel == 0) ||
+                            (atl != null && Arrays.stream(atl.testLevels()).anyMatch(tl -> tl == testLevel));
                 })
                 .map(aClass -> storyPathResolver.resolve((Class<? extends Embeddable>) aClass))
                 .collect(toList());
