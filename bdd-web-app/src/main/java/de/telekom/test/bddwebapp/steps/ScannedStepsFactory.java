@@ -36,8 +36,8 @@ public interface ScannedStepsFactory {
                 selectedSteps.add(step);
                 // remove parents with lower test level
                 selectedSteps.removeAll(selectedSteps.stream()
-                        .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()))
-                        .filter(selectedStep -> selectedStep.getClass().getAnnotation(Steps.class).testLevel() < stepTestLevel)
+                        .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()) || selectedStep.getClass().isAssignableFrom(step.getClass()))
+                        .filter(selectedStep -> selectedStep.getClass().getAnnotation(Steps.class).testLevel() < step.getClass().getAnnotation(Steps.class).testLevel())
                         .collect(toList()));
             }
         });
