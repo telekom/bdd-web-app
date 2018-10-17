@@ -1,6 +1,6 @@
-package groovy.de.telekom.jbehave.webapp.interaction
+package de.telekom.jbehave.webapp.interaction
 
-import de.telekom.bdd.webapp.interaction.FlatInteraction
+import de.telekom.test.bddwebapp.interaction.FlatInteraction
 import spock.lang.Specification
 
 import java.text.NumberFormat
