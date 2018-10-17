@@ -106,7 +106,12 @@ public class LifecyleSteps {
     }
 
     private String getStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {
-        return storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1)).toString();
+        String value = storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1)).toString();
+        // get list values as comma separated list, e.g. [value] is value or [value1,value2] is value1,value2
+        if (value.startsWith("[") && value.endsWith("]")) {
+            value = value.substring(1, value.length() - 1);
+        }
+        return value;
     }
 
     public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
