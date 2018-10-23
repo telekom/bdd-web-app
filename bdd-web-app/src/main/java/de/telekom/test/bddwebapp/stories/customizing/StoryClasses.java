@@ -1,5 +1,7 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -19,6 +21,10 @@ import java.util.Map;
 public class StoryClasses {
 
     private final Map<String, Class> storyClasses = new HashMap();
+
+    @Getter
+    @Setter
+    private boolean apiOnlyForAllStories;
 
     public void setStoryClass(Class clazz, String name) {
         storyClasses.put(name, clazz);

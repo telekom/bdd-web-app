@@ -7,6 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Disabled the frontend instrumentalisation for single api stories or for the whole test project.
+ * This annotation can be used at instances of AbstractStory and RunAllStories.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>

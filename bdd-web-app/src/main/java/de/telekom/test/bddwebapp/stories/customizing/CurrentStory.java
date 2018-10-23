@@ -40,6 +40,9 @@ public class CurrentStory {
     }
 
     public boolean isApiOnly() {
+        if (storyClasses.isApiOnlyForAllStories()) {
+            return true;
+        }
         Class clazz = getStoryClass();
         if (clazz == null) {
             return false;
