@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.stories.config;
+package de.telekom.test.bddwebapp.api;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Additional test level annotation to run stories on different environments.
+ * Disabled the frontend instrumentalisation for single api stories or for the whole test project.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
@@ -16,8 +16,5 @@ import java.lang.annotation.Target;
  */
 @Target(value = ElementType.TYPE)
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface TestLevel {
-
-    int[] testLevels() default 0;
-
+public @interface ApiOnly {
 }

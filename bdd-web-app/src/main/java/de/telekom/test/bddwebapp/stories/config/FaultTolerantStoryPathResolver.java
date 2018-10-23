@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.stories.config;
 
+import de.telekom.test.bddwebapp.stories.customizing.CustomizingStoryPathResolver;
 import org.jbehave.core.io.StoryPathResolver;
-import org.jbehave.core.io.UnderscoredCamelCaseResolver;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -16,10 +16,9 @@ import org.springframework.context.ApplicationContext;
 public interface FaultTolerantStoryPathResolver {
 
     default StoryPathResolver removeStoryFromClassNameStoryPathResolver() {
-        return new UnderscoredCamelCaseResolver().removeFromClassName("Story");
+        return new CustomizingStoryPathResolver(getApplicationContext()).removeFromClassName("Story");
     }
 
     ApplicationContext getApplicationContext();
-
 
 }

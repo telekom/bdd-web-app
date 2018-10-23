@@ -7,6 +7,15 @@ import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.springframework.context.ApplicationContext;
 
+/**
+ * Enhanced the JBehave story report builder by screenshots.
+ *
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
+ * <p>
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
+ */
 public interface ScreenshotStoryReporterBuilder {
 
     default StoryReporterBuilder screenshotStoryReporterBuilder() {

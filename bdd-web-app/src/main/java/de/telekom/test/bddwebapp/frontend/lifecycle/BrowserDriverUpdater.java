@@ -26,8 +26,8 @@ public class BrowserDriverUpdater {
 
     private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
-    private final @NonNull
-    WebDriverWrapper webDriverWrapper;
+    @NonNull
+    private final WebDriverWrapper webDriverWrapper;
 
     @Value("${webdriver.proxy.host:#{null}}")
     private String proxyHost;

@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.junit.rules.MethodRule;
@@ -26,8 +27,11 @@ public class SeleniumTestRule implements MethodRule {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final @NonNull
-    WebDriverWrapper webDriverWrapper;
+    @NonNull
+    private final CurrentStory currentStory;
+
+    @NonNull
+    private final WebDriverWrapper webDriverWrapper;
 
     @Override
     public Statement apply(Statement statement, FrameworkMethod frameworkMethod, Object o) {
@@ -35,9 +39,13 @@ public class SeleniumTestRule implements MethodRule {
 
             @Override
             public void evaluate() throws Throwable {
-                startBrowser();
-                statement.evaluate();
-                stopBrowser();
+                if (currentStory.isApiOnly()) {
+                    statement.evaluate();
+                } else {
+                    startBrowser();
+                    statement.evaluate();
+                    stopBrowser();
+                }
             }
 
             private void startBrowser() {

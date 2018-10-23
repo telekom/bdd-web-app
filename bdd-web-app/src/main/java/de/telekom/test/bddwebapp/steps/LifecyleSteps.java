@@ -4,6 +4,7 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
@@ -35,6 +36,8 @@ public class LifecyleSteps {
     ScenarioInteraction scenarioInteraction;
     protected final @NonNull
     StoryInteraction storyInteraction;
+    protected final @NonNull
+    CurrentStory currentStory;
 
     private final @NonNull
     WebDriverWrapper webDriverWrapper;
@@ -49,7 +52,9 @@ public class LifecyleSteps {
     @BeforeStory
     public void startStoryInteraction() {
         storyInteraction.startInteraction();
-        webDriverWrapper.loadWebdriver();
+        if (!currentStory.isApiOnly()) {
+            webDriverWrapper.loadWebdriver();
+        }
     }
 
     @BeforeScenario(uponType = ScenarioType.NORMAL)
@@ -70,7 +75,9 @@ public class LifecyleSteps {
 
     @AfterStory
     public void afterStory() {
-        webDriverWrapper.quit();
+        if (!currentStory.isApiOnly()) {
+            webDriverWrapper.quit();
+        }
     }
 
     @AfterStories
