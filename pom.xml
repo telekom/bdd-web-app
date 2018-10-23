@@ -16,7 +16,7 @@
         <module>bdd-web-app-demo/taxi</module>
         <module>bdd-web-app-demo/taxi-test</module>
         <module>bdd-web-app-demo/taxi-test-ger</module>
-        <module>bdd-web-app-demo/taxi-test-integrative</module>
+        <module>bdd-web-app-demo/taxi-test-customzing</module>
     </modules>
 
 </project>
