@@ -30,9 +30,10 @@ import static java.util.stream.IntStream.range;
 @AllArgsConstructor
 public class ScreenshotOnSuccess {
 
+    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnSuccess.class);
+
     protected final StoryReporterBuilder reporterBuilder;
     protected final WebDriverWrapper webDriverWrapper;
-    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnSuccess.class);
 
     public String makeScreenshot(String storyFolder, String step) {
         long timestamp = new Date().getTime();
@@ -59,7 +60,7 @@ public class ScreenshotOnSuccess {
 
     protected String getScreenshotName(String contextPath, long timestamp) {
         String screenshotName = contextPath.replaceAll("/", ".");
-        screenshotName = screenshotName.substring(1, screenshotName.length());
+        screenshotName = screenshotName.substring(1);
         screenshotName = screenshotName.replaceAll(".xhtml", "");
         return "success-" + timestamp + "_" + screenshotName;
     }

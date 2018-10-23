@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jbehave.core.embedder.PrintStreamEmbedderMonitor;
 import org.springframework.context.ApplicationContext;
@@ -17,6 +18,7 @@ import org.springframework.context.ApplicationContext;
 @RequiredArgsConstructor
 public class CurrentStoryEmbedderMonitor extends PrintStreamEmbedderMonitor {
 
+    @NonNull
     private final ApplicationContext applicationContext;
 
     @Override

@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
 
 /**
  * Gives access to the current story about the Spring Context
@@ -44,7 +44,7 @@ public class CurrentStory {
         if (clazz == null) {
             return false;
         }
-        return asList(clazz.getAnnotations()).stream()
+        return stream(clazz.getAnnotations())
                 .anyMatch(annotation -> annotation.annotationType().equals(ApiOnly.class));
     }
 

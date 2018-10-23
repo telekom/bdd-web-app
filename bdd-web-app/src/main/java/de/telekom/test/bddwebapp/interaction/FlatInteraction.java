@@ -37,7 +37,9 @@ public abstract class FlatInteraction implements Interaction {
 
     private static String OBJECT_KEY_SEPARATOR = ".";
     private static String LIST_ITEM_FORMAT = "[%d]";
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Getter
     protected Map<String, Object> context = Maps.newHashMap();
 

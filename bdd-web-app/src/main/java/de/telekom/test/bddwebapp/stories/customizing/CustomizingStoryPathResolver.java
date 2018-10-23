@@ -18,8 +18,8 @@ import org.springframework.context.ApplicationContext;
 @RequiredArgsConstructor
 public class CustomizingStoryPathResolver extends UnderscoredCamelCaseResolver {
 
-    private final @NonNull
-    ApplicationContext applicationContext;
+    @NonNull
+    private final ApplicationContext applicationContext;
 
     public StoryClasses getStoryClasses() {
         return applicationContext.getBean(StoryClasses.class);

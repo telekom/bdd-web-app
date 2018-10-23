@@ -28,9 +28,10 @@ import static java.text.MessageFormat.format;
 @AllArgsConstructor
 public class ScreenshotOnFailure {
 
+    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnFailure.class);
+
     protected final StoryReporterBuilder reporterBuilder;
     protected final WebDriverWrapper webDriverWrapper;
-    private final Logger logger = LoggerFactory.getLogger(ScreenshotOnFailure.class);
 
     @AfterScenario(uponType = ScenarioType.EXAMPLE, uponOutcome = Outcome.FAILURE)
     public void afterScenarioWithExamplesFailure(UUIDExceptionWrapper uuidWrappedFailure) {

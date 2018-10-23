@@ -30,8 +30,8 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebElementDecorator implements FieldDecorator {
 
-    private final @NonNull
-    WebDriver webDriver;
+    @NonNull
+    private final WebDriver webDriver;
 
     public Object decorate(ClassLoader loader, Field field) {
         DefaultElementLocatorFactory defaultElementLocatorFactory = new DefaultElementLocatorFactory(webDriver);
