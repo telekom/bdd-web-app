@@ -24,7 +24,7 @@ public class CurrentStoryEmbedderMonitor extends PrintStreamEmbedderMonitor {
     @Override
     public void runningStory(String path) {
         CurrentStory currentStory = applicationContext.getBean(CurrentStory.class);
-        currentStory.setFullStoryPath(path);
+        currentStory.setStoryPath(path);
         super.runningStory(path);
     }
 

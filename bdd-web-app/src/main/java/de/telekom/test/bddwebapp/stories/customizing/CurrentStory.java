@@ -29,10 +29,10 @@ public class CurrentStory {
 
     @Getter
     @Setter
-    private String fullStoryPath;
+    private String storyPath;
 
     public String getStoryName() {
-        return fullStoryPath.substring(fullStoryPath.lastIndexOf("/") + 1, fullStoryPath.lastIndexOf("."));
+        return storyPath.substring(storyPath.lastIndexOf("/") + 1, storyPath.lastIndexOf("."));
     }
 
     public Class getStoryClass() {
