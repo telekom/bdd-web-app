@@ -35,7 +35,7 @@ public class RunAllTestlevelTaxiStories extends RunAllStories {
      */
     @Override
     public String storiesBasePath() {
-        return "de.telekom.test.bddwebapp.taxi.integration";
+        return "de.telekom.test.bddwebapp.taxi.customizing";
     }
 
 }
