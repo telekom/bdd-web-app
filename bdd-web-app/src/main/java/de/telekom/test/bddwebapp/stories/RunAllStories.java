@@ -3,11 +3,11 @@ package de.telekom.test.bddwebapp.stories;
 import com.github.valfirst.jbehave.junit.monitoring.JUnitReportingRunner;
 import de.telekom.test.bddwebapp.api.ApiOnly;
 import de.telekom.test.bddwebapp.steps.ScannedStepsFactory;
-import de.telekom.test.bddwebapp.stories.customizing.CurrentStoryEmbedderMonitor;
 import de.telekom.test.bddwebapp.stories.config.FaultTolerantStoryPathResolver;
 import de.telekom.test.bddwebapp.stories.config.ScannedStoryPaths;
 import de.telekom.test.bddwebapp.stories.config.ScreenshotStoryReporterBuilder;
-import de.telekom.test.bddwebapp.stories.customizing.StoryClasses;
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStoryEmbedderMonitor;
+import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.Embedder;
@@ -59,13 +59,16 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
 
     @Override
     public void run() throws Throwable {
-        if(apiOnly()){
-            StoryClasses storyClasses = getApplicationContext().getBean(StoryClasses.class);
+        if (apiOnly()) {
+            CustomizingStories storyClasses = getApplicationContext().getBean(CustomizingStories.class);
             storyClasses.setApiOnlyForAllStories(true);
         }
         super.run();
     }
 
+    /**
+     * Check this if instance has the @ApiOnly annotation
+     */
     public boolean apiOnly() {
         return stream(this.getClass().getAnnotations())
                 .anyMatch(annotation -> annotation.annotationType().equals(ApiOnly.class));

@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
+import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import io.github.bonigarcia.wdm.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,9 @@ public class BrowserDriverUpdater {
     private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
     @NonNull
+    private final CustomizingStories customizingStories;
+
+    @NonNull
     private final WebDriverWrapper webDriverWrapper;
 
     @Value("${webdriver.proxy.host:#{null}}")
@@ -43,6 +47,9 @@ public class BrowserDriverUpdater {
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
+        if (customizingStories.isApiOnlyForAllStories()) {
+            return;
+        }
         String browser = webDriverWrapper.getBrowser();
         switch (browser) {
             case "firefox": {

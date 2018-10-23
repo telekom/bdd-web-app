@@ -21,8 +21,8 @@ public class CustomizingStoryPathResolver extends UnderscoredCamelCaseResolver {
     @NonNull
     private final ApplicationContext applicationContext;
 
-    public StoryClasses getStoryClasses() {
-        return applicationContext.getBean(StoryClasses.class);
+    public CustomizingStories getStoryClasses() {
+        return applicationContext.getBean(CustomizingStories.class);
     }
 
     protected String resolveName(Class<? extends Embeddable> embeddableClass) {

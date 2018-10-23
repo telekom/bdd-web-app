@@ -18,7 +18,7 @@ import java.util.Map;
  * For details see the file license on the toplevel.
  */
 @Component
-public class StoryClasses {
+public class CustomizingStories {
 
     private final Map<String, Class> storyClasses = new HashMap();
 
