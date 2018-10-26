@@ -12,11 +12,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <version.surefire>2.22.1</version.surefire>
-        <version.jbehave>4.3.5</version.jbehave>
-        <version.jbehave.site-resources>3.3.1</version.jbehave.site-resources>
+        <surefire.version>2.22.1</surefire.version>
+        <jbehave.version>4.3.5</jbehave.version>
+        <jbehave.site-resources.version>3.3.1</jbehave.site-resources.version>
 
-        <version.bdd-web-app>1.1-SNAPSHOT</version.bdd-web-app>
+        <bdd-web-app.version>1.1-SNAPSHOT</bdd-web-app.version>
     </properties>
 
     <build>
@@ -24,7 +24,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${version.surefire}</version>
+                <version>${surefire.version}</version>
                 <configuration>
                     <includes>
                         <include>**/RunAllGerTaxiStories.java</include>
@@ -46,7 +46,7 @@
                                 <artifactItem>
                                     <groupId>org.jbehave.site</groupId>
                                     <artifactId>jbehave-site-resources</artifactId>
-                                    <version>${version.jbehave.site-resources}</version>
+                                    <version>${jbehave.site-resources.version}</version>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
                                 </artifactItem>
@@ -64,7 +64,7 @@
                                 <artifactItem>
                                     <groupId>org.jbehave</groupId>
                                     <artifactId>jbehave-core</artifactId>
-                                    <version>${version.jbehave}</version>
+                                    <version>${jbehave.version}</version>
                                     <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
                                     <includes>**\/*.css,**\/*.ftl,**\/*.js</includes>
                                 </artifactItem>
@@ -81,7 +81,7 @@
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bdd-web-app</artifactId>
-                <version>${version.bdd-web-app}</version>
+                <version>${bdd-web-app.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
