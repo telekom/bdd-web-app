@@ -3,7 +3,6 @@ package de.telekom.test.bddwebapp.frontend.screenshot;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -19,7 +18,8 @@ import java.util.Date;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.IntStream.range;
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNoneBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * Take screenshot on success and save to file system
@@ -42,36 +42,31 @@ public class ScreenshotOnSuccess {
 
     public String makeScreenshot(String storyFolder, String step) {
         WebDriver driver = webDriverWrapper.getDriver();
-        if(driver == null){
-            return null;
-        }
-        long timestamp = new Date().getTime();
-        String currentUrl = driver.getCurrentUrl();
-        if (isBlank(currentUrl)) {
-            return null;
-        }
-        try {
-            logger.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
-            URL url = new URL(currentUrl);
-            String contextPath = url.getPath();
-            String screenshotName = getScreenshotName(contextPath, timestamp);
-            String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
-            screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
-            if (StringUtils.isNoneBlank(screenshotPath) && screenshotIsNotEmpty(screenshotPath)) {
-                logger.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
-                return format("../screenshots/{0}/{1}.png", storyFolder, screenshotName);
+        String currentUrl;
+        if (driver != null && isNotBlank(currentUrl = driver.getCurrentUrl())) {
+            try {
+                logger.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
+                URL url = new URL(currentUrl);
+                String contextPath = url.getPath();
+                String screenshotName = getScreenshotName(contextPath);
+                String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
+                screenshotPath = webDriverWrapper.saveScreenshotTo(screenshotPath);
+                if (isNoneBlank(screenshotPath) && screenshotIsNotEmpty(screenshotPath)) {
+                    logger.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
+                    return format("../screenshots/{0}/{1}.png", storyFolder, screenshotName);
+                }
+            } catch (Exception e) {
+                logger.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
             }
-        } catch (Exception e) {
-            logger.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
         }
         return null;
     }
 
-    protected String getScreenshotName(String contextPath, long timestamp) {
+    protected String getScreenshotName(String contextPath) {
         String screenshotName = contextPath.replaceAll("/", ".");
         screenshotName = screenshotName.substring(1);
         screenshotName = screenshotName.replaceAll(".xhtml", "");
-        return "success-" + timestamp + "_" + screenshotName;
+        return "success-" + new Date().getTime() + "_" + screenshotName;
     }
 
     protected boolean screenshotIsNotEmpty(String screenshotPath) {
