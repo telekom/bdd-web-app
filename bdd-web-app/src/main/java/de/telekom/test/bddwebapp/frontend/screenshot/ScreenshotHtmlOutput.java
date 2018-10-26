@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.frontend.screenshot;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.failures.UUIDExceptionWrapper;
 import org.jbehave.core.model.Story;
 import org.jbehave.core.reporters.HtmlOutput;
@@ -8,6 +7,8 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 
 import java.io.PrintStream;
 import java.util.Date;
+
+import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 
 /**
  * Render screenshots for success and error at report
@@ -52,7 +53,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
     public void successful(String step) {
         if (screenshotsOnSuccess && step.contains("Then")) {
             String screenshotOnSuccessPath = screenshotMakerOnSuccess.makeScreenshot(currentStoryFolder, step);
-            if (StringUtils.isNoneBlank(screenshotOnSuccessPath)) {
+            if (isNoneBlank(screenshotOnSuccessPath)) {
                 this.print(this.format("successfulWithLink", "{0} {1}\n", screenshotOnSuccessPath, step));
                 return;
             }

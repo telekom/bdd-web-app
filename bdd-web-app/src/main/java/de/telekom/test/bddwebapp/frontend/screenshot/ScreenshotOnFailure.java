@@ -43,6 +43,9 @@ public class ScreenshotOnFailure {
         if (uuidWrappedFailure instanceof PendingStepFound) {
             return;
         }
+        if (webDriverWrapper.getDriver() == null) {
+            return;
+        }
         String screenshotPath = screenshotPath(uuidWrappedFailure.getUUID());
         String currentUrl = "[unknown page title]";
         try {

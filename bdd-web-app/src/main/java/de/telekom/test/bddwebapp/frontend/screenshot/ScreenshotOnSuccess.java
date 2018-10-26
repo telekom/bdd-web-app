@@ -2,8 +2,10 @@ package de.telekom.test.bddwebapp.frontend.screenshot;
 
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.jbehave.core.reporters.StoryReporterBuilder;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +19,7 @@ import java.util.Date;
 
 import static java.text.MessageFormat.format;
 import static java.util.stream.IntStream.range;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Take screenshot on success and save to file system
@@ -32,13 +35,19 @@ public class ScreenshotOnSuccess {
 
     private final Logger logger = LoggerFactory.getLogger(ScreenshotOnSuccess.class);
 
+    @NonNull
     protected final StoryReporterBuilder reporterBuilder;
+    @NonNull
     protected final WebDriverWrapper webDriverWrapper;
 
     public String makeScreenshot(String storyFolder, String step) {
+        WebDriver driver = webDriverWrapper.getDriver();
+        if(driver == null){
+            return null;
+        }
         long timestamp = new Date().getTime();
-        String currentUrl = webDriverWrapper.getDriver().getCurrentUrl();
-        if (StringUtils.isBlank(currentUrl)) {
+        String currentUrl = driver.getCurrentUrl();
+        if (isBlank(currentUrl)) {
             return null;
         }
         try {

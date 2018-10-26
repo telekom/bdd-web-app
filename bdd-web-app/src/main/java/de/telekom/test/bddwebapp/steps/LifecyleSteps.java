@@ -32,17 +32,16 @@ public class LifecyleSteps {
      */
     public static final String CURRENT_PAGE = "CURRENT_PAGE";
 
-    protected final @NonNull
-    ScenarioInteraction scenarioInteraction;
-    protected final @NonNull
-    StoryInteraction storyInteraction;
-    protected final @NonNull
-    CurrentStory currentStory;
-
-    private final @NonNull
-    WebDriverWrapper webDriverWrapper;
-    private final @NonNull
-    BrowserDriverUpdater browserDriverUpdater;
+    @NonNull
+    protected final ScenarioInteraction scenarioInteraction;
+    @NonNull
+    protected final StoryInteraction storyInteraction;
+    @NonNull
+    protected final CurrentStory currentStory;
+    @NonNull
+    private final WebDriverWrapper webDriverWrapper;
+    @NonNull
+    private final BrowserDriverUpdater browserDriverUpdater;
 
     @BeforeStories
     public void updateDriver() {
