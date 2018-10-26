@@ -12,9 +12,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <version.surefire>2.21.0</version.surefire>
-        <version.jbehave>4.3.3</version.jbehave>
+        <version.surefire>2.22.1</version.surefire>
+        <version.jbehave>4.3.5</version.jbehave>
         <version.jbehave.site-resources>3.3.1</version.jbehave.site-resources>
+
         <version.bdd-web-app>1.1-SNAPSHOT</version.bdd-web-app>
     </properties>
 
@@ -26,7 +27,10 @@
                 <version>${version.surefire}</version>
                 <configuration>
                     <includes>
-                        <include>**/RunAllTaxiStories.java</include>
+                        <include>**/RunAllTestlevel0TaxiStories.java</include>
+                        <include>**/RunAllTestlevel1TaxiStories.java</include>
+                        <include>**/RunAllTestlevel2TaxiStories.java</include>
+                        <include>**/RunAllTestlevel2ApiOnlyTaxiStories.java</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -36,7 +40,7 @@
                 <executions>
                     <execution>
                         <id>unpack-jbehave-site-resources</id>
-                        <phase>generate-resources</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
@@ -54,7 +58,7 @@
                     </execution>
                     <execution>
                         <id>unpack-jbehave-reports-resources</id>
-                        <phase>generate-resources</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
