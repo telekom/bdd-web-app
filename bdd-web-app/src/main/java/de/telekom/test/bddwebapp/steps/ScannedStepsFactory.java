@@ -32,9 +32,9 @@ public interface ScannedStepsFactory {
         List<Object> selectedSteps = new ArrayList<>();
         Collection<Object> allSteps = getApplicationContext().getBeansWithAnnotation(Steps.class).values();
         allSteps = allSteps.stream()
-                .sorted(comparing(o -> o.getClass().getAnnotation(Steps.class).testLevel()).reversed())
+                .sorted(comparing(o -> o.getClass().getAnnotation(Steps.class).testLevel()))
                 .collect(toList());
-        allSteps.forEach(step -> {
+        allSteps.stream().forEachOrdered(step -> {
             int stepTestLevel = step.getClass().getAnnotation(Steps.class).testLevel();
             if (testLevel >= stepTestLevel) {
                 selectedSteps.add(step);
