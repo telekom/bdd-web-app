@@ -1,4 +1,4 @@
-package de.telekom.jbehave.webapp.interaction
+package de.telekom.test.bddwebapp.interaction
 
 import de.telekom.test.bddwebapp.interaction.FlatInteraction
 import spock.lang.Specification

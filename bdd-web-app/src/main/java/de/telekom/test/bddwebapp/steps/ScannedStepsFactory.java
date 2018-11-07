@@ -6,7 +6,6 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
@@ -30,21 +29,19 @@ public interface ScannedStepsFactory {
 
     default InjectableStepsFactory testLevelStepsFactory(int testLevel) {
         List<Object> selectedSteps = new ArrayList<>();
-        Collection<Object> allSteps = getApplicationContext().getBeansWithAnnotation(Steps.class).values();
-        allSteps = allSteps.stream()
+        getApplicationContext().getBeansWithAnnotation(Steps.class).values().stream()
                 .sorted(comparing(o -> o.getClass().getAnnotation(Steps.class).testLevel()))
-                .collect(toList());
-        allSteps.stream().forEachOrdered(step -> {
-            int stepTestLevel = step.getClass().getAnnotation(Steps.class).testLevel();
-            if (testLevel >= stepTestLevel) {
-                selectedSteps.add(step);
-                List<Object> lowerTestLevelThanSelected = selectedSteps.stream()
-                        .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()) || selectedStep.getClass().isAssignableFrom(step.getClass()))
-                        .filter(selectedStep -> selectedStep.getClass().getAnnotation(Steps.class).testLevel() < step.getClass().getAnnotation(Steps.class).testLevel())
-                        .collect(toList());
-                selectedSteps.removeAll(lowerTestLevelThanSelected);
-            }
-        });
+                .forEachOrdered(step -> {
+                    int stepTestLevel = step.getClass().getAnnotation(Steps.class).testLevel();
+                    if (testLevel >= stepTestLevel) {
+                        selectedSteps.add(step);
+                        List<Object> lowerTestLevelThanSelected = selectedSteps.stream()
+                                .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()) || selectedStep.getClass().isAssignableFrom(step.getClass()))
+                                .filter(assignedStep -> assignedStep.getClass().getAnnotation(Steps.class).testLevel() < step.getClass().getAnnotation(Steps.class).testLevel())
+                                .collect(toList());
+                        selectedSteps.removeAll(lowerTestLevelThanSelected);
+                    }
+                });
         return new InstanceStepsFactory(configuration(), selectedSteps);
     }
 
