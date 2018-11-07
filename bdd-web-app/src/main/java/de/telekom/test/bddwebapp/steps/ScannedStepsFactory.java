@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -30,15 +31,18 @@ public interface ScannedStepsFactory {
     default InjectableStepsFactory testLevelStepsFactory(int testLevel) {
         List<Object> selectedSteps = new ArrayList<>();
         Collection<Object> allSteps = getApplicationContext().getBeansWithAnnotation(Steps.class).values();
+        allSteps = allSteps.stream()
+                .sorted(comparing(o -> o.getClass().getAnnotation(Steps.class).testLevel()).reversed())
+                .collect(toList());
         allSteps.forEach(step -> {
             int stepTestLevel = step.getClass().getAnnotation(Steps.class).testLevel();
             if (testLevel >= stepTestLevel) {
                 selectedSteps.add(step);
-                // remove parents with lower test level
-                selectedSteps.removeAll(selectedSteps.stream()
+                List<Object> lowerTestLevelThanSelected = selectedSteps.stream()
                         .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()) || selectedStep.getClass().isAssignableFrom(step.getClass()))
                         .filter(selectedStep -> selectedStep.getClass().getAnnotation(Steps.class).testLevel() < step.getClass().getAnnotation(Steps.class).testLevel())
-                        .collect(toList()));
+                        .collect(toList());
+                selectedSteps.removeAll(lowerTestLevelThanSelected);
             }
         });
         return new InstanceStepsFactory(configuration(), selectedSteps);
