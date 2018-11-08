@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.Integer.valueOf;
+import static java.util.Comparator.comparingInt;
 
 /**
  * Steps factory for automatic step instantiation by class path scan
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
- * @author Yasin Yildiz {@literal <YildizY@telekom.de>} - Coauthor of the test level steps factory
+ * @author Yasin Yildiz {@literal <YildizY@telekom.de>} - Coauthor of the optimized test level steps factory
  * <p>
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
@@ -33,12 +33,10 @@ public interface ScannedStepsFactory {
         List<Object> stepsMatchingTestLevel = getApplicationContext().getBeansWithAnnotation(Steps.class).values().stream()
                 .filter(step -> step.getClass().getAnnotation(Steps.class).testLevel() <= testLevel)
                 .collect(Collectors.toList());
-        stepsMatchingTestLevel.forEach(currentStep -> {
-            stepsMatchingTestLevel.stream()
-                    .filter(step -> currentStep.getClass().isAssignableFrom(step.getClass()) || step.getClass().isAssignableFrom(currentStep.getClass()))
-                    .max((step1, step2) -> valueOf(step1.getClass().getAnnotation(Steps.class).testLevel()).compareTo(step2.getClass().getAnnotation(Steps.class).testLevel()))
-                    .ifPresent(stepWithHighestTestLevel -> selectedSteps.add(stepWithHighestTestLevel));
-        });
+        stepsMatchingTestLevel.forEach(currentStep -> stepsMatchingTestLevel.stream()
+                .filter(step -> currentStep.getClass().isAssignableFrom(step.getClass()) || step.getClass().isAssignableFrom(currentStep.getClass()))
+                .max(comparingInt(step -> step.getClass().getAnnotation(Steps.class).testLevel()))
+                .ifPresent(selectedSteps::add));
         return new InstanceStepsFactory(configuration(), selectedSteps);
     }
 
