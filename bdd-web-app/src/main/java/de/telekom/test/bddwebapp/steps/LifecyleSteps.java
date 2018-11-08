@@ -39,9 +39,11 @@ public class LifecyleSteps {
     @NonNull
     protected final CurrentStory currentStory;
     @NonNull
-    private final WebDriverWrapper webDriverWrapper;
+    protected final WebDriverWrapper webDriverWrapper;
     @NonNull
-    private final BrowserDriverUpdater browserDriverUpdater;
+    protected final BrowserDriverUpdater browserDriverUpdater;
+    @NonNull
+    protected final StoryInteractionParameterConverter storyInteractionParameterConverter;
 
     @BeforeStories
     public void updateDriver() {
@@ -86,38 +88,7 @@ public class LifecyleSteps {
 
     @AsParameterConverter
     public String checkForStoryInteractionKeyAndGetValue(String possibleStoryInteractionKeyOrValue) {
-        // concatenated string with story interaction value
-        if (possibleStoryInteractionKeyOrValue.contains("$") && possibleStoryInteractionKeyOrValue.contains("+")) {
-            return concatenatedStringWithStoryInteractionValue(possibleStoryInteractionKeyOrValue);
-        }
-        // only story interaction value
-        else if (possibleStoryInteractionKeyOrValue.startsWith("$")) {
-            return getStoryInteractionValue(possibleStoryInteractionKeyOrValue);
-        }
-        // regular test value
-        return possibleStoryInteractionKeyOrValue;
-    }
-
-    private String concatenatedStringWithStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {
-        String[] split = possibleStoryInteractionKeyOrValue.split("\\+");
-        StringBuilder concatedValue = new StringBuilder();
-        for (String s : split) {
-            if (s.startsWith("$")) {
-                concatedValue.append(getStoryInteractionValue(s));
-            } else {
-                concatedValue.append(s);
-            }
-        }
-        return concatedValue.toString();
-    }
-
-    private String getStoryInteractionValue(String possibleStoryInteractionKeyOrValue) {
-        String value = storyInteraction.recallNotNull(possibleStoryInteractionKeyOrValue.substring(1)).toString();
-        // get list values as comma separated list, e.g. [value] is value or [value1,value2] is value1,value2
-        if (value.startsWith("[") && value.endsWith("]")) {
-            value = value.substring(1, value.length() - 1);
-        }
-        return value;
+        return storyInteractionParameterConverter.getValue(possibleStoryInteractionKeyOrValue);
     }
 
     public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
