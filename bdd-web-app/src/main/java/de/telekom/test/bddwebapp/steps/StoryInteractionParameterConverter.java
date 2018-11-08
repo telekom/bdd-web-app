@@ -22,6 +22,9 @@ import static java.util.stream.Stream.of;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StoryInteractionParameterConverter {
 
+    public static String KEY_LITERAL = "$";
+    public static String CONCATENATED_LITERAL = "+";
+
     @NonNull
     private final StoryInteraction storyInteraction;
 
@@ -33,15 +36,15 @@ public class StoryInteractionParameterConverter {
     }
 
     protected boolean isKey(String keyOrValueOrConcatenated) {
-        return keyOrValueOrConcatenated.startsWith("$");
+        return keyOrValueOrConcatenated.startsWith(KEY_LITERAL);
     }
 
     protected boolean isConcatenatedKey(String keyOrValueOrConcatenated) {
-        return keyOrValueOrConcatenated.contains("$") && keyOrValueOrConcatenated.contains("+");
+        return keyOrValueOrConcatenated.contains(KEY_LITERAL) && keyOrValueOrConcatenated.contains(CONCATENATED_LITERAL);
     }
 
     protected String concatenatedKey(String concatenatedKey) {
-        return of(concatenatedKey.split("\\+"))
+        return of(concatenatedKey.split("\\" + CONCATENATED_LITERAL))
                 .map(this::mapToValue)
                 .collect(joining());
     }
