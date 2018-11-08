@@ -11,6 +11,7 @@ class ScannedStepsFactoryTest extends Specification {
     def configurationMock = Mock(Configuration.class)
     def testStepLevel0 = new TestLevel0Step();
     def testStepLevel1 = new TestLevel1Step();
+    def testLevel0ExtendsTestLevel1Step = new TestLevel0ExtendsTestLevel1Step();
     def testLevel1ExtendsTestLevel0Step = new TestLevel1ExtendsTestLevel0Step();
 
     ScannedStepsFactory scannedStepsFactory = new ScannedStepsFactory() {
@@ -45,6 +46,19 @@ class ScannedStepsFactoryTest extends Specification {
         factory.stepsInstances.values().asList() == [testStepLevel0]
     }
 
+    def "run test level 0 with test level 0 step that extends test level 1 step"() {
+        given:
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+                ["testLevel0"                     : testStepLevel0,
+                 "testLevel0ExtendsTestLevel1Step": testLevel0ExtendsTestLevel1Step,
+                 "testLevel1"                     : testStepLevel1,
+                 "testLevel1Extended"             : testLevel1ExtendsTestLevel0Step]
+        when:
+        InstanceStepsFactory factory = scannedStepsFactory.testLevelStepsFactory(0)
+        then:
+        factory.stepsInstances.values().asList() == [testStepLevel0, testLevel0ExtendsTestLevel1Step]
+    }
+
     def "run test level 1 with test level 1 steps only"() {
         given:
         scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
@@ -65,7 +79,7 @@ class ScannedStepsFactoryTest extends Specification {
         when:
         InstanceStepsFactory factory = scannedStepsFactory.testLevelStepsFactory(1)
         then:
-        factory.stepsInstances.values().asList() == [testStepLevel1, testLevel1ExtendsTestLevel0Step]
+        factory.stepsInstances.values().asList() == [testLevel1ExtendsTestLevel0Step, testStepLevel1]
     }
 
     def "run test level 1 with steps on different test level with different order"() {

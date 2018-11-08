@@ -7,9 +7,9 @@ import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
+import static java.lang.Integer.valueOf;
 
 /**
  * Steps factory for automatic step instantiation by class path scan
@@ -29,19 +29,15 @@ public interface ScannedStepsFactory {
 
     default InjectableStepsFactory testLevelStepsFactory(int testLevel) {
         List<Object> selectedSteps = new ArrayList<>();
-        getApplicationContext().getBeansWithAnnotation(Steps.class).values().stream()
-                .sorted(comparing(o -> o.getClass().getAnnotation(Steps.class).testLevel()))
-                .forEachOrdered(step -> {
-                    int stepTestLevel = step.getClass().getAnnotation(Steps.class).testLevel();
-                    if (testLevel >= stepTestLevel) {
-                        selectedSteps.add(step);
-                        List<Object> lowerTestLevelThanSelected = selectedSteps.stream()
-                                .filter(selectedStep -> step.getClass().isAssignableFrom(selectedStep.getClass()) || selectedStep.getClass().isAssignableFrom(step.getClass()))
-                                .filter(assignedStep -> assignedStep.getClass().getAnnotation(Steps.class).testLevel() < step.getClass().getAnnotation(Steps.class).testLevel())
-                                .collect(toList());
-                        selectedSteps.removeAll(lowerTestLevelThanSelected);
-                    }
-                });
+        List<Object> stepsMatchingTestLevel = getApplicationContext().getBeansWithAnnotation(Steps.class).values().stream()
+                .filter(step -> step.getClass().getAnnotation(Steps.class).testLevel() <= testLevel)
+                .collect(Collectors.toList());
+        stepsMatchingTestLevel.forEach(currentStep -> {
+            stepsMatchingTestLevel.stream()
+                    .filter(step -> currentStep.getClass().isAssignableFrom(step.getClass()) || step.getClass().isAssignableFrom(currentStep.getClass()))
+                    .max((step1, step2) -> valueOf(step1.getClass().getAnnotation(Steps.class).testLevel()).compareTo(step2.getClass().getAnnotation(Steps.class).testLevel()))
+                    .ifPresent(step -> selectedSteps.add(step));
+        });
         return new InstanceStepsFactory(configuration(), selectedSteps);
     }
 
