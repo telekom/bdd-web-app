@@ -36,15 +36,11 @@ fi
 
 ## Start
 echo ""
-echo "--> vse_ci_execute_YETI, installation on ${INSTUSER}@${DEPLOYHOST}"
+echo "--> vse_ci_execute_BDD-WEB-APP, installation on ${INSTUSER}@${DEPLOYHOST}"
 
 ###
 ## stop services
 kill_tomcat ${INSTUSER}
-
-## check necessary directories
-check_and_create_directory deploy_revisions/YETI_JENKINS/app-config
-check_and_create_directory deploy_revisions/YETI_JENKINS/app_config_orig
 
 ## deploy packages
 echo "Copying ${CONTEXT_BDD_WEB_APP}.war"
