@@ -49,7 +49,7 @@ check_and_create_directory deploy_revisions/${TOMCAT_TARGET_DIR}
 
 ## deploy packages
 echo "Copying ${CONTEXT_BDD_WEB_APP}.war"
-scp -p ${CI_DIR}/${JOBNAME}/bdd-web-app-demo/taxi/target/${TAXI_NAME}-${TAXI-VERSION}.war  ${INSTUSER}@${DEPLOYHOST}:/home/${INSTUSER}/tomcat/deploy_revisions/${TOMCAT_TARGET_DIR}/${CONTEXT_BDD_WEB_APP}.war
+scp -p ${CI_DIR}/${JOBNAME}/bdd-web-app-demo/taxi/target/${TAXI_NAME}-${TAXI_VERSION}.war  ${INSTUSER}@${DEPLOYHOST}:/home/${INSTUSER}/tomcat/deploy_revisions/${TOMCAT_TARGET_DIR}/${CONTEXT_BDD_WEB_APP}.war
 
 echo "Cleanup enviroment"
 ssh ${INSTUSER}@${DEPLOYHOST} rm -Rf /home/${INSTUSER}/tomcat/tmp/
