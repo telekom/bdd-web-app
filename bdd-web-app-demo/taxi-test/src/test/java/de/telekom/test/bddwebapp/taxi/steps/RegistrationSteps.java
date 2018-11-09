@@ -55,7 +55,7 @@ public class RegistrationSteps extends SeleniumSteps {
 
     @When("the user register with $testData")
     public void theUserRegister(ExamplesTable testData) {
-        lifecyleSteps.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
+        storyInteractionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
     }
 
     private void theUserRegister(Map<String, String> testData) {

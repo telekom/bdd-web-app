@@ -1,5 +1,9 @@
 package de.telekom.test.bddwebapp.steps
 
+import de.telekom.test.bddwebapp.steps.testlevel.TestLevel0ExtendsTestLevel1Step
+import de.telekom.test.bddwebapp.steps.testlevel.TestLevel0Step
+import de.telekom.test.bddwebapp.steps.testlevel.TestLevel1ExtendsTestLevel0Step
+import de.telekom.test.bddwebapp.steps.testlevel.TestLevel1Step
 import org.jbehave.core.configuration.Configuration
 import org.jbehave.core.steps.InstanceStepsFactory
 import org.springframework.context.ApplicationContext

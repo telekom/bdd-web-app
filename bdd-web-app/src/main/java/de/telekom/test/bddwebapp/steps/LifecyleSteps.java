@@ -5,14 +5,11 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
+import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
-import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -39,15 +36,17 @@ public class LifecyleSteps {
     @NonNull
     protected final CurrentStory currentStory;
     @NonNull
+    protected final CustomizingStories customizingStories;
+    @NonNull
     protected final WebDriverWrapper webDriverWrapper;
     @NonNull
     protected final BrowserDriverUpdater browserDriverUpdater;
-    @NonNull
-    protected final StoryInteractionParameterConverter storyInteractionParameterConverter;
 
     @BeforeStories
     public void updateDriver() {
-        browserDriverUpdater.updateDriver();
+        if (!customizingStories.isApiOnlyForAllStories()) {
+            browserDriverUpdater.updateDriver();
+        }
     }
 
     @BeforeStory
@@ -68,7 +67,7 @@ public class LifecyleSteps {
         setupSequenceInteraction();
     }
 
-    private void setupSequenceInteraction() {
+    protected void setupSequenceInteraction() {
         scenarioInteraction.startInteraction();
         storyInteraction.setScenarioInteraction(scenarioInteraction);
         scenarioInteraction.setStoryInteraction(storyInteraction);
@@ -76,25 +75,12 @@ public class LifecyleSteps {
 
     @AfterStory
     public void afterStory() {
-        if (!currentStory.isApiOnly()) {
-            webDriverWrapper.quit();
-        }
+        webDriverWrapper.quit();
     }
 
     @AfterStories
     public void afterStories() {
         webDriverWrapper.quit();
-    }
-
-    @AsParameterConverter
-    public String checkForStoryInteractionKeyAndGetValue(String possibleStoryInteractionKeyOrValue) {
-        return storyInteractionParameterConverter.getValue(possibleStoryInteractionKeyOrValue);
-    }
-
-    public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
-        List<Map<String, String>> rows = examplesTable.getRows();
-        rows.forEach(map -> map.entrySet().forEach(entry -> entry.setValue(checkForStoryInteractionKeyAndGetValue(entry.getValue()))));
-        return rows;
     }
 
 }

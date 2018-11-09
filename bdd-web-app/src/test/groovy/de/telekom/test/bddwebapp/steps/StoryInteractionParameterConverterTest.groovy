@@ -9,7 +9,7 @@ class StoryInteractionParameterConverterTest extends Specification {
 
     def "simple value"() {
         when:
-        def value = storyInteractionParameterConverter.getValue('value')
+        def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('value')
         then:
         value == "value"
     }
@@ -18,7 +18,7 @@ class StoryInteractionParameterConverterTest extends Specification {
         given:
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key') >> 'value'
         when:
-        def value = storyInteractionParameterConverter.getValue('$key')
+        def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('$key')
         then:
         value == "value"
     }
@@ -27,7 +27,7 @@ class StoryInteractionParameterConverterTest extends Specification {
         given:
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key') >> ['value']
         when:
-        def value = storyInteractionParameterConverter.getValue('$key')
+        def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('$key')
         then:
         value == "value"
     }
@@ -36,7 +36,7 @@ class StoryInteractionParameterConverterTest extends Specification {
         given:
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key') >> ['value1', 'value2']
         when:
-        def value = storyInteractionParameterConverter.getValue('$key')
+        def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('$key')
         then:
         value == "value1, value2"
     }
@@ -46,7 +46,7 @@ class StoryInteractionParameterConverterTest extends Specification {
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key1') >> 'value1'
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key2') >> 'value2'
         when:
-        def value = storyInteractionParameterConverter.getValue('$key1+$key2')
+        def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('$key1+$key2')
         then:
         value == "value1value2"
     }
@@ -56,7 +56,7 @@ class StoryInteractionParameterConverterTest extends Specification {
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key2') >> 'value2'
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key3') >> 'value3'
         when:
-        def value = storyInteractionParameterConverter.getValue('value1 +$key2+ +$key3+ value4')
+        def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('value1 +$key2+ +$key3+ value4')
         then:
         value == "value1 value2 value3 value4"
     }

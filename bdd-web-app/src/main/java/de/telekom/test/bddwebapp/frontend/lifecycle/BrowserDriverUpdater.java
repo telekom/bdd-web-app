@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
-import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import io.github.bonigarcia.wdm.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -27,17 +26,13 @@ public class BrowserDriverUpdater {
 
     private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
-    @NonNull
-    private final CustomizingStories customizingStories;
+    @Value("${webdriver.proxy.host:#{null}}")
+    private String proxyHost;
+    @Value("${webdriver.proxy.port:#{null}}")
+    private String proxyPort;
 
     @NonNull
     private final WebDriverWrapper webDriverWrapper;
-
-    @Value("${webdriver.proxy.host:#{null}}")
-    private String proxyHost;
-
-    @Value("${webdriver.proxy.port:#{null}}")
-    private String proxyPort;
 
     /*
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
@@ -47,9 +42,6 @@ public class BrowserDriverUpdater {
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
-        if (customizingStories.isApiOnlyForAllStories()) {
-            return;
-        }
         String browser = webDriverWrapper.getBrowser();
         switch (browser) {
             case "firefox": {

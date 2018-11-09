@@ -7,6 +7,7 @@ import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.steps.LifecyleSteps;
+import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -39,6 +40,9 @@ public abstract class SeleniumSteps {
 
     @Autowired
     protected LifecyleSteps lifecyleSteps;
+
+    @Autowired
+    protected StoryInteractionParameterConverter storyInteractionParameterConverter;
 
     protected synchronized <T extends Page> T createExpectedPage(Class<T> expectedPage) {
         WebDriver driver = webDriverWrapper.getDriver();
