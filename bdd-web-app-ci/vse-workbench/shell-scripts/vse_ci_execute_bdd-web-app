@@ -42,6 +42,9 @@ echo "--> vse_ci_execute_BDD-WEB-APP, installation on ${INSTUSER}@${DEPLOYHOST}"
 ## stop services
 kill_tomcat ${INSTUSER}
 
+## check necessary directories
+check_and_create_directory deploy_revisions/${TOMCAT_TARGET_DIR}
+
 ## deploy packages
 echo "Copying ${CONTEXT_BDD_WEB_APP}.war"
 scp -p ${CI_DIR}/${JOBNAME}/bdd-web-app/target/${CONTEXT_BDD_WEB_APP}.war  ${INSTUSER}@${DEPLOYHOST}:/home/${INSTUSER}/tomcat/deploy_revisions/${TOMCAT_TARGET_DIR}/${CONTEXT_BDD_WEB_APP}.war
