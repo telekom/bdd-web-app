@@ -8,7 +8,6 @@ import org.jbehave.core.annotations.Given;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 
 /**
@@ -23,9 +22,6 @@ public class RegistrationStepsTestLevel extends RegistrationSteps {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Value("${hostIncludingPort}")
-    private String hostIncludingPort;
-
     @Autowired
     private StoryInteraction storyInteraction;
 
@@ -35,9 +31,10 @@ public class RegistrationStepsTestLevel extends RegistrationSteps {
     @Override
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
-        logger.info("Create registered user in real system");
-        requestBuilder.requestWithJsonConfig(hostIncludingPort, "testData/user", "", "").post();
-        storyInteraction.rememberObject(testobject, requestBuilder.getResponseAsMap());
+        logger.info("Create registered user in \"real-system\"");
+        // In the real scenario you wouldn't run the super method.
+        // You would use an own implementation that create the user in the real system.
+        super.registeredUser(testobject);
     }
 
 }
