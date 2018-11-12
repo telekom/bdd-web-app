@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.api.RequestBuilder;
-import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.RegistrationPage;
 import org.jbehave.core.annotations.Given;
@@ -9,7 +8,6 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
 import java.util.Random;
@@ -25,13 +23,10 @@ import static org.junit.Assert.assertTrue;
  * For details see the file license on the toplevel.
  */
 @Steps
-public class RegistrationSteps extends SeleniumSteps {
+public class RegistrationSteps extends AbstractTaxiSteps {
 
     private final Random random = new Random();
     private final Logger logger = Logger.getGlobal();
-
-    @Value("${hostIncludingPort}")
-    private String hostIncludingPort;
 
     @Autowired
     private RequestBuilder requestBuilder;
@@ -44,7 +39,7 @@ public class RegistrationSteps extends SeleniumSteps {
 
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
-        requestBuilder.requestWithJsonConfig(hostIncludingPort, "testData/user", "", "").post();
+        request().post("/testData/user");
         storyInteraction.rememberObject(testobject, requestBuilder.getResponseAsMap());
     }
 

@@ -1,13 +1,11 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.LoginPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import static org.junit.Assert.assertTrue;
 
@@ -19,10 +17,7 @@ import static org.junit.Assert.assertTrue;
  * For details see the file license on the toplevel.
  */
 @Steps
-public class LoginSteps extends SeleniumSteps {
-
-    @Value("${hostIncludingPort}")
-    private String hostIncludingPort;
+public class LoginSteps extends AbstractTaxiSteps {
 
     @Autowired
     private ReservationSteps reservationSteps;
@@ -48,7 +43,7 @@ public class LoginSteps extends SeleniumSteps {
 
     @When("the user opens the login page")
     public void theUserOpensTheLoginPage() {
-        open(getUrlWithHost(hostIncludingPort, LoginPage.URL));
+        open(appendUrl(hostIncludingPort, contextPath, LoginPage.URL));
     }
 
     @When("the user logs in with $username $password")

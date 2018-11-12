@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
@@ -54,7 +56,9 @@ public class ReservationController {
     }
 
     private ReservationPricesVO callReservationSimulator(HttpServletRequest request, ReservationVO reservation) {
-        String reservationSimulatorUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/simulator/api/reservation";
+        String reservationSimulatorUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                + (isNotBlank(request.getContextPath()) ? "/" + request.getContextPath() : "")
+                + "/simulator/api/reservation";
         return restTemplate.postForObject(reservationSimulatorUrl, reservation, ReservationPricesVO.class);
     }
 

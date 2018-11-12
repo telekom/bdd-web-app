@@ -1,15 +1,11 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.api.RequestBuilder;
-import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,13 +26,7 @@ import static org.junit.Assert.assertNotNull;
  * For details see the file license on the toplevel.
  */
 @Steps
-public class ReservationSteps extends SeleniumSteps {
-
-    @Value("${hostIncludingPort}")
-    private String hostIncludingPort;
-
-    @Autowired
-    private RequestBuilder requestBuilder;
+public class ReservationSteps extends AbstractTaxiSteps {
 
     @BeforeStory
     public void theReservationIsDeletedInTheSimulator() {
@@ -85,7 +75,7 @@ public class ReservationSteps extends SeleniumSteps {
 
     @When("the user open the reservation page")
     public void theUserOpenTheReservationPage() {
-        open(getUrlWithHost(hostIncludingPort, ReservationPage.URL));
+        open(appendUrl(hostIncludingPort, contextPath, ReservationPage.URL));
     }
 
     @When("reserve a shared taxi")
@@ -127,10 +117,6 @@ public class ReservationSteps extends SeleniumSteps {
         String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);
         assertNotNull(currentPrice);
         assertThat(currentPrice, is(price));
-    }
-
-    private RequestBuilder request() {
-        return requestBuilder.requestWithJsonConfig(hostIncludingPort, "", null, null);
     }
 
 }
