@@ -40,7 +40,7 @@
                 <executions>
                     <execution>
                         <id>unpack-jbehave-site-resources</id>
-                        <phase>install</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
@@ -58,7 +58,7 @@
                     </execution>
                     <execution>
                         <id>unpack-jbehave-reports-resources</id>
-                        <phase>install</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
