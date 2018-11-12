@@ -45,7 +45,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
 
     @When("the user open the registration page")
     private void theUserOpenTheRegistrationPage() {
-        open(getUrlWithHost(hostIncludingPort, RegistrationPage.URL));
+        open(appendUrl(hostIncludingPort, contextPath, RegistrationPage.URL));
     }
 
     @When("the user register with $testData")
