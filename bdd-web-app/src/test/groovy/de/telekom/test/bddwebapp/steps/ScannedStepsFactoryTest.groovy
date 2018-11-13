@@ -1,14 +1,20 @@
 package de.telekom.test.bddwebapp.steps
 
-import de.telekom.test.bddwebapp.steps.testlevel.TestLevel0ExtendsTestLevel1Step
-import de.telekom.test.bddwebapp.steps.testlevel.TestLevel0Step
-import de.telekom.test.bddwebapp.steps.testlevel.TestLevel1ExtendsTestLevel0Step
-import de.telekom.test.bddwebapp.steps.testlevel.TestLevel1Step
+
 import org.jbehave.core.configuration.Configuration
 import org.jbehave.core.steps.InstanceStepsFactory
 import org.springframework.context.ApplicationContext
 import spock.lang.Specification
 
+/**
+ * Unit test
+ *
+ * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
+ * <p>
+ * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * This file is distributed under the conditions of the Apache License, Version 2.0.
+ * For details see the file license on the toplevel.
+ */
 class ScannedStepsFactoryTest extends Specification {
 
     def applicationContextMock = Mock(ApplicationContext.class)
@@ -98,5 +104,20 @@ class ScannedStepsFactoryTest extends Specification {
         factory.stepsInstances.values().asList() == [testLevel1ExtendsTestLevel0Step, testStepLevel1]
     }
 
+    @Steps(testLevel = 0)
+    public class TestLevel0ExtendsTestLevel1Step extends TestLevel1Step {
+    }
+
+    @Steps(testLevel = 0)
+    public class TestLevel0Step {
+    }
+
+    @Steps(testLevel = 1)
+    public class TestLevel1ExtendsTestLevel0Step extends TestLevel0Step {
+    }
+
+    @Steps(testLevel = 1)
+    public class TestLevel1Step {
+    }
 
 }
