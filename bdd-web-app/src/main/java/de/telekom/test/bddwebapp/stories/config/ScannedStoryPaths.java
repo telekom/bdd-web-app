@@ -4,8 +4,10 @@ import de.telekom.test.bddwebapp.stories.AbstractStory;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.io.StoryPathResolver;
+import org.junit.Ignore;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 
 import java.util.Arrays;
@@ -30,6 +32,7 @@ public interface ScannedStoryPaths {
     default List<String> scannedStoryPaths() {
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
+        provider.addExcludeFilter(new AnnotationTypeFilter(Ignore.class));
         Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
         StoryPathResolver storyPathResolver = configuration().storyPathResolver();
         return components.stream()
@@ -41,6 +44,7 @@ public interface ScannedStoryPaths {
     default List<String> testLevelStoryPaths(int testLevel) {
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
+        provider.addExcludeFilter(new AnnotationTypeFilter(Ignore.class));
         Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
         StoryPathResolver storyPathResolver = configuration().storyPathResolver();
         return components.stream()
