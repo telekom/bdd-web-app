@@ -24,6 +24,7 @@ class ScannedStepsFactoryTest extends Specification {
     def testLevel0ExtendsTestLevel1Step = new TestLevel0ExtendsTestLevel1Step();
     def testLevel1ExtendsTestLevel0Step = new TestLevel1ExtendsTestLevel0Step();
     def testLevel2ExtendsTestLevel1ExtendsTestLevel0Step = new TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step();
+    def testLevel2ExtendsTestLevel0ExtendsTestLevel1Step = new TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step();
 
     ScannedStepsFactory scannedStepsFactory = new ScannedStepsFactory() {
         ApplicationContext getApplicationContext() {
@@ -108,14 +109,27 @@ class ScannedStepsFactoryTest extends Specification {
     def "run test level 2 with test level 2 step that extends test level 1 step that extends test level 0 step"() {
         given:
         scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
-                ["testLevel0"        : testStepLevel0,
-                 "testLevel1Extended": testLevel1ExtendsTestLevel0Step,
+                ["testLevel0"                                      : testStepLevel0,
+                 "testLevel1Extended"                              : testLevel1ExtendsTestLevel0Step,
                  "testLevel2ExtendsTestLevel1ExtendsTestLevel0Step": testLevel2ExtendsTestLevel1ExtendsTestLevel0Step
                 ]
         when:
         InstanceStepsFactory factory = scannedStepsFactory.testLevelStepsFactory(2)
         then:
         factory.stepsInstances.values().asList() == [testLevel2ExtendsTestLevel1ExtendsTestLevel0Step]
+    }
+
+    def "run test level 2 with crazy inheritance hierarchy"() {
+        given:
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+                ["testLevel1"                                      : testStepLevel1,
+                 "testLevel0ExtendsTestLevel1Step"                 : testLevel0ExtendsTestLevel1Step,
+                 "testLevel2ExtendsTestLevel0ExtendsTestLevel1Step": testLevel2ExtendsTestLevel0ExtendsTestLevel1Step
+                ]
+        when:
+        InstanceStepsFactory factory = scannedStepsFactory.testLevelStepsFactory(2)
+        then:
+        factory.stepsInstances.values().asList() == [testLevel2ExtendsTestLevel0ExtendsTestLevel1Step]
     }
 
 
@@ -137,6 +151,10 @@ class ScannedStepsFactoryTest extends Specification {
 
     @Steps(testLevel = 2)
     public class TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step extends TestLevel1ExtendsTestLevel0Step {
+    }
+
+    @Steps(testLevel = 2)
+    public class TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step extends TestLevel0ExtendsTestLevel1Step {
     }
 
 }
