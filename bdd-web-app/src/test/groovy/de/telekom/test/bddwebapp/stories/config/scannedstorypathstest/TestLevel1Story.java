@@ -5,10 +5,6 @@ import de.telekom.test.bddwebapp.stories.config.TestLevel;
 import org.springframework.context.ApplicationContext;
 
 @TestLevel(testLevels = {1})
-public class TestLevel1Story extends AbstractStory {
-
-    public ApplicationContext getApplicationContext() {
-        return null;
-    }
+public class TestLevel1Story extends DummyStory {
 
 }
