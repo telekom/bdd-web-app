@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo-taxi</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo-taxi-test</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,7 @@
         <jbehave.site-resources.version>3.3.1</jbehave.site-resources.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 
-        <bdd-web-app.version>1.1</bdd-web-app.version>
+        <bdd-web-app.version>1.2-SNAPSHOT</bdd-web-app.version>
     </properties>
 
     <build>
