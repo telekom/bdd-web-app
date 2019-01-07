@@ -27,12 +27,17 @@ import java.util.Map;
 @Component
 public class RequestBuilder {
 
-    private final RestAssuredConfig basicRestConfig = new RestAssuredConfig().decoderConfig(new DecoderConfig("UTF-8"))
-            .encoderConfig(new EncoderConfig("UTF-8", "UTF-8"))
-            .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
+    private RestAssuredConfig basicRestConfig = defaultConfiguration();
 
     private RequestSpecification requestSpecification;
+
     private Response response;
+
+    public RestAssuredConfig defaultConfiguration() {
+        return new RestAssuredConfig().decoderConfig(new DecoderConfig("UTF-8"))
+                .encoderConfig(new EncoderConfig("UTF-8", "UTF-8"))
+                .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
+    }
 
     public void clearRequest() {
         requestSpecification = null;
@@ -44,10 +49,6 @@ public class RequestBuilder {
             requestSpecification = RestAssured.given().log().all().expect().log().all().request();
         }
         return this;
-    }
-
-    public Response response() {
-        return response;
     }
 
     public RequestBuilder requestWithJsonConfig(String host, String apiPath, String proxyHost, String proxyPort) {
@@ -80,6 +81,14 @@ public class RequestBuilder {
                 return 80;
             }
         }
+    }
+
+    public RequestSpecification requestSpecification() {
+        return requestSpecification;
+    }
+
+    public Response response() {
+        return response;
     }
 
     public RequestBuilder basePath(String apiPath) {
