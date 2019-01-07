@@ -6,8 +6,6 @@ import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,7 +33,6 @@ import static java.util.stream.Collectors.toMap;
  */
 public abstract class FlatInteraction implements Interaction {
 
-    private static String OBJECT_KEY_SEPARATOR = ".";
     private static String LIST_ITEM_FORMAT = "[%d]";
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -45,6 +42,10 @@ public abstract class FlatInteraction implements Interaction {
 
     public void startInteraction() {
         context = Maps.newHashMap();
+    }
+
+    public void stopInteraction() {
+        startInteraction();
     }
 
     /**
@@ -63,55 +64,7 @@ public abstract class FlatInteraction implements Interaction {
                 remember(key + String.format(LIST_ITEM_FORMAT, i), list.get(i));
             }
         }
-        getContext().put(key, value);
-    }
-
-    // -------------------------------------------------------------------------
-    // Object Handling
-    // -------------------------------------------------------------------------
-
-    public void rememberObject(String entityKey, String objectKey, Object value) {
-        Map<String, Object> objectMap = recallMap(entityKey);
-        if (objectMap == null) {
-            objectMap = new HashMap<>();
-        }
-        objectMap.put(objectKey, value);
-        remember(entityKey, objectMap);
-    }
-
-    public void rememberObject(String entityKey, Map<String, Object> object) {
-        remember(entityKey, object);
-    }
-
-    public <S> S recallObject(String objectKey, String attributeKey) {
-        String key = objectKey + OBJECT_KEY_SEPARATOR + attributeKey;
-        return recall(key);
-    }
-
-    public <S> S recallObjectNotNull(String objectKey, String attributeKey) {
-        String key = objectKey + OBJECT_KEY_SEPARATOR + attributeKey;
-        return recallNotNull(key);
-    }
-
-    public <S> Map<String, S> recallMap(String key) {
-        return recall(key);
-    }
-
-    // -------------------------------------------------------------------------
-    // List Handling
-    // -------------------------------------------------------------------------
-
-    public <S> void rememberToList(String key, S value) {
-        List<Object> list = recallList(key);
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-        list.add(value);
-        remember(key, list);
-    }
-
-    public <S> List<S> recallList(String key) {
-        return recall(key);
+        context.put(key, value);
     }
 
     // -------------------------------------------------------------------------
