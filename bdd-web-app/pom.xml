@@ -26,8 +26,8 @@
         <slf4j.version>1.7.25</slf4j.version>
         <jbehave.version>4.3.5</jbehave.version>
         <jbehave.version.junit-runner>2.2.0</jbehave.version.junit-runner>
-        <webdrivermanager.version>3.1.2-SNAPSHOT</webdrivermanager.version>
-        <lombok.version>1.2-SNAPSHOT8.4</lombok.version>
+        <webdrivermanager.version>3.1.1</webdrivermanager.version>
+        <lombok.version>1.18.4</lombok.version>
 
         <!-- Test dependencies -->
         <groovy-all.version>2.4.15</groovy-all.version>
