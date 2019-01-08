@@ -34,7 +34,7 @@ public class BrowserDriverUpdater {
     @NonNull
     private final WebDriverWrapper webDriverWrapper;
 
-    /*
+    /**
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
      * This applies to the driver for firefox and opera.
      *
