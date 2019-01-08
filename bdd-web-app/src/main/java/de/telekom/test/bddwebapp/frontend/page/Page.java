@@ -21,12 +21,34 @@ public abstract class Page {
 
     public Page(WebDriver driver) {
         this.driver = driver;
-        checkUrl();
+        checkPage();
     }
 
+    /**
+     * Check if the page is the right one.
+     * By default, the URL is checked.
+     * If necessary, however, another check can be added by implementing checkPageDesignator(), e.g. in single page applications.
+     */
+    public void checkPage() {
+        checkUrl();
+        checkPageDesignator();
+    }
+
+    /**
+     * Check the URL.
+     * Used by checkPage().
+     */
     public void checkUrl() {
         Wait<WebDriver> wait = new WebDriverWait(driver, 30);
         wait.until(new UrlMatchesExpectation(getURL(), this.getClass().getName()));
+    }
+
+    /**
+     * Override this if you wan't to assert the page by a web element, e.g. in single page applications.
+     * Used by checkPage().
+     */
+    public void checkPageDesignator() {
+        // implement your check
     }
 
     public void reload() {
