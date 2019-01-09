@@ -1,7 +1,5 @@
 package de.telekom.test.bddwebapp.taxi.stories.registration;
 
-import de.telekom.test.bddwebapp.taxi.config.AbstractTaxiStory;
-
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
@@ -10,7 +8,7 @@ import de.telekom.test.bddwebapp.taxi.config.AbstractTaxiStory;
  * For details see the file license on the toplevel.
  */
 public class RegistrationError
- extends AbstractTaxiStory
+// extends AbstractTaxiStory
 {
 }
 
