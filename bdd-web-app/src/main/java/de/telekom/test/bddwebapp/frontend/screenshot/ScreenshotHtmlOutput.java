@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.frontend.screenshot;
 
-import org.jbehave.core.failures.UUIDExceptionWrapper;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.jbehave.core.failures.PendingStepFound;
 import org.jbehave.core.model.Story;
 import org.jbehave.core.reporters.HtmlOutput;
 import org.jbehave.core.reporters.StoryReporterBuilder;
@@ -22,25 +23,27 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 public class ScreenshotHtmlOutput extends HtmlOutput {
 
     protected final boolean screenshotsOnSuccess;
-    protected final ScreenshotOnFailure screenshotMakerOnFailure;
-    protected final ScreenshotOnSuccess screenshotMakerOnSuccess;
+    protected final ScreenshotCreator screenshotCreator;
 
     protected String currentStoryFolder;
 
     public ScreenshotHtmlOutput(PrintStream output,
-                                StoryReporterBuilder reporterBuilder, boolean screenshotsOnSuccess, ScreenshotOnFailure screenshotMakerOnFailure, ScreenshotOnSuccess screenshotMakerOnSuccess) {
+                                StoryReporterBuilder reporterBuilder, boolean screenshotsOnSuccess, ScreenshotCreator screenshotCreator) {
         super(output, reporterBuilder.keywords());
         this.screenshotsOnSuccess = screenshotsOnSuccess;
-        this.screenshotMakerOnFailure = screenshotMakerOnFailure;
-        this.screenshotMakerOnSuccess = screenshotMakerOnSuccess;
-        changeALine();
+        this.screenshotCreator = screenshotCreator;
+        successScreenshotPattern();
+        failedScreenshotPattern();
     }
 
-    private void changeALine() {
+    protected void successScreenshotPattern() {
         if (screenshotsOnSuccess) {
-            super.overwritePattern("successfulWithLink", "<div class=\"step successful\"><a target=\"_blank\" href=\"{0}\">{1}</a></div>\n");
+            super.overwritePattern("successfulWithScreenshot", "<div class=\"step successful\"><a target=\"_blank\" href=\"{0}\">{1}</a></div>\n");
         }
-        super.overwritePattern("failed", "<div class=\"step failed\">{0}<span class=\"keyword failed\">({1})</span><br/><span class=\"message failed\">{2}</span><br/><a style=\"color: darkmagenta; font-weight: none; text-decoration: underline;\" target=\"_blank\" href=\"../screenshots/failed-scenario-{3}.png\">Screenshot</a></div>\n");
+    }
+
+    protected void failedScreenshotPattern() {
+        super.overwritePattern("failedWithScreenshot", "<div class=\"step failed\"><a style=\"color: darkmagenta; font-weight: none; text-decoration: underline;\" target=\"_blank\" href=\"{3}\">{0}</a> <span class=\"keyword failed\">({1})</span><br/><span class=\"message failed\">{2}</span></div>");
     }
 
     @Override
@@ -51,21 +54,35 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
 
     @Override
     public void successful(String step) {
-        if (screenshotsOnSuccess && step.contains("Then")) {
-            String screenshotOnSuccessPath = screenshotMakerOnSuccess.makeScreenshot(currentStoryFolder, step);
-            if (isNoneBlank(screenshotOnSuccessPath)) {
-                this.print(this.format("successfulWithLink", "{0} {1}\n", screenshotOnSuccessPath, step));
-                return;
-            }
+        if (!screenshotsOnSuccess || !step.contains("Then") || !successfulScreenshot(step)) {
+            super.successful(step);
         }
-        super.successful(step);
+    }
+
+    protected boolean successfulScreenshot(String step) {
+        String screenshotPath = screenshotCreator.createScreenshot(currentStoryFolder, step, "successful");
+        if (isNoneBlank(screenshotPath)) {
+            this.print(this.format("successfulWithScreenshot", "{0} {1}\n", screenshotPath, step));
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void failed(String step, Throwable storyFailure) {
-        super.failed(step, storyFailure);
-        UUIDExceptionWrapper uuidWrappedFailure = (UUIDExceptionWrapper) storyFailure;
-        screenshotMakerOnFailure.afterScenarioFailure(uuidWrappedFailure);
+        if (storyFailure instanceof PendingStepFound || !failedScreenshot(step, storyFailure)) {
+            super.failed(step, storyFailure);
+        }
+    }
+
+    protected boolean failedScreenshot(String step, Throwable storyFailure) {
+        String screenshotPath = screenshotCreator.createScreenshot(currentStoryFolder, step, "failed");
+        if (isNoneBlank(screenshotPath)) {
+            String stackTrace = ExceptionUtils.getStackTrace(storyFailure.getCause());
+            this.print(this.format("failedWithScreenshot", "{3} {0} ({1})\n({2})\n", step, "FAILED", stackTrace, screenshotPath));
+            return true;
+        }
+        return false;
     }
 
 }

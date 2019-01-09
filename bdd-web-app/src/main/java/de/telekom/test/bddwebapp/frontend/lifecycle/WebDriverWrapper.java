@@ -248,7 +248,7 @@ public class WebDriverWrapper {
         return driver == null;
     }
 
-    public String saveScreenshotTo(String path) {
+    public String createScreenshot(String path) {
         try {
             log.info("Create screenshot to '{}'", path);
             if (driver == null) {
