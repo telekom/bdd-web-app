@@ -43,16 +43,14 @@ public class ScreenshotCreator {
             logger.debug("No failure screenshot was taken because WebDriver is null");
             return null;
         }
-        String currentUrl = currentUrl();
         try {
             logger.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
-            URL url = new URL(currentUrl);
-            String contextPath = url.getPath();
-            String screenshotName = screenshotName(contextPath, status);
-            String screenshotPath = format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), storyFolder, screenshotName);
+            String screenshotName = screenshotName(step, status);
+            String screenshotPath = screenshotPath(storyFolder, screenshotName);
             screenshotPath = webDriverWrapper.createScreenshot(screenshotPath);
             if (isNoneBlank(screenshotPath) && screenshotIsNotEmpty(screenshotPath)) {
-                logger.info(format("Screenshot of page \"{0}\" has been saved to \"{1}\"", contextPath, screenshotPath));
+                String urlPath = urlPath();
+                logger.info(format("Screenshot of step \"{0}\" with url \"{1}\" has been saved to \"{2}\"", step, urlPath, screenshotPath));
                 return format("../screenshots/{0}/{1}.png", storyFolder, screenshotName);
             }
         } catch (Exception e) {
@@ -61,19 +59,14 @@ public class ScreenshotCreator {
         return null;
     }
 
-    protected String currentUrl() {
-        try {
-            return webDriverWrapper.getDriver().getCurrentUrl();
-        } catch (Exception e) {
-            return "[unknown page title]";
-        }
+    protected String screenshotName(String step, String status) {
+        step = step.replaceAll("\\s", "_"); // replace space by underscore
+        step = step.replaceAll("\"[.*\"]", ""); // remove params
+        return step + "_" + new Date().getTime() + "_" + status;
     }
 
-    protected String screenshotName(String contextPath, String status) {
-        String screenshotName = contextPath.replaceAll("/", ".");
-        screenshotName = screenshotName.substring(1);
-        screenshotName = screenshotName.replaceAll(".xhtml", "");
-        return status + "-" + new Date().getTime() + "_" + screenshotName;
+    protected String screenshotPath(String folder, String name) {
+        return format("{0}/screenshots/{1}/{2}.png", reporterBuilder.outputDirectory(), folder, name);
     }
 
     protected boolean screenshotIsNotEmpty(String screenshotPath) {
@@ -90,6 +83,14 @@ public class ScreenshotCreator {
         Raster raster = bufferedImage.getData();
         return range(0, raster.getWidth()).noneMatch(x ->
                 range(0, raster.getHeight()).anyMatch(y -> bufferedImage.getRGB(x, y) != 0xFFFFFFFF));
+    }
+
+    protected String urlPath() {
+        try {
+            return new URL(webDriverWrapper.getDriver().getCurrentUrl()).getPath();
+        } catch (Exception e) {
+            return "[unknown url]";
+        }
     }
 
 }
