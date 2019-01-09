@@ -25,7 +25,7 @@ import static java.util.Arrays.stream;
 public class CurrentStory {
 
     @NonNull
-    private final CustomizingStories storyClasses;
+    private final CustomizingStories customizingStories;
 
     @Getter
     @Setter
@@ -36,18 +36,30 @@ public class CurrentStory {
     }
 
     public Class getStoryClass() {
-        return storyClasses.getStoryClass(getStoryName());
+        return customizingStories.getStoryClass(getStoryName());
     }
 
     public boolean isApiOnly() {
-        // check run all stories class or general configuration
-        if (storyClasses.isApiOnlyForAllStories()) {
-            return true;
-        }
-        // check story class
+        return isApiOnlyForAllStories() ||
+                isApiOnlyBaseType() ||
+                isApiOnlyAnnotationForCurrentStory();
+    }
+
+    private boolean isApiOnlyForAllStories() {
+        return customizingStories.isApiOnlyForAllStories();
+    }
+
+    private boolean isApiOnlyBaseType() {
         Class clazz = getStoryClass();
-        return clazz != null && stream(clazz.getAnnotations())
-                .anyMatch(annotation -> annotation.annotationType().equals(ApiOnly.class));
+        return clazz != null &&
+                customizingStories.getApiOnlyBaseType() != null &&
+                customizingStories.getApiOnlyBaseType().isAssignableFrom(clazz);
+    }
+
+    private boolean isApiOnlyAnnotationForCurrentStory() {
+        Class clazz = getStoryClass();
+        return clazz != null &&
+                stream(clazz.getAnnotations()).anyMatch(a -> a.annotationType().equals(ApiOnly.class));
     }
 
 }

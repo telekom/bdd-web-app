@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
+import de.telekom.test.bddwebapp.stories.AbstractStory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,10 @@ public class CustomizingStories {
     @Getter
     @Setter
     private boolean apiOnlyForAllStories;
+
+    @Getter
+    @Setter
+    private Class<? extends AbstractStory> apiOnlyBaseType;
 
     public void setStoryClass(Class clazz, String name) {
         storyClasses.put(name, clazz);
