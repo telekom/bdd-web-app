@@ -37,27 +37,42 @@ public class BrowserDriverUpdater {
     /**
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
      * This applies to the driver for firefox and opera.
-     *
+     * <p>
      * https://github.com/bonigarcia/webdrivermanager
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
         String browser = webDriverWrapper.getBrowser();
+
+        WebDriverManager webDriverManager;
         switch (browser) {
             case "firefox": {
-                updateFirefox();
+                webDriverManager = FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX);
                 break;
             }
             case "chrome": {
-                updateChrome();
+                System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
+                webDriverManager = ChromeDriverManager.getInstance(DriverManagerType.CHROME);
                 break;
             }
             case "edge": {
-                updateEdge();
+                webDriverManager = EdgeDriverManager.getInstance(DriverManagerType.EDGE);
                 break;
             }
             case "ie": {
-                updateInternetExplorer();
+                webDriverManager = InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER);
+                break;
+            }
+            case "opera": {
+                webDriverManager = OperaDriverManager.getInstance(DriverManagerType.OPERA);
+                break;
+            }
+            case "phantomJs": {
+                webDriverManager = PhantomJsDriverManager.getInstance(DriverManagerType.PHANTOMJS);
+                break;
+            }
+            case "seleniumServerStandalone": {
+                webDriverManager = SeleniumServerStandaloneManager.getInstance(DriverManagerType.SELENIUM_SERVER_STANDALONE);
                 break;
             }
             default: {
@@ -65,36 +80,12 @@ public class BrowserDriverUpdater {
             }
         }
 
+        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
+            webDriverManager.proxy(proxyHost + ":" + proxyPort);
+        }
+        webDriverManager.setup();
+
         log.info("Updated driver for " + browser + " test instrumentalization.");
-    }
-
-    private void updateFirefox() {
-        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).proxy(proxyHost + ":" + proxyPort);
-        }
-        FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX).setup();
-    }
-
-    private void updateChrome() {
-        System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
-        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            ChromeDriverManager.getInstance(DriverManagerType.CHROME).proxy(proxyHost + ":" + proxyPort);
-        }
-        ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
-    }
-
-    private void updateEdge() {
-        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            EdgeDriverManager.getInstance(DriverManagerType.EDGE).proxy(proxyHost + ":" + proxyPort);
-        }
-        EdgeDriverManager.getInstance(DriverManagerType.EDGE).setup();
-    }
-
-    private void updateInternetExplorer() {
-        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).proxy(proxyHost + ":" + proxyPort);
-        }
-        InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).setup();
     }
 
 }
