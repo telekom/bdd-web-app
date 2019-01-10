@@ -14,6 +14,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -86,11 +88,14 @@ public class WebDriverWrapper {
             case "chrome": {
                 return chromeCapabilities();
             }
+            case "edge": {
+                return edgeCapabilities();
+            }
             case "ie": {
                 return ieCapabilities();
             }
-            case "edge": {
-                return edgeCapabilities();
+            case "opera": {
+                return operaCapabilities();
             }
             case "safari": {
                 return safariCapabilities();
@@ -101,7 +106,27 @@ public class WebDriverWrapper {
         }
     }
 
-    private DesiredCapabilities ieCapabilities() {
+    protected DesiredCapabilities firefoxCapabilities() {
+        DesiredCapabilities caps = DesiredCapabilities.firefox();
+        caps.setCapability("overlappingCheckDisabled", true);
+        return caps;
+    }
+
+    protected DesiredCapabilities chromeCapabilities() {
+        DesiredCapabilities caps = DesiredCapabilities.chrome();
+        caps.setCapability("disable-restore-session-state", true);
+        caps.setCapability("disable-application-cache", true);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-extensions");
+        caps.setCapability(ChromeOptions.CAPABILITY, options);
+        return caps;
+    }
+
+    protected DesiredCapabilities edgeCapabilities() {
+        return DesiredCapabilities.edge();
+    }
+
+    protected DesiredCapabilities ieCapabilities() {
         DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
         caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
         caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
@@ -115,28 +140,12 @@ public class WebDriverWrapper {
         return caps;
     }
 
-    private DesiredCapabilities firefoxCapabilities() {
-        DesiredCapabilities caps = DesiredCapabilities.firefox();
-        caps.setCapability("overlappingCheckDisabled", true);
-        return caps;
-    }
-
-    private DesiredCapabilities chromeCapabilities() {
-        DesiredCapabilities caps = DesiredCapabilities.chrome();
-        caps.setCapability("disable-restore-session-state", true);
-        caps.setCapability("disable-application-cache", true);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-extensions");
-        caps.setCapability(ChromeOptions.CAPABILITY, options);
-        return caps;
-    }
-
-    private DesiredCapabilities edgeCapabilities() {
-        return null;
+    protected DesiredCapabilities operaCapabilities() {
+        return DesiredCapabilities.operaBlink();
     }
 
     private DesiredCapabilities safariCapabilities() {
-        return null;
+        return DesiredCapabilities.safari();
     }
 
     protected void loadLocalWebdriver(String browser, DesiredCapabilities capabilities) {
@@ -158,6 +167,10 @@ public class WebDriverWrapper {
                 loadInternetExplorer(capabilities);
                 return;
             }
+            case "opera": {
+                loadOpera(capabilities);
+                break;
+            }
             case "safari": {
                 loadSafari(capabilities);
                 return;
@@ -167,29 +180,35 @@ public class WebDriverWrapper {
         }
     }
 
-    private void loadFirefox(DesiredCapabilities capabilities) {
+    protected void loadFirefox(DesiredCapabilities capabilities) {
         FirefoxOptions firefoxOptions = new FirefoxOptions(capabilities);
         driver = new FirefoxDriver(firefoxOptions);
     }
 
-    private void loadChrome(DesiredCapabilities capabilities) {
+    protected void loadChrome(DesiredCapabilities capabilities) {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.merge(capabilities);
         driver = new ChromeDriver(chromeOptions);
     }
 
-    private void loadEdge(DesiredCapabilities capabilities) {
+    protected void loadEdge(DesiredCapabilities capabilities) {
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.merge(capabilities);
         driver = new EdgeDriver(edgeOptions);
     }
 
-    private void loadInternetExplorer(DesiredCapabilities capabilities) {
+    protected void loadInternetExplorer(DesiredCapabilities capabilities) {
         InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions(capabilities);
         driver = new InternetExplorerDriver(internetExplorerOptions);
     }
 
-    private void loadSafari(DesiredCapabilities capabilities) {
+    private void loadOpera(DesiredCapabilities capabilities) {
+        OperaOptions operaOptions = new OperaOptions();
+        operaOptions.merge(capabilities);
+        driver = new OperaDriver(operaOptions);
+    }
+
+    protected void loadSafari(DesiredCapabilities capabilities) {
         SafariOptions safariOptions = new SafariOptions();
         safariOptions.merge(capabilities);
         driver = new SafariDriver();
@@ -204,7 +223,7 @@ public class WebDriverWrapper {
         }
     }
 
-    public String getBrowser() {
+    protected String getBrowser() {
         String browser = System.getProperty("browser");
         if (isBlank(browser)) {
             if (isNotBlank(defaultBrowser)) {
