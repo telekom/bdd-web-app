@@ -31,6 +31,14 @@ public class CustomizingStories {
     @Setter
     private Class<? extends AbstractStory> apiOnlyBaseType;
 
+    @Getter
+    @Setter
+    private boolean restartBrowserBeforeScenarioForAllStories;
+
+    @Getter
+    @Setter
+    private Class<? extends AbstractStory> restartBrowserBeforeScenarioBaseType;
+
     public void setStoryClass(Class clazz, String name) {
         storyClasses.put(name, clazz);
     }

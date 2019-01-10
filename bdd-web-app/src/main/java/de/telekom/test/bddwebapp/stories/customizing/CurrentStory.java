@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
 import de.telekom.test.bddwebapp.api.ApiOnly;
+import de.telekom.test.bddwebapp.steps.RestartBrowserBeforeScenario;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,29 @@ public class CurrentStory {
         Class clazz = getStoryClass();
         return clazz != null &&
                 stream(clazz.getAnnotations()).anyMatch(a -> a.annotationType().equals(ApiOnly.class));
+    }
+
+    public boolean isRestartBrowserBeforeScenario() {
+        return isRestartBrowserBeforeScenarioForAllStories() ||
+                isRestartBrowserBeforeScenarioBaseType() ||
+                isRestartBrowserBeforeScenarioForCurrentStory();
+    }
+
+    private boolean isRestartBrowserBeforeScenarioForAllStories() {
+        return customizingStories.isRestartBrowserBeforeScenarioForAllStories();
+    }
+
+    private boolean isRestartBrowserBeforeScenarioBaseType() {
+        Class clazz = getStoryClass();
+        return clazz != null &&
+                customizingStories.getRestartBrowserBeforeScenarioBaseType() != null &&
+                customizingStories.getRestartBrowserBeforeScenarioBaseType().isAssignableFrom(clazz);
+    }
+
+    private boolean isRestartBrowserBeforeScenarioForCurrentStory() {
+        Class clazz = getStoryClass();
+        return clazz != null &&
+                stream(clazz.getAnnotations()).anyMatch(a -> a.annotationType().equals(RestartBrowserBeforeScenario.class));
     }
 
 }
