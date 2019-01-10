@@ -34,7 +34,7 @@ class LifecyleStepsTest extends Specification {
         when:
         lifecyleSteps.updateDriver()
         lifecyleSteps.startStoryInteraction()
-        lifecyleSteps.setupSequenceInteractionForNormal()
+        lifecyleSteps.setupScenarioInteractionForNormal()
         lifecyleSteps.afterStory()
         lifecyleSteps.afterStories()
         then:
@@ -54,7 +54,7 @@ class LifecyleStepsTest extends Specification {
         when:
         lifecyleSteps.updateDriver()
         lifecyleSteps.startStoryInteraction()
-        lifecyleSteps.setupSequenceInteractionForNormal()
+        lifecyleSteps.setupScenarioInteractionForNormal()
         lifecyleSteps.afterStory()
         lifecyleSteps.afterStories()
         then:
@@ -74,7 +74,7 @@ class LifecyleStepsTest extends Specification {
         when:
         lifecyleSteps.updateDriver()
         lifecyleSteps.startStoryInteraction()
-        lifecyleSteps.setupSequenceInteractionForNormal()
+        lifecyleSteps.setupScenarioInteractionForNormal()
         lifecyleSteps.afterStory()
         lifecyleSteps.afterStories()
         then:

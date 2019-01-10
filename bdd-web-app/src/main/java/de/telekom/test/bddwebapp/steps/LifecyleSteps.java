@@ -52,25 +52,29 @@ public class LifecyleSteps {
     @BeforeStory
     public void startStoryInteraction() {
         storyInteraction.startInteraction();
-        if (!currentStory.isApiOnly()) {
+        if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
             webDriverWrapper.loadWebdriver();
         }
     }
 
     @BeforeScenario(uponType = ScenarioType.NORMAL)
-    public void setupSequenceInteractionForNormal() {
-        setupSequenceInteraction();
+    public void setupScenarioInteractionForNormal() {
+        setupScenarioInteraction();
     }
 
     @BeforeScenario(uponType = ScenarioType.EXAMPLE)
-    public void setupSequenceInteractionForExample() {
-        setupSequenceInteraction();
+    public void setupScenarioInteractionForExample() {
+        setupScenarioInteraction();
     }
 
-    protected void setupSequenceInteraction() {
+    protected void setupScenarioInteraction() {
         scenarioInteraction.startInteraction();
         storyInteraction.setScenarioInteraction(scenarioInteraction);
         scenarioInteraction.setStoryInteraction(storyInteraction);
+        if (currentStory.isRestartBrowserBeforeScenario()) {
+            webDriverWrapper.quit();
+            webDriverWrapper.loadWebdriver();
+        }
     }
 
     @AfterStory
