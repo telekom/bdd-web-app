@@ -60,36 +60,53 @@ public class RequestBuilder {
         return this;
     }
 
-    public RequestBuilder requestWithJsonConfig(String host, String apiPath, String proxyHost, String proxyPort) {
+    public RequestBuilder requestWithBaseUriAndProxy(String host, String apiPath, String proxyHost, String proxyPort) {
         request();
+        baseUri(host, apiPath);
+        proxy(proxyHost, proxyPort);
+        return this;
+    }
+
+    public RequestBuilder requestWithJsonConfig(String host, String apiPath, String proxyHost, String proxyPort) {
+        requestWithBaseUriAndProxy(host, apiPath, proxyHost, proxyPort);
+        restJsonConfig();
+        return this;
+    }
+
+    public RequestBuilder baseUri(String host, String apiPath) {
         try {
             final URI baseURI = new URI(host);
             requestSpecification.baseUri(baseURI.toString()).basePath(apiPath);
             int port = baseURI.getPort() > 0 ? baseURI.getPort() : determineStandardPortForScheme(baseURI.getScheme());
             requestSpecification.port(port);
-
-            if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
-                requestSpecification.proxy(proxyHost, new Integer(proxyPort));
-            }
-
-            requestSpecification.config(basicRestConfig);
-            requestSpecification.header("Accept", ContentType.JSON.toString());
-            requestSpecification.header("Content-Type", ContentType.JSON.toString());
         } catch (Exception ex) {
-            throw new RuntimeException("Error setting baseUri, path, port and proxy for request", ex);
+            throw new RuntimeException("Error setting baseUri for request", ex);
         }
         return this;
     }
 
     private int determineStandardPortForScheme(String scheme) {
-        switch (scheme) {
-            case "https": {
-                return 443;
-            }
-            default: {
-                return 80;
-            }
+        if (scheme.equalsIgnoreCase("https")) {
+            return 443;
+        } else {
+            return 80;
         }
+    }
+
+    public void proxy(String proxyHost, String proxyPort) {
+        try {
+            if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
+                requestSpecification.proxy(proxyHost, new Integer(proxyPort));
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("Error setting proxy for request", ex);
+        }
+    }
+
+    public void restJsonConfig() {
+        requestSpecification.config(basicRestConfig);
+        requestSpecification.header("Accept", ContentType.JSON.toString());
+        requestSpecification.header("Content-Type", ContentType.JSON.toString());
     }
 
     public RequestSpecification requestSpecification() {
