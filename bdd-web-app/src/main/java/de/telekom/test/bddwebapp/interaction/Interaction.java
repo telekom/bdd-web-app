@@ -63,12 +63,24 @@ interface Interaction {
     // -------------------------------------------------------------------------
 
     default void rememberObject(String entityKey, String objectKey, Object value) {
-        Map<String, Object> objectMap = recallMap(entityKey);
-        if (objectMap == null) {
+        Object object = recall(entityKey);
+
+        Map<String, Object> objectMap;
+        if (object instanceof Map) {
+            objectMap = (Map<String, Object>) object;
+        } else {
             objectMap = new HashMap<>();
         }
         objectMap.put(objectKey, value);
+
         remember(entityKey, objectMap);
+
+        /* This is a fallback for the special case that the key with a simple value already exists in interaction.
+         * E.g. if you remember("key", "value") and than remember("key", "object", "value").
+         * Try to avoid this construct as it leads to inconsistencies! */
+        if (object != null && !(object instanceof Map)) {
+            remember(entityKey, object);
+        }
     }
 
     default void rememberObject(Enum entityKey, String objectKey, Object value) {
