@@ -206,6 +206,16 @@ public class RequestBuilder {
         return this;
     }
 
+    public RequestBuilder head() {
+        response = requestSpecification.head();
+        return this;
+    }
+
+    public RequestBuilder head(String path) {
+        response = requestSpecification.head(path);
+        return this;
+    }
+
     public RequestBuilder delete() {
         response = requestSpecification.delete();
         return this;
