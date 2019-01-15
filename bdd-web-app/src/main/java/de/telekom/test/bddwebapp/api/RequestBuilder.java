@@ -28,6 +28,7 @@ import java.util.Map;
  * Spring component class for request specifications.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
+ * @author Oana Nechiforescu - Added support for HEAD
  * <p>
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
