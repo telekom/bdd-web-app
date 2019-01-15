@@ -13,7 +13,7 @@ import java.text.NumberFormat
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-class FlatInteractionPerformanceSpec extends Specification {
+class FlatInteractionPerformanceTest extends Specification {
 
     FlatInteraction abstractInteraction = new FlatInteraction() {
     }

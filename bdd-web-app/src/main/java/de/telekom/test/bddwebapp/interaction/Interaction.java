@@ -113,6 +113,10 @@ interface Interaction {
         return recall(key);
     }
 
+    default <S> Map<String, S> recallMap(Enum key) {
+        return recall(key.toString());
+    }
+
     // -------------------------------------------------------------------------
     // List Handling
     // -------------------------------------------------------------------------
