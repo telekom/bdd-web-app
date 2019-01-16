@@ -94,7 +94,7 @@ public class RequestBuilder {
         }
     }
 
-    public void proxy(String proxyHost, String proxyPort) {
+    public RequestBuilder proxy(String proxyHost, String proxyPort) {
         try {
             if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
                 requestSpecification.proxy(proxyHost, new Integer(proxyPort));
@@ -102,12 +102,14 @@ public class RequestBuilder {
         } catch (Exception ex) {
             throw new RuntimeException("Error setting proxy for request", ex);
         }
+        return this;
     }
 
-    public void restJsonConfig() {
+    public RequestBuilder restJsonConfig() {
         requestSpecification.config(basicRestConfig);
         requestSpecification.header("Accept", ContentType.JSON.toString());
         requestSpecification.header("Content-Type", ContentType.JSON.toString());
+        return this;
     }
 
     public RequestSpecification requestSpecification() {
