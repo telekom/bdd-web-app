@@ -26,7 +26,7 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bdd-web-app</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.2-SNAPSHOT</version>
                 
             </dependency>
 ```
@@ -96,7 +96,7 @@ If you want to integrate the test execution into your maven-lifecycle, then add 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>2.22.1</version>
                 <configuration>
                     <includes>
                         <include>**/RunAllMyStories.java</include>
