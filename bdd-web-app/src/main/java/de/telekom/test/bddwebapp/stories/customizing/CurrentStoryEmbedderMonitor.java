@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
  * Gives access to the current story about the Spring Context
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
- * @author Marc Eckart
+ * @author Marc Eckart - Initial implementation of embedder monitor
  * <p>
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.

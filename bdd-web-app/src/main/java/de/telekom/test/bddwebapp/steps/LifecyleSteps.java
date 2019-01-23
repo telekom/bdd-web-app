@@ -44,7 +44,7 @@ public class LifecyleSteps {
 
     @BeforeStories
     public void updateDriver() {
-        if (!customizingStories.isApiOnlyForAllStories()) {
+        if (!customizingStories.isApiOnlyForAllStories() && !customizingStories.storyClassesContainsOnlyApiOnlyStories()) {
             browserDriverUpdater.updateDriver();
         }
     }

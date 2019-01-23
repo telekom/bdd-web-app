@@ -47,4 +47,9 @@ public class CustomizingStories {
         return storyClasses.get(name);
     }
 
+    public boolean storyClassesContainsOnlyApiOnlyStories() {
+        return apiOnlyBaseType != null &&
+                storyClasses.values().stream().allMatch(storyClass -> storyClass.isAssignableFrom(apiOnlyBaseType));
+    }
+
 }

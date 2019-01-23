@@ -15,7 +15,7 @@ import static java.util.Arrays.stream;
  * Gives access to the current story about the Spring Context
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
- * @author Marc Eckart
+ * @author Marc Eckart - Initial implementation of current story bean
  * <p>
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
