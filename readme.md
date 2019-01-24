@@ -27,7 +27,6 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bdd-web-app</artifactId>
                 <version>1.2-SNAPSHOT</version>
-                
             </dependency>
 ```
 
@@ -165,3 +164,37 @@ And page shows user name hans
 ```
 
 Run your story and look at the test report. If you miss the report styling call the "mvn site" command on your test project.
+
+## Run on different browsers
+
+The default browser is google chrome. 
+If you want to use another browser set the system parameter: ``` browser=[BROWSER] ```.
+
+Supported browsers are: Firefox, Chrome, Edge, Internet Explorer (IE), Opera and Safari.
+E.g. if you want to test with firefox you can use this VM-Parameter: ``` -Dbrowser=firefox ```.
+
+### Portable browser
+
+You can use portable browsers by: ``` browser.path=[BROWSER_PATH] ```.
+
+Supported portable browsers are: Firefox, Chrome, and Opera.
+E.g. if you want to use firefox portable you can use this VM-Parameters: ``` -Dbrowser=firefox -Dbrowser.path="[Base_path]\FirefoxPortable\App\Firefox\firefox.exe"```.
+
+### Webdriver management
+
+The instrumentation drivers will be updated automatically before running the stories.
+
+In an intranet you will probably need a http proxy to update the drivers:
+``` webdriver.proxy.host=[PROXY_HOST] ```
+``` webdriver.proxy.port=[PROXY_PORT] ```
+
+When you updating Firefox or Opera drivers you will often get the status code 403 from Github.
+You can prevent this by setting a token. A description can be found here: https://github.com/bonigarcia/webdrivermanager.
+
+## Reporting
+
+Description coming soon.
+
+## Customizing
+
+Description coming soon.
