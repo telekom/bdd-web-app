@@ -36,7 +36,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * Manage the current WebDriver instance. Uses proven standard configurations for specific browsers. The lifecycle is determined by SeleniumTestRule.
+ * Manage the current WebDriver instance. Uses proven standard configurations for specific browsers.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Igor Cernopolc - Initially added support for RemoteWebDriver
@@ -52,6 +52,12 @@ public class WebDriverWrapper {
 
     @Value("${default.browser:chrome}")
     private String defaultBrowser;
+
+    /*
+     * Path for portable browser
+     */
+    @Value("${browser.path:#{null}}")
+    private String browserPath;
 
     @Value("${webdriver.proxy.host:#{null}}")
     private String proxyHost;
@@ -107,19 +113,19 @@ public class WebDriverWrapper {
     }
 
     protected DesiredCapabilities firefoxCapabilities() {
-        DesiredCapabilities caps = DesiredCapabilities.firefox();
-        caps.setCapability("overlappingCheckDisabled", true);
-        return caps;
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
+        desiredCapabilities.setCapability("overlappingCheckDisabled", true);
+        return desiredCapabilities;
     }
 
     protected DesiredCapabilities chromeCapabilities() {
-        DesiredCapabilities caps = DesiredCapabilities.chrome();
-        caps.setCapability("disable-restore-session-state", true);
-        caps.setCapability("disable-application-cache", true);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-extensions");
-        caps.setCapability(ChromeOptions.CAPABILITY, options);
-        return caps;
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
+        desiredCapabilities.setCapability("disable-restore-session-state", true);
+        desiredCapabilities.setCapability("disable-application-cache", true);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--disable-extensions");
+        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        return desiredCapabilities;
     }
 
     protected DesiredCapabilities edgeCapabilities() {
@@ -127,17 +133,17 @@ public class WebDriverWrapper {
     }
 
     protected DesiredCapabilities ieCapabilities() {
-        DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-        caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        caps.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-        caps.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
-        caps.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
-        caps.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
-        caps.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
-        caps.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
-        caps.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
-        caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        return caps;
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
+        desiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+        desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
+        desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        return desiredCapabilities;
     }
 
     protected DesiredCapabilities operaCapabilities() {
@@ -182,36 +188,57 @@ public class WebDriverWrapper {
 
     protected void loadFirefox(DesiredCapabilities capabilities) {
         FirefoxOptions firefoxOptions = new FirefoxOptions(capabilities);
+        if (isNotBlank(browserPath)) {
+            log.info("Load portable firefox instance from '{}'", browserPath);
+            firefoxOptions.setBinary(browserPath);
+        }
         driver = new FirefoxDriver(firefoxOptions);
     }
 
     protected void loadChrome(DesiredCapabilities capabilities) {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.merge(capabilities);
+        if (isNotBlank(browserPath)) {
+            log.info("Load portable chrome instance from '{}'", browserPath);
+            chromeOptions.setBinary(browserPath);
+        }
         driver = new ChromeDriver(chromeOptions);
     }
 
     protected void loadEdge(DesiredCapabilities capabilities) {
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.merge(capabilities);
+        if (isNotBlank(browserPath)) {
+            throw new IllegalArgumentException("Can't use 'browserPath' for edge browser. Portable is not supported!");
+        }
         driver = new EdgeDriver(edgeOptions);
     }
 
     protected void loadInternetExplorer(DesiredCapabilities capabilities) {
         InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions(capabilities);
+        if (isNotBlank(browserPath)) {
+            throw new IllegalArgumentException("Can't use 'browserPath' for Internet Explorer. Portable is not supported!");
+        }
         driver = new InternetExplorerDriver(internetExplorerOptions);
     }
 
     private void loadOpera(DesiredCapabilities capabilities) {
         OperaOptions operaOptions = new OperaOptions();
         operaOptions.merge(capabilities);
+        if (isNotBlank(browserPath)) {
+            log.info("Load portable opera instance from '{}'", browserPath);
+            operaOptions.setBinary(browserPath);
+        }
         driver = new OperaDriver(operaOptions);
     }
 
     protected void loadSafari(DesiredCapabilities capabilities) {
         SafariOptions safariOptions = new SafariOptions();
         safariOptions.merge(capabilities);
-        driver = new SafariDriver();
+        if (isNotBlank(browserPath)) {
+            throw new IllegalArgumentException("Can't use 'browserPath' for Safari. Portable is not supported!");
+        }
+        driver = new SafariDriver(safariOptions);
     }
 
     protected void loadRemoteWebdriver(String gridURL, DesiredCapabilities capabilities) {
@@ -225,15 +252,10 @@ public class WebDriverWrapper {
 
     protected String getBrowser() {
         String browser = System.getProperty("browser");
-        if (isBlank(browser)) {
-            if (isNotBlank(defaultBrowser)) {
-                browser = defaultBrowser;
-            } else {
-                browser = "chrome";
-            }
+        if (isNotBlank(browser)) {
+            return browser.toLowerCase();
         }
-        browser = browser.toLowerCase();
-        return browser;
+        return defaultBrowser;
     }
 
     protected String getGridURL() {
