@@ -168,14 +168,14 @@ Run your story and look at the test report. If you miss the report styling call 
 ## Run on different browsers
 
 The default browser is google chrome. 
-If you want to use another browser set the system parameter: ``` browser=[BROWSER] ```.
+If you want to use another browser set the system parameter: `browser=[BROWSER]`.
 
 Supported browsers are: Firefox, Chrome, Edge, Internet Explorer (IE), Opera and Safari.
-E.g. if you want to test with firefox you can use this VM-Parameter: ``` -Dbrowser=firefox ```.
+E.g. if you want to test with firefox you can use this VM-Parameter: `-Dbrowser=firefox`.
 
 ### Portable browser
 
-You can use portable browsers by: ``` browser.path=[BROWSER_PATH] ```.
+You can use portable browsers by: `browser.path=[BROWSER_PATH]`.
 
 Supported portable browsers are: Firefox, Chrome, and Opera.
 E.g. if you want to use firefox portable you can use this VM-Parameters: ``` -Dbrowser=firefox -Dbrowser.path="[Base_path]\FirefoxPortable\App\Firefox\firefox.exe"```.
@@ -185,16 +185,141 @@ E.g. if you want to use firefox portable you can use this VM-Parameters: ``` -Db
 The instrumentation drivers will be updated automatically before running the stories.
 
 In an intranet you will probably need a http proxy to update the drivers:
-``` webdriver.proxy.host=[PROXY_HOST] ```
-``` webdriver.proxy.port=[PROXY_PORT] ```
+`webdriver.proxy.host=[PROXY_HOST]`
+`webdriver.proxy.port=[PROXY_PORT]`
 
 When you updating Firefox or Opera drivers you will often get the status code 403 from Github.
 You can prevent this by setting a token. A description can be found here: https://github.com/bonigarcia/webdrivermanager.
 
 ## Reporting
 
-Description coming soon.
+The framework extends the reporting from JBehave by screenshots. The screenshots are linked in the JBehave Report and stored in a separate folder "target/jbehave/screenshots".
 
-## Customizing
+By default, screenshots are only taken in case of an error, but it can also be activated for all successful displayed pages.
+You can active this by setting `screenshot.onsuccess=true`
 
-Description coming soon.
+## Test level
+
+This feature is probably the most important for large projects with distributed systems.
+During development, external systems usually need to be simulated. Only by this way, faults or unimplemented functions can be set in external system with reasonable effort.
+In later development, all systems must be operated together. Here then an integrative test is necessary to ensure the perfect cooperation of the systems.
+
+In distributed projects, test automation often results in duplicate work. 
+The development teams test their software in simulated environments and a separate test team setup the integration tests, both with their own implementations.
+
+This framework offers the possibility to reuse steps in integration test from development and overwrite if necessary.
+For the integrative test then only test steps must be written that are absolutely necessary.
+Examples can be found in the demo project "taxi-test-customizing"
+
+### Setup
+
+If you wan't to use it, you have to setup another resolvers for steps and stories first. 
+Your AbstractStory need the test level step resolver.
+```
+public abstract class AbstractTestLevelStory extends AbstractStory {
+    @Override
+    public ApplicationContext getApplicationContext() {
+        return ApplicationContextProvider.getApplicationContext();
+    }
+    @Override
+    public InjectableStepsFactory stepsFactory() {
+        return testLevelStepsFactory(getTestLevel());
+    }
+}
+```
+
+Your RunAllStories class needs the test level step resolver and the test level story resolver.
+
+```
+public class RunAllTestlevel0TaxiStories extends RunAllStories {
+    @Override
+    public ApplicationContext getApplicationContext() {
+        return ApplicationContextProvider.getApplicationContext();
+    }
+    @Override
+    public InjectableStepsFactory stepsFactory() {
+        return testLevelStepsFactory(getTestLevel());
+    }
+    @Override
+    public List<String> storyPaths() {
+        return testLevelStoryPaths(getTestLevel());
+    }
+}
+```
+
+By default, the test level ist set by system property 'testLevel'. 
+You can overwrite the getTestLevel() method or just set the test level directly in if you want.
+
+### Story Configuration
+
+TODO
+
+### Steps Configuration
+
+TODO
+
+## Customizing stories
+
+This section describes the customizing functions of bdd-web-app. 
+Examples can be found in the demo project "taxi-test-customizing"
+
+All default customizing can be configured in the same way. Either global, by type or by annotation.
+When customizing annotations, please note that these are not inherited.
+
+If you wan't you can write your own story customizing by using the 'customizingStories' and the 'currentStory' bean.
+The customizing stories bean remember all stories that has to be executed.
+The current story bean returns the current story being executed.
+You can refer to this information about the spring context and then use JBehave annotations like @BeforeScenario for Customizing.
+
+### Api only
+
+If you have pure api stories that does not need any frontend you can disable the driver update and the browser start.
+With this feature api only stories can run faster than stories with frontend interaction.
+There are several ways to configure ApiOnly.
+
+**Disable frontend interaction for all stories**
+``` 
+CustomizingStories customizingStories = applicationContext.getBean(CustomizingStories.class);
+storyClasses.setApiOnlyForAllStories(true); 
+```
+
+**Disable frontend interaction for story base types**
+``` 
+CustomizingStories customizingStories = applicationContext.getBean(CustomizingStories.class);
+customizingStories.setApiOnlyBaseType(YourAbstractApiOnlyStory.class);
+```
+
+**Disable frontend interaction for single story**
+``` 
+@ApiOnly
+public class YourStory extends YourAbstractStory {
+}
+```
+
+### Restart browser before scenario
+
+By default, the browser is restarted before each story.
+This should then delete all cookies so that the stories do not overlap there.
+
+Within a story, you can write a step that restart the browser.
+But if you want to restart always before a scenario, this can be also configured by bdd-web-app.
+For that there are different possibilities.
+
+**Restart browser before scenario for all stories**
+``` 
+CustomizingStories customizingStories = applicationContext.getBean(CustomizingStories.class);
+storyClasses.setRestartBrowserBeforeScenarioForAllStories(true); 
+```
+
+**Restart browser before scenario for story base types**
+``` 
+CustomizingStories customizingStories = applicationContext.getBean(CustomizingStories.class);
+customizingStories.setRestartBrowserBeforeScenarioBaseType(YourAbstractRestartBeforeEachScenarioStory.class);
+```
+
+**Restart browser before scenario for single story**
+``` 
+@RestartBrowserBeforeScenario
+public class YourStory extends YourAbstractStory {
+}
+```
