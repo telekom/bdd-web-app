@@ -149,11 +149,6 @@ public class RequestBuilder {
         return this;
     }
 
-    public RequestBuilder queryParam(String key, Object value) {
-        requestSpecification.queryParam(key, value);
-        return this;
-    }
-
     public RequestBuilder body(String body) {
         requestSpecification.body(body);
         return this;
