@@ -252,11 +252,36 @@ You can overwrite the getTestLevel() method or just set the test level directly 
 
 ### Story Configuration
 
-TODO
+Stories can be configured on which test levels they should run. If no test level is set, this is 0 by default.
+Otherwise it must always be set explicitly on which test levels the story should run.
+
+```
+@TestLevel(testLevels = {0, 1})
+public class LoginTestLevel0And1 extends AbstractTestLevelStory {
+...
+}
+```
 
 ### Steps Configuration
 
-TODO
+If you do not specify a test level in steps, the default is 0. 
+These steps can be used at any higher test level. If necessary, they can also be overwritten.
+
+```
+@Steps(testLevel = 1)
+public class RegistrationStepsTestLevel extends RegistrationSteps {
+...
+}
+```
+
+Of course it is also possible to define test steps that require a minimum test level.
+
+```
+@Steps(testLevel = 1)
+public class MinTestLevel1Step {
+...
+}
+```
 
 ## Customizing stories
 
