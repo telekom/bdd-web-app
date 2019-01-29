@@ -19,7 +19,7 @@ import spock.lang.Specification
  */
 class LifecyleStepsTest extends Specification {
 
-    LifecyleSteps lifecyleSteps = new LifecyleSteps(
+    LifecycleSteps lifecyleSteps = new LifecycleSteps(
             Mock(ScenarioInteraction.class),
             Mock(StoryInteraction.class),
             Mock(CurrentStory.class),

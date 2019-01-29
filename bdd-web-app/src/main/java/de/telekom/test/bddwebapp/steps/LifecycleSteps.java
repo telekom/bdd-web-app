@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Steps
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class LifecyleSteps {
+public class LifecycleSteps {
 
     /*
      * The current selenium page of story interaction. Is automatically deleted after a story.

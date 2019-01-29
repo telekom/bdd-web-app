@@ -6,7 +6,7 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import de.telekom.test.bddwebapp.steps.LifecyleSteps;
+import de.telekom.test.bddwebapp.steps.LifecycleSteps;
 import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +39,7 @@ public abstract class SeleniumSteps {
     protected ScenarioInteraction scenarioInteraction;
 
     @Autowired
-    protected LifecyleSteps lifecyleSteps;
+    protected LifecycleSteps lifecyleSteps;
 
     @Autowired
     protected StoryInteractionParameterConverter storyInteractionParameterConverter;
@@ -53,12 +53,12 @@ public abstract class SeleniumSteps {
             throw new RuntimeException(e);
         }
         PageFactory.initElements(new WebElementDecorator(driver), page);
-        storyInteraction.remember(LifecyleSteps.CURRENT_PAGE, page);
+        storyInteraction.remember(LifecycleSteps.CURRENT_PAGE, page);
         return page;
     }
 
     protected <T extends Page> T getCurrentPage() {
-        return storyInteraction.recall(LifecyleSteps.CURRENT_PAGE);
+        return storyInteraction.recall(LifecycleSteps.CURRENT_PAGE);
     }
 
     protected String getUrlWithHost(String hostIncludingPort, String path) {
