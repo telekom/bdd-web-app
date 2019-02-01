@@ -45,7 +45,7 @@ public class BrowserDriverUpdater {
         String browser = webDriverWrapper.getBrowser();
 
         WebDriverManager webDriverManager;
-        switch (browser) {
+        switch (browser.toLowerCase()) {
             case "firefox": {
                 webDriverManager = FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX);
                 break;
@@ -67,11 +67,11 @@ public class BrowserDriverUpdater {
                 webDriverManager = OperaDriverManager.getInstance(DriverManagerType.OPERA);
                 break;
             }
-            case "phantomJs": {
+            case "phantomjs": {
                 webDriverManager = PhantomJsDriverManager.getInstance(DriverManagerType.PHANTOMJS);
                 break;
             }
-            case "seleniumServerStandalone": {
+            case "seleniumserverstandalone": {
                 webDriverManager = SeleniumServerStandaloneManager.getInstance(DriverManagerType.SELENIUM_SERVER_STANDALONE);
                 break;
             }

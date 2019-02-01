@@ -87,7 +87,7 @@ public class WebDriverWrapper {
     }
 
     protected DesiredCapabilities capabilities(String browser) {
-        switch (browser) {
+        switch (browser.toLowerCase()) {
             case "firefox": {
                 return firefoxCapabilities();
             }
@@ -156,7 +156,7 @@ public class WebDriverWrapper {
 
     protected void loadLocalWebdriver(String browser, DesiredCapabilities capabilities) {
         log.info("Browser is set to: " + browser);
-        switch (browser) {
+        switch (browser.toLowerCase()) {
             case "firefox": {
                 loadFirefox(capabilities);
                 return;
@@ -253,7 +253,7 @@ public class WebDriverWrapper {
     protected String getBrowser() {
         String browser = System.getProperty("browser");
         if (isNotBlank(browser)) {
-            return browser.toLowerCase();
+            return browser;
         }
         return defaultBrowser;
     }
