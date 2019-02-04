@@ -39,7 +39,7 @@ kill_tomcat(){
 }
 
 are_all_wars_depoyed() {
-    for entry in "/home/gnrlwas_5/tomcat/webapps"/*.war
+    for entry in "/home/gnrlwas_3/tomcat/webapps"/*.war
     do
       if [[ ! -d "${entry%.war}" ]]; then
 

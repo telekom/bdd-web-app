@@ -27,7 +27,7 @@ W_DIR=`dirname ${BASE}`
 CI_DIR=/home/coinop/jenkins/workspace
 TOMCAT_TARGET_DIR=BDD-WEB-APP_JENKINS
 TAXI_NAME=bdd-web-app-demo-taxi
-TAXI_VERSION=1.1-SNAPSHOT
+TAXI_VERSION=1.2-SNAPSHOT
 
 if [ -f ${W_DIR}/vse_ci_execute_functions ]; then
   . ${W_DIR}/vse_ci_execute_functions
