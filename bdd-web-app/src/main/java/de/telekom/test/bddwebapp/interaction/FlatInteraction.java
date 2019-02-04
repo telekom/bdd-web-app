@@ -3,8 +3,7 @@ package de.telekom.test.bddwebapp.interaction;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import lombok.Getter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
@@ -31,11 +30,10 @@ import static java.util.stream.Collectors.toMap;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Slf4j
 public abstract class FlatInteraction implements Interaction {
 
     private static String LIST_ITEM_FORMAT = "[%d]";
-
-    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Getter
     protected Map<String, Object> context = Maps.newHashMap();
@@ -78,7 +76,7 @@ public abstract class FlatInteraction implements Interaction {
         carefulHint("logAllPossibleKeysWithType()");
         Map<String, Class> keysWithType = context.entrySet().stream()
                 .collect(toMap(Entry::getKey, entry -> entry.getValue().getClass()));
-        logger.info("\n" + mapToString(keysWithType));
+        log.info("\n" + mapToString(keysWithType));
     }
 
     /**
@@ -86,11 +84,11 @@ public abstract class FlatInteraction implements Interaction {
      */
     public void logAllPossibleKeysWithValue() {
         carefulHint("logAllPossibleKeysWithValue()");
-        logger.info("\n" + mapToString(context));
+        log.info("\n" + mapToString(context));
     }
 
     private void carefulHint(String method) {
-        logger.info("\n==============================================================================================\n" +
+        log.info("\n==============================================================================================\n" +
                 "Be careful with " + method + ". The log can get very large. Use only for debugging purposes!\n" +
                 "==============================================================================================");
     }

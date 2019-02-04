@@ -13,6 +13,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.ProxySpecification;
 import io.restassured.specification.RequestSpecification;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,7 @@ import java.util.Map;
  * For details see the file license on the toplevel.
  */
 @Component
+@Slf4j
 public class RequestBuilder {
 
     private RestAssuredConfig basicRestConfig = defaultConfiguration();
@@ -50,11 +52,13 @@ public class RequestBuilder {
     }
 
     public void clearRequest() {
+        log.debug("Clear request");
         requestSpecification = null;
         response = null;
     }
 
     public RequestBuilder request() {
+        log.debug("Create new request");
         if (requestSpecification == null) {
             requestSpecification = RestAssured.given().log().all().expect().log().all().request();
         }

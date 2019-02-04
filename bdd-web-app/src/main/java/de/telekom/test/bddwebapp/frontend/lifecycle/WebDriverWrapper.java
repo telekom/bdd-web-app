@@ -2,6 +2,7 @@ package de.telekom.test.bddwebapp.frontend.lifecycle;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -22,8 +23,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -46,9 +45,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * For details see the file license on the toplevel.
  */
 @Component
+@Slf4j
 public class WebDriverWrapper {
-
-    private final Logger log = LoggerFactory.getLogger(WebDriverWrapper.class);
 
     @Value("${default.browser:chrome}")
     private String defaultBrowser;
