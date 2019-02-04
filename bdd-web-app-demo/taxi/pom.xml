@@ -20,7 +20,6 @@
         <bootstrap.version>4.2.1</bootstrap.version>
         <bcprov-jdk15on.version>1.60</bcprov-jdk15on.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
-        <maven-jgit-buildnumber-plugin.version>1.2.10</maven-jgit-buildnumber-plugin.version>
     </properties>
 
     <dependencies>
@@ -113,18 +112,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>ru.concerteza.buildnumber</groupId>
-                <artifactId>maven-jgit-buildnumber-plugin</artifactId>
-                <version>${maven-jgit-buildnumber-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>git-buildnumber</id>
-                        <goals>
-                            <goal>extract-buildnumber</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                    </execution>
-                </executions>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <configuration>
+                    <verbose>false</verbose>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -133,10 +125,9 @@
                     <archive>
                         <manifestEntries>
                             <Version>${project.version}</Version>
-                            <Revision>${git.revision}</Revision>
-                            <BuildNumber>${git.buildnumber}</BuildNumber>
-                            <CommitsCount>${git.commitsCount}</CommitsCount>
+                            <Revision>${git.commit.id}</Revision>
                             <Branch>${git.branch}</Branch>
+                            <Repository>${git.remote.origin.url}</Repository>
                             <Build-Time>${maven.build.timestamp}</Build-Time>
                         </manifestEntries>
                     </archive>
