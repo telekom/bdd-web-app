@@ -1,0 +1,5 @@
+bdd-web-app : easy setuo of BDD test projects for wen applications
+Copyright (c) Daniel Keiss, Deutsche Telekom AG
+contact: opensource@telekom.de
+This files is distributed under the terms of the Apapche 2.0 license.
+For details see the file LICENSE on the toplevel.
