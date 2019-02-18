@@ -37,6 +37,7 @@
 
         <snapshotUrl></snapshotUrl>
         <releaseUrl></releaseUrl>
+        <guava.version>27.0.1-jre</guava.version>
     </properties>
 
     <distributionManagement>
@@ -153,6 +154,13 @@
                 <version>${cglib.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
             <!-- Testing -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -265,6 +273,11 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
