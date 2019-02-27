@@ -2,9 +2,7 @@ package de.telekom.test.bddwebapp.taxi.pages;
 
 import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -33,6 +31,10 @@ public class RegistrationPage extends JQueryPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementEnhanced submitButton;
 
+    /* This doesn't work for html unit */
+    @FindBy(css = "input:invalid")
+    private WebElementEnhanced validationError;
+
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
@@ -58,8 +60,7 @@ public class RegistrationPage extends JQueryPage {
     }
 
     public boolean registrationDataIsInvalidMessageIsShown() {
-        WebElement invalid = driver.findElement(By.cssSelector("input:invalid"));
-        return invalid != null && invalid.isDisplayed();
+        return validationError.exists() && validationError.isDisplayed();
     }
 
     @Override

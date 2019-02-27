@@ -311,6 +311,10 @@ public class WebDriverWrapper {
                 log.error("Can not create screenshot because webdriver is null!");
                 return null;
             }
+            if(driver instanceof HtmlUnitDriver){
+                log.error("Can not create screenshots for htmlunit!");
+                return null;
+            }
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             File destFile = new File(path);
             FileUtils.copyFile(screenshot, destFile);
