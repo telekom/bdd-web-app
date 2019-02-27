@@ -28,6 +28,8 @@
         <jbehave.version.junit-runner>2.2.0</jbehave.version.junit-runner>
         <webdrivermanager.version>3.2.0</webdrivermanager.version>
         <lombok.version>1.18.4</lombok.version>
+        <htmlunit-driver.version>2.33.3</htmlunit-driver.version>
+        <htmlunit.version>2.33</htmlunit.version>
 
         <!-- Test dependencies -->
         <groovy-all.version>2.4.15</groovy-all.version>
@@ -106,10 +108,30 @@
                 <artifactId>selenium-remote-driver</artifactId>
                 <version>${selenium.version}</version>
             </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Webdrivermanager -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
                 <artifactId>webdrivermanager</artifactId>
                 <version>${webdrivermanager.version}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- HTML Unit -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>htmlunit-driver</artifactId>
+                <version>${htmlunit-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sourceforge.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>${htmlunit.version}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -139,7 +161,6 @@
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
             <!-- Misc. -->
-
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
@@ -237,6 +258,21 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- HTML Unit -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${htmlunit-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>${htmlunit.version}</version>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

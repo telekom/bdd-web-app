@@ -13,6 +13,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
@@ -104,6 +105,9 @@ public class WebDriverWrapper {
             case "safari": {
                 return safariCapabilities();
             }
+            case "htmlunit": {
+                return htmlUnitCapabilities();
+            }
             default: {
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
             }
@@ -150,6 +154,10 @@ public class WebDriverWrapper {
         return DesiredCapabilities.safari();
     }
 
+    private DesiredCapabilities htmlUnitCapabilities() {
+        return DesiredCapabilities.htmlUnit();
+    }
+
     protected void loadLocalWebdriver(String browser, DesiredCapabilities capabilities) {
         log.info("Browser is set to: " + browser);
         switch (browser.toLowerCase()) {
@@ -175,6 +183,10 @@ public class WebDriverWrapper {
             }
             case "safari": {
                 loadSafari(capabilities);
+                return;
+            }
+            case "htmlunit": {
+                loadHtmlUnit(capabilities);
                 return;
             }
             default:
@@ -236,6 +248,12 @@ public class WebDriverWrapper {
             throw new IllegalArgumentException("Can't use 'browserPath' for Safari. Portable is not supported!");
         }
         driver = new SafariDriver(safariOptions);
+    }
+
+    private void loadHtmlUnit(DesiredCapabilities capabilities) {
+        HtmlUnitDriver htmlUnitDriver = new HtmlUnitDriver(capabilities);
+        htmlUnitDriver.setJavascriptEnabled(true);
+        driver = htmlUnitDriver;
     }
 
     protected void loadRemoteWebdriver(String gridURL, DesiredCapabilities capabilities) {
