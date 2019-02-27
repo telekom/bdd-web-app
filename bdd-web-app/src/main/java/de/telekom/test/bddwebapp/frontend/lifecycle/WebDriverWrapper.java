@@ -120,9 +120,7 @@ public class WebDriverWrapper {
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
         desiredCapabilities.setCapability("disable-restore-session-state", true);
         desiredCapabilities.setCapability("disable-application-cache", true);
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-extensions");
-        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        desiredCapabilities.setCapability("useAutomationExtension", false);
         return desiredCapabilities;
     }
 
@@ -195,6 +193,7 @@ public class WebDriverWrapper {
 
     protected void loadChrome(DesiredCapabilities capabilities) {
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setExperimentalOption("useAutomationExtension", false);
         chromeOptions.merge(capabilities);
         if (isNotBlank(browserPath)) {
             log.info("Load portable chrome instance from '{}'", browserPath);
