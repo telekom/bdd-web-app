@@ -39,7 +39,7 @@ public abstract class SeleniumSteps {
     protected ScenarioInteraction scenarioInteraction;
 
     @Autowired
-    protected LifecycleSteps lifecyleSteps;
+    protected LifecycleSteps lifecycleSteps;
 
     @Autowired
     protected StoryInteractionParameterConverter storyInteractionParameterConverter;
