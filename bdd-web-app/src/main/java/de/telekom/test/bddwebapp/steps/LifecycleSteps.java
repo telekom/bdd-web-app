@@ -1,15 +1,19 @@
 package de.telekom.test.bddwebapp.steps;
 
+import de.telekom.test.bddwebapp.api.RequestInteractionFilter;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
+import io.restassured.RestAssured;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Arrays;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -47,6 +51,7 @@ public class LifecycleSteps {
         if (!customizingStories.isApiOnlyForAllStories() && !customizingStories.storyClassesContainsOnlyApiOnlyStories()) {
             browserDriverUpdater.updateDriver();
         }
+        RestAssured.filters(Arrays.asList(new RequestInteractionFilter(scenarioInteraction)));
     }
 
     @BeforeStory
