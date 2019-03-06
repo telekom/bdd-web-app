@@ -26,11 +26,12 @@ public class BrowserDriverUpdater {
 
     @Value("${webdriver.proxy.host:#{null}}")
     private String proxyHost;
+
     @Value("${webdriver.proxy.port:#{null}}")
     private String proxyPort;
 
     @NonNull
-    private final WebDriverWrapper webDriverWrapper;
+    private final WebDriverConfiguration webDriverConfiguration;
 
     /**
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
@@ -40,7 +41,7 @@ public class BrowserDriverUpdater {
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
-        String browser = webDriverWrapper.getBrowser();
+        String browser = webDriverConfiguration.getBrowser();
 
         WebDriverManager webDriverManager;
         switch (browser.toLowerCase()) {
