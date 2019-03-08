@@ -7,10 +7,10 @@
     <artifactId>bdd-web-app</artifactId>
     <version>1.2</version>
 
-    <name>bdd-web-app testframework</name>
-    <description>
-        Test framework using JBehave, Spring Selenium and restAssured
-    </description>
+    <name>BDD web application testing framework</name>
+    <url>https://github.com/telekom/bdd-web-app</url>
+    <description>Easy setup of bdd test projects for web applications</description>
+    <inceptionYear>2017</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,6 +41,31 @@
         <releaseUrl></releaseUrl>
         <guava.version>27.0.1-jre</guava.version>
     </properties>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>dkeiss</id>
+            <name>Daniel Keiss</name>
+            <email>daniel.keiss@telekom.de</email>
+            <url>https://github.com/dkeiss</url>
+            <organization>Deutsche Telekom IT GmbH</organization>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/telekom/bdd-web-app.git</connection>
+        <developerConnection>scm:git:git@github.com/telekom/bdd-web-app.git</developerConnection>
+        <url>http://github.com/telekom/bdd-web-app</url>
+    </scm>
 
     <distributionManagement>
         <snapshotRepository>
@@ -91,21 +116,6 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-firefox-driver</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-chrome-driver</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-remote-driver</artifactId>
                 <version>${selenium.version}</version>
             </dependency>
 
@@ -247,14 +257,11 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-firefox-driver</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Webdrivermanager -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
