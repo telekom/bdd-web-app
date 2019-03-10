@@ -39,7 +39,6 @@
         <objenesis.version>3.0.1</objenesis.version>
 
         <!-- Build dependencies -->
-        <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <lombok-maven-plugin.version>1.18.6.0</lombok-maven-plugin.version>
@@ -71,30 +70,24 @@
     </scm>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
+            <uniqueVersion>false</uniqueVersion>
             <id>ossrh</id>
+            <name>OSSRH Release Repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <layout>default</layout>
         </repository>
+        <snapshotRepository>
+            <uniqueVersion>true</uniqueVersion>
+            <id>ossrh</id>
+            <name>OSSRH Release Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <layout>legacy</layout>
+        </snapshotRepository>
     </distributionManagement>
 
     <build>
         <plugins>
-            <!-- Maven Central Deployment -->
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${nexus-staging-maven-plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
             <!-- Signature -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
