@@ -13,10 +13,11 @@
 
     <modules>
         <module>bdd-web-app</module>
-        <module>bdd-web-app-demo/taxi</module>
-        <module>bdd-web-app-demo/taxi-test</module>
-        <module>bdd-web-app-demo/taxi-test-ger</module>
-        <module>bdd-web-app-demo/taxi-test-customizing</module>
+        <module>demo/app/taxi-app</module>
+        <module>demo/app/testdata-sim</module>
+        <module>demo/test/taxi-test</module>
+        <module>demo/test/taxi-test-ger</module>
+        <module>demo/test/taxi-test-customizing</module>
     </modules>
 
 </project>
