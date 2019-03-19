@@ -2,9 +2,9 @@ package de.telekom.test.bddwebapp.stories;
 
 import com.github.valfirst.jbehave.junit.monitoring.JUnitReportingRunner;
 import de.telekom.test.bddwebapp.steps.ScannedStepsFactory;
-import de.telekom.test.bddwebapp.stories.customizing.CurrentStoryEmbedderMonitor;
 import de.telekom.test.bddwebapp.stories.config.FaultTolerantStoryPathResolver;
 import de.telekom.test.bddwebapp.stories.config.ScreenshotStoryReporterBuilder;
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStoryEmbedderMonitor;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.Embedder;

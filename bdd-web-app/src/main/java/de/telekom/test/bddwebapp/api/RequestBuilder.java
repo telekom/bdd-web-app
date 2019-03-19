@@ -27,6 +27,7 @@ import java.util.Map;
 
 /**
  * Spring component class for request specifications.
+ * Please use api steps instead!
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Oana Nechiforescu - Added support for HEAD
@@ -37,6 +38,7 @@ import java.util.Map;
  */
 @Component
 @Slf4j
+@Deprecated
 public class RequestBuilder {
 
     private RestAssuredConfig basicRestConfig = defaultConfiguration();

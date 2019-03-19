@@ -82,9 +82,9 @@ class FlatInteractionPerformanceTest extends Specification {
         return complexTestdata
     }
 
-    int _count(Map<String, Object> testdata) {
+    int _count(Map<String, Object> testData) {
         int count = 0
-        for (Object value : testdata.values()) {
+        for (Object value : testData.values()) {
             if (value instanceof Map) {
                 count += _count(value)
                 continue

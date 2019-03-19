@@ -1,10 +1,10 @@
 package de.telekom.test.bddwebapp.frontend.steps;
 
 import com.google.common.collect.Maps;
+import de.telekom.test.bddwebapp.api.ApiSteps;
 import de.telekom.test.bddwebapp.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.frontend.page.Page;
-import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.steps.LifecycleSteps;
 import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
@@ -25,7 +25,7 @@ import java.util.Map;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public abstract class SeleniumSteps {
+public abstract class SeleniumSteps extends ApiSteps {
 
     private static final String QUERY_PARAMS = "QUERY_PARAMS";
 
@@ -34,9 +34,6 @@ public abstract class SeleniumSteps {
 
     @Autowired
     protected StoryInteraction storyInteraction;
-
-    @Autowired
-    protected ScenarioInteraction scenarioInteraction;
 
     @Autowired
     protected LifecycleSteps lifecycleSteps;
