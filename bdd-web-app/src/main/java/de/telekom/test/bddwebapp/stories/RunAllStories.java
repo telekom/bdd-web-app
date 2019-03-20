@@ -58,7 +58,7 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
     }
 
     @Override
-    public void run() throws Throwable {
+    public void run() {
         if (apiOnly()) {
             CustomizingStories storyClasses = getApplicationContext().getBean(CustomizingStories.class);
             storyClasses.setApiOnlyForAllStories(true);
