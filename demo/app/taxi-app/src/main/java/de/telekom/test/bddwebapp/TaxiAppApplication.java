@@ -37,19 +37,4 @@ public class TaxiAppApplication extends SpringBootServletInitializer {
         return builder.build();
     }
 
-    @Bean
-    @ConditionalOnExpression("${h2.web.enabled:true}")
-    public ServletRegistrationBean h2servletRegistration() {
-        ServletRegistrationBean registration = new ServletRegistrationBean(new org.h2.server.web.WebServlet());
-        registration.addUrlMappings("/console/*");
-        registration.addInitParameter("webAllowOthers", "true");
-        return registration;
-    }
-
-    @Bean
-    @ConditionalOnExpression("${h2.tcp.enabled:true}")
-    public Server h2TcpServer() throws SQLException {
-        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9090").start();
-    }
-
 }
