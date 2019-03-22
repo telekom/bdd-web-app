@@ -52,10 +52,6 @@ public class ReservationController {
     public @ResponseBody
     ReservationPricesVO reservation(Principal principal, @Valid @RequestBody ReservationVO reservation) {
         reservationService.saveReservation(principal.getName(), reservation);
-        return callReservationSimulator(reservation);
-    }
-
-    private ReservationPricesVO callReservationSimulator(ReservationVO reservation) {
         return restTemplate.postForObject(reservationServiceUrl + "/reservation", reservation, ReservationPricesVO.class);
     }
 
