@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Spring component class for request specifications.
+ * Spring component class for recallRequest specifications.
  * Please use api steps instead!
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -54,13 +54,13 @@ public class RequestBuilder {
     }
 
     public void clearRequest() {
-        log.debug("Clear request");
+        log.debug("Clear recallRequest");
         requestSpecification = null;
         response = null;
     }
 
     public RequestBuilder request() {
-        log.debug("Create new request");
+        log.debug("Create new recallRequest");
         if (requestSpecification == null) {
             requestSpecification = RestAssured.given().log().all().expect().log().all().request();
         }
@@ -87,7 +87,7 @@ public class RequestBuilder {
             int port = baseURI.getPort() > 0 ? baseURI.getPort() : determineStandardPortForScheme(baseURI.getScheme());
             requestSpecification.port(port);
         } catch (Exception ex) {
-            throw new RuntimeException("Error setting baseUri for request", ex);
+            throw new RuntimeException("Error setting baseUri for recallRequest", ex);
         }
         return this;
     }
@@ -106,7 +106,7 @@ public class RequestBuilder {
                 requestSpecification.proxy(proxyHost, new Integer(proxyPort));
             }
         } catch (Exception ex) {
-            throw new RuntimeException("Error setting proxy for request", ex);
+            throw new RuntimeException("Error setting proxy for recallRequest", ex);
         }
         return this;
     }
@@ -590,7 +590,7 @@ public class RequestBuilder {
         try {
             return response.getBody().as(Map.class);
         } catch (Exception e) {
-            throw new RuntimeException("Error converting rest response to map. Response: [" + response.getBody().asString() + "]", e);
+            throw new RuntimeException("Error converting rest recallResponse to map. Response: [" + response.getBody().asString() + "]", e);
         }
     }
 

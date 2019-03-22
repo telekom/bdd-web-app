@@ -22,7 +22,7 @@ public abstract class AbstractTaxiSteps extends SeleniumSteps {
     }
 
     protected RequestSpecification testDataSimRequest() {
-        RequestSpecification request = newRequest();
+        RequestSpecification request = createRequest();
         request.baseUri(testDataSimUrl);
         request.header("Accept", ContentType.JSON.toString());
         request.header("Content-Type", ContentType.JSON.toString());

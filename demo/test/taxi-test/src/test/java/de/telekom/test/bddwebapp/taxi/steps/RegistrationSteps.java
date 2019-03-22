@@ -30,7 +30,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
         testDataSimRequest().post("/fixture/user").then().statusCode(200);
-        storyInteraction.rememberObject(testobject, getResponseAsMap());
+        storyInteraction.rememberObject(testobject, recallResponseAsMap());
     }
 
     @When("the user open the registration page")

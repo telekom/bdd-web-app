@@ -68,7 +68,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         scenarioInteraction.rememberToList("reservationPrices", reservationPrice);
         body.put("reservationPrices", scenarioInteraction.recallList("reservationPrices"));
         testDataSimRequest().body(body).put("/simulator/config/reservation");
-        response().then().statusCode(200);
+        recallResponse().then().statusCode(200);
     }
 
     @Given("reservation already made")

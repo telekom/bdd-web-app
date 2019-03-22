@@ -73,18 +73,14 @@
 
     <distributionManagement>
         <repository>
-            <uniqueVersion>false</uniqueVersion>
             <id>ossrh</id>
             <name>OSSRH Release Repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-            <layout>default</layout>
         </repository>
         <snapshotRepository>
-            <uniqueVersion>true</uniqueVersion>
             <id>ossrh</id>
             <name>OSSRH Release Snapshot Repository</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <layout>legacy</layout>
         </snapshotRepository>
     </distributionManagement>
 

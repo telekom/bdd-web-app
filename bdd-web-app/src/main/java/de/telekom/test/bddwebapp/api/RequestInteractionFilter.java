@@ -9,7 +9,7 @@ import io.restassured.specification.FilterableResponseSpecification;
 import lombok.AllArgsConstructor;
 
 /**
- * Filter for Rest Assured that saves the current response in the Scenario Interaction.
+ * Filter for Rest Assured that saves the current recallResponse in the Scenario Interaction.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
