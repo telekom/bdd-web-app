@@ -13,7 +13,7 @@ public abstract class AbstractTaxiSteps extends SeleniumSteps {
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
     protected String taxiAppUrl;
 
-    @Value("${testData-sim.url:http://localhost:6000/testData-sim}")
+    @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
     protected String testDataSimUrl;
 
     @BeforeScenario

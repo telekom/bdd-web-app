@@ -32,7 +32,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
     private String taxiAppUrl;
 
-    @Value("${testData-sim.url:http://localhost:6000/testData-sim}")
+    @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
     private String testDataSimUrl;
 
     @BeforeStory
