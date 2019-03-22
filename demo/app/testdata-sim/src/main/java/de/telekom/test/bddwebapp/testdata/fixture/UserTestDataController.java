@@ -31,7 +31,7 @@ public class UserTestDataController {
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
     private String taxiAppUrl;
 
-    @PostMapping("/testData/user")
+    @PostMapping("/fixture/user")
     public RegistrationVO testDataUser() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
