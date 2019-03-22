@@ -55,17 +55,13 @@ public class LoginPage extends JQueryPage {
     }
 
     public boolean registeredMessageIsShown() {
-        if (alertSuccessDiv.exists()) {
-            return alertSuccessDiv.getText().contains("registered");
-        }
-        return false;
+        alertSuccessDiv.waitForExisting(1);
+        return alertSuccessDiv.getText().contains("registered");
     }
 
     public boolean loginDataIsInvalidMessageIsShown() {
-        if (alertWarningDiv.exists()) {
-            return alertWarningDiv.getText().contains("invalid");
-        }
-        return false;
+        alertWarningDiv.waitForExisting(1);
+        return alertWarningDiv.getText().contains("invalid");
     }
 
     public boolean isUsernameFieldShown() {

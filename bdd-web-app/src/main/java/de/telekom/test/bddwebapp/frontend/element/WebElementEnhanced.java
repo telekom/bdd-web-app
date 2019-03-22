@@ -125,6 +125,12 @@ public class WebElementEnhanced {
         return webElement.getScreenshotAs(outputType);
     }
 
+    public void waitForExisting(int maxWaitTimeInSeconds) {
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
+        webDriverWait.withMessage("Element still not exists!");
+        webDriverWait.until(driver -> exists());
+    }
+
     public void waitForDisplayed(int maxWaitTimeInSeconds) {
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
         webDriverWait.withMessage("Element: \"" + webElement + "\" is still not displayed!");
