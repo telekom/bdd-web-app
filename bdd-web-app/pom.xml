@@ -18,22 +18,24 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <!-- Framework dependencies -->
-        <selenium.version>3.141.59</selenium.version>
-        <restassured.version>3.3.0</restassured.version>
+        <!-- Long-term dependencies. Update only if it is absolutely necessary. -->
         <spring.version>5.1.5.RELEASE</spring.version>
+        <restassured.version>3.3.0</restassured.version>
         <cglib.version>3.2.10</cglib.version>
         <slf4j.version>1.7.26</slf4j.version>
+        <lombok.version>1.18.6</lombok.version>
+        <guava.version>27.1-jre</guava.version>
+
+        <!-- Short-term dependencies. Update when new version is available. -->
+        <selenium.version>3.141.59</selenium.version>
+        <htmlunit-driver.version>2.34.0</htmlunit-driver.version>
+        <htmlunit.version>2.34.1</htmlunit.version>
+        <webdrivermanager.version>3.3.0</webdrivermanager.version>
         <jbehave.version>4.4</jbehave.version>
         <jbehave.version.junit-runner>2.2.0</jbehave.version.junit-runner>
         <jbehave-site-resources.version>3.3.1</jbehave-site-resources.version>
-        <webdrivermanager.version>3.3.0</webdrivermanager.version>
-        <lombok.version>1.18.6</lombok.version>
-        <htmlunit-driver.version>2.34.0</htmlunit-driver.version>
-        <htmlunit.version>2.34.1</htmlunit.version>
-        <guava.version>27.1-jre</guava.version>
 
-        <!-- Test dependencies -->
+        <!-- Unit test dependencies -->
         <groovy-all.version>2.4.15</groovy-all.version>
         <spock-core.version>1.2-groovy-2.4</spock-core.version>
         <byte-buddy.version>1.9.10</byte-buddy.version>
