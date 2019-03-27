@@ -1,19 +1,14 @@
-package de.telekom.test.bddwebapp.steps;
+package de.telekom.test.bddwebapp.frontend.steps;
 
-import de.telekom.test.bddwebapp.api.RequestInteractionFilter;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
-import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
-import de.telekom.test.bddwebapp.interaction.StoryInteraction;
+import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import io.restassured.RestAssured;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Arrays;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -26,17 +21,8 @@ import java.util.Arrays;
  */
 @Steps
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class LifecycleSteps {
+public class WebDriverLifecycleSteps {
 
-    /*
-     * The current selenium page of story interaction. Is automatically deleted after a story.
-     */
-    public static final String CURRENT_PAGE = "CURRENT_PAGE";
-
-    @NonNull
-    protected final ScenarioInteraction scenarioInteraction;
-    @NonNull
-    protected final StoryInteraction storyInteraction;
     @NonNull
     protected final CurrentStory currentStory;
     @NonNull
@@ -47,39 +33,27 @@ public class LifecycleSteps {
     protected final BrowserDriverUpdater browserDriverUpdater;
 
     @BeforeStories
-    public void updateDriver() {
+    public void beforeStories() {
         if (!customizingStories.isApiOnlyForAllStories() && !customizingStories.storyClassesContainsOnlyApiOnlyStories()) {
             browserDriverUpdater.updateDriver();
         }
-        RestAssured.filters(Arrays.asList(new RequestInteractionFilter(scenarioInteraction)));
     }
 
     @BeforeStory
-    public void startStoryInteraction() {
-        storyInteraction.startInteraction();
+    public void beforeStory() {
         if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
             webDriverWrapper.loadWebdriver();
         }
     }
 
     @BeforeScenario(uponType = ScenarioType.NORMAL)
-    public void setupScenarioInteractionForNormal() {
-        setupScenarioInteraction();
+    public void beforeScenarioForNormal() {
+        beforeScenario(ScenarioType.NORMAL);
     }
 
     @BeforeScenario(uponType = ScenarioType.EXAMPLE)
-    public void setupScenarioInteractionForExample() {
-        setupScenarioInteraction();
-    }
-
-    protected void setupScenarioInteraction() {
-        scenarioInteraction.startInteraction();
-        storyInteraction.setScenarioInteraction(scenarioInteraction);
-        scenarioInteraction.setStoryInteraction(storyInteraction);
-        if (currentStory.isRestartBrowserBeforeScenario()) {
-            webDriverWrapper.quit();
-            webDriverWrapper.loadWebdriver();
-        }
+    public void beforeScenarioForExample() {
+        beforeScenario(ScenarioType.EXAMPLE);
     }
 
     @AfterStory
@@ -90,6 +64,13 @@ public class LifecycleSteps {
     @AfterStories
     public void afterStories() {
         webDriverWrapper.quit();
+    }
+
+    protected void beforeScenario(ScenarioType type) {
+        if (currentStory.isRestartBrowserBeforeScenario()) {
+            webDriverWrapper.quit();
+            webDriverWrapper.loadWebdriver();
+        }
     }
 
 }

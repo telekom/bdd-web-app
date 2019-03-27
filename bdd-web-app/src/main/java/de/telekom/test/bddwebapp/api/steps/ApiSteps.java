@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.api;
+package de.telekom.test.bddwebapp.api.steps;
 
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import io.restassured.RestAssured;

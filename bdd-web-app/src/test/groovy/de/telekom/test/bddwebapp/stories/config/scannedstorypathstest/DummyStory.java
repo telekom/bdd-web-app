@@ -40,7 +40,7 @@ public abstract class DummyStory extends AbstractStory {
         };
     }
 
-    public void run() throws Throwable {
+    public void run()  {
     }
 
 }

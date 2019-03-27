@@ -1,12 +1,12 @@
 package de.telekom.test.bddwebapp.frontend.steps;
 
 import com.google.common.collect.Maps;
-import de.telekom.test.bddwebapp.api.ApiSteps;
+import de.telekom.test.bddwebapp.api.steps.ApiSteps;
 import de.telekom.test.bddwebapp.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import de.telekom.test.bddwebapp.steps.LifecycleSteps;
+import de.telekom.test.bddwebapp.interaction.steps.InteractionLifecycleSteps;
 import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +27,11 @@ import java.util.Map;
  */
 public abstract class SeleniumSteps extends ApiSteps {
 
+    /*
+     * The current selenium page of story interaction. Is automatically deleted after a story.
+     */
+    public static final String CURRENT_PAGE = "CURRENT_PAGE";
+
     private static final String QUERY_PARAMS = "QUERY_PARAMS";
 
     @Autowired
@@ -36,7 +41,7 @@ public abstract class SeleniumSteps extends ApiSteps {
     protected StoryInteraction storyInteraction;
 
     @Autowired
-    protected LifecycleSteps lifecycleSteps;
+    protected InteractionLifecycleSteps lifecycleSteps;
 
     @Autowired
     protected StoryInteractionParameterConverter storyInteractionParameterConverter;
@@ -50,12 +55,12 @@ public abstract class SeleniumSteps extends ApiSteps {
             throw new RuntimeException(e);
         }
         PageFactory.initElements(new WebElementDecorator(driver), page);
-        storyInteraction.remember(LifecycleSteps.CURRENT_PAGE, page);
+        storyInteraction.remember(CURRENT_PAGE, page);
         return page;
     }
 
     protected <T extends Page> T getCurrentPage() {
-        return storyInteraction.recall(LifecycleSteps.CURRENT_PAGE);
+        return storyInteraction.recall(CURRENT_PAGE);
     }
 
     protected String getUrlWithHost(String hostIncludingPort, String path) {
