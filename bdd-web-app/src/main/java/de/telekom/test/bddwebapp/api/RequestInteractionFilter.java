@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.api;
 
+import de.telekom.test.bddwebapp.api.steps.ApiSteps;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import io.restassured.filter.Filter;
 import io.restassured.filter.FilterContext;
@@ -24,7 +25,7 @@ public class RequestInteractionFilter implements Filter {
 
     public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext ctx) {
         Response response = ctx.next(requestSpec, responseSpec);
-        scenarioInteraction.remember("response", response);
+        scenarioInteraction.remember(ApiSteps.RESPONSE_INTERACTION_KEY, response);
         return response;
     }
 

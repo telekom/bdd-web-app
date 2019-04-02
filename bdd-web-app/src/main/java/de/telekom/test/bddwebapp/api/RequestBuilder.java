@@ -27,7 +27,6 @@ import java.util.Map;
 
 /**
  * Spring component class for recallRequest specifications.
- * Please use api steps instead!
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Oana Nechiforescu - Added support for HEAD
@@ -35,6 +34,8 @@ import java.util.Map;
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
+ *
+ * @Deprecated Please use ApiSteps instead
  */
 @Component
 @Slf4j
@@ -176,7 +177,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder put(String path, String... var) {
-        response = requestSpecification.put(path, var);
+        response = requestSpecification.put(path, (Object[]) var);
         return this;
     }
 
@@ -191,7 +192,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder post(String path, String... var) {
-        response = requestSpecification.post(path, var);
+        response = requestSpecification.post(path, (Object[]) var);
         return this;
     }
 
@@ -206,7 +207,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder get(String path, String... var) {
-        response = requestSpecification.get(path, var);
+        response = requestSpecification.get(path, (Object[]) var);
         return this;
     }
 
@@ -231,7 +232,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder delete(String path, String... var) {
-        response = requestSpecification.delete(path, var);
+        response = requestSpecification.delete(path, (Object[]) var);
         return this;
     }
 
@@ -256,7 +257,7 @@ public class RequestBuilder {
     }
 
     public RequestBuilder body(Object var1, ObjectMapper var2) {
-        requestSpecification.body(var2);
+        requestSpecification.body(var1, var2);
         return this;
     }
 
