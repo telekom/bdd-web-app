@@ -34,7 +34,6 @@ import java.util.Map;
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
- *
  * @Deprecated Please use ApiSteps instead
  */
 @Component
@@ -54,12 +53,18 @@ public class RequestBuilder {
                 .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
     }
 
+    /**
+     * Extend your step class from ApiSteps and use clearRequest() instead.
+     */
     public void clearRequest() {
         log.debug("Clear recallRequest");
         requestSpecification = null;
         response = null;
     }
 
+    /**
+     * Extend your step class from ApiSteps and use createRequest() instead.
+     */
     public RequestBuilder request() {
         log.debug("Create new recallRequest");
         if (requestSpecification == null) {
@@ -68,6 +73,9 @@ public class RequestBuilder {
         return this;
     }
 
+    /**
+     * Extend your step class from ApiSteps and use createRequestWithBaseUriAndProxy() instead.
+     */
     public RequestBuilder requestWithBaseUriAndProxy(String host, String apiPath, String proxyHost, String proxyPort) {
         request();
         baseUri(host, apiPath);
@@ -75,12 +83,18 @@ public class RequestBuilder {
         return this;
     }
 
+    /**
+     * Extend your step class from ApiSteps and use createRequestWithJsonConfig() instead.
+     */
     public RequestBuilder requestWithJsonConfig(String host, String apiPath, String proxyHost, String proxyPort) {
         requestWithBaseUriAndProxy(host, apiPath, proxyHost, proxyPort);
         restJsonConfig();
         return this;
     }
 
+    /**
+     * Extend your step class from ApiSteps and use baseUri() instead.
+     */
     public RequestBuilder baseUri(String host, String apiPath) {
         try {
             final URI baseURI = new URI(host);
@@ -101,6 +115,9 @@ public class RequestBuilder {
         }
     }
 
+    /**
+     * Extend your step class from ApiSteps and use proxy() instead.
+     */
     public RequestBuilder proxy(String proxyHost, String proxyPort) {
         try {
             if (StringUtils.isNotBlank(proxyHost) && StringUtils.isNotBlank(proxyPort)) {
@@ -112,6 +129,9 @@ public class RequestBuilder {
         return this;
     }
 
+    /**
+     * Extend your step class from ApiSteps and use jsonConfig() instead.
+     */
     public RequestBuilder restJsonConfig() {
         requestSpecification.config(basicRestConfig);
         requestSpecification.header("Accept", ContentType.JSON.toString());
@@ -119,10 +139,16 @@ public class RequestBuilder {
         return this;
     }
 
+    /**
+     * Extend your step class from ApiSteps and use recallRequest() instead.
+     */
     public RequestSpecification requestSpecification() {
         return requestSpecification;
     }
 
+    /**
+     * Extend your step class from ApiSteps and use recallResponse() instead.
+     */
     public Response response() {
         return response;
     }
