@@ -9,7 +9,7 @@
 
     <name>BDD web application testing framework</name>
     <url>https://github.com/telekom/bdd-web-app</url>
-    <description>Easy setup of bdd test projects for web applications</description>
+    <description>Setup BDD-test-projects for web applications fast and easy</description>
     <inceptionYear>2017</inceptionYear>
 
     <properties>
