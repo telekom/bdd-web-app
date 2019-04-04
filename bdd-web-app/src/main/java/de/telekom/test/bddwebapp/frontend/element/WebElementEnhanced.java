@@ -178,7 +178,7 @@ public class WebElementEnhanced {
         if (scrollTo) {
             scrollTo();
         }
-        new Actions(webDriver).click(webElement).perform();
+        webElement.click();
     }
 
     public void setValue(String value) {
@@ -195,7 +195,7 @@ public class WebElementEnhanced {
     }
 
     public boolean check(Function check) {
-        webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+        webDriver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
         try {
             check.apply(Void.TYPE);
         } catch (NoSuchElementException | StaleElementReferenceException e) {
