@@ -5,21 +5,19 @@ in order to use any discounts.
 
 Scenario: Reservation is not possible for the given period, because there are no offers available
 Given logged in customer user
-And possible reservation between 10:00 and 10:30
-When reserve a shared taxi
+When reserve a shared taxi between 10:00 and 10:30
 Then the reservation is not successful
 
-Scenario: Successful reservation of a collective taxi ride
+Scenario: Successful reservation of a taxi ride
 Given possible reservation between 10:00 and 10:30
-And between 10:00 and 10:30 the price is 30,50 € with 0 passengers
-When reserve a shared taxi
+And the price is 30,50 € with 0 other passengers
+When reserve a shared taxi between 10:00 and 10:30
 Then the reservation is successful
 And between 10:00 and 10:30 the price is 30,50 € at 0 passengers
 
-Scenario: View updated prices for already booked reservations
-Given reservation already made
-And between 10:00 and 10:15 the price is 30,50 € with 0 passengers
-And between 10:15 and 10:30 the price is 15,50 € with 2 passengers
+Scenario: View updated prices for already booked reservations with other passengers
+Given the price is 30,50 € with 0 other passengers between 10:00 and 10:15
+And the price is 15,50 € with 2 other passengers between 10:15 and 10:30
 When the user open the reservation page
 Then the reservation is successful
 And between 10:00 and 10:15 the price is 30,50 € at 0 passengers

@@ -1,6 +1,9 @@
-package de.telekom.test.bddwebapp.testdata.fixture;
+package de.telekom.test.bddwebapp.testdata.testdata;
 
-import de.telekom.test.bddwebapp.testdata.fixture.vo.RegistrationVO;
+import de.telekom.test.bddwebapp.testdata.simulator.config.ReservationSimulatorConfig;
+import de.telekom.test.bddwebapp.testdata.simulator.vo.ReservationPriceVO;
+import de.telekom.test.bddwebapp.testdata.simulator.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.testdata.vo.RegistrationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -9,9 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+import java.util.Optional;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
@@ -22,8 +27,11 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@RestController
-public class UserTestDataController {
+@RestController("testdata")
+public class TestDataController {
+
+    @Autowired
+    private ReservationSimulatorConfig reservationSimulatorConfig;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -31,7 +39,7 @@ public class UserTestDataController {
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
     private String taxiAppUrl;
 
-    @PostMapping("/fixture/user")
+    @PostMapping("user")
     public RegistrationVO testDataUser() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -43,7 +51,7 @@ public class UserTestDataController {
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(taxiAppUrl + "/registration", request, String.class);
-        if(!response.getStatusCode().is3xxRedirection()){
+        if (!response.getStatusCode().is3xxRedirection()) {
             throw new RuntimeException("Error creation user test data!");
         }
 
@@ -53,6 +61,24 @@ public class UserTestDataController {
         registration.setUsername(map.getFirst("username"));
         registration.setPassword(map.getFirst("password"));
         return registration;
+    }
+
+    @PutMapping("reservation")
+    public void updatePossibleReservation(@RequestBody ReservationVO reservation) {
+        reservationSimulatorConfig.setCurrentReservation(Optional.of(reservation));
+    }
+
+    @DeleteMapping("reservation")
+    public void deletePossibleReservation() {
+        reservationSimulatorConfig.setCurrentReservation(Optional.empty());
+    }
+
+    @PostMapping("prices")
+    public List<ReservationPriceVO> addOfferedPrice(@RequestBody ReservationPriceVO reservationPrice) {
+        ReservationVO reservation = reservationSimulatorConfig.getCurrentReservation()
+                .orElseThrow(() -> new RuntimeException("No reservation available!"));
+        reservation.getReservationPrices().add(reservationPrice);
+        return reservation.getReservationPrices();
     }
 
 }

@@ -1,8 +1,6 @@
-package de.telekom.test.bddwebapp.testdata.simulator.vo;
+package de.telekom.test.bddwebapp.testdata.testdata.vo;
 
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -12,9 +10,11 @@ import java.util.List;
  * For details see the file license on the toplevel.
  */
 @Data
-public class ReservationPricesVO {
+public class RegistrationVO {
 
-    private String message;
-    private List<ReservationPriceVO> reservationPrices;
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String password;
 
 }
