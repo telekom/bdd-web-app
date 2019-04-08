@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.steps.testdata;
 
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
+import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.steps.Steps;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,7 +19,7 @@ import java.util.Date;
 public class ReservationTestData {
 
     @Autowired
-    private ScenarioInteraction scenarioInteraction;
+    private StoryInteraction storyInteraction;
 
     public ReservationVO exampleReservation(String earliestStartTime, String latestStartTime) {
         ReservationVO reservation = new ReservationVO();
@@ -28,15 +29,15 @@ public class ReservationTestData {
         reservation.setDestination("Flughafen Berlin-Tegel");
         reservation.setEarliestStartTime(earliestStartTime);
         reservation.setLatestStartTime(latestStartTime);
-        scenarioInteraction.remember("earliestStartTime", earliestStartTime);
-        scenarioInteraction.remember("latestStartTime", latestStartTime);
+        storyInteraction.remember("reservation", reservation);
         return reservation;
     }
 
     public ReservationPriceVO examplePrice(String price, String passengers) {
+        ReservationVO reservation = storyInteraction.recallNotNull("reservation");
         return examplePrice(price, passengers,
-                scenarioInteraction.recallNotNull("earliestStartTime"),
-                scenarioInteraction.recallNotNull("latestStartTime"));
+                reservation.getEarliestStartTime(),
+                reservation.getLatestStartTime());
     }
 
     public ReservationPriceVO examplePrice(String price, String passengers, String startTime, String endTime) {

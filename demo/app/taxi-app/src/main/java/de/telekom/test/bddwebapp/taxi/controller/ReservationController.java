@@ -36,7 +36,7 @@ public class ReservationController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${reservation-service.url:http://localhost:6000/testdata-sim/simulator/api}")
+    @Value("${reservation-service.url:http://localhost:6000/testdata-sim/api}")
     private String reservationServiceUrl;
 
     @GetMapping("reservation")

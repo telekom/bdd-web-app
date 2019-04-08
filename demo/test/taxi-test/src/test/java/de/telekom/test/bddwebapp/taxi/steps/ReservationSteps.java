@@ -3,6 +3,7 @@ package de.telekom.test.bddwebapp.taxi.steps;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationTestData;
+import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -44,6 +45,11 @@ public class ReservationSteps extends AbstractTaxiSteps {
                 .statusCode(200);
     }
 
+    @Given("impossible reservation between $earliestStartTime and $latestStartTime")
+    public void impossibleReservation(String earliestStartTime, String latestStartTime) {
+        reservationTestData.exampleReservation(earliestStartTime, latestStartTime);
+    }
+
     @Given("possible reservation between $earliestStartTime and $latestStartTime")
     public void possibleReservation(String earliestStartTime, String latestStartTime) {
         testDataSimRequest()
@@ -61,7 +67,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
                 .given()
                 .body(reservationTestData.examplePrice(price, passengers))
                 .when()
-                .put()
+                .post("/testdata/prices")
                 .then()
                 .statusCode(200);
     }
@@ -72,7 +78,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
                 .given()
                 .body(reservationTestData.examplePrice(price, passengers, earliestStartTime, latestStartTime))
                 .when()
-                .put()
+                .post("/testdata/prices")
                 .then()
                 .statusCode(200);
     }
@@ -84,12 +90,13 @@ public class ReservationSteps extends AbstractTaxiSteps {
 
     @When("reserve a shared taxi")
     public void aSharedTaxiIsReservedBetween() {
+        ReservationVO reservation = storyInteraction.recallNotNull("reservation");
         ReservationPage reservationPage = getCurrentPage();
-        reservationPage.setDate(scenarioInteraction.recallNotNull("date"));
-        reservationPage.setDeparture(scenarioInteraction.recallNotNull("departure"));
-        reservationPage.setDestination(scenarioInteraction.recallNotNull("destination"));
-        reservationPage.setEarliestStartTime(scenarioInteraction.recallNotNull("earliestStartTime"));
-        reservationPage.setLatestStartTime(scenarioInteraction.recallNotNull("latestStartTime"));
+        reservationPage.setDate(reservation.getDate());
+        reservationPage.setDeparture(reservation.getDeparture());
+        reservationPage.setDestination(reservation.getDestination());
+        reservationPage.setEarliestStartTime(reservation.getEarliestStartTime());
+        reservationPage.setLatestStartTime(reservation.getLatestStartTime());
         reservationPage.submitReservation();
     }
 
