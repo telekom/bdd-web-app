@@ -5,6 +5,7 @@ import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -18,7 +19,8 @@ import javax.validation.Valid;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@RestController("api")
+@RestController
+@RequestMapping("api")
 public class ReservationApiController {
 
     @Autowired

@@ -27,7 +27,8 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@RestController("testdata")
+@RestController
+@RequestMapping("testdata")
 public class TestDataController {
 
     @Autowired
