@@ -1,9 +1,9 @@
-package de.telekom.test.bddwebapp.testdata.testdata;
+package de.telekom.test.bddwebapp.testdata.controller;
 
-import de.telekom.test.bddwebapp.testdata.simulator.config.ReservationSimulatorConfig;
-import de.telekom.test.bddwebapp.testdata.simulator.vo.ReservationPriceVO;
-import de.telekom.test.bddwebapp.testdata.simulator.vo.ReservationVO;
-import de.telekom.test.bddwebapp.testdata.testdata.vo.RegistrationVO;
+import de.telekom.test.bddwebapp.testdata.config.ReservationSimulatorConfig;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -61,6 +61,11 @@ public class TestDataController {
         registration.setUsername(map.getFirst("username"));
         registration.setPassword(map.getFirst("password"));
         return registration;
+    }
+
+    @GetMapping("reservation")
+    public ReservationVO getCurrentReservation() {
+        return reservationSimulatorConfig.getCurrentReservation().get();
     }
 
     @PutMapping("reservation")

@@ -1,13 +1,11 @@
-package de.telekom.test.bddwebapp.testdata.simulator.config;
+package de.telekom.test.bddwebapp.testdata.config;
 
-import de.telekom.test.bddwebapp.testdata.simulator.vo.ReservationNotPossibleException;
-import de.telekom.test.bddwebapp.testdata.simulator.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationNotPossibleException;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**

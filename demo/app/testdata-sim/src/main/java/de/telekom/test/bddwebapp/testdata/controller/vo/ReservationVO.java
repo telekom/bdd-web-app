@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.testdata.simulator.vo;
+package de.telekom.test.bddwebapp.testdata.controller.vo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

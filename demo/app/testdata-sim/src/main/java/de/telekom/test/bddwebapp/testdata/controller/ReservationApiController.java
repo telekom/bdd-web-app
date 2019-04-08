@@ -1,7 +1,7 @@
-package de.telekom.test.bddwebapp.testdata.simulator;
+package de.telekom.test.bddwebapp.testdata.controller;
 
-import de.telekom.test.bddwebapp.testdata.simulator.config.ReservationSimulatorConfig;
-import de.telekom.test.bddwebapp.testdata.simulator.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.config.ReservationSimulatorConfig;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

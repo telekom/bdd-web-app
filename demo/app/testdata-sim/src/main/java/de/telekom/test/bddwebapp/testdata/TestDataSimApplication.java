@@ -22,11 +22,6 @@ public class TestDataSimApplication extends SpringBootServletInitializer {
         SpringApplication.run(TestDataSimApplication.class, args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(TestDataSimApplication.class);
-    }
-
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
