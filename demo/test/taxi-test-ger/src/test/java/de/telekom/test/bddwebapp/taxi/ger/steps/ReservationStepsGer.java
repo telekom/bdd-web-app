@@ -10,26 +10,21 @@ import org.jbehave.core.annotations.When;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Steps
 public class ReservationStepsGer extends ReservationSteps {
 
-    @Given("eine valide Reservierung zwischen $earliestStartTime Uhr und $latestStartTime Uhr")
-    public void possibleReservation(String earliestStartTime, String latestStartTime) {
-        super.possibleReservation(earliestStartTime, latestStartTime);
+    @Given("eine beispielhafte Reservierung zwischen $earliestStartTime Uhr und $latestStartTime Uhr")
+    public void exampleReservation(String earliestStartTime, String latestStartTime) {
+        super.exampleReservation(earliestStartTime, latestStartTime);
     }
 
     @Given("zwischen $startTime Uhr und $endTime Uhr beträgt der Preis $price € bei $passengers Mitfahrern")
-    public void betweenStartTimeAndEndTimeThePriceIs(String startTime, String endTime, String price, String passengers) {
-        super.betweenStartTimeAndEndTimeThePriceIs(startTime, endTime, price, passengers);
-    }
-
-    @Given("die bereits getätigte Reservierung")
-    public void reservationAlreadyMade() {
-        super.reservationAlreadyMade();
+    public void thePriceIsWithOtherPassengers(String startTime, String endTime, String price, String passengers) {
+        super.thePriceIsWithOtherPassengers(startTime, endTime, price, passengers);
     }
 
     @When("der Nutzer die Reservierungsseite öffnet")

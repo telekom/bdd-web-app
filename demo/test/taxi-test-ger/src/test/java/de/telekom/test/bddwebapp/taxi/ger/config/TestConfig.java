@@ -16,16 +16,6 @@ import org.springframework.core.env.Environment;
  * For details see the file license on the toplevel.
  */
 @Configuration
-@PropertySource("test.properties")
 @ComponentScan("de.telekom.test.bddwebapp")
 public class TestConfig {
-
-    @Autowired
-    private Environment environment;
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
 }

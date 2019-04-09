@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
-import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.jbehave.core.annotations.BeforeScenario;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,11 +21,8 @@ public abstract class AbstractTaxiSteps extends SeleniumSteps {
     }
 
     protected RequestSpecification testDataSimRequest() {
-        RequestSpecification request = createRequest();
-        request.baseUri(testDataSimUrl);
-        request.header("Accept", ContentType.JSON.toString());
-        request.header("Content-Type", ContentType.JSON.toString());
-        return request;
+        createRequest().baseUri(testDataSimUrl);
+        return jsonConfig();
     }
 
 }

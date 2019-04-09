@@ -2,14 +2,15 @@ package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
-import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationTestData;
+import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationPriceVO;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import java.io.UnsupportedEncodingException;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
@@ -33,9 +34,6 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
     private String testDataSimUrl;
 
-    @Autowired
-    private ReservationTestData reservationTestData;
-
     @BeforeStory
     public void theReservationIsDeletedInTheSimulator() {
         testDataSimRequest()
@@ -45,40 +43,33 @@ public class ReservationSteps extends AbstractTaxiSteps {
                 .statusCode(200);
     }
 
-    @Given("impossible reservation between $earliestStartTime and $latestStartTime")
-    public void impossibleReservation(String earliestStartTime, String latestStartTime) {
-        reservationTestData.exampleReservation(earliestStartTime, latestStartTime);
-    }
-
-    @Given("possible reservation between $earliestStartTime and $latestStartTime")
-    public void possibleReservation(String earliestStartTime, String latestStartTime) {
-        testDataSimRequest()
+    @Given("example reservation between $earliestStartTime and $latestStartTime")
+    public void exampleReservation(String earliestStartTime, String latestStartTime) {
+        ReservationVO reservation = testDataSimRequest()
                 .given()
-                .body(reservationTestData.exampleReservation(earliestStartTime, latestStartTime))
+                .queryParam("earliestStartTime", earliestStartTime)
+                .queryParam("latestStartTime", latestStartTime)
                 .when()
-                .put("/testdata/reservation")
+                .post("/testdata/reservation")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .extract().as(ReservationVO.class);
+        storyInteraction.remember("reservation", reservation);
     }
 
-    @Given("the price is $price € with $passengers other passengers")
-    public void thePriceIsWithOtherPassengers(String price, String passengers) {
-        testDataSimRequest()
-                .given()
-                .body(reservationTestData.examplePrice(price, passengers))
-                .when()
-                .post("/testdata/prices")
-                .then()
-                .statusCode(200);
-    }
+    @Given("the price is $price € with $passengers other passengers between $startTime and $endTime")
+    public void thePriceIsWithOtherPassengers(String price, String passengers, String startTime, String endTime) {
+        ReservationPriceVO reservationPrice = new ReservationPriceVO();
+        reservationPrice.setPrice(price);
+        reservationPrice.setPassengers(passengers);
+        reservationPrice.setStartTime(startTime);
+        reservationPrice.setEndTime(endTime);
 
-    @Given("the price is $price € with $passengers other passengers between $earliestStartTime and $latestStartTime")
-    public void thePriceIsWithOtherPassengers(String price, String passengers, String earliestStartTime, String latestStartTime) {
         testDataSimRequest()
                 .given()
-                .body(reservationTestData.examplePrice(price, passengers, earliestStartTime, latestStartTime))
+                .body(reservationPrice)
                 .when()
-                .post("/testdata/prices")
+                .put("/testdata/prices")
                 .then()
                 .statusCode(200);
     }

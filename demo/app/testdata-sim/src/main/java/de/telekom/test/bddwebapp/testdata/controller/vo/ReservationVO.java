@@ -22,6 +22,7 @@ public class ReservationVO {
     private String earliestStartTime;
     private String destination;
     private String latestStartTime;
+    private String message;
 
     private List<ReservationPriceVO> reservationPrices = new ArrayList<>();
 

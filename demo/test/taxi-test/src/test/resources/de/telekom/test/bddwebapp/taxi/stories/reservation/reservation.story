@@ -3,15 +3,14 @@ As a logged-in user
 I would like to be able to make reservations for collective tickets for certain routes in certain time periods
 in order to use any discounts.
 
-Scenario: Reservation is not possible because there are no offers available
+Scenario: Reservation is not possible for the given period, because there are no offers available
 Given logged in customer user
-And impossible reservation between 10:00 and 10:30
+And example reservation between 10:00 and 10:30
 When reserve a shared taxi
 Then the reservation is not successful
 
-Scenario: Successful reservation of a taxi ride
-Given possible reservation between 10:00 and 10:30
-And the price is 30,50 € with 0 other passengers
+Scenario: Successful reservation, because there are now a offer available
+Given the price is 30,50 € with 0 other passengers between 10:00 and 10:30
 When reserve a shared taxi
 Then the reservation is successful
 And between 10:00 and 10:30 the price is 30,50 € at 0 passengers

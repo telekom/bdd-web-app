@@ -46,6 +46,14 @@ interface Interaction {
         return recall(key.toString());
     }
 
+    default <S> S recall(String key, Class<S> type) {
+        return type.cast(recall(key));
+    }
+
+    default <S> S recall(Enum key, Class<S> type) {
+        return recall(key.toString(), type);
+    }
+
     default <S> S recallNotNull(String key) {
         S value = recall(key);
         assertNotNull(String.format("Recalled '%s' for story interaction value '%s'", value, key), value);
@@ -54,6 +62,14 @@ interface Interaction {
 
     default <S> S recallNotNull(Enum key) {
         return recallNotNull(key.toString());
+    }
+
+    default <S> S recallNotNull(String key, Class<S> type) {
+        return type.cast(recallNotNull(key));
+    }
+
+    default <S> S recallNotNull(Enum key, Class<S> type) {
+        return type.cast(recallNotNull(key.toString()));
     }
 
     Map<String, Object> getContext();

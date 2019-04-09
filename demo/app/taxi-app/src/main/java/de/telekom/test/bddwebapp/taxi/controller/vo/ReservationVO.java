@@ -29,4 +29,6 @@ public class ReservationVO {
     @NotBlank
     private String latestStartTime;
 
+    private String message;
+
 }
