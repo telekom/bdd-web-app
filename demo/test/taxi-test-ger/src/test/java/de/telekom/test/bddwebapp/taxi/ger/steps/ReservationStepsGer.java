@@ -24,7 +24,7 @@ public class ReservationStepsGer extends ReservationSteps {
 
     @Given("zwischen $startTime Uhr und $endTime Uhr beträgt der Preis $price € bei $passengers Mitfahrern")
     public void thePriceIsWithOtherPassengers(String startTime, String endTime, String price, String passengers) {
-        super.thePriceIsWithOtherPassengers(startTime, endTime, price, passengers);
+        super.thePriceIsWithOtherPassengers(price, passengers, startTime, endTime);
     }
 
     @When("der Nutzer die Reservierungsseite öffnet")
