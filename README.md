@@ -170,6 +170,7 @@ Run your story and look at the test report. If you miss the report styling call 
 You will find additional information to the test framework in the wiki: https://github.com/telekom/bdd-web-app/wiki.
 
 In the wiki is described:
+- What are the general system requirements
 - How you can configure the test run on different browsers, update browser driver behind a proxy and activate screenshot after successful step.
 - Run the same stories on different staging environments like almost simulated, almost real systems or fully integrative.
 - How to customize your test project for special needs.
