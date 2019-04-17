@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import static org.openqa.selenium.support.PageFactory.initElements;
+
 /**
  * Abstract steps class for selenium test.
  *
@@ -54,7 +56,8 @@ public abstract class SeleniumSteps extends ApiSteps {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
-        PageFactory.initElements(new WebElementDecorator(driver), page);
+        initElements(new WebElementDecorator(driver), page);
+        page.checkPage();
         storyInteraction.remember(CURRENT_PAGE, page);
         return page;
     }

@@ -21,13 +21,12 @@ public abstract class Page {
 
     public Page(WebDriver driver) {
         this.driver = driver;
-        checkPage();
     }
 
     /**
      * Check if the page is the right one.
      * By default, the URL is checked.
-     * If necessary, however, another check can be added by implementing checkPageDesignator(), e.g. in single page applications.
+     * If necessary, another check can be used by implementing checkPageDesignator(), e.g. for single page applications.
      */
     public void checkPage() {
         checkUrl();
