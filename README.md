@@ -30,6 +30,8 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
             </dependency>
 ```
 
+BDD-Web-App is also available for other build-automation-tools like gradle. You will find the artefacts here: https://search.maven.org/artifact/de.telekom.test/bdd-web-app/1.2/jar.
+
 ## Configuration
 
 You need four java classes for configuration.
