@@ -11,5 +11,5 @@ import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
  * For details see the file license on the toplevel.
  */
 @TestLevel(testLevels = {0, 1})
-public class LoginAllTestLevelsIncluded extends AbstractTestLevelStory {
+public class LoginTestLevel0And1 extends AbstractTestLevelStory {
 }
