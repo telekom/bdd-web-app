@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.element;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
@@ -91,6 +90,10 @@ public class WebElementEnhanced {
 
     public String getText() {
         return webElement.getText();
+    }
+
+    public String getHtml() {
+        return webElement.getAttribute("innerHTML");
     }
 
     public String getTagName() {
