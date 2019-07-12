@@ -31,7 +31,7 @@ import java.util.Map;
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Oana Nechiforescu - Added support for HEAD
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  * @Deprecated Please use ApiSteps instead
