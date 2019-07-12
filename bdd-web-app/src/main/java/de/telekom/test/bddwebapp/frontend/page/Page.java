@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.page;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  * Abstract base class for page objects. Checks the current url when creating.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
+ * @author Tim Jödicke - First implementation of checkPageState() in project using bdd-web-app
  * <p>
  * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
@@ -30,16 +32,26 @@ public abstract class Page {
      */
     public void checkPage() {
         checkUrl();
+        checkPageState();
         checkPageDesignator();
     }
 
     /**
-     * Check the URL.
+     * Check if the expected URL matches the current one.
      * Used by checkPage().
      */
     public void checkUrl() {
-        Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+        Wait<WebDriver> wait = new WebDriverWait(driver, 15);
         wait.until(new UrlMatchesExpectation(getURL(), this.getClass().getName()));
+    }
+
+    /**
+     * Check if the page is completely loaded.
+     * Used by checkPage().
+     */
+    public void checkPageState() {
+        Wait<WebDriver> wait = new WebDriverWait(driver, 15);
+        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
     }
 
     /**
