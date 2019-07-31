@@ -133,6 +133,18 @@ interface Interaction {
         return recall(key.toString());
     }
 
+    default <S> Map<String, S> recallMapOrCreateNew(String key) {
+        Map<String, S> map = recallMap(key);
+        if (map == null) {
+            remember(key, new HashMap<String, S>());
+        }
+        return recallMap(key);
+    }
+
+    default <S> Map<String, S> recallMapOrCreateNew(Enum key) {
+        return recallMapOrCreateNew(key.toString());
+    }
+
     // -------------------------------------------------------------------------
     // List Handling
     // -------------------------------------------------------------------------
@@ -156,6 +168,18 @@ interface Interaction {
 
     default <S> List<S> recallList(Enum key) {
         return recall(key);
+    }
+
+    default <S> List<S> recallListOrCreateNew(String key) {
+        List<S> list = recallList(key);
+        if (list == null) {
+            remember(key, new ArrayList<S>());
+        }
+        return recallList(key);
+    }
+
+    default <S> List<S> recallListOrCreateNew(Enum key) {
+        return recallListOrCreateNew(key.toString());
     }
 
 }
