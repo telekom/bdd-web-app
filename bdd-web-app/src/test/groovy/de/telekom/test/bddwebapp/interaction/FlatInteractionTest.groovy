@@ -44,20 +44,6 @@ class FlatInteractionTest extends Specification {
         interaction.getContext() != null
     }
 
-    def "recall integer in all flavors"() {
-        when:
-        interaction.context.put("KEY", 1)
-        then:
-        interaction.recall("KEY") == 1
-        interaction.recall(TestDataEnum.KEY) == 1
-        interaction.recall("KEY", Integer.class) == 1
-        interaction.recall(TestDataEnum.KEY, Integer.class) == 1
-        interaction.recallNotNull("KEY") == 1
-        interaction.recallNotNull(TestDataEnum.KEY) == 1
-        interaction.recallNotNull("KEY", Integer.class) == 1
-        interaction.recallNotNull(TestDataEnum.KEY, Integer.class) == 1
-    }
-
     def "test remember string"() {
         when:
         interaction.remember("KEY", "value")
@@ -75,6 +61,8 @@ class FlatInteractionTest extends Specification {
         interaction.recall("KEY.key") == "value"
         interaction.recall(TestDataEnum.KEY) == ["key": "value"]
         interaction.recallMap(TestDataEnum.KEY) == ["key": "value"]
+        interaction.recallMapOrCreateNew("KEY") == ["key": "value"]
+        interaction.recallMapOrCreateNew(TestDataEnum.KEY) == ["key": "value"]
     }
 
     def "test remember list"() {
@@ -82,10 +70,23 @@ class FlatInteractionTest extends Specification {
         interaction.remember("KEY", ["value"])
         then:
         interaction.recall("KEY") == ["value"]
-        interaction.recallList("KEY") == ["value"]
         interaction.recall("KEY[0]") == "value"
         interaction.recall(TestDataEnum.KEY) == ["value"]
+        interaction.recallList("KEY") == ["value"]
         interaction.recallList(TestDataEnum.KEY) == ["value"]
+        interaction.recallListOrCreateNew("KEY") == ["value"]
+        interaction.recallListOrCreateNew(TestDataEnum.KEY) == ["value"]
+    }
+
+    def "remember values to list"() {
+        when:
+        interaction.rememberToList("KEY", "value1")
+        interaction.rememberToList(TestDataEnum.KEY, "value2")
+        then:
+        interaction.recall("KEY") == ["value1", "value2"]
+        interaction.recall(TestDataEnum.KEY) == ["value1", "value2"]
+        interaction.recallList("KEY") == ["value1", "value2"]
+        interaction.recallList(TestDataEnum.KEY) == ["value1", "value2"]
     }
 
     def "test remember list with map"() {
@@ -107,12 +108,36 @@ class FlatInteractionTest extends Specification {
 
     def "test remember object"() {
         when:
-        interaction.rememberObject("KEY", "attribute", "value")
+        interaction.rememberObject(rememberWithKey, "attribute", "value")
         then:
-        interaction.recall("KEY") == ["attribute": "value"]
+        interaction.recall(recallWithKey) == ["attribute": "value"]
+        interaction.recallNotNull(recallWithKey) == ["attribute": "value"]
+        interaction.recallObject(recallWithKey, "attribute") == "value"
+        interaction.recallObjectNotNull(recallWithKey, "attribute") == "value"
         interaction.recall("KEY.attribute") == "value"
-        interaction.recallObject("KEY", "attribute") == "value"
-        interaction.recall(TestDataEnum.KEY) == ["attribute": "value"]
+        where:
+        rememberWithKey  | recallWithKey
+        "KEY"            | "KEY"
+        "KEY"            | TestDataEnum.KEY
+        TestDataEnum.KEY | "KEY"
+        TestDataEnum.KEY | TestDataEnum.KEY
+    }
+
+    def "test remember object as map"() {
+        when:
+        interaction.rememberObject(rememberWithKey, ["attribute": "value"])
+        then:
+        interaction.recall(recallWithKey) == ["attribute": "value"]
+        interaction.recallNotNull(recallWithKey) == ["attribute": "value"]
+        interaction.recallObject(recallWithKey, "attribute") == "value"
+        interaction.recallObjectNotNull(recallWithKey, "attribute") == "value"
+        interaction.recall("KEY.attribute") == "value"
+        where:
+        rememberWithKey  | recallWithKey
+        "KEY"            | "KEY"
+        "KEY"            | TestDataEnum.KEY
+        TestDataEnum.KEY | "KEY"
+        TestDataEnum.KEY | TestDataEnum.KEY
     }
 
     def "test remember object with existing key object (as enum)"() {

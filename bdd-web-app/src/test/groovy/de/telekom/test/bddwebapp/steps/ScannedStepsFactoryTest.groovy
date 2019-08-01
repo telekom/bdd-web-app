@@ -134,27 +134,27 @@ class ScannedStepsFactoryTest extends Specification {
 
 
     @Steps(testLevel = 0)
-    public class TestLevel0ExtendsTestLevel1Step extends TestLevel1Step {
+    class TestLevel0ExtendsTestLevel1Step extends TestLevel1Step {
     }
 
     @Steps(testLevel = 0)
-    public class TestLevel0Step {
+    class TestLevel0Step {
     }
 
     @Steps(testLevel = 1)
-    public class TestLevel1ExtendsTestLevel0Step extends TestLevel0Step {
+    class TestLevel1ExtendsTestLevel0Step extends TestLevel0Step {
     }
 
     @Steps(testLevel = 1)
-    public class TestLevel1Step {
+    class TestLevel1Step {
     }
 
     @Steps(testLevel = 2)
-    public class TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step extends TestLevel1ExtendsTestLevel0Step {
+    class TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step extends TestLevel1ExtendsTestLevel0Step {
     }
 
     @Steps(testLevel = 2)
-    public class TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step extends TestLevel0ExtendsTestLevel1Step {
+    class TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step extends TestLevel0ExtendsTestLevel1Step {
     }
 
 }
