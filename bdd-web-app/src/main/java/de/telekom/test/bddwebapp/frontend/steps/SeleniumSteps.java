@@ -10,9 +10,9 @@ import de.telekom.test.bddwebapp.interaction.steps.InteractionLifecycleSteps;
 import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
@@ -34,7 +34,7 @@ public abstract class SeleniumSteps extends ApiSteps {
      */
     public static final String CURRENT_PAGE = "CURRENT_PAGE";
 
-    private static final String QUERY_PARAMS = "QUERY_PARAMS";
+    public static final String QUERY_PARAMS = "QUERY_PARAMS";
 
     @Autowired
     protected WebDriverWrapper webDriverWrapper;
@@ -52,7 +52,8 @@ public abstract class SeleniumSteps extends ApiSteps {
         WebDriver driver = webDriverWrapper.getDriver();
         T page;
         try {
-            page = expectedPage.getConstructor(WebDriver.class).newInstance(driver);
+            Constructor<T> constructor = expectedPage.getConstructor(WebDriver.class);
+            page = constructor.newInstance(driver);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }

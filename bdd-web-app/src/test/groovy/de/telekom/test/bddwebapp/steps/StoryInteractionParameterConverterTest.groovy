@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.steps
 
 import de.telekom.test.bddwebapp.interaction.StoryInteraction
+import org.jbehave.core.model.ExamplesTable
 import spock.lang.Specification
 
 /**
@@ -14,7 +15,7 @@ import spock.lang.Specification
  */
 class StoryInteractionParameterConverterTest extends Specification {
 
-    StoryInteractionParameterConverter storyInteractionParameterConverter = new StoryInteractionParameterConverter(Mock(StoryInteraction.class))
+    StoryInteractionParameterConverter storyInteractionParameterConverter = new StoryInteractionParameterConverter(Mock(StoryInteraction))
 
     def "simple value"() {
         when:
@@ -68,6 +69,17 @@ class StoryInteractionParameterConverterTest extends Specification {
         def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('value1 +$key2+ +$key3+ value4')
         then:
         value == "value1 value2 value3 value4"
+    }
+
+    def "get rows with interaction values"() {
+        given:
+        storyInteractionParameterConverter.storyInteraction.recallNotNull('key') >> 'value2'
+        ExamplesTable examplesTable = Mock(ExamplesTable)
+        examplesTable.getRows() >> [['attribute': 'value'], ['attribute': '$key']]
+        when:
+        def rows = storyInteractionParameterConverter.getRowsWithInteractionKey(examplesTable)
+        then:
+        rows == [['attribute': 'value'],['attribute': 'value2']]
     }
 
 }

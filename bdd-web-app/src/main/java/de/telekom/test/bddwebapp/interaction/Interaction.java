@@ -46,14 +46,6 @@ interface Interaction {
         return recall(key.toString());
     }
 
-    default <S> S recall(String key, Class<S> type) {
-        return type.cast(recall(key));
-    }
-
-    default <S> S recall(Enum key, Class<S> type) {
-        return recall(key.toString(), type);
-    }
-
     default <S> S recallNotNull(String key) {
         S value = recall(key);
         assertNotNull(String.format("Recalled '%s' for story interaction value '%s'", value, key), value);
@@ -62,14 +54,6 @@ interface Interaction {
 
     default <S> S recallNotNull(Enum key) {
         return recallNotNull(key.toString());
-    }
-
-    default <S> S recallNotNull(String key, Class<S> type) {
-        return type.cast(recallNotNull(key));
-    }
-
-    default <S> S recallNotNull(Enum key, Class<S> type) {
-        return type.cast(recallNotNull(key.toString()));
     }
 
     Map<String, Object> getContext();
@@ -107,6 +91,10 @@ interface Interaction {
         remember(entityKey, object);
     }
 
+    default void rememberObject(Enum entityKey, Map<String, Object> object) {
+        remember(entityKey.toString(), object);
+    }
+
     default <S> S recallObject(String objectKey, String attributeKey) {
         String key = objectKey + OBJECT_KEY_SEPARATOR + attributeKey;
         return recall(key);
@@ -133,15 +121,24 @@ interface Interaction {
         return recall(key.toString());
     }
 
+    default <S> Map<String, S> recallMapOrCreateNew(String key) {
+        Map<String, S> map = recallMap(key);
+        if (map == null) {
+            remember(key, new HashMap<String, S>());
+        }
+        return recallMap(key);
+    }
+
+    default <S> Map<String, S> recallMapOrCreateNew(Enum key) {
+        return recallMapOrCreateNew(key.toString());
+    }
+
     // -------------------------------------------------------------------------
     // List Handling
     // -------------------------------------------------------------------------
 
     default <S> void rememberToList(String key, S value) {
-        List<Object> list = recallList(key);
-        if (list == null) {
-            list = new ArrayList<>();
-        }
+        List<S> list = recallListOrCreateNew(key);
         list.add(value);
         remember(key, list);
     }
@@ -156,6 +153,18 @@ interface Interaction {
 
     default <S> List<S> recallList(Enum key) {
         return recall(key);
+    }
+
+    default <S> List<S> recallListOrCreateNew(String key) {
+        List<S> list = recallList(key);
+        if (list == null) {
+            remember(key, new ArrayList<S>());
+        }
+        return recallList(key);
+    }
+
+    default <S> List<S> recallListOrCreateNew(Enum key) {
+        return recallListOrCreateNew(key.toString());
     }
 
 }

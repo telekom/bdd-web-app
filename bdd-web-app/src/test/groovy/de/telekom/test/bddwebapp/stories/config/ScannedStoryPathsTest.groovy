@@ -17,7 +17,7 @@ import spock.lang.Specification
  */
 class ScannedStoryPathsTest extends Specification {
 
-    def ScannedStoryPaths scannedStoryPaths = new ScannedStoryPaths() {
+    ScannedStoryPaths scannedStoryPaths = new ScannedStoryPaths() {
         Configuration configuration() {
             return new MostUsefulConfiguration()
         }
@@ -26,8 +26,6 @@ class ScannedStoryPathsTest extends Specification {
             return Package.getPackage(this.class).name
         }
     }
-
-    def ApplicationContext applicationContext = Mock(ApplicationContext)
 
     def "test scanned story paths"() {
         when:

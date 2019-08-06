@@ -42,7 +42,8 @@ public class StoryInteractionParameterConverter {
 
     public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
         List<Map<String, String>> rows = examplesTable.getRows();
-        rows.forEach(map -> map.entrySet().forEach(entry -> entry.setValue(getValueFromKeyOrValueOrConcatenated(entry.getValue()))));
+        rows.forEach(map -> map.entrySet()
+                .forEach(entry -> entry.setValue(getValueFromKeyOrValueOrConcatenated(entry.getValue()))));
         return rows;
     }
 

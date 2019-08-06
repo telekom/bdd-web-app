@@ -21,10 +21,10 @@ import spock.lang.Unroll
 class WebDriverLifecycleStepsTest extends Specification {
 
     WebDriverLifecycleSteps steps = new WebDriverLifecycleSteps(
-            Mock(CurrentStory.class),
-            Mock(CustomizingStories.class),
-            Mock(WebDriverWrapper.class),
-            Mock(BrowserDriverUpdater.class)
+            Mock(CurrentStory),
+            Mock(CustomizingStories),
+            Mock(WebDriverWrapper),
+            Mock(BrowserDriverUpdater)
     )
 
     @Unroll
