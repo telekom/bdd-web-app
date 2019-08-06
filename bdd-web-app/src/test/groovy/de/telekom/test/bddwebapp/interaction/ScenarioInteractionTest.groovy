@@ -9,7 +9,7 @@ class ScenarioInteractionTest extends Specification {
 
     def setup() {
         scenarioInteraction.storyInteraction = new StoryInteraction()
-        scenarioInteraction.requestBuilder = Mock(RequestBuilder.class)
+        scenarioInteraction.requestBuilder = Mock(RequestBuilder)
     }
 
     def "start interaction"() {

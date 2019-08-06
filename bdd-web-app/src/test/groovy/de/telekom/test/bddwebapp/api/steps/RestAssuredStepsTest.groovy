@@ -17,7 +17,7 @@ import spock.lang.Specification
 class RestAssuredStepsTest extends Specification {
 
     RestAssuredSteps steps = new RestAssuredSteps(
-            Mock(ScenarioInteraction.class))
+            Mock(ScenarioInteraction))
 
     def "before stories"() {
         when:

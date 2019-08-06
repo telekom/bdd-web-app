@@ -20,8 +20,6 @@ class FlatInteractionPerformanceTest extends Specification {
 
     Map exampleJson = json(20)
 
-    NumberFormat format = NumberFormat.getInstance()
-
     def "save simple map with list"() {
         given:
         println "Given items: " + _count(exampleJson)

@@ -15,7 +15,7 @@ import spock.lang.Specification
  */
 class StoryInteractionParameterConverterTest extends Specification {
 
-    StoryInteractionParameterConverter storyInteractionParameterConverter = new StoryInteractionParameterConverter(Mock(StoryInteraction.class))
+    StoryInteractionParameterConverter storyInteractionParameterConverter = new StoryInteractionParameterConverter(Mock(StoryInteraction))
 
     def "simple value"() {
         when:
@@ -74,7 +74,7 @@ class StoryInteractionParameterConverterTest extends Specification {
     def "get rows with interaction values"() {
         given:
         storyInteractionParameterConverter.storyInteraction.recallNotNull('key') >> 'value2'
-        ExamplesTable examplesTable = Mock(ExamplesTable.class)
+        ExamplesTable examplesTable = Mock(ExamplesTable)
         examplesTable.getRows() >> [['attribute': 'value'], ['attribute': '$key']]
         when:
         def rows = storyInteractionParameterConverter.getRowsWithInteractionKey(examplesTable)

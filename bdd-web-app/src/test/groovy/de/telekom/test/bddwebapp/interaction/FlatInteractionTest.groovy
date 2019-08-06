@@ -24,7 +24,7 @@ class FlatInteractionTest extends Specification {
     def setup() {
         // getField(abstractInteraction.class, "log") doesn't work here
         def logField = asList(getAllFields(interaction.class)).stream()
-                .filter({ field -> field.getType().isAssignableFrom(Logger.class) })
+                .filter({ field -> field.getType().isAssignableFrom(Logger) })
                 .findFirst().get()
         removeFinalModifier(logField)
         writeStaticField(logField, log, true)
