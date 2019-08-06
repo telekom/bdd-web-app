@@ -50,8 +50,10 @@ public abstract class Page {
      * Used by checkPage().
      */
     public void checkPageState() {
-        Wait<WebDriver> wait = new WebDriverWait(driver, 15);
-        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        if(driver instanceof JavascriptExecutor){
+            Wait<WebDriver> wait = new WebDriverWait(driver, 15);
+            wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        }
     }
 
     /**
