@@ -5,6 +5,8 @@ import de.telekom.test.bddwebapp.taxi.steps.RegistrationSteps;
 import lombok.extern.slf4j.Slf4j;
 import org.jbehave.core.annotations.Given;
 
+import static org.junit.Assert.fail;
+
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -20,6 +22,9 @@ public class RegistrationStepsTestLevel extends RegistrationSteps {
     @Override
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
+        if (Integer.valueOf(System.getProperty("testLevel")) == 0) {
+            fail("This step should run only in test level 1 and above");
+        }
         log.info("Create registered user in \"real-system\"");
         // In the real scenario you wouldn't run the super method.
         // You would use an own implementation that create the user in the real system.

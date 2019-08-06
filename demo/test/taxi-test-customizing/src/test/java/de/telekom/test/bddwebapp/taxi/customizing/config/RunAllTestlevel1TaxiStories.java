@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.customizing.config;
 
 import de.telekom.test.bddwebapp.stories.RunAllStories;
+import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.springframework.context.ApplicationContext;
 
@@ -16,18 +17,24 @@ import java.util.List;
 public class RunAllTestlevel1TaxiStories extends RunAllStories {
 
     @Override
+    public Configuration configuration() {
+        System.setProperty("testLevel", "1");
+        return super.configuration();
+    }
+
+    @Override
     public ApplicationContext getApplicationContext() {
         return ApplicationContextProvider.getApplicationContext();
     }
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return testLevelStepsFactory(1);
+        return testLevelStepsFactory(getTestLevel());
     }
 
     @Override
     public List<String> storyPaths() {
-        return testLevelStoryPaths(1);
+        return testLevelStoryPaths(getTestLevel());
     }
 
     /*
