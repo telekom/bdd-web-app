@@ -128,22 +128,26 @@ public class WebElementEnhanced {
         return webElement.getScreenshotAs(outputType);
     }
 
-    public void waitForExisting(int maxWaitTimeInSeconds) {
+    public void waitFor(Function<WebDriver, Boolean> function, int maxWaitTimeInSeconds, String errorMessage) {
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
-        webDriverWait.withMessage("Element still not exists!");
-        webDriverWait.until(driver -> exists());
+        webDriverWait.withMessage(errorMessage);
+        webDriverWait.until(function);
+    }
+
+    public void waitForExisting(int maxWaitTimeInSeconds) {
+        Function<WebDriver, Boolean> waitForExisting = driver -> exists();
+        waitFor(waitForExisting, maxWaitTimeInSeconds, "Element still not exists!");
     }
 
     public void waitForDisplayed(int maxWaitTimeInSeconds) {
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
-        webDriverWait.withMessage("Element: \"" + webElement + "\" is still not displayed!");
-        webDriverWait.until(driver -> {
+        Function<WebDriver, Boolean> waitForDisplayed = driver -> {
             try {
                 return webElement.isDisplayed();
             } catch (WebDriverException e) {
                 return false;
             }
-        });
+        };
+        waitFor(waitForDisplayed, maxWaitTimeInSeconds, "Element: \"" + webElement + "\" is still not displayed!");
     }
 
     public void scrollTo() {
