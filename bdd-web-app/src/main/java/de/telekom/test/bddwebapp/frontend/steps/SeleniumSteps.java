@@ -8,7 +8,6 @@ import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.interaction.steps.InteractionLifecycleSteps;
 import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +15,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import static de.telekom.test.bddwebapp.util.UrlAppender.appendQueryParams;
+import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 /**
@@ -83,48 +84,6 @@ public abstract class SeleniumSteps extends ApiSteps {
     protected void open(String url) {
         WebDriver driver = webDriverWrapper.getDriver();
         driver.get(url);
-    }
-
-    protected String appendQueryParams(String url, Map<String, String> queryParams) {
-        if (queryParams != null && queryParams.size() > 0) {
-            StringBuilder query = new StringBuilder();
-            boolean isFirstparameter = true;
-            for (String key : queryParams.keySet()) {
-                if (isFirstparameter) {
-                    isFirstparameter = false;
-                } else {
-                    query.append("&");
-                }
-                String value = queryParams.get(key);
-                if (StringUtils.isEmpty(value)) {
-                    query.append(key);
-                } else {
-                    query.append(key).append("=").append(value);
-                }
-            }
-            url += "?" + query;
-        }
-        return url;
-    }
-
-    protected String appendUrl(String url, String... appenders) {
-        StringBuilder urlBuilder = new StringBuilder(url);
-        for (String appender : appenders) {
-            boolean alreadyAppended = false;
-            if (urlBuilder.toString().endsWith("/") && appender.startsWith("/")) {
-                urlBuilder.append(StringUtils.substring(appender, 1));
-                alreadyAppended = true;
-            }
-            if (!alreadyAppended) {
-                if (urlBuilder.toString().endsWith("/") || appender.startsWith("/")) {
-                    urlBuilder.append(appender);
-                } else {
-                    urlBuilder.append("/").append(appender);
-                }
-            }
-        }
-        url = urlBuilder.toString();
-        return url;
     }
 
     protected Map<String, String> mapQueryParam() {

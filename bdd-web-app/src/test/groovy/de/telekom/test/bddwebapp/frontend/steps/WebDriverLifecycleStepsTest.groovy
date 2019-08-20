@@ -1,11 +1,9 @@
 package de.telekom.test.bddwebapp.frontend.steps
 
-
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories
-import org.jbehave.core.annotations.ScenarioType
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -75,13 +73,32 @@ class WebDriverLifecycleStepsTest extends Specification {
         steps.webDriverWrapper.quit()
     }
 
-    def "BeforeScenario"() {
+    def "BeforeScenario (normal)"() {
+        given:
+        steps.currentStory.isRestartBrowserBeforeScenario() >> restart
         when:
-        steps.beforeScenario(ScenarioType.EXAMPLE)
+        steps.beforeScenarioForNormal()
         then:
-        1 * steps.currentStory.isRestartBrowserBeforeScenario() >> true
-        1 * steps.webDriverWrapper.quit()
-        1 * steps.webDriverWrapper.loadWebdriver()
+        (restart ? 1 : 0) * steps.webDriverWrapper.quit()
+        (restart ? 1 : 0) * steps.webDriverWrapper.loadWebdriver()
+        where:
+        restart | _
+        true    | _
+        false   | _
+    }
+
+    def "BeforeScenario (example table)"() {
+        given:
+        steps.currentStory.isRestartBrowserBeforeScenario() >> restart
+        when:
+        steps.beforeScenarioForExample()
+        then:
+        (restart ? 1 : 0) * steps.webDriverWrapper.quit()
+        (restart ? 1 : 0) * steps.webDriverWrapper.loadWebdriver()
+        where:
+        restart | _
+        true    | _
+        false   | _
     }
 
 }

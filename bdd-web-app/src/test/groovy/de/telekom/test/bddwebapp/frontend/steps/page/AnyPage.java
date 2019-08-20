@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.frontend.steps;
+package de.telekom.test.bddwebapp.frontend.steps.page;
 
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import org.openqa.selenium.WebDriver;
