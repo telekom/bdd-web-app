@@ -7,6 +7,7 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static org.junit.Assert.assertTrue;
 
 /**
