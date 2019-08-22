@@ -24,7 +24,7 @@ public abstract class JQueryPage extends Page {
         super(driver);
     }
 
-    protected synchronized void waitForAjaxToComplete() {
+    public synchronized void waitForAjaxToComplete() {
         ExpectedCondition<Boolean> noAjaxRequestActive = (WebDriver webDriver) -> {
             try {
                 return (Boolean) ((JavascriptExecutor) Objects.requireNonNull(webDriver)).executeScript("return jQuery.active == 0");

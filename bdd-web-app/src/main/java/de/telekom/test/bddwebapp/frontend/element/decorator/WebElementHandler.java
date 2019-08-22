@@ -7,14 +7,13 @@ import net.sf.cglib.proxy.MethodProxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Binds the WebElementEnhanced.
@@ -28,7 +27,7 @@ import static java.util.Arrays.asList;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class WebElementHandler implements MethodInterceptor {
 
     private static final List<String> IGNORED_METHODS = asList("toString", "hashCode");
@@ -49,7 +48,7 @@ public class WebElementHandler implements MethodInterceptor {
         return null;
     }
 
-    private Object invokeWebElementEnhanced(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+    protected Object invokeWebElementEnhanced(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         WebElementEnhanced webElementEnhanced = (WebElementEnhanced) o;
         if (!"setWebDriver".equals(method.getName())) {
             webElementEnhanced.setWebDriver(webDriver);
@@ -65,7 +64,7 @@ public class WebElementHandler implements MethodInterceptor {
         }
     }
 
-    private Object invokeListContainingWebElementEnhanced(Object[] objects, MethodProxy methodProxy) throws Throwable {
+    protected Object invokeListContainingWebElementEnhanced(Object[] objects, MethodProxy methodProxy) throws Throwable {
         List<WebElementEnhanced> webElementEnhanceds = locator.findElements().stream()
                 .map(webElement -> {
                     WebElementEnhanced webElementEnhanced = new WebElementEnhanced();
@@ -73,7 +72,7 @@ public class WebElementHandler implements MethodInterceptor {
                     webElementEnhanced.setWebDriver(webDriver);
                     return webElementEnhanced;
                 })
-                .collect(Collectors.toList());
+                .collect(toList());
         try {
             return methodProxy.invoke(webElementEnhanceds, objects);
         } catch (InvocationTargetException e) {

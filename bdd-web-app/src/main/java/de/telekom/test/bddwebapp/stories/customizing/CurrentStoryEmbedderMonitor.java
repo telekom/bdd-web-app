@@ -19,7 +19,7 @@ import org.springframework.context.ApplicationContext;
 public class CurrentStoryEmbedderMonitor extends PrintStreamEmbedderMonitor {
 
     @NonNull
-    private final ApplicationContext applicationContext;
+    protected final ApplicationContext applicationContext;
 
     @Override
     public void runningStory(String path) {

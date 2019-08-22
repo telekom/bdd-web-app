@@ -4,8 +4,6 @@ import de.telekom.test.bddwebapp.api.RequestInteractionFilter;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.steps.Steps;
 import io.restassured.RestAssured;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.BeforeStories;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,11 +19,10 @@ import java.util.Arrays;
  * For details see the file license on the toplevel.
  */
 @Steps
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RestAssuredSteps {
 
-    @NonNull
-    protected final ScenarioInteraction scenarioInteraction;
+    @Autowired
+    protected ScenarioInteraction scenarioInteraction;
 
     @BeforeStories
     public void beforeStories() {

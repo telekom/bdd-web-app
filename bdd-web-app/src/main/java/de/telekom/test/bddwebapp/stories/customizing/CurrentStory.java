@@ -3,8 +3,6 @@ package de.telekom.test.bddwebapp.stories.customizing;
 import de.telekom.test.bddwebapp.api.ApiOnly;
 import de.telekom.test.bddwebapp.steps.RestartBrowserBeforeScenario;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,11 +20,10 @@ import static java.util.Arrays.stream;
  * For details see the file license on the toplevel.
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CurrentStory {
 
-    @NonNull
-    private final CustomizingStories customizingStories;
+    @Autowired
+    private CustomizingStories customizingStories;
 
     @Getter
     @Setter

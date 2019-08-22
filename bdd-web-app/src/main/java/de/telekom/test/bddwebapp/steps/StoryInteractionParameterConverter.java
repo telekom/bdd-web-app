@@ -1,8 +1,6 @@
 package de.telekom.test.bddwebapp.steps;
 
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.AsParameterConverter;
 import org.jbehave.core.model.ExamplesTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +21,13 @@ import static java.util.stream.Stream.of;
  * For details see the file license on the toplevel.
  */
 @Steps
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StoryInteractionParameterConverter {
 
     public static String KEY_LITERAL = "$";
     public static String CONCATENATED_LITERAL = "+";
 
-    @NonNull
-    private final StoryInteraction storyInteraction;
+    @Autowired
+    private StoryInteraction storyInteraction;
 
     @AsParameterConverter
     public String getValueFromKeyOrValueOrConcatenated(String keyOrValueOrConcatenated) {

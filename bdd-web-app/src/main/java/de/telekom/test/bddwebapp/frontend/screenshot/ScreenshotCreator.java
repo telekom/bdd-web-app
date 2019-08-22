@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 @Slf4j
 public class ScreenshotCreator {
 
-    protected static String SCREENSHOT_PATH = "{0}/screenshots/{1}/{2}.png";
+    public static String SCREENSHOT_PATH = "{0}/screenshots/{1}/{2}.png";
 
     @NonNull
     protected final StoryReporterBuilder reporterBuilder;

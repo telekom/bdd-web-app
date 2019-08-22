@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Extends WebElement by several helper methods.
@@ -85,7 +86,7 @@ public class WebElementEnhanced {
     public List<WebElementEnhanced> findElementsEnhanced(By by) {
         return webElement.findElements(by).stream()
                 .map(element -> new WebElementEnhanced(element, webDriver))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public String getText() {

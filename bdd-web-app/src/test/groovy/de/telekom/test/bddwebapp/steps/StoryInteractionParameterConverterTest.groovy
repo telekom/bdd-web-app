@@ -15,8 +15,12 @@ import spock.lang.Specification
  */
 class StoryInteractionParameterConverterTest extends Specification {
 
-    StoryInteractionParameterConverter storyInteractionParameterConverter = new StoryInteractionParameterConverter(Mock(StoryInteraction))
+    def storyInteractionParameterConverter = new StoryInteractionParameterConverter()
 
+    def setup(){
+        storyInteractionParameterConverter.storyInteraction = Mock(StoryInteraction)
+    }
+    
     def "simple value"() {
         when:
         def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('value')
