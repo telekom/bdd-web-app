@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.frontend.steps;
 
-import com.google.common.collect.Maps;
 import de.telekom.test.bddwebapp.api.steps.ApiSteps;
 import de.telekom.test.bddwebapp.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
@@ -8,6 +7,7 @@ import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.interaction.steps.InteractionLifecycleSteps;
 import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +28,7 @@ import static org.openqa.selenium.support.PageFactory.initElements;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Slf4j
 public abstract class SeleniumSteps extends ApiSteps {
 
     /*
@@ -61,6 +62,7 @@ public abstract class SeleniumSteps extends ApiSteps {
         initElements(new WebElementDecorator(driver), page);
         page.checkPage();
         storyInteraction.remember(CURRENT_PAGE, page);
+        log.info("Created page object for class " + expectedPage);
         return page;
     }
 
@@ -91,11 +93,7 @@ public abstract class SeleniumSteps extends ApiSteps {
     }
 
     protected <T> Map<String, T> getMapFromStoryInteraction() {
-        Object body = scenarioInteraction.recall(SeleniumSteps.QUERY_PARAMS);
-        if (body == null) {
-            scenarioInteraction.remember(SeleniumSteps.QUERY_PARAMS, Maps.newHashMap());
-        }
-        return (Map<String, T>) scenarioInteraction.recallNotNull(SeleniumSteps.QUERY_PARAMS);
+        return scenarioInteraction.recallMapOrCreateNew(SeleniumSteps.QUERY_PARAMS);
     }
 
 }
