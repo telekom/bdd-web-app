@@ -5,8 +5,6 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,17 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
  * For details see the file license on the toplevel.
  */
 @Steps
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WebDriverLifecycleSteps {
 
-    @NonNull
-    protected final CurrentStory currentStory;
-    @NonNull
-    protected final CustomizingStories customizingStories;
-    @NonNull
-    protected final WebDriverWrapper webDriverWrapper;
-    @NonNull
-    protected final BrowserDriverUpdater browserDriverUpdater;
+    @Autowired
+    protected CurrentStory currentStory;
+    @Autowired
+    protected CustomizingStories customizingStories;
+    @Autowired
+    protected WebDriverWrapper webDriverWrapper;
+    @Autowired
+    protected BrowserDriverUpdater browserDriverUpdater;
 
     @BeforeStories
     public void beforeStories() {

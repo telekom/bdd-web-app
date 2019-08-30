@@ -1,8 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
 import io.github.bonigarcia.wdm.*;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +18,6 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * For details see the file license on the toplevel.
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class BrowserDriverUpdater {
 
@@ -30,8 +27,8 @@ public class BrowserDriverUpdater {
     @Value("${webdriver.proxy.port:#{null}}")
     private String proxyPort;
 
-    @NonNull
-    private final WebDriverConfiguration webDriverConfiguration;
+    @Autowired
+    private WebDriverConfiguration webDriverConfiguration;
 
     /**
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.

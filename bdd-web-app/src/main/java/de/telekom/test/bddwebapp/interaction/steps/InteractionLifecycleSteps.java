@@ -3,8 +3,6 @@ package de.telekom.test.bddwebapp.interaction.steps;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.steps.Steps;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.ScenarioType;
@@ -20,13 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  * For details see the file license on the toplevel.
  */
 @Steps
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class InteractionLifecycleSteps {
 
-    @NonNull
-    protected final ScenarioInteraction scenarioInteraction;
-    @NonNull
-    protected final StoryInteraction storyInteraction;
+    @Autowired
+    protected ScenarioInteraction scenarioInteraction;
+    @Autowired
+    protected StoryInteraction storyInteraction;
 
     @BeforeStory
     public void beforeStory() {
