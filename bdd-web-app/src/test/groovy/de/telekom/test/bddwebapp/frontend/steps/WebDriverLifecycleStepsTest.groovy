@@ -18,12 +18,14 @@ import spock.lang.Unroll
  */
 class WebDriverLifecycleStepsTest extends Specification {
 
-    WebDriverLifecycleSteps steps = new WebDriverLifecycleSteps(
-            Mock(CurrentStory),
-            Mock(CustomizingStories),
-            Mock(WebDriverWrapper),
-            Mock(BrowserDriverUpdater)
-    )
+    def steps = new WebDriverLifecycleSteps()
+
+    def "setup"() {
+        steps.currentStory = Mock(CurrentStory)
+        steps.customizingStories = Mock(CustomizingStories)
+        steps.webDriverWrapper = Mock(WebDriverWrapper)
+        steps.browserDriverUpdater = Mock(BrowserDriverUpdater)
+    }
 
     @Unroll
     def "BeforeStories leads to driver update [apiOnly=#apiOnly | containsOnlyApiStories=#containsOnlyApiStories | invocationCount=#invocationCount]"() {

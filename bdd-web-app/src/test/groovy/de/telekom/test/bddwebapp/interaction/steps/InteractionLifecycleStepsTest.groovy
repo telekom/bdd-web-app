@@ -15,9 +15,12 @@ import spock.lang.Specification
  */
 class InteractionLifecycleStepsTest extends Specification {
 
-    def steps = new InteractionLifecycleSteps(
-            Mock(ScenarioInteraction),
-            Mock(StoryInteraction))
+    def steps = new InteractionLifecycleSteps()
+
+    def "setup"() {
+        steps.scenarioInteraction = Mock(ScenarioInteraction)
+        steps.storyInteraction = Mock(StoryInteraction)
+    }
 
     def "before story"() {
         when:
