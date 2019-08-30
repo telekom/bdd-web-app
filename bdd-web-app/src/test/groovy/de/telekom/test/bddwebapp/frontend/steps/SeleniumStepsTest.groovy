@@ -3,6 +3,7 @@ package de.telekom.test.bddwebapp.frontend.steps
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper
 import de.telekom.test.bddwebapp.frontend.steps.page.AnyPage
 import de.telekom.test.bddwebapp.frontend.steps.page.WrongPage
+import de.telekom.test.bddwebapp.interaction.ScenarioInteraction
 import de.telekom.test.bddwebapp.interaction.StoryInteraction
 import org.openqa.selenium.WebDriver
 import spock.lang.Specification
@@ -51,6 +52,27 @@ class SeleniumStepsTest extends Specification {
         def currentPage = seleniumSteps.getCurrentPage()
         then:
         currentPage instanceof AnyPage
+    }
+
+    def "open url"() {
+        given:
+        seleniumSteps.webDriverWrapper = Mock(WebDriverWrapper.class)
+        WebDriver driver = Mock(WebDriver.class)
+        seleniumSteps.webDriverWrapper.getDriver() >> driver
+        when:
+        seleniumSteps.open("url")
+        then:
+        1 * driver.get("url")
+    }
+
+    def "map query param"() {
+        given:
+        seleniumSteps.scenarioInteraction = Mock(ScenarioInteraction.class)
+        seleniumSteps.scenarioInteraction.recallMapOrCreateNew(SeleniumSteps.QUERY_PARAMS) >> ["key": "value"]
+        when:
+        def queryParams = seleniumSteps.mapQueryParam()
+        then:
+        queryParams == ["key": "value"]
     }
 
 }
