@@ -48,7 +48,7 @@
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
 
         <!-- Build dependencies -->
-        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+        <gmavenplus-plugin.version>1.7.1</gmavenplus-plugin.version>
     </properties>
 
     <licenses>
@@ -169,7 +169,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.6.1</version>
+                <version>${gmavenplus-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
