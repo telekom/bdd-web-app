@@ -167,4 +167,12 @@ interface Interaction {
         return recallListOrCreateNew(key.toString());
     }
 
+    default void clear(String key) {
+        remember(key, null);
+    }
+
+    default void clear(Enum key) {
+        clear(key.toString());
+    }
+
 }

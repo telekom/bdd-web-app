@@ -14,9 +14,9 @@ import spock.lang.Specification
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-class RestAssuredStepsTest extends Specification {
+class RestAssuredLifecycleStepsTest extends Specification {
 
-    def steps = new RestAssuredSteps()
+    def steps = new RestAssuredLifecycleSteps()
 
     def "before stories"() {
         given:
