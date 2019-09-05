@@ -20,11 +20,10 @@ import static java.util.stream.Collectors.toList;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class WebElementEnhanced {
+public class WebElementEnhanced extends WebElementProxy {
 
     public static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "exists", "check");
 
-    protected WebElement webElement;
     protected WebDriver webDriver;
 
     public WebElementEnhanced() {
@@ -39,48 +38,8 @@ public class WebElementEnhanced {
         this.webDriver = webDriver;
     }
 
-    public WebElement getWebElement() {
-        return webElement;
-    }
-
-    public void setWebElement(WebElement webElement) {
-        this.webElement = webElement;
-    }
-
     public void setWebDriver(WebDriver webDriver) {
         this.webDriver = webDriver;
-    }
-
-    public void sendKeys(CharSequence... keysToSend) {
-        webElement.sendKeys(keysToSend);
-    }
-
-    public Point getLocation() {
-        return webElement.getLocation();
-    }
-
-    public void submit() {
-        webElement.submit();
-    }
-
-    public String getAttribute(String name) {
-        return webElement.getAttribute(name);
-    }
-
-    public String getCssValue(String propertyName) {
-        return webElement.getCssValue(propertyName);
-    }
-
-    public Dimension getSize() {
-        return webElement.getSize();
-    }
-
-    public Rectangle getRect() {
-        return webElement.getRect();
-    }
-
-    public List<WebElement> findElements(By by) {
-        return webElement.findElements(by);
     }
 
     public List<WebElementEnhanced> findElementsEnhanced(By by) {
@@ -89,44 +48,12 @@ public class WebElementEnhanced {
                 .collect(toList());
     }
 
-    public String getText() {
-        return webElement.getText();
-    }
-
     public String getHtml() {
         return webElement.getAttribute("innerHTML");
     }
 
-    public String getTagName() {
-        return webElement.getTagName();
-    }
-
-    public boolean isSelected() {
-        return webElement.isSelected();
-    }
-
-    public WebElement findElement(By by) {
-        return webElement.findElement(by);
-    }
-
     public WebElementEnhanced findElementEnhanced(By by) {
         return new WebElementEnhanced(webElement.findElement(by), webDriver);
-    }
-
-    public boolean isEnabled() {
-        return webElement.isEnabled();
-    }
-
-    public boolean isDisplayed() {
-        return webElement.isDisplayed();
-    }
-
-    public void clear() {
-        webElement.clear();
-    }
-
-    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return webElement.getScreenshotAs(outputType);
     }
 
     public void waitFor(Function<WebDriver, Boolean> function, int maxWaitTimeInSeconds, String errorMessage) {
