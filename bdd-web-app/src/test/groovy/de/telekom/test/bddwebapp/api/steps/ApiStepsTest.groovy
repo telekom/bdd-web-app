@@ -97,7 +97,6 @@ class ApiStepsTest extends Specification {
         1 * request.config(_)
         1 * request.header("Accept", ContentType.JSON.toString())
         1 * request.header("Content-Type", ContentType.JSON.toString())
-
     }
 
 }

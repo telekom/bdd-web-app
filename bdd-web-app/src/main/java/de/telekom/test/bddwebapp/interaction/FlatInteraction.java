@@ -33,7 +33,7 @@ import static java.util.stream.Collectors.toMap;
 @Slf4j
 public class FlatInteraction implements Interaction {
 
-    private static String LIST_ITEM_FORMAT = "[%d]";
+    public static String LIST_ITEM_FORMAT = "[%d]";
 
     @Getter
     protected Map<String, Object> context = Maps.newHashMap();

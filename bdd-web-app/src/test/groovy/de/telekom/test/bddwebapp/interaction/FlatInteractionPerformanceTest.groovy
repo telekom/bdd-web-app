@@ -2,8 +2,6 @@ package de.telekom.test.bddwebapp.interaction
 
 import spock.lang.Specification
 
-import java.text.NumberFormat
-
 /**
  * Unit test
  *
@@ -90,7 +88,6 @@ class FlatInteractionPerformanceTest extends Specification {
             if (value instanceof List) {
                 for (Object item : value) {
                     count += _count(item)
-                    continue
                 }
             }
             count++

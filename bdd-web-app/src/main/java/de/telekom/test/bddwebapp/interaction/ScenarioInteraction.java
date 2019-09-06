@@ -1,16 +1,12 @@
 package de.telekom.test.bddwebapp.interaction;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import de.telekom.test.bddwebapp.api.RequestBuilder;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Holds context variables that are needed in the entire JBehave Scenario.

@@ -57,12 +57,11 @@ class SeleniumStepsTest extends Specification {
     def "open url"() {
         given:
         seleniumSteps.webDriverWrapper = Mock(WebDriverWrapper.class)
-        WebDriver driver = Mock(WebDriver.class)
-        seleniumSteps.webDriverWrapper.getDriver() >> driver
+        seleniumSteps.webDriverWrapper.getDriver() >> Mock(WebDriver.class)
         when:
         seleniumSteps.open("url")
         then:
-        1 * driver.get("url")
+        1 * seleniumSteps.webDriverWrapper.getDriver().get("url")
     }
 
     def "map query param"() {

@@ -1,9 +1,7 @@
 package de.telekom.test.bddwebapp.stories.config
 
-
 import org.jbehave.core.configuration.Configuration
 import org.jbehave.core.configuration.MostUsefulConfiguration
-import org.springframework.context.ApplicationContext
 import spock.lang.Specification
 
 /**
@@ -17,7 +15,7 @@ import spock.lang.Specification
  */
 class ScannedStoryPathsTest extends Specification {
 
-    ScannedStoryPaths scannedStoryPaths = new ScannedStoryPaths() {
+    def scannedStoryPaths = new ScannedStoryPaths() {
         Configuration configuration() {
             return new MostUsefulConfiguration()
         }

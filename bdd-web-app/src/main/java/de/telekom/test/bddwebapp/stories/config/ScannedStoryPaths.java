@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import static java.lang.ClassLoader.getSystemClassLoader;
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.util.ClassUtils.resolveClassName;
 
@@ -36,7 +37,7 @@ public interface ScannedStoryPaths {
         Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
         StoryPathResolver storyPathResolver = configuration().storyPathResolver();
         return components.stream()
-                .map(beanDefinition -> resolveClassName(beanDefinition.getBeanClassName(), getSystemClassLoader()))
+                .map(beanDefinition -> resolveClassName(requireNonNull(beanDefinition.getBeanClassName()), getSystemClassLoader()))
                 .map(aClass -> storyPathResolver.resolve((Class<? extends Embeddable>) aClass))
                 .collect(toList());
     }
@@ -48,7 +49,7 @@ public interface ScannedStoryPaths {
         Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
         StoryPathResolver storyPathResolver = configuration().storyPathResolver();
         return components.stream()
-                .map(beanDefinition -> resolveClassName(beanDefinition.getBeanClassName(), getSystemClassLoader()))
+                .map(beanDefinition -> resolveClassName(requireNonNull(beanDefinition.getBeanClassName()), getSystemClassLoader()))
                 .filter(aClass -> {
                     TestLevel atl = aClass.getAnnotation(TestLevel.class);
                     return (atl == null && testLevel == 0) ||
