@@ -36,30 +36,23 @@ public interface WebDriverConfiguration {
 
     default DesiredCapabilities capabilities(String browser) {
         switch (browser.toLowerCase()) {
-            case "firefox": {
+            case "firefox":
                 return firefoxCapabilities();
-            }
-            case "chrome": {
+            case "chrome":
                 return chromeCapabilities();
-            }
-            case "edge": {
+            case "edge":
                 return edgeCapabilities();
-            }
-            case "ie": {
+            case "ie":
+            case "internetexplorer":
                 return ieCapabilities();
-            }
-            case "opera": {
+            case "opera":
                 return operaCapabilities();
-            }
-            case "safari": {
+            case "safari":
                 return safariCapabilities();
-            }
-            case "htmlunit": {
+            case "htmlunit":
                 return htmlUnitCapabilities();
-            }
-            default: {
+            default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
-            }
         }
     }
 
@@ -96,27 +89,21 @@ public interface WebDriverConfiguration {
         LoggerFactory.getLogger(WebDriverConfiguration.class).info("Browser is set to: " + browser);
         DesiredCapabilities capabilities = capabilities(browser);
         switch (browser.toLowerCase()) {
-            case "firefox": {
+            case "firefox":
                 return loadFirefox(capabilities);
-            }
-            case "chrome": {
+            case "chrome":
                 return loadChrome(capabilities);
-            }
-            case "edge": {
+            case "edge":
                 return loadEdge(capabilities);
-            }
-            case "ie": {
+            case "ie":
+            case "internetexplorer":
                 return loadInternetExplorer(capabilities);
-            }
-            case "opera": {
+            case "opera":
                 return loadOpera(capabilities);
-            }
-            case "safari": {
+            case "safari":
                 return loadSafari(capabilities);
-            }
-            case "htmlunit": {
+            case "htmlunit":
                 return loadHtmlUnit(capabilities);
-            }
             default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
         }

@@ -27,8 +27,8 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
 
     protected String currentStoryFolder;
 
-    public ScreenshotHtmlOutput(PrintStream output,
-                                StoryReporterBuilder reporterBuilder, boolean screenshotsOnSuccess, ScreenshotCreator screenshotCreator) {
+    public ScreenshotHtmlOutput(PrintStream output, StoryReporterBuilder reporterBuilder,
+                                boolean screenshotsOnSuccess, ScreenshotCreator screenshotCreator) {
         super(output, reporterBuilder.keywords());
         this.screenshotsOnSuccess = screenshotsOnSuccess;
         this.screenshotCreator = screenshotCreator;

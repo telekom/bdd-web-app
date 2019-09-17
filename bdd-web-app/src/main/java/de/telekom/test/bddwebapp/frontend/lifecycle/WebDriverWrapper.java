@@ -47,7 +47,6 @@ public class WebDriverWrapper {
         webDriverConfiguration.afterLoad(driver);
     }
 
-
     public void quit() {
         if (driver != null) {
             try {
