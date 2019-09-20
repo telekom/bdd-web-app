@@ -99,4 +99,9 @@ public class ReservationPage extends JQueryPage {
         return URL;
     }
 
+    public boolean javaScriptIsDisabled() {
+        String currentUrl = driver.getCurrentUrl();
+        return currentUrl.contains("?") && currentUrl.contains("date")
+                && currentUrl.contains("earliestStartTime") && currentUrl.contains("latestStartTime");
+    }
 }

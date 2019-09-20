@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.taxi.customizing.config;
+package de.telekom.test.bddwebapp.taxi.customizing.config.webdriver;
 
-import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
+import de.telekom.test.bddwebapp.frontend.lifecycle.UsefulWebDriverConfiguration;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Point;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Primary /* Overwrite UsefulWebDriverConfiguration */
 @Slf4j
-public class SpecialWebDriverConfiguration implements WebDriverConfiguration {
+public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfiguration {
 
     @Autowired
     private WebDriverWrapper webDriverWrapper;

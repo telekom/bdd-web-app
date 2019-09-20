@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -31,19 +32,26 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 public class WebDriverWrapper {
 
     @Autowired
-    private WebDriverConfiguration webDriverConfiguration;
+    private WebDriverConfiguration defaultWebDriverConfiguration;
+
+    @Autowired
+    private CurrentStory currentStory;
 
     @Getter
     @Setter
     private WebDriver driver;
 
+    public WebDriverConfiguration getCurrentWebDriverConfiguration() {
+        return currentStory.getAlternativeWebDriverConfiguration().orElse(defaultWebDriverConfiguration);
+    }
+
     public void loadWebdriver() {
+        WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
         if (isBlank(webDriverConfiguration.getGridURL())) {
             driver = webDriverConfiguration.loadLocalWebdriver();
         } else {
             driver = webDriverConfiguration.loadRemoteWebdriver();
         }
-
         webDriverConfiguration.afterLoad(driver);
     }
 

@@ -1,7 +1,8 @@
-package de.telekom.test.bddwebapp.taxi.customizing.config;
+package de.telekom.test.bddwebapp.taxi.customizing.config.runall;
 
 import de.telekom.test.bddwebapp.api.ApiOnly;
 import de.telekom.test.bddwebapp.stories.RunAllStories;
+import de.telekom.test.bddwebapp.taxi.customizing.config.ApplicationContextProvider;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.springframework.context.ApplicationContext;
