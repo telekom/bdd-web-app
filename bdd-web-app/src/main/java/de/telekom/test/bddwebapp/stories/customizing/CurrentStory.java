@@ -93,10 +93,12 @@ public class CurrentStory {
 
     public Optional<WebDriverConfiguration> getAlternativeWebDriverConfiguration() {
         Class clazz = getStoryClass();
-        AlternativeWebDriverConfiguration alternativeWebDriverConfigurationAnnotation = (AlternativeWebDriverConfiguration) clazz.getAnnotation(AlternativeWebDriverConfiguration.class);
-        if (alternativeWebDriverConfigurationAnnotation != null) {
-            String alternativeWebDriverConfigurationBeanName = alternativeWebDriverConfigurationAnnotation.value();
-            return Optional.of(applicationContext.getBean(alternativeWebDriverConfigurationBeanName, WebDriverConfiguration.class));
+        if(clazz != null){
+            AlternativeWebDriverConfiguration alternativeWebDriverConfigurationAnnotation = (AlternativeWebDriverConfiguration) clazz.getAnnotation(AlternativeWebDriverConfiguration.class);
+            if (alternativeWebDriverConfigurationAnnotation != null) {
+                String alternativeWebDriverConfigurationBeanName = alternativeWebDriverConfigurationAnnotation.value();
+                return Optional.of(applicationContext.getBean(alternativeWebDriverConfigurationBeanName, WebDriverConfiguration.class));
+            }
         }
         return Optional.empty();
     }
