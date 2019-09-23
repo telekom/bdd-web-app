@@ -29,7 +29,7 @@ public class BrowserDriverUpdater {
     private String proxyPort;
 
     @Autowired
-    private WebDriverConfiguration webDriverConfiguration;
+    private WebDriverWrapper webDriverWrapper;
 
     /**
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
@@ -39,7 +39,7 @@ public class BrowserDriverUpdater {
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
-        String browser = webDriverConfiguration.getBrowser();
+        String browser = webDriverWrapper.getCurrentWebDriverConfiguration().getBrowser();
         DriverManagerType driverManagerType = mapToDriverManagerType(browser);
         if (driverManagerType == null) {
             log.info("No driver update available for " + browser);
