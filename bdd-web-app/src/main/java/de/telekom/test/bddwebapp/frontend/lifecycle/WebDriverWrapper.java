@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -31,8 +32,10 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 @Slf4j
 public class WebDriverWrapper {
 
+    public static Class<? extends WebDriverConfiguration> DEFAULT_WEB_DRIVER_CONFIGURATION = UsefulWebDriverConfiguration.class;
+
     @Autowired
-    private WebDriverConfiguration defaultWebDriverConfiguration;
+    private List<WebDriverConfiguration> webDriverConfigurations;
 
     @Autowired
     private CurrentStory currentStory;
@@ -42,7 +45,21 @@ public class WebDriverWrapper {
     private WebDriver driver;
 
     public WebDriverConfiguration getCurrentWebDriverConfiguration() {
-        return currentStory.getAlternativeWebDriverConfiguration().orElse(defaultWebDriverConfiguration);
+        return currentStory.getAlternativeWebDriverConfiguration()
+                .map(webDriverConfigurationClass -> getAlternativeWebDriverConfiguration(webDriverConfigurationClass))
+                .orElse(getDefaultWebDriverConfiguration());
+    }
+
+    public WebDriverConfiguration getAlternativeWebDriverConfiguration(Class<? extends WebDriverConfiguration> alternativeWebDriverConfigurationClass) {
+        return webDriverConfigurations.stream()
+                .filter(webDriverConfiguration -> webDriverConfiguration.getClass().equals(alternativeWebDriverConfigurationClass))
+                .findFirst().get();
+    }
+
+    public WebDriverConfiguration getDefaultWebDriverConfiguration() {
+        return webDriverConfigurations.stream()
+                .filter(webDriverConfiguration -> webDriverConfiguration.getClass().equals(DEFAULT_WEB_DRIVER_CONFIGURATION))
+                .findFirst().get();
     }
 
     public void loadWebdriver() {

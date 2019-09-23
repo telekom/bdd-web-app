@@ -1,5 +1,8 @@
 package de.telekom.test.bddwebapp.stories.config;
 
+import de.telekom.test.bddwebapp.frontend.lifecycle.UsefulWebDriverConfiguration;
+import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,7 +21,6 @@ import java.lang.annotation.Target;
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface AlternativeWebDriverConfiguration {
 
-    /* webDriverConfigurationBeanName */
-    String value() default "webDriverConfiguration";
+    Class<? extends WebDriverConfiguration> value() default UsefulWebDriverConfiguration.class;
 
 }

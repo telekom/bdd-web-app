@@ -6,9 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,12 +21,16 @@ import java.util.concurrent.TimeUnit;
  * For details see the file license on the toplevel.
  */
 @Component
-@Primary /* Overwrite UsefulWebDriverConfiguration */
 @Slf4j
 public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfiguration {
 
     @Autowired
     private WebDriverWrapper webDriverWrapper;
+
+    @PostConstruct
+    public void overrideDefaultWebDriverConfiguration() {
+        WebDriverWrapper.DEFAULT_WEB_DRIVER_CONFIGURATION = OverrideDefaultWebDriverConfiguration.class;
+    }
 
     @Override
     public void afterLoad(WebDriver driver) {

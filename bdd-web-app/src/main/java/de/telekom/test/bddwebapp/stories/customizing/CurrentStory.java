@@ -7,9 +7,9 @@ import de.telekom.test.bddwebapp.stories.config.AlternativeWebDriverConfiguratio
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.lang.annotation.Annotation;
 import java.util.Optional;
 
 import static java.util.Arrays.stream;
@@ -28,9 +28,6 @@ import static java.util.Arrays.stream;
 public class CurrentStory {
 
     @Autowired
-    private ApplicationContext applicationContext;
-
-    @Autowired
     private CustomizingStories customizingStories;
 
     @Getter
@@ -38,11 +35,18 @@ public class CurrentStory {
     private String storyPath;
 
     public String getStoryName() {
+        if (storyPath == null) {
+            return null;
+        }
         return storyPath.substring(storyPath.lastIndexOf("/") + 1, storyPath.lastIndexOf("."));
     }
 
     public Class getStoryClass() {
-        return customizingStories.getStoryClass(getStoryName());
+        String storyName = getStoryName();
+        if (storyName == null) {
+            return null;
+        }
+        return customizingStories.getStoryClass(storyName);
     }
 
     public boolean isApiOnly() {
@@ -87,18 +91,15 @@ public class CurrentStory {
 
     private boolean isRestartBrowserBeforeScenarioForCurrentStory() {
         Class clazz = getStoryClass();
-        return clazz != null &&
-                stream(clazz.getAnnotations()).anyMatch(a -> a.annotationType().equals(RestartBrowserBeforeScenario.class));
+        return clazz != null && stream(clazz.getAnnotations())
+                .anyMatch(a -> a.annotationType().equals(RestartBrowserBeforeScenario.class));
     }
 
-    public Optional<WebDriverConfiguration> getAlternativeWebDriverConfiguration() {
+    public Optional<Class<? extends WebDriverConfiguration>> getAlternativeWebDriverConfiguration() {
         Class clazz = getStoryClass();
-        if(clazz != null){
-            AlternativeWebDriverConfiguration alternativeWebDriverConfigurationAnnotation = (AlternativeWebDriverConfiguration) clazz.getAnnotation(AlternativeWebDriverConfiguration.class);
-            if (alternativeWebDriverConfigurationAnnotation != null) {
-                String alternativeWebDriverConfigurationBeanName = alternativeWebDriverConfigurationAnnotation.value();
-                return Optional.of(applicationContext.getBean(alternativeWebDriverConfigurationBeanName, WebDriverConfiguration.class));
-            }
+        Annotation alternativeWebDriverConfiguration;
+        if (clazz != null && (alternativeWebDriverConfiguration = clazz.getAnnotation(AlternativeWebDriverConfiguration.class)) != null) {
+            return Optional.of(((AlternativeWebDriverConfiguration) alternativeWebDriverConfiguration).value());
         }
         return Optional.empty();
     }
