@@ -59,7 +59,7 @@ public class TestDataBuilder {
 
     public ReservationVO createExampleReservation(String earliestStartTime, String latestStartTime) {
         ReservationVO reservation = new ReservationVO();
-        Date tomorrow = new Date(new Date().getTime() + 86400000l);
+        Date tomorrow = new Date(new Date().getTime() + 86400000L);
         reservation.setDate(new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
         reservation.setDeparture("Alexanderplatz, Berlin");
         reservation.setDestination("Flughafen Berlin-Tegel");

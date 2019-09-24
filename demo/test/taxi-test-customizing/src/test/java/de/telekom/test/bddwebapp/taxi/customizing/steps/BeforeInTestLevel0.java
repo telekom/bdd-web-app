@@ -12,7 +12,7 @@ public class BeforeInTestLevel0 {
 
     @Before
     public void before() {
-        if (Integer.valueOf(System.getProperty("testLevel")) > 0) {
+        if (Integer.parseInt(System.getProperty("testLevel")) > 0) {
             fail("This step should be overridden by BeforeInTestLevel1");
         }
     }

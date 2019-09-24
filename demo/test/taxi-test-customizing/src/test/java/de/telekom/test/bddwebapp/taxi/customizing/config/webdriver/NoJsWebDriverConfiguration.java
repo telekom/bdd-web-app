@@ -2,7 +2,6 @@ package de.telekom.test.bddwebapp.taxi.customizing.config.webdriver;
 
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,8 +10,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
+@Component
 @Slf4j
-@Component("noJsWebDriverConfiguration")
 public class NoJsWebDriverConfiguration implements WebDriverConfiguration {
 
     @Override
@@ -24,11 +25,10 @@ public class NoJsWebDriverConfiguration implements WebDriverConfiguration {
         chromeOptions.setExperimentalOption("prefs", chromePrefs);
         chromeOptions.merge(capabilities);
         String browserPath = this.getBrowserPath();
-        if (StringUtils.isNotBlank(browserPath)) {
+        if (isNotBlank(browserPath)) {
             log.info("Load portable chrome instance from '{}'", browserPath);
             chromeOptions.setBinary(browserPath);
         }
-
         return new ChromeDriver(chromeOptions);
     }
 

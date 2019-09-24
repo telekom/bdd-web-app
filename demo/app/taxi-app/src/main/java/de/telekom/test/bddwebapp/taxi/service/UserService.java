@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -57,14 +57,10 @@ public class UserService {
     }
 
     private String sha3hash(String password) {
-        try {
-            SHA3.DigestSHA3 md = new SHA3.DigestSHA3(256);
-            md.update(password.getBytes("UTF-8"));
-            byte[] digest = md.digest();
-            return Hex.toHexString(digest);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        SHA3.DigestSHA3 md = new SHA3.DigestSHA3(256);
+        md.update(password.getBytes(StandardCharsets.UTF_8));
+        byte[] digest = md.digest();
+        return Hex.toHexString(digest);
     }
 
 }

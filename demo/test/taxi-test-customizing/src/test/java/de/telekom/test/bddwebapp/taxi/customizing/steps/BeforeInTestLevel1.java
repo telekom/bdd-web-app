@@ -13,7 +13,7 @@ public class BeforeInTestLevel1 extends BeforeInTestLevel0 {
     @Override
     @Before
     public void before() {
-        if (Integer.valueOf(System.getProperty("testLevel")) > 0) {
+        if (Integer.parseInt(System.getProperty("testLevel")) > 0) {
             fail("This step should run only in test level 1 and above");
         }
     }

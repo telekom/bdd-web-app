@@ -22,7 +22,7 @@ public class RegistrationStepsTestLevel extends RegistrationSteps {
     @Override
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
-        if (Integer.valueOf(System.getProperty("testLevel")) == 0) {
+        if (Integer.parseInt(System.getProperty("testLevel")) == 0) {
             fail("This step should run only in test level 1 and above");
         }
         log.info("Create registered user in \"real-system\"");
