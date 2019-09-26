@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
 
     <name>BDD web application testing framework</name>
     <url>https://github.com/telekom/bdd-web-app</url>
