@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.interaction;
 
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,13 +11,14 @@ import org.springframework.stereotype.Component;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Component
 public class StoryInteraction extends FlatInteraction {
 
+    @Setter
     private ScenarioInteraction scenarioInteraction;
 
     /**
@@ -31,10 +33,6 @@ public class StoryInteraction extends FlatInteraction {
      */
     public void rememberObjectFromScenarioInteraction(String entityKey, String objectKey) {
         super.rememberObject(entityKey, objectKey, scenarioInteraction.recallObjectNotNull(entityKey, objectKey));
-    }
-
-    public void setScenarioInteraction(ScenarioInteraction sequenceInteraction) {
-        this.scenarioInteraction = sequenceInteraction;
     }
 
 }

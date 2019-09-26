@@ -26,14 +26,14 @@ import static java.util.stream.Collectors.toMap;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Slf4j
-public abstract class FlatInteraction implements Interaction {
+public class FlatInteraction implements Interaction {
 
-    private static String LIST_ITEM_FORMAT = "[%d]";
+    public static String LIST_ITEM_FORMAT = "[%d]";
 
     @Getter
     protected Map<String, Object> context = Maps.newHashMap();
@@ -72,25 +72,19 @@ public abstract class FlatInteraction implements Interaction {
     /**
      * Be careful with this method. The log can get very large. Use only for debugging purposes!
      */
-    public void logAllPossibleKeysWithType() {
-        carefulHint("logAllPossibleKeysWithType()");
-        Map<String, Class> keysWithType = context.entrySet().stream()
-                .collect(toMap(Entry::getKey, entry -> entry.getValue().getClass()));
-        log.info("\n" + mapToString(keysWithType));
+    public void logAllPossibleKeysWithValue() {
+        log.info("Log all possible keys with value:");
+        log.info(mapToString(context));
     }
 
     /**
      * Be careful with this method. The log can get very large. Use only for debugging purposes!
      */
-    public void logAllPossibleKeysWithValue() {
-        carefulHint("logAllPossibleKeysWithValue()");
-        log.info("\n" + mapToString(context));
-    }
-
-    private void carefulHint(String method) {
-        log.info("\n==============================================================================================\n" +
-                "Be careful with " + method + ". The log can get very large. Use only for debugging purposes!\n" +
-                "==============================================================================================");
+    public void logAllPossibleKeysWithType() {
+        log.info("Log all possible keys with type:");
+        Map<String, Class> keysWithType = context.entrySet().stream()
+                .collect(toMap(Entry::getKey, entry -> entry.getValue().getClass()));
+        log.info(mapToString(keysWithType));
     }
 
     private String mapToString(Map<String, ?> map) {

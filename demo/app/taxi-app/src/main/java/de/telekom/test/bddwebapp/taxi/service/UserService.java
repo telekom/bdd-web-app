@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -17,7 +17,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -57,14 +57,10 @@ public class UserService {
     }
 
     private String sha3hash(String password) {
-        try {
-            SHA3.DigestSHA3 md = new SHA3.DigestSHA3(256);
-            md.update(password.getBytes("UTF-8"));
-            byte[] digest = md.digest();
-            return Hex.toHexString(digest);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        SHA3.DigestSHA3 md = new SHA3.DigestSHA3(256);
+        md.update(password.getBytes(StandardCharsets.UTF_8));
+        byte[] digest = md.digest();
+        return Hex.toHexString(digest);
     }
 
 }

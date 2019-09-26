@@ -17,7 +17,7 @@ import static java.util.Comparator.comparingInt;
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Yasin Yildiz {@literal <YildizY@telekom.de>} - Coauthor of the optimized test level steps factory
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */

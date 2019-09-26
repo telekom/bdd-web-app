@@ -1,9 +1,9 @@
 package de.telekom.test.bddwebapp.steps
 
-
 import org.jbehave.core.configuration.Configuration
 import org.jbehave.core.steps.InstanceStepsFactory
 import org.springframework.context.ApplicationContext
+import org.springframework.core.env.Environment
 import spock.lang.Specification
 
 /**
@@ -11,34 +11,41 @@ import spock.lang.Specification
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 class ScannedStepsFactoryTest extends Specification {
 
-    def applicationContextMock = Mock(ApplicationContext.class)
-    def configurationMock = Mock(Configuration.class)
-    def testStepLevel0 = new TestLevel0Step();
-    def testStepLevel1 = new TestLevel1Step();
-    def testLevel0ExtendsTestLevel1Step = new TestLevel0ExtendsTestLevel1Step();
-    def testLevel1ExtendsTestLevel0Step = new TestLevel1ExtendsTestLevel0Step();
-    def testLevel2ExtendsTestLevel1ExtendsTestLevel0Step = new TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step();
-    def testLevel2ExtendsTestLevel0ExtendsTestLevel1Step = new TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step();
+    def context = Mock(ApplicationContext)
+    def configuration = Mock(Configuration)
 
-    ScannedStepsFactory scannedStepsFactory = new ScannedStepsFactory() {
+    def scannedStepsFactory = new ScannedStepsFactory() {
         ApplicationContext getApplicationContext() {
-            return applicationContextMock;
+            return context
         }
 
         Configuration configuration() {
-            return configurationMock;
+            return configuration
         }
+    }
+
+    def setup() {
+        context.getEnvironment() >> Mock(Environment)
+    }
+
+    def "scanned steps factory"() {
+        given:
+        context.getBeansWithAnnotation(Steps) >> ["steps": Mock(Steps)]
+        when:
+        InstanceStepsFactory factory = scannedStepsFactory.scannedStepsFactory()
+        then:
+        factory.stepsInstances.size() == 1
     }
 
     def "run test level 0 with test level 0 steps only"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel0": testStepLevel0]
         when:
         InstanceStepsFactory factory = scannedStepsFactory.testLevelStepsFactory(0)
@@ -48,7 +55,7 @@ class ScannedStepsFactoryTest extends Specification {
 
     def "run test level 0 with steps on different test levels"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel0"        : testStepLevel0,
                  "testLevel1"        : testStepLevel1,
                  "testLevel1Extended": testLevel1ExtendsTestLevel0Step]
@@ -60,7 +67,7 @@ class ScannedStepsFactoryTest extends Specification {
 
     def "run test level 0 with test level 0 step that extends test level 1 step"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel0"                     : testStepLevel0,
                  "testLevel0ExtendsTestLevel1Step": testLevel0ExtendsTestLevel1Step,
                  "testLevel1"                     : testStepLevel1,
@@ -73,7 +80,7 @@ class ScannedStepsFactoryTest extends Specification {
 
     def "run test level 1 with test level 1 steps only"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel1"        : testStepLevel1,
                  "testLevel1Extended": testLevel1ExtendsTestLevel0Step]
         when:
@@ -84,7 +91,7 @@ class ScannedStepsFactoryTest extends Specification {
 
     def "run test level 1 with steps on different test levels"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel0"        : testStepLevel0,
                  "testLevel1"        : testStepLevel1,
                  "testLevel1Extended": testLevel1ExtendsTestLevel0Step]
@@ -96,7 +103,7 @@ class ScannedStepsFactoryTest extends Specification {
 
     def "run test level 1 with steps on different test level with different order"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel1Extended": testLevel1ExtendsTestLevel0Step,
                  "testLevel0"        : testStepLevel0,
                  "testLevel1"        : testStepLevel1]
@@ -108,7 +115,7 @@ class ScannedStepsFactoryTest extends Specification {
 
     def "run test level 2 with test level 2 step that extends test level 1 step that extends test level 0 step"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel0"                                      : testStepLevel0,
                  "testLevel1Extended"                              : testLevel1ExtendsTestLevel0Step,
                  "testLevel2ExtendsTestLevel1ExtendsTestLevel0Step": testLevel2ExtendsTestLevel1ExtendsTestLevel0Step
@@ -121,7 +128,7 @@ class ScannedStepsFactoryTest extends Specification {
 
     def "run test level 2 with crazy inheritance hierarchy"() {
         given:
-        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps.class) >>
+        scannedStepsFactory.applicationContext.getBeansWithAnnotation(Steps) >>
                 ["testLevel1"                                      : testStepLevel1,
                  "testLevel0ExtendsTestLevel1Step"                 : testLevel0ExtendsTestLevel1Step,
                  "testLevel2ExtendsTestLevel0ExtendsTestLevel1Step": testLevel2ExtendsTestLevel0ExtendsTestLevel1Step
@@ -132,29 +139,51 @@ class ScannedStepsFactoryTest extends Specification {
         factory.stepsInstances.values().asList() == [testLevel2ExtendsTestLevel0ExtendsTestLevel1Step]
     }
 
+    def "no test level configured"() {
+        when:
+        def testLevel = scannedStepsFactory.getTestLevel()
+        then:
+        testLevel == 0
+    }
+
+    def "get configured test level"() {
+        given:
+        context.getEnvironment().getProperty("testLevel", Integer) >> 1
+        when:
+        def testLevel = scannedStepsFactory.getTestLevel()
+        then:
+        testLevel == 1
+    }
+
+    def testStepLevel0 = new TestLevel0Step()
+    def testStepLevel1 = new TestLevel1Step()
+    def testLevel0ExtendsTestLevel1Step = new TestLevel0ExtendsTestLevel1Step()
+    def testLevel1ExtendsTestLevel0Step = new TestLevel1ExtendsTestLevel0Step()
+    def testLevel2ExtendsTestLevel1ExtendsTestLevel0Step = new TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step()
+    def testLevel2ExtendsTestLevel0ExtendsTestLevel1Step = new TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step()
 
     @Steps(testLevel = 0)
-    public class TestLevel0ExtendsTestLevel1Step extends TestLevel1Step {
+    class TestLevel0ExtendsTestLevel1Step extends TestLevel1Step {
     }
 
     @Steps(testLevel = 0)
-    public class TestLevel0Step {
+    class TestLevel0Step {
     }
 
     @Steps(testLevel = 1)
-    public class TestLevel1ExtendsTestLevel0Step extends TestLevel0Step {
+    class TestLevel1ExtendsTestLevel0Step extends TestLevel0Step {
     }
 
     @Steps(testLevel = 1)
-    public class TestLevel1Step {
+    class TestLevel1Step {
     }
 
     @Steps(testLevel = 2)
-    public class TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step extends TestLevel1ExtendsTestLevel0Step {
+    class TestLevel2ExtendsTestLevel1ExtendsTestLevel0Step extends TestLevel1ExtendsTestLevel0Step {
     }
 
     @Steps(testLevel = 2)
-    public class TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step extends TestLevel0ExtendsTestLevel1Step {
+    class TestLevel2ExtendsTestLevel0ExtendsTestLevel1Step extends TestLevel0ExtendsTestLevel1Step {
     }
 
 }

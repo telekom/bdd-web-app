@@ -1,11 +1,9 @@
 package de.telekom.test.bddwebapp.frontend.steps
 
-
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories
-import org.jbehave.core.annotations.ScenarioType
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -14,18 +12,20 @@ import spock.lang.Unroll
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 class WebDriverLifecycleStepsTest extends Specification {
 
-    WebDriverLifecycleSteps steps = new WebDriverLifecycleSteps(
-            Mock(CurrentStory.class),
-            Mock(CustomizingStories.class),
-            Mock(WebDriverWrapper.class),
-            Mock(BrowserDriverUpdater.class)
-    )
+    def steps = new WebDriverLifecycleSteps()
+
+    def "setup"() {
+        steps.currentStory = Mock(CurrentStory)
+        steps.customizingStories = Mock(CustomizingStories)
+        steps.webDriverWrapper = Mock(WebDriverWrapper)
+        steps.browserDriverUpdater = Mock(BrowserDriverUpdater)
+    }
 
     @Unroll
     def "BeforeStories leads to driver update [apiOnly=#apiOnly | containsOnlyApiStories=#containsOnlyApiStories | invocationCount=#invocationCount]"() {
@@ -75,13 +75,32 @@ class WebDriverLifecycleStepsTest extends Specification {
         steps.webDriverWrapper.quit()
     }
 
-    def "BeforeScenario"() {
+    def "BeforeScenario (normal)"() {
+        given:
+        steps.currentStory.isRestartBrowserBeforeScenario() >> restart
         when:
-        steps.beforeScenario(ScenarioType.EXAMPLE)
+        steps.beforeScenarioForNormal()
         then:
-        1 * steps.currentStory.isRestartBrowserBeforeScenario() >> true
-        1 * steps.webDriverWrapper.quit()
-        1 * steps.webDriverWrapper.loadWebdriver()
+        (restart ? 1 : 0) * steps.webDriverWrapper.quit()
+        (restart ? 1 : 0) * steps.webDriverWrapper.loadWebdriver()
+        where:
+        restart | _
+        true    | _
+        false   | _
+    }
+
+    def "BeforeScenario (example table)"() {
+        given:
+        steps.currentStory.isRestartBrowserBeforeScenario() >> restart
+        when:
+        steps.beforeScenarioForExample()
+        then:
+        (restart ? 1 : 0) * steps.webDriverWrapper.quit()
+        (restart ? 1 : 0) * steps.webDriverWrapper.loadWebdriver()
+        where:
+        restart | _
+        true    | _
+        false   | _
     }
 
 }

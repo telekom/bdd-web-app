@@ -1,14 +1,14 @@
-package de.telekom.test.bddwebapp.taxi.customizing.config;
+package de.telekom.test.bddwebapp.taxi.customizing.config.webdriver;
 
-import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
+import de.telekom.test.bddwebapp.frontend.lifecycle.UsefulWebDriverConfiguration;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,17 +16,21 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Component
-@Primary /* Overwrite UsefulWebDriverConfiguration */
 @Slf4j
-public class SpecialWebDriverConfiguration implements WebDriverConfiguration {
+public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfiguration {
 
     @Autowired
     private WebDriverWrapper webDriverWrapper;
+
+    @PostConstruct
+    public void overrideDefaultWebDriverConfiguration() {
+        WebDriverWrapper.DEFAULT_WEB_DRIVER_CONFIGURATION = OverrideDefaultWebDriverConfiguration.class;
+    }
 
     @Override
     public void afterLoad(WebDriver driver) {

@@ -10,7 +10,6 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -23,11 +22,11 @@ import java.util.List;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor
 public class WebElementDecorator implements FieldDecorator {
 
     @NonNull
@@ -44,18 +43,18 @@ public class WebElementDecorator implements FieldDecorator {
         return new DefaultFieldDecorator(defaultElementLocatorFactory).decorate(loader, field);
     }
 
-    private boolean isWebElementEnhanced(Field field) {
+    protected boolean isWebElementEnhanced(Field field) {
         return WebElementEnhanced.class.isAssignableFrom(field.getType()) && field.isAnnotationPresent(FindBy.class);
     }
 
-    private boolean isListWithWebElementEnhanced(Field field) {
+    protected boolean isListWithWebElementEnhanced(Field field) {
         return List.class.isAssignableFrom(field.getType())
                 && WebElementEnhanced.class.isAssignableFrom(
                 (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0])
                 && field.isAnnotationPresent(FindBy.class);
     }
 
-    private Object getEnhancedObject(Field field, DefaultElementLocatorFactory defaultElementLocatorFactory) {
+    protected Object getEnhancedObject(Field field, DefaultElementLocatorFactory defaultElementLocatorFactory) {
         Enhancer e = new Enhancer();
         e.setSuperclass(field.getType());
         ElementLocator locator = defaultElementLocatorFactory.createLocator(field);

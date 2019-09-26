@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.frontend.steps;
 
-import com.google.common.collect.Maps;
 import de.telekom.test.bddwebapp.api.steps.ApiSteps;
 import de.telekom.test.bddwebapp.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
@@ -8,14 +7,16 @@ import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.interaction.steps.InteractionLifecycleSteps;
 import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
-import org.apache.commons.lang3.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import static de.telekom.test.bddwebapp.util.UrlAppender.appendQueryParams;
+import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 /**
@@ -23,10 +24,11 @@ import static org.openqa.selenium.support.PageFactory.initElements;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Slf4j
 public abstract class SeleniumSteps extends ApiSteps {
 
     /*
@@ -34,7 +36,7 @@ public abstract class SeleniumSteps extends ApiSteps {
      */
     public static final String CURRENT_PAGE = "CURRENT_PAGE";
 
-    private static final String QUERY_PARAMS = "QUERY_PARAMS";
+    public static final String QUERY_PARAMS = "QUERY_PARAMS";
 
     @Autowired
     protected WebDriverWrapper webDriverWrapper;
@@ -52,13 +54,15 @@ public abstract class SeleniumSteps extends ApiSteps {
         WebDriver driver = webDriverWrapper.getDriver();
         T page;
         try {
-            page = expectedPage.getConstructor(WebDriver.class).newInstance(driver);
+            Constructor<T> constructor = expectedPage.getConstructor(WebDriver.class);
+            page = constructor.newInstance(driver);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
         initElements(new WebElementDecorator(driver), page);
         page.checkPage();
         storyInteraction.remember(CURRENT_PAGE, page);
+        log.info("Created page object for class " + expectedPage);
         return page;
     }
 
@@ -84,58 +88,12 @@ public abstract class SeleniumSteps extends ApiSteps {
         driver.get(url);
     }
 
-    protected String appendQueryParams(String url, Map<String, String> queryParams) {
-        if (queryParams != null && queryParams.size() > 0) {
-            StringBuilder query = new StringBuilder();
-            boolean isFirstparameter = true;
-            for (String key : queryParams.keySet()) {
-                if (isFirstparameter) {
-                    isFirstparameter = false;
-                } else {
-                    query.append("&");
-                }
-                String value = queryParams.get(key);
-                if (StringUtils.isEmpty(value)) {
-                    query.append(key);
-                } else {
-                    query.append(key).append("=").append(value);
-                }
-            }
-            url += "?" + query;
-        }
-        return url;
-    }
-
-    protected String appendUrl(String url, String... appenders) {
-        StringBuilder urlBuilder = new StringBuilder(url);
-        for (String appender : appenders) {
-            boolean alreadyAppended = false;
-            if (urlBuilder.toString().endsWith("/") && appender.startsWith("/")) {
-                urlBuilder.append(StringUtils.substring(appender, 1));
-                alreadyAppended = true;
-            }
-            if (!alreadyAppended) {
-                if (urlBuilder.toString().endsWith("/") || appender.startsWith("/")) {
-                    urlBuilder.append(appender);
-                } else {
-                    urlBuilder.append("/").append(appender);
-                }
-            }
-        }
-        url = urlBuilder.toString();
-        return url;
-    }
-
     protected Map<String, String> mapQueryParam() {
         return getMapFromStoryInteraction();
     }
 
     protected <T> Map<String, T> getMapFromStoryInteraction() {
-        Object body = scenarioInteraction.recall(SeleniumSteps.QUERY_PARAMS);
-        if (body == null) {
-            scenarioInteraction.remember(SeleniumSteps.QUERY_PARAMS, Maps.newHashMap());
-        }
-        return (Map<String, T>) scenarioInteraction.recallNotNull(SeleniumSteps.QUERY_PARAMS);
+        return scenarioInteraction.recallMapOrCreateNew(SeleniumSteps.QUERY_PARAMS);
     }
 
 }

@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -19,7 +19,7 @@ import org.springframework.context.ApplicationContext;
 public class CustomizingStoryPathResolver extends UnderscoredCamelCaseResolver {
 
     @NonNull
-    private final ApplicationContext applicationContext;
+    protected final ApplicationContext applicationContext;
 
     public CustomizingStories getStoryClasses() {
         return applicationContext.getBean(CustomizingStories.class);

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -99,4 +99,9 @@ public class ReservationPage extends JQueryPage {
         return URL;
     }
 
+    public boolean javaScriptIsDisabled() {
+        String currentUrl = driver.getCurrentUrl();
+        return currentUrl.contains("?") && currentUrl.contains("date")
+                && currentUrl.contains("earliestStartTime") && currentUrl.contains("latestStartTime");
+    }
 }

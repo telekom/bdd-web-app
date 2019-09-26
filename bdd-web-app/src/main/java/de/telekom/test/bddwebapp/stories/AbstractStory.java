@@ -14,11 +14,16 @@ import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 
 /**
- * Basic story
+ * Add the following features to the story execution:
+ * - Screenshot build
+ * - Story path hardening
+ * - Steps factory to find steps by annotation
+ * - Most useful embedder configuration for the test framework
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
+ * @author Nils Villwock - Idea to disable report generation after story execution to prevent false positive
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -42,6 +47,8 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
     public Embedder configuredEmbedder() {
         Embedder embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
+        // deactivate view generation for single story runs to prevent false positive
+        embedder.embedderControls().doGenerateViewAfterStories(false);
         return embedder;
     }
 

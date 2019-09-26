@@ -1,26 +1,24 @@
 package de.telekom.test.bddwebapp.interaction
 
+import org.junit.Ignore
 import spock.lang.Specification
-
-import java.text.NumberFormat
 
 /**
  * Unit test
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Ignore
 class FlatInteractionPerformanceTest extends Specification {
 
     FlatInteraction abstractInteraction = new FlatInteraction() {
     }
 
     Map exampleJson = json(20)
-
-    NumberFormat format = NumberFormat.getInstance()
 
     def "save simple map with list"() {
         given:
@@ -92,7 +90,6 @@ class FlatInteractionPerformanceTest extends Specification {
             if (value instanceof List) {
                 for (Object item : value) {
                     count += _count(item)
-                    continue
                 }
             }
             count++

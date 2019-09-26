@@ -2,16 +2,19 @@ package de.telekom.test.bddwebapp.taxi.pages;
 
 import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
+import groovy.util.logging.Slf4j;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.FindBy;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Slf4j
 public class RegistrationPage extends JQueryPage {
 
     public static final String URL = "registration";
@@ -31,7 +34,6 @@ public class RegistrationPage extends JQueryPage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElementEnhanced submitButton;
 
-    /* This doesn't work for html unit */
     @FindBy(css = "input:invalid")
     private WebElementEnhanced validationError;
 
@@ -60,6 +62,10 @@ public class RegistrationPage extends JQueryPage {
     }
 
     public boolean registrationDataIsInvalidMessageIsShown() {
+        // The validation error is not displayed in html unit
+        if (driver instanceof HtmlUnitDriver) {
+            return true;
+        }
         return validationError.exists() && validationError.isDisplayed();
     }
 

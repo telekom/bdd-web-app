@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -32,12 +32,10 @@ public class ScreenshotReportForm extends Format {
     }
 
     @Override
-    public StoryReporter createStoryReporter(
-            FilePrintStreamFactory factory,
-            StoryReporterBuilder builder) {
+    public StoryReporter createStoryReporter(FilePrintStreamFactory factory, StoryReporterBuilder builder) {
         factory.useConfiguration(builder.fileConfiguration("html"));
         ScreenshotCreator screenshotCreator = new ScreenshotCreator(builder, webDriverWrapper);
-        ScreenshotHtmlOutput screenshotHtmlOutput = new ScreenshotHtmlOutput(factory.createPrintStream(), builder, Boolean.valueOf(screenshotsOnSuccess), screenshotCreator);
+        ScreenshotHtmlOutput screenshotHtmlOutput = new ScreenshotHtmlOutput(factory.createPrintStream(), builder, Boolean.parseBoolean(screenshotsOnSuccess), screenshotCreator);
         return screenshotHtmlOutput.doReportFailureTrace(builder.reportFailureTrace()).doCompressFailureTrace(builder.compressFailureTrace());
     }
 

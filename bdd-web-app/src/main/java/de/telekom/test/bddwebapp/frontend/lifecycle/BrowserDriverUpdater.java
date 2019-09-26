@@ -1,8 +1,7 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
-import io.github.bonigarcia.wdm.*;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import io.github.bonigarcia.wdm.DriverManagerType;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,12 +14,11 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class BrowserDriverUpdater {
 
@@ -30,8 +28,8 @@ public class BrowserDriverUpdater {
     @Value("${webdriver.proxy.port:#{null}}")
     private String proxyPort;
 
-    @NonNull
-    private final WebDriverConfiguration webDriverConfiguration;
+    @Autowired
+    private WebDriverWrapper webDriverWrapper;
 
     /**
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
@@ -41,50 +39,42 @@ public class BrowserDriverUpdater {
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
-        String browser = webDriverConfiguration.getBrowser();
-
-        WebDriverManager webDriverManager;
-        switch (browser.toLowerCase()) {
-            case "firefox": {
-                webDriverManager = FirefoxDriverManager.getInstance(DriverManagerType.FIREFOX);
-                break;
-            }
-            case "chrome": {
-                System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
-                webDriverManager = ChromeDriverManager.getInstance(DriverManagerType.CHROME);
-                break;
-            }
-            case "edge": {
-                webDriverManager = EdgeDriverManager.getInstance(DriverManagerType.EDGE);
-                break;
-            }
-            case "ie": {
-                webDriverManager = InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER);
-                break;
-            }
-            case "opera": {
-                webDriverManager = OperaDriverManager.getInstance(DriverManagerType.OPERA);
-                break;
-            }
-            case "phantomjs": {
-                webDriverManager = PhantomJsDriverManager.getInstance(DriverManagerType.PHANTOMJS);
-                break;
-            }
-            case "seleniumserverstandalone": {
-                webDriverManager = SeleniumServerStandaloneManager.getInstance(DriverManagerType.SELENIUM_SERVER_STANDALONE);
-                break;
-            }
-            default: {
-                return;
-            }
+        String browser = webDriverWrapper.getCurrentWebDriverConfiguration().getBrowser();
+        DriverManagerType driverManagerType = mapToDriverManagerType(browser);
+        if (driverManagerType == null) {
+            log.info("No driver update available for " + browser);
+            return;
         }
 
+        WebDriverManager webDriverManager = WebDriverManager.getInstance(driverManagerType);
         if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
             webDriverManager.proxy(proxyHost + ":" + proxyPort);
         }
         webDriverManager.setup();
 
-        log.info("Updated driver for " + browser + " test instrumentalization.");
+        log.info("Updated instrumentalization driver for " + driverManagerType.toString() + "(" + browser + ")");
+    }
+
+    private DriverManagerType mapToDriverManagerType(String browser) {
+        switch (browser.toLowerCase()) {
+            case "firefox":
+                return DriverManagerType.FIREFOX;
+            case "chrome":
+                return DriverManagerType.CHROME;
+            case "edge":
+                return DriverManagerType.EDGE;
+            case "ie":
+            case "internetexplorer":
+                return DriverManagerType.IEXPLORER;
+            case "opera":
+                return DriverManagerType.OPERA;
+            case "phantomjs":
+                return DriverManagerType.PHANTOMJS;
+            case "standalone":
+            case "seleniumserverstandalone":
+                return DriverManagerType.SELENIUM_SERVER_STANDALONE;
+        }
+        return null;
     }
 
 }

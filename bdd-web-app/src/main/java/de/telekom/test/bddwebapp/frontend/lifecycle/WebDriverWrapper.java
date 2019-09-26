@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -22,7 +24,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Igor Cernopolc - Initially added support for RemoteWebDriver
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -30,23 +32,45 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 @Slf4j
 public class WebDriverWrapper {
 
+    public static Class<? extends WebDriverConfiguration> DEFAULT_WEB_DRIVER_CONFIGURATION = UsefulWebDriverConfiguration.class;
+
     @Autowired
-    private WebDriverConfiguration webDriverConfiguration;
+    private List<WebDriverConfiguration> webDriverConfigurations;
+
+    @Autowired
+    private CurrentStory currentStory;
 
     @Getter
     @Setter
     private WebDriver driver;
 
+    public WebDriverConfiguration getCurrentWebDriverConfiguration() {
+        return currentStory.getAlternativeWebDriverConfiguration()
+                .map(webDriverConfigurationClass -> getAlternativeWebDriverConfiguration(webDriverConfigurationClass))
+                .orElse(getDefaultWebDriverConfiguration());
+    }
+
+    public WebDriverConfiguration getAlternativeWebDriverConfiguration(Class<? extends WebDriverConfiguration> alternativeWebDriverConfigurationClass) {
+        return webDriverConfigurations.stream()
+                .filter(webDriverConfiguration -> webDriverConfiguration.getClass().equals(alternativeWebDriverConfigurationClass))
+                .findFirst().get();
+    }
+
+    public WebDriverConfiguration getDefaultWebDriverConfiguration() {
+        return webDriverConfigurations.stream()
+                .filter(webDriverConfiguration -> webDriverConfiguration.getClass().equals(DEFAULT_WEB_DRIVER_CONFIGURATION))
+                .findFirst().get();
+    }
+
     public void loadWebdriver() {
+        WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
         if (isBlank(webDriverConfiguration.getGridURL())) {
             driver = webDriverConfiguration.loadLocalWebdriver();
         } else {
             driver = webDriverConfiguration.loadRemoteWebdriver();
         }
-
         webDriverConfiguration.afterLoad(driver);
     }
-
 
     public void quit() {
         if (driver != null) {

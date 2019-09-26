@@ -1,7 +1,8 @@
-package de.telekom.test.bddwebapp.taxi.customizing.config;
+package de.telekom.test.bddwebapp.taxi.customizing.config.runall;
 
-import de.telekom.test.bddwebapp.api.ApiOnly;
 import de.telekom.test.bddwebapp.stories.RunAllStories;
+import de.telekom.test.bddwebapp.taxi.customizing.config.ApplicationContextProvider;
+import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.springframework.context.ApplicationContext;
 
@@ -10,12 +11,17 @@ import java.util.List;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@ApiOnly
-public class RunAllTestlevel2ApiOnlyTaxiStories extends RunAllStories {
+public class RunAllTestlevel1TaxiStories extends RunAllStories {
+
+    @Override
+    public Configuration configuration() {
+        System.setProperty("testLevel", "1");
+        return super.configuration();
+    }
 
     @Override
     public ApplicationContext getApplicationContext() {
@@ -24,12 +30,12 @@ public class RunAllTestlevel2ApiOnlyTaxiStories extends RunAllStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return testLevelStepsFactory(2);
+        return testLevelStepsFactory(getTestLevel());
     }
 
     @Override
     public List<String> storyPaths() {
-        return testLevelStoryPaths(2);
+        return testLevelStoryPaths(getTestLevel());
     }
 
     /*

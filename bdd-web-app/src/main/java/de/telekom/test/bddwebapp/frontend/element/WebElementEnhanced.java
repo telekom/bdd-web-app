@@ -7,7 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Extends WebElement by several helper methods.
@@ -15,15 +16,14 @@ import java.util.stream.Collectors;
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Tim Jödicke
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class WebElementEnhanced {
+public class WebElementEnhanced extends WebElementProxy {
 
     public static List<String> NOT_INVOKE_WEB_ELEMENT_METHODS = Arrays.asList("setWebElement", "setWebDriver", "exists", "check");
 
-    protected WebElement webElement;
     protected WebDriver webDriver;
 
     public WebElementEnhanced() {
@@ -38,112 +38,44 @@ public class WebElementEnhanced {
         this.webDriver = webDriver;
     }
 
-    public WebElement getWebElement() {
-        return webElement;
-    }
-
-    public void setWebElement(WebElement webElement) {
-        this.webElement = webElement;
-    }
-
     public void setWebDriver(WebDriver webDriver) {
         this.webDriver = webDriver;
-    }
-
-    public void sendKeys(CharSequence... keysToSend) {
-        webElement.sendKeys(keysToSend);
-    }
-
-    public Point getLocation() {
-        return webElement.getLocation();
-    }
-
-    public void submit() {
-        webElement.submit();
-    }
-
-    public String getAttribute(String name) {
-        return webElement.getAttribute(name);
-    }
-
-    public String getCssValue(String propertyName) {
-        return webElement.getCssValue(propertyName);
-    }
-
-    public Dimension getSize() {
-        return webElement.getSize();
-    }
-
-    public Rectangle getRect() {
-        return webElement.getRect();
-    }
-
-    public List<WebElement> findElements(By by) {
-        return webElement.findElements(by);
     }
 
     public List<WebElementEnhanced> findElementsEnhanced(By by) {
         return webElement.findElements(by).stream()
                 .map(element -> new WebElementEnhanced(element, webDriver))
-                .collect(Collectors.toList());
-    }
-
-    public String getText() {
-        return webElement.getText();
+                .collect(toList());
     }
 
     public String getHtml() {
         return webElement.getAttribute("innerHTML");
     }
 
-    public String getTagName() {
-        return webElement.getTagName();
-    }
-
-    public boolean isSelected() {
-        return webElement.isSelected();
-    }
-
-    public WebElement findElement(By by) {
-        return webElement.findElement(by);
-    }
-
     public WebElementEnhanced findElementEnhanced(By by) {
         return new WebElementEnhanced(webElement.findElement(by), webDriver);
     }
 
-    public boolean isEnabled() {
-        return webElement.isEnabled();
-    }
-
-    public boolean isDisplayed() {
-        return webElement.isDisplayed();
-    }
-
-    public void clear() {
-        webElement.clear();
-    }
-
-    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return webElement.getScreenshotAs(outputType);
+    public void waitFor(Function<WebDriver, Boolean> function, int maxWaitTimeInSeconds, String errorMessage) {
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
+        webDriverWait.withMessage(errorMessage);
+        webDriverWait.until(function);
     }
 
     public void waitForExisting(int maxWaitTimeInSeconds) {
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
-        webDriverWait.withMessage("Element still not exists!");
-        webDriverWait.until(driver -> exists());
+        Function<WebDriver, Boolean> waitForExisting = driver -> exists();
+        waitFor(waitForExisting, maxWaitTimeInSeconds, "Element still not exists!");
     }
 
     public void waitForDisplayed(int maxWaitTimeInSeconds) {
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
-        webDriverWait.withMessage("Element: \"" + webElement + "\" is still not displayed!");
-        webDriverWait.until(driver -> {
+        Function<WebDriver, Boolean> waitForDisplayed = driver -> {
             try {
                 return webElement.isDisplayed();
             } catch (WebDriverException e) {
                 return false;
             }
-        });
+        };
+        waitFor(waitForDisplayed, maxWaitTimeInSeconds, "Element: \"" + webElement + "\" is still not displayed!");
     }
 
     public void scrollTo() {

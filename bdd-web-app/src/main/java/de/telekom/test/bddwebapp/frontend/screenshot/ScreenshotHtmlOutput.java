@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -27,8 +27,8 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
 
     protected String currentStoryFolder;
 
-    public ScreenshotHtmlOutput(PrintStream output,
-                                StoryReporterBuilder reporterBuilder, boolean screenshotsOnSuccess, ScreenshotCreator screenshotCreator) {
+    public ScreenshotHtmlOutput(PrintStream output, StoryReporterBuilder reporterBuilder,
+                                boolean screenshotsOnSuccess, ScreenshotCreator screenshotCreator) {
         super(output, reporterBuilder.keywords());
         this.screenshotsOnSuccess = screenshotsOnSuccess;
         this.screenshotCreator = screenshotCreator;

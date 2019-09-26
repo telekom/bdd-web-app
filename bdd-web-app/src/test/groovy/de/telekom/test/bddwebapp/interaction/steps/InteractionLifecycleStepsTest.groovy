@@ -9,15 +9,18 @@ import spock.lang.Specification
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 class InteractionLifecycleStepsTest extends Specification {
 
-    def steps = new InteractionLifecycleSteps(
-            Mock(ScenarioInteraction.class),
-            Mock(StoryInteraction.class))
+    def steps = new InteractionLifecycleSteps()
+
+    def "setup"() {
+        steps.scenarioInteraction = Mock(ScenarioInteraction)
+        steps.storyInteraction = Mock(StoryInteraction)
+    }
 
     def "before story"() {
         when:

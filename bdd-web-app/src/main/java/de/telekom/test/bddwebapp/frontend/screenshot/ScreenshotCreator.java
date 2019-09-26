@@ -26,7 +26,7 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2018 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 @Slf4j
 public class ScreenshotCreator {
 
-    protected static String SCREENSHOT_PATH = "{0}/screenshots/{1}/{2}.png";
+    public static String SCREENSHOT_PATH = "{0}/screenshots/{1}/{2}.png";
 
     @NonNull
     protected final StoryReporterBuilder reporterBuilder;
@@ -55,13 +55,16 @@ public class ScreenshotCreator {
                     "Maybe the WebDriver was closed or the current story is in ApiOnly mode");
             return null;
         }
+
         try {
             log.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
             String screenshotName = screenshotName(step, status);
-            String screenshotPath = format(SCREENSHOT_PATH, reporterBuilder.outputDirectory(), storyFolder, screenshotName);
+            String screenshotPath = screenshotPath(storyFolder, screenshotName);
+
             screenshotPath = webDriverWrapper.createScreenshot(screenshotPath);
             if (isNoneBlank(screenshotPath) && screenshotIsNotEmpty(screenshotPath)) {
-                return screenshotUrl(storyFolder, step, screenshotName, screenshotPath);
+                logScreenshot(step, screenshotPath);
+                return reportUrl(storyFolder, screenshotName);
             }
         } catch (Exception e) {
             log.error(format("Screenshot failed for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
@@ -69,33 +72,29 @@ public class ScreenshotCreator {
         return null;
     }
 
-    /**
-     * Create screenshot name from step, status and timestamp.
-     *
-     * @param step   - The step name
-     * @param status - Status of the current step
-     * @return The screenshot name
-     */
     protected String screenshotName(String step, String status) {
         step = step.replaceAll("\\s", "_"); // replace space by underscore
         step = step.replaceAll("\"[.*\"]", ""); // remove params
         return step + "_" + new Date().getTime() + "_" + status;
     }
 
+    protected String screenshotPath(String storyFolder, String screenshotName) {
+        return format(SCREENSHOT_PATH, reporterBuilder.outputDirectory(), storyFolder, screenshotName);
+    }
+
     protected boolean screenshotIsNotEmpty(String screenshotPath) {
         try {
             BufferedImage bufferedImage = ImageIO.read(new FileInputStream(screenshotPath));
             Raster raster = bufferedImage.getData();
-            return !(range(0, raster.getWidth()).noneMatch(x ->
-                    range(0, raster.getHeight()).anyMatch(y -> bufferedImage.getRGB(x, y) != 0xFFFFFFFF)));
+            return range(0, raster.getWidth()).anyMatch(x ->
+                    range(0, raster.getHeight()).anyMatch(y -> bufferedImage.getRGB(x, y) != 0xFFFFFFFF));
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    protected String screenshotUrl(String storyFolder, String step, String screenshotName, String screenshotPath) {
-        // log screenshot creation with step, path and current url
+    protected void logScreenshot(String step, String screenshotPath) {
         String urlPath;
         try {
             urlPath = new URL(webDriverWrapper.getDriver().getCurrentUrl()).getPath();
@@ -103,13 +102,14 @@ public class ScreenshotCreator {
             urlPath = "[unknown url]";
         }
         log.info(format("Screenshot of step \"{0}\" with url \"{1}\" has been saved to \"{2}\"", step, urlPath, screenshotPath));
-        // screenshot name url encoding
+    }
+
+    protected String reportUrl(String storyFolder, String screenshotName) {
         try {
             screenshotName = URLEncoder.encode(screenshotName, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             log.error("Exception at screenshot name url encoding", e);
         }
-        // get the screenshot path relative to the story report
         return format(SCREENSHOT_PATH, "..", storyFolder, screenshotName);
     }
 
