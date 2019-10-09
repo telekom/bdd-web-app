@@ -6,7 +6,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-reactor</artifactId>
-    <version>1.4</version>
+    <version>1.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>bdd web-app reactor</name>
