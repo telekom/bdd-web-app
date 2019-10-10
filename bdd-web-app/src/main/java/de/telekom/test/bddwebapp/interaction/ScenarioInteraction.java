@@ -1,8 +1,6 @@
 package de.telekom.test.bddwebapp.interaction;
 
-import de.telekom.test.bddwebapp.api.RequestBuilder;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,13 +31,9 @@ public class ScenarioInteraction extends FlatInteraction {
     @Setter
     private StoryInteraction storyInteraction;
 
-    @Autowired
-    private RequestBuilder requestBuilder;
-
     @Override
     public void startInteraction() {
         super.startInteraction();
-        requestBuilder.clearRequest();
     }
 
     public List<Object> arrayBody() {

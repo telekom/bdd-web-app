@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.interaction
 
-import de.telekom.test.bddwebapp.api.RequestBuilder
+
 import spock.lang.Specification
 
 class ScenarioInteractionTest extends Specification {
@@ -9,14 +9,6 @@ class ScenarioInteractionTest extends Specification {
 
     def setup() {
         scenarioInteraction.storyInteraction = new StoryInteraction()
-        scenarioInteraction.requestBuilder = Mock(RequestBuilder)
-    }
-
-    def "start interaction"() {
-        when:
-        scenarioInteraction.startInteraction()
-        then:
-        1 * scenarioInteraction.requestBuilder.clearRequest()
     }
 
     def "create new array body"() {
