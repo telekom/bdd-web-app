@@ -46,7 +46,7 @@ public class WebDriverWrapper {
 
     public WebDriverConfiguration getCurrentWebDriverConfiguration() {
         return currentStory.getAlternativeWebDriverConfiguration()
-                .map(webDriverConfigurationClass -> getAlternativeWebDriverConfiguration(webDriverConfigurationClass))
+                .map(this::getAlternativeWebDriverConfiguration)
                 .orElse(getDefaultWebDriverConfiguration());
     }
 

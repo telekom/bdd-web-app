@@ -1,7 +1,6 @@
-package de.telekom.test.bddwebapp.taxi.customizing.stories.api;
+package de.telekom.test.bddwebapp.taxi.testlevel.stories;
 
-import de.telekom.test.bddwebapp.api.ApiOnly;
-import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
+import de.telekom.test.bddwebapp.taxi.testlevel.config.AbstractTestLevelStory;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -10,6 +9,5 @@ import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@ApiOnly
-public class CheckUserFixture extends AbstractTestLevelStory {
+public class LoginNoTestLevel extends AbstractTestLevelStory {
 }

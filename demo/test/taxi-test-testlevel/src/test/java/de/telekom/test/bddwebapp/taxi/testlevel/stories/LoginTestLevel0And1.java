@@ -1,7 +1,7 @@
-package de.telekom.test.bddwebapp.taxi.customizing.stories.testlevel;
+package de.telekom.test.bddwebapp.taxi.testlevel.stories;
 
 import de.telekom.test.bddwebapp.stories.config.TestLevel;
-import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
+import de.telekom.test.bddwebapp.taxi.testlevel.config.AbstractTestLevelStory;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -10,6 +10,6 @@ import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@TestLevel(testLevels = 0)
-public class LoginTestLevel0Only extends AbstractTestLevelStory {
+@TestLevel(testLevels = {0, 1})
+public class LoginTestLevel0And1 extends AbstractTestLevelStory {
 }

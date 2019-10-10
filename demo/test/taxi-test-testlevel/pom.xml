@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.test</groupId>
-    <artifactId>bdd-web-app-demo-taxi-test-customizing</artifactId>
+    <artifactId>bdd-web-app-demo-taxi-test-testlevel</artifactId>
     <version>1.5-SNAPSHOT</version>
 
     <properties>
@@ -27,7 +27,10 @@
                 <version>${surefire.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/RunAllTaxiStories.java</include>
+                        <include>**/RunAllTestlevel0TaxiStories.java</include>
+                        <include>**/RunAllTestlevel1TaxiStories.java</include>
+                        <include>**/RunAllTestlevel2TaxiStories.java</include>
+                        <include>**/RunAllTestlevel2ApiOnlyTaxiStories.java</include>
                     </includes>
                 </configuration>
             </plugin>

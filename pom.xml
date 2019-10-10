@@ -17,6 +17,7 @@
         <module>demo/app/testdata-sim</module>
         <module>demo/test/taxi-test</module>
         <module>demo/test/taxi-test-ger</module>
+        <module>demo/test/taxi-test-testlevel</module>
         <module>demo/test/taxi-test-customizing</module>
     </modules>
 

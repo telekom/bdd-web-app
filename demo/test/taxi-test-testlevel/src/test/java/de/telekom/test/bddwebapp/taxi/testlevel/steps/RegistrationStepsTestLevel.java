@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.customizing.steps;
+package de.telekom.test.bddwebapp.taxi.testlevel.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.steps.RegistrationSteps;

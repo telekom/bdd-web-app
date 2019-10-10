@@ -1,7 +1,7 @@
-package de.telekom.test.bddwebapp.taxi.customizing.config.runall;
+package de.telekom.test.bddwebapp.taxi.testlevel.config.runall;
 
 import de.telekom.test.bddwebapp.stories.RunAllStories;
-import de.telekom.test.bddwebapp.taxi.customizing.config.ApplicationContextProviderApiOnly;
+import de.telekom.test.bddwebapp.taxi.testlevel.config.ApplicationContextProvider;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.springframework.context.ApplicationContext;
@@ -15,17 +15,17 @@ import java.util.List;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class RunAllTestlevel2TaxiStories extends RunAllStories {
+public class RunAllTestlevel0TaxiStories extends RunAllStories {
 
     @Override
     public Configuration configuration() {
-        System.setProperty("testLevel", "2");
+        System.setProperty("testLevel", "0");
         return super.configuration();
     }
 
     @Override
     public ApplicationContext getApplicationContext() {
-        return ApplicationContextProviderApiOnly.getApplicationContext();
+        return ApplicationContextProvider.getApplicationContext();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RunAllTestlevel2TaxiStories extends RunAllStories {
      */
     @Override
     public String storiesBasePath() {
-        return "de.telekom.test.bddwebapp.taxi.customizing";
+        return "de.telekom.test.bddwebapp.taxi.testlevel";
     }
 
 }
