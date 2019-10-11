@@ -8,6 +8,7 @@ public abstract class WebElementProxy implements WebElement {
 
     protected WebElement webElement;
 
+    /** Only for internal use */
     public WebElementProxy() {
     }
 

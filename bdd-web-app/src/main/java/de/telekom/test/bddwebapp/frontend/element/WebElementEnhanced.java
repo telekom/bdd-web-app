@@ -26,6 +26,7 @@ public class WebElementEnhanced extends WebElementProxy {
 
     protected WebDriver webDriver;
 
+    /** Only for internal use */
     public WebElementEnhanced() {
     }
 
