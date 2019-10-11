@@ -15,12 +15,12 @@ public abstract class WebElementProxy implements WebElement {
         this.webElement = webElement;
     }
 
-    public WebElement getWebElement() {
-        return webElement;
-    }
-
     public void setWebElement(WebElement webElement) {
         this.webElement = webElement;
+    }
+
+    public WebElement getWebElement() {
+        return webElement;
     }
 
     public void sendKeys(CharSequence... keysToSend) {

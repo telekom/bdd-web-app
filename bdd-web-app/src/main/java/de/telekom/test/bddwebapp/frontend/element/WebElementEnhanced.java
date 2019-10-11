@@ -29,12 +29,8 @@ public class WebElementEnhanced extends WebElementProxy {
     public WebElementEnhanced() {
     }
 
-    public WebElementEnhanced(WebElement webElement) {
-        this.webElement = webElement;
-    }
-
     public WebElementEnhanced(WebElement webElement, WebDriver webDriver) {
-        this.webElement = webElement;
+        super(webElement);
         this.webDriver = webDriver;
     }
 
