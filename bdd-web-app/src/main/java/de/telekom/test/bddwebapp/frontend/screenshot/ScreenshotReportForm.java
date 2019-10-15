@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScreenshotReportForm extends Format {
 
-    @Value("${screenshot.onsuccess:@null}")
+    @Value("${screenshot.onsuccess:true}")
     private String screenshotsOnSuccess;
 
     @Autowired
