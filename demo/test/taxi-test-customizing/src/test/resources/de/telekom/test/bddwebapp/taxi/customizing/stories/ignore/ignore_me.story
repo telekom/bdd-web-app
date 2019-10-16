@@ -1,7 +1,7 @@
 Narrative:
 As a framwork user
-I would like to write api test without frontend instrumentalisation
-to use the framework for api tests only
+I expect that everything works with JUnit defaults
+like the @Ignore Annotation for story classes
 
-Scenario: Successful login
-Given registered user as igor
+Scenario: This step should not executed because the story is ignored
+When this step fail
