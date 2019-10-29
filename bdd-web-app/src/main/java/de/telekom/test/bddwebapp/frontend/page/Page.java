@@ -50,7 +50,7 @@ public abstract class Page {
      * Used by checkPage().
      */
     public void checkPageState() {
-        if(driver instanceof JavascriptExecutor){
+        if (driver instanceof JavascriptExecutor) {
             Wait<WebDriver> wait = new WebDriverWait(driver, 15);
             wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
         }
@@ -76,6 +76,11 @@ public abstract class Page {
         }
     }
 
+    /*
+     * At page instantiation it's checked that this URL is contained in the open browser URL.
+     * You can use regular expressions like "/path/.+/path".
+     * So be careful with query params, you have to mask "?" by "\?".
+     */
     public abstract String getURL();
 
 }
