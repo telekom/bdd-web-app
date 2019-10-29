@@ -25,16 +25,37 @@ class SeleniumStepsTest extends Specification {
     void setup() {
     }
 
-    def "create expected page"() {
+    def "create expected page with different urls"() {
         given:
         seleniumSteps.webDriverWrapper = Mock(WebDriverWrapper)
         seleniumSteps.webDriverWrapper.getDriver() >> Mock(WebDriver)
-        seleniumSteps.webDriverWrapper.getDriver().getCurrentUrl() >> "https://github.com/telekom/bdd-web-app"
+        seleniumSteps.webDriverWrapper.getDriver().getCurrentUrl() >> "https://github.com/telekom/bdd-web-app?key=value"
         seleniumSteps.storyInteraction = Mock(StoryInteraction)
+        AnyPage.URL = url
         when:
         def page = seleniumSteps.createExpectedPage(AnyPage)
         then:
         page instanceof AnyPage
+
+        where:
+        url                                                  | _
+        "https://github.com/telekom/bdd-web-app"             | _
+        "https://github.com/telekom/bdd-web-app\\?key=value" | _
+        "telekom/bdd-web-app"                                | _
+        ".+/bdd-web-app"                                     | _
+        ".+/bdd-web-app\\?key=.+"                            | _
+    }
+
+    def "create page with wrong url"() {
+        given:
+        seleniumSteps.webDriverWrapper = Mock(WebDriverWrapper)
+        seleniumSteps.webDriverWrapper.getDriver() >> Mock(WebDriver)
+        seleniumSteps.webDriverWrapper.getDriver().getCurrentUrl() >> "https://github.com/telekom/other-framework"
+        seleniumSteps.storyInteraction = Mock(StoryInteraction)
+        when:
+        seleniumSteps.createExpectedPage(AnyPage)
+        then:
+        thrown RuntimeException
     }
 
     def "create expected page with exceptions"() {

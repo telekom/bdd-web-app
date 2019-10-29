@@ -5,13 +5,14 @@ import org.openqa.selenium.WebDriver;
 
 public class AnyPage extends Page {
 
+    private static String URL; // Don't do that in practise! This is just by unit testing reason
+
     public AnyPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public String getURL() {
-        return "https://github.com/telekom/bdd-web-app";
+        return URL;
     }
-
 }
