@@ -13,6 +13,13 @@ import org.jbehave.core.steps.InjectableStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 /**
  * Add the following features to the story execution:
  * - Screenshot build
@@ -47,9 +54,19 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
     public Embedder configuredEmbedder() {
         Embedder embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
-        // deactivate view generation for single story runs to prevent false positive
-        embedder.embedderControls().doGenerateViewAfterStories(false);
+
+        if (isExecutedByJUnitRunner()) {
+            // deactivate view generation for single story runs to prevent false positive
+            embedder.embedderControls().doGenerateViewAfterStories(false);
+        }
+
         return embedder;
+    }
+
+    public boolean isExecutedByJUnitRunner() {
+        // the test class here is a indicator that the story is run by maven build and not by junit-class
+        String testClass = System.getProperty("test");
+         return isBlank(testClass);
     }
 
     public abstract ApplicationContext getApplicationContext();
