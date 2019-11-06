@@ -1,11 +1,14 @@
 package de.telekom.test.bddwebapp.frontend.steps;
 
+import de.telekom.test.bddwebapp.cucumber.AfterFeature;
+import de.telekom.test.bddwebapp.cucumber.BeforeAll;
+import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import org.jbehave.core.annotations.*;
+import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -29,45 +32,36 @@ public class WebDriverLifecycleSteps {
     @Autowired
     protected BrowserDriverUpdater browserDriverUpdater;
 
-    @BeforeStories
+    @BeforeAll
     public void beforeStories() {
-        if (!customizingStories.isApiOnlyForAllStories() && !customizingStories.storyClassesContainsOnlyApiOnlyStories()) {
+        if (!customizingStories.isApiOnlyForAllStories()) {
             browserDriverUpdater.updateDriver();
         }
     }
 
-    @BeforeStory
+    @BeforeFeature
     public void beforeStory() {
         if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
             webDriverWrapper.loadWebdriver();
         }
     }
 
-    @BeforeScenario(uponType = ScenarioType.NORMAL)
-    public void beforeScenarioForNormal() {
-        beforeScenario(ScenarioType.NORMAL);
-    }
-
-    @BeforeScenario(uponType = ScenarioType.EXAMPLE)
-    public void beforeScenarioForExample() {
-        beforeScenario(ScenarioType.EXAMPLE);
-    }
-
-    @AfterStory
-    public void afterStory() {
-        webDriverWrapper.quit();
-    }
-
-    @AfterStories
-    public void afterStories() {
-        webDriverWrapper.quit();
-    }
-
-    protected void beforeScenario(ScenarioType type) {
+    @Before
+    public void beforeScenario() {
         if (currentStory.isRestartBrowserBeforeScenario()) {
             webDriverWrapper.quit();
             webDriverWrapper.loadWebdriver();
         }
+    }
+
+    @AfterFeature
+    public void afterStory() {
+        webDriverWrapper.quit();
+    }
+
+    @AfterFeature
+    public void afterStories() {
+        webDriverWrapper.quit();
     }
 
 }

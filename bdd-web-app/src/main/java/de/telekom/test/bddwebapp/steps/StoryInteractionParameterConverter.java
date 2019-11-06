@@ -1,8 +1,7 @@
 package de.telekom.test.bddwebapp.steps;
 
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import org.jbehave.core.annotations.AsParameterConverter;
-import org.jbehave.core.model.ExamplesTable;
+import io.cucumber.datatable.DataTable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class StoryInteractionParameterConverter {
     @Autowired
     private StoryInteraction storyInteraction;
 
-    @AsParameterConverter
+    // @AsParameterConverter TODO implement for cucumber
     public String getValueFromKeyOrValueOrConcatenated(String keyOrValueOrConcatenated) {
         if (isConcatenatedKey(keyOrValueOrConcatenated)) {
             return concatenatedKey(keyOrValueOrConcatenated);
@@ -37,8 +36,8 @@ public class StoryInteractionParameterConverter {
         return mapToValue(keyOrValueOrConcatenated);
     }
 
-    public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
-        List<Map<String, String>> rows = examplesTable.getRows();
+    public List<Map<String, String>> getRowsWithInteractionKey(DataTable examplesTable) {
+        List<Map<String, String>> rows = examplesTable.asMaps();
         rows.forEach(map -> map.entrySet()
                 .forEach(entry -> entry.setValue(getValueFromKeyOrValueOrConcatenated(entry.getValue()))));
         return rows;

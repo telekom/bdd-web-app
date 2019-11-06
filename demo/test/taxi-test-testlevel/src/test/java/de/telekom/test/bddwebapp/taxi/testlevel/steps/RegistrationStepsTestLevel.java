@@ -2,8 +2,8 @@ package de.telekom.test.bddwebapp.taxi.testlevel.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.steps.RegistrationSteps;
+import io.cucumber.java.en.Given;
 import lombok.extern.slf4j.Slf4j;
-import org.jbehave.core.annotations.Given;
 
 import static org.junit.Assert.fail;
 

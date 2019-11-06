@@ -1,13 +1,13 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
+import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationPriceVO;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
-import org.jbehave.core.annotations.BeforeStory;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Value;
 
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
@@ -33,7 +33,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
     private String testDataSimUrl;
 
-    @BeforeStory
+    @BeforeFeature
     public void theReservationIsDeletedInTheSimulator() {
         testDataSimRequest()
                 .when()

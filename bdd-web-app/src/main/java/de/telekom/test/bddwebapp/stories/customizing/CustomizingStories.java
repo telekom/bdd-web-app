@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
-import de.telekom.test.bddwebapp.stories.AbstractStory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -29,15 +28,7 @@ public class CustomizingStories {
 
     @Getter
     @Setter
-    private Class<? extends AbstractStory> apiOnlyBaseType;
-
-    @Getter
-    @Setter
     private boolean restartBrowserBeforeScenarioForAllStories;
-
-    @Getter
-    @Setter
-    private Class<? extends AbstractStory> restartBrowserBeforeScenarioBaseType;
 
     public void setStoryClass(Class clazz, String name) {
         storyClasses.put(name, clazz);
@@ -45,11 +36,6 @@ public class CustomizingStories {
 
     public Class getStoryClass(String name) {
         return storyClasses.get(name);
-    }
-
-    public boolean storyClassesContainsOnlyApiOnlyStories() {
-        return apiOnlyBaseType != null &&
-                storyClasses.values().stream().allMatch(storyClass -> storyClass.isAssignableFrom(apiOnlyBaseType));
     }
 
 }

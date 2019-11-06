@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.customizing.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
-import org.jbehave.core.annotations.When;
+import io.cucumber.java.en.When;
 
 import static org.junit.Assert.fail;
 

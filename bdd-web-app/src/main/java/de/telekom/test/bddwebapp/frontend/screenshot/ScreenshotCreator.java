@@ -4,7 +4,6 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.jbehave.core.reporters.StoryReporterBuilder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -36,8 +35,6 @@ public class ScreenshotCreator {
 
     public static String SCREENSHOT_PATH = "{0}/screenshots/{1}/{2}.png";
 
-    @NonNull
-    protected final StoryReporterBuilder reporterBuilder;
     @NonNull
     protected final WebDriverWrapper webDriverWrapper;
 
@@ -79,7 +76,8 @@ public class ScreenshotCreator {
     }
 
     protected String screenshotPath(String storyFolder, String screenshotName) {
-        return format(SCREENSHOT_PATH, reporterBuilder.outputDirectory(), storyFolder, screenshotName);
+        // TODO
+        return format(SCREENSHOT_PATH, "TODO", storyFolder, screenshotName);
     }
 
     protected boolean screenshotIsNotEmpty(String screenshotPath) {

@@ -51,19 +51,11 @@ public class CurrentStory {
 
     public boolean isApiOnly() {
         return isApiOnlyForAllStories() ||
-                isApiOnlyBaseType() ||
                 isApiOnlyAnnotationForCurrentStory();
     }
 
     private boolean isApiOnlyForAllStories() {
         return customizingStories.isApiOnlyForAllStories();
-    }
-
-    private boolean isApiOnlyBaseType() {
-        Class clazz = getStoryClass();
-        return clazz != null &&
-                customizingStories.getApiOnlyBaseType() != null &&
-                customizingStories.getApiOnlyBaseType().isAssignableFrom(clazz);
     }
 
     private boolean isApiOnlyAnnotationForCurrentStory() {
@@ -74,19 +66,11 @@ public class CurrentStory {
 
     public boolean isRestartBrowserBeforeScenario() {
         return isRestartBrowserBeforeScenarioForAllStories() ||
-                isRestartBrowserBeforeScenarioBaseType() ||
                 isRestartBrowserBeforeScenarioForCurrentStory();
     }
 
     private boolean isRestartBrowserBeforeScenarioForAllStories() {
         return customizingStories.isRestartBrowserBeforeScenarioForAllStories();
-    }
-
-    private boolean isRestartBrowserBeforeScenarioBaseType() {
-        Class clazz = getStoryClass();
-        return clazz != null &&
-                customizingStories.getRestartBrowserBeforeScenarioBaseType() != null &&
-                customizingStories.getRestartBrowserBeforeScenarioBaseType().isAssignableFrom(clazz);
     }
 
     private boolean isRestartBrowserBeforeScenarioForCurrentStory() {

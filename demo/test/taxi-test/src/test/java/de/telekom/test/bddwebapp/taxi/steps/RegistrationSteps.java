@@ -2,10 +2,10 @@ package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.RegistrationPage;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
-import org.jbehave.core.model.ExamplesTable;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.Map;
 
@@ -40,7 +40,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
     }
 
     @When("the user register with $testData")
-    public void theUserRegister(ExamplesTable testData) {
+    public void theUserRegister(DataTable testData) {
         storyInteractionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
     }
 

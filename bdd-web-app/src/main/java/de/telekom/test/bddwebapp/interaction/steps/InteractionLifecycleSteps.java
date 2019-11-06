@@ -1,11 +1,10 @@
 package de.telekom.test.bddwebapp.interaction.steps;
 
+import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.steps.Steps;
-import org.jbehave.core.annotations.BeforeScenario;
-import org.jbehave.core.annotations.BeforeStory;
-import org.jbehave.core.annotations.ScenarioType;
+import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -25,22 +24,13 @@ public class InteractionLifecycleSteps {
     @Autowired
     protected StoryInteraction storyInteraction;
 
-    @BeforeStory
+    @BeforeFeature
     public void beforeStory() {
         storyInteraction.startInteraction();
     }
 
-    @BeforeScenario(uponType = ScenarioType.NORMAL)
-    public void beforeScenarioForNormal() {
-        beforeScenario(ScenarioType.NORMAL);
-    }
-
-    @BeforeScenario(uponType = ScenarioType.EXAMPLE)
-    public void beforeScenarioForExample() {
-        beforeScenario(ScenarioType.EXAMPLE);
-    }
-
-    protected void beforeScenario(ScenarioType type) {
+    @Before
+    public void beforeScenario() {
         scenarioInteraction.startInteraction();
         storyInteraction.setScenarioInteraction(scenarioInteraction);
         scenarioInteraction.setStoryInteraction(storyInteraction);
