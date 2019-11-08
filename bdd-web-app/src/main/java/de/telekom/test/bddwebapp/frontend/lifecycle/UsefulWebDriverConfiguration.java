@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -45,34 +46,21 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
     }
 
     @Override
-    public DesiredCapabilities firefoxCapabilities() {
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
-        desiredCapabilities.setCapability("overlappingCheckDisabled", true);
-        return desiredCapabilities;
+    public FirefoxOptions firefoxOptions(DesiredCapabilities capabilities) {
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        capabilities.setCapability("overlappingCheckDisabled", true);
+        firefoxOptions.merge(capabilities);
+        return firefoxOptions;
     }
 
     @Override
-    public DesiredCapabilities chromeCapabilities() {
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-        desiredCapabilities.setCapability("disable-restore-session-state", true);
-        desiredCapabilities.setCapability("disable-application-cache", true);
-        desiredCapabilities.setCapability("useAutomationExtension", false);
-        return desiredCapabilities;
-    }
-
-    @Override
-    public DesiredCapabilities ieCapabilities() {
-        DesiredCapabilities desiredCapabilities = DesiredCapabilities.internetExplorer();
-        desiredCapabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-        desiredCapabilities.setCapability(CapabilityType.HAS_NATIVE_EVENTS, true);
-        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_APPLICATION_CACHE, true);
-        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_FINDING_BY_CSS, true);
-        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, true);
-        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_LOCATION_CONTEXT, true);
-        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_SQL_DATABASE, true);
-        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_WEB_STORAGE, true);
-        desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        return desiredCapabilities;
+    public ChromeOptions chromeOptions(DesiredCapabilities capabilities) {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        capabilities.setCapability("disable-restore-session-state", true);
+        capabilities.setCapability("disable-application-cache", true);
+        capabilities.setCapability("useAutomationExtension", false);
+        chromeOptions.merge(capabilities);
+        return chromeOptions;
     }
 
     @Override
