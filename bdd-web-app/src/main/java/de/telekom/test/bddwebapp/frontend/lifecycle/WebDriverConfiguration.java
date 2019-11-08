@@ -35,59 +35,16 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 public interface WebDriverConfiguration {
 
     default DesiredCapabilities capabilities(String browser) {
-        switch (browser.toLowerCase()) {
-            case "firefox":
-                return firefoxCapabilities();
-            case "chrome":
-                return chromeCapabilities();
-            case "edge":
-                return edgeCapabilities();
-            case "ie":
-            case "internetexplorer":
-                return ieCapabilities();
-            case "opera":
-                return operaCapabilities();
-            case "safari":
-                return safariCapabilities();
-            case "htmlunit":
-                return htmlUnitCapabilities();
-            default:
-                throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
-        }
-    }
-
-    default DesiredCapabilities firefoxCapabilities() {
-        return DesiredCapabilities.firefox();
-    }
-
-    default DesiredCapabilities chromeCapabilities() {
-        return DesiredCapabilities.chrome();
-    }
-
-    default DesiredCapabilities edgeCapabilities() {
-        return DesiredCapabilities.edge();
-    }
-
-    default DesiredCapabilities ieCapabilities() {
-        return DesiredCapabilities.internetExplorer();
-    }
-
-    default DesiredCapabilities operaCapabilities() {
-        return DesiredCapabilities.operaBlink();
-    }
-
-    default DesiredCapabilities safariCapabilities() {
-        return DesiredCapabilities.safari();
-    }
-
-    default DesiredCapabilities htmlUnitCapabilities() {
-        return DesiredCapabilities.htmlUnit();
+        return new DesiredCapabilities();
     }
 
     default WebDriver loadWebdriver() {
         String browser = getBrowser();
         LoggerFactory.getLogger(WebDriverConfiguration.class).info("Browser is set to: " + browser);
         DesiredCapabilities capabilities = capabilities(browser);
+        if (isRemoteWebdriver()) {
+            return loadRemoteWebdriver(capabilities);
+        }
         switch (browser.toLowerCase()) {
             case "firefox":
                 return loadFirefox(capabilities);
@@ -104,11 +61,13 @@ public interface WebDriverConfiguration {
                 return loadSafari(capabilities);
             case "htmlunit":
                 return loadHtmlUnit(capabilities);
-            case "remote":
-                return loadRemoteWebdriver(capabilities);
             default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
         }
+    }
+
+    default boolean isRemoteWebdriver() {
+        return isNotBlank(getGridURL());
     }
 
     default WebDriver loadRemoteWebdriver(DesiredCapabilities capabilities) {
@@ -195,9 +154,6 @@ public interface WebDriverConfiguration {
         String browser = System.getProperty("browser");
         if (isNotBlank(browser)) {
             return browser;
-        }
-        if (isNotBlank(getGridURL())) {
-            return "remote";
         }
         return "chrome";
     }
