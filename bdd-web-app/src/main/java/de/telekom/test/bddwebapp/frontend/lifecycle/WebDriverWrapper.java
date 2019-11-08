@@ -16,8 +16,6 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-
 /**
  * Manage the current WebDriver instance.
  *
@@ -64,11 +62,7 @@ public class WebDriverWrapper {
 
     public void loadWebdriver() {
         WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
-        if (isBlank(webDriverConfiguration.getGridURL())) {
-            driver = webDriverConfiguration.loadLocalWebdriver();
-        } else {
-            driver = webDriverConfiguration.loadRemoteWebdriver();
-        }
+        driver = webDriverConfiguration.loadWebdriver();
         webDriverConfiguration.afterLoad(driver);
     }
 
