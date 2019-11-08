@@ -84,7 +84,7 @@ public interface WebDriverConfiguration {
         return DesiredCapabilities.htmlUnit();
     }
 
-    default WebDriver loadLocalWebdriver() {
+    default WebDriver loadWebdriver() {
         String browser = getBrowser();
         LoggerFactory.getLogger(WebDriverConfiguration.class).info("Browser is set to: " + browser);
         DesiredCapabilities capabilities = capabilities(browser);
@@ -104,15 +104,16 @@ public interface WebDriverConfiguration {
                 return loadSafari(capabilities);
             case "htmlunit":
                 return loadHtmlUnit(capabilities);
+            case "remote":
+                return loadRemoteWebdriver(capabilities);
             default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
         }
     }
 
-    default WebDriver loadRemoteWebdriver() {
+    default WebDriver loadRemoteWebdriver(DesiredCapabilities capabilities) {
         String gridURL = getGridURL();
         LoggerFactory.getLogger(WebDriverConfiguration.class).info("Running on: " + gridURL);
-        DesiredCapabilities capabilities = capabilities(getBrowser());
         try {
             return new RemoteWebDriver(new URL(gridURL), capabilities);
         } catch (MalformedURLException e) {
@@ -194,6 +195,9 @@ public interface WebDriverConfiguration {
         String browser = System.getProperty("browser");
         if (isNotBlank(browser)) {
             return browser;
+        }
+        if (isNotBlank(getGridURL())) {
+            return "remote";
         }
         return "chrome";
     }
