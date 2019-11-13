@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -48,9 +49,8 @@ public class FlatInteraction implements Interaction {
 
     /**
      * Store some test data in the interaction context for later use.
-     * Converts maps and list so that they are flat.
-     * Also saves the maps and lists as individual objects.
-     * Be careful when saving large and deep maps as this approach increases the amount of data exponentially!
+     * Saves every key on every hierarchy as individual objects for lists and maps.
+     * Be careful when saving very large and deep maps as this approach increases the amount of data exponentially!
      */
     public void remember(String key, Object value) {
         if (value instanceof Map) {
@@ -63,6 +63,30 @@ public class FlatInteraction implements Interaction {
             }
         }
         context.put(key, value);
+    }
+
+    /**
+     * Get the value from a complex type by reflection, even in hierarchical objects.
+     * In some way the opposite way of the remember operation.
+     */
+    public <S> S recallByHierarchy(String key) {
+        if (key.contains(".")) {
+            String[] paths = key.split("\\.");
+            String objectKey = paths[0];
+            Object object = recall(objectKey);
+            if (object != null && !object.getClass().isPrimitive()
+                    && !(object instanceof Map || object instanceof String || object instanceof Number)) {
+                for (int i = 1; i < paths.length; i++) {
+                    try {
+                        object = FieldUtils.readField(object, paths[i], true);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return (S) object;
+            }
+        }
+        return null;
     }
 
     // -------------------------------------------------------------------------
