@@ -36,8 +36,16 @@ interface Interaction {
      * Get some data in the interaction context.
      */
     default <S> S recall(String key) {
-        return (S) getContext().get(key);
+        // try to get the value by key first
+        S s = (S) getContext().get(key);
+        // try to get the value by the hierarchy
+        if (s == null && key.contains(".")) {
+            return recallByHierarchy(key);
+        }
+        return s;
     }
+
+    <S> S recallByHierarchy(String key);
 
     /**
      * Get some data in the interaction context. Use enum as key.

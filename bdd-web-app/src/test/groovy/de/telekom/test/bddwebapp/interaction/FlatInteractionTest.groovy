@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.interaction
 
+import de.telekom.test.bddwebapp.interaction.flatinteractiontest.ComplexType
 import org.slf4j.Logger
 import spock.lang.Specification
 
@@ -164,6 +165,21 @@ class FlatInteractionTest extends Specification {
         interaction.recallObject("KEY", "attribute") == "value2"
         interaction.recall(TestDataEnum.KEY) == "value"
         interaction.recallObject(TestDataEnum.KEY, "attribute") == "value2"
+    }
+
+    def "test recall object with hierarchy"() {
+        when:
+        interaction.remember("KEY", new ComplexType())
+        then:
+        interaction.recall(hierarchyKey) == hierarchyValue
+        interaction.recall(complexKey) in ComplexType
+        interaction.recall(stringKey) == stringValue
+
+        where:
+        hierarchyKey                                                        | hierarchyValue | complexKey                                                             | stringKey                                                             | stringValue
+        "KEY.hierarchy"                                                     | 0              | "KEY.complexValue"                                                     | "KEY.stringValue"                                                     | "value0"
+        "KEY.complexValue.hierarchy"                                        | 1              | "KEY.complexValue.complexValue"                                        | "KEY.complexValue.stringValue"                                        | "value1"
+        "KEY.complexValue.complexValue.complexValue.complexValue.hierarchy" | 4              | "KEY.complexValue.complexValue.complexValue.complexValue.complexValue" | "KEY.complexValue.complexValue.complexValue.complexValue.stringValue" | "value4"
     }
 
     def "log all possible keys with value"() {
