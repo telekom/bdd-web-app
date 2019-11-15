@@ -66,6 +66,19 @@ public class FlatInteraction implements Interaction {
     }
 
     /**
+     * Get some data in the interaction context.
+     */
+    public <S> S recall(String key) {
+        // try to get the value by key first
+        S s = (S) getContext().get(key);
+        // try to get the value by the hierarchy
+        if (s == null && key.contains(".")) {
+            return recallByHierarchy(key);
+        }
+        return s;
+    }
+
+    /**
      * Get the value from a complex type by reflection, even in hierarchical objects.
      * In some way the opposite way of the remember operation.
      */
