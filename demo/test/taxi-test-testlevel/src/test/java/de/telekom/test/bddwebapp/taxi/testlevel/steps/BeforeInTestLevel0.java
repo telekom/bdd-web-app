@@ -1,12 +1,10 @@
 package de.telekom.test.bddwebapp.taxi.testlevel.steps;
 
-import de.telekom.test.bddwebapp.steps.Steps;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 
 import static org.junit.Assert.fail;
 
-@Steps
 @Slf4j
 public class BeforeInTestLevel0 {
 

@@ -3,6 +3,7 @@ package de.telekom.test.bddwebapp.steps;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import io.cucumber.datatable.DataTable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import static java.util.stream.Stream.of;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps
+@Component
 public class StoryInteractionParameterConverter {
 
     public static String KEY_LITERAL = "$";

@@ -1,11 +1,10 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.LoginPage;
+import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static org.junit.Assert.assertTrue;
@@ -17,14 +16,7 @@ import static org.junit.Assert.assertTrue;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps
 public class LoginSteps extends AbstractTaxiSteps {
-
-    @Autowired
-    private ReservationSteps reservationSteps;
-
-    @Autowired
-    private RegistrationSteps registrationSteps;
 
     @Given("the opened login page")
     public void theOpenedLoginPage() {
@@ -34,12 +26,13 @@ public class LoginSteps extends AbstractTaxiSteps {
 
     @Given("logged in customer $testobject")
     public void loggedInCustomer(String testobject) {
-        registrationSteps.registeredUser(testobject);
+        testDataSimRequest().post("/testdata/user").then().statusCode(200);
+        storyInteraction.rememberObject(testobject, recallResponseAsMap());
         theUserOpensTheLoginPage();
         theLoginPageIsShown();
         theUserLogsIn(storyInteraction.recallObjectNotNull(testobject, "username"),
                 storyInteraction.recallObjectNotNull(testobject, "password"));
-        reservationSteps.theReservationPageIsShown();
+        createExpectedPage(ReservationPage.class);
     }
 
     @When("the user opens the login page")

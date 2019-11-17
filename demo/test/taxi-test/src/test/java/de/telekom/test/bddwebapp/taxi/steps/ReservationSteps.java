@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
-import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationPriceVO;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
@@ -24,7 +23,6 @@ import static org.junit.Assert.assertNotNull;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps
 public class ReservationSteps extends AbstractTaxiSteps {
 
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")

@@ -5,11 +5,11 @@ import de.telekom.test.bddwebapp.cucumber.BeforeAll;
 import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
-import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps
+@Component
 public class WebDriverLifecycleSteps {
 
     @Autowired

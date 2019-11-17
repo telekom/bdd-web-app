@@ -3,9 +3,9 @@ package de.telekom.test.bddwebapp.interaction.steps;
 import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import de.telekom.test.bddwebapp.steps.Steps;
 import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps
+@Component
 public class InteractionLifecycleSteps {
 
     @Autowired

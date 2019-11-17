@@ -13,8 +13,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <surefire.version>2.22.1</surefire.version>
-        <jbehave.version>4.3.5</jbehave.version>
-        <jbehave.site-resources.version>3.3.1</jbehave.site-resources.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 
         <bdd-web-app.version>2.0-SNAPSHOT</bdd-web-app.version>
@@ -28,63 +26,9 @@
                 <version>${surefire.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/RunAllTaxiStories.java</include>
+                        <include>**/RunAll.java</include>
                     </includes>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack-jbehave-site-resources</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave.site</groupId>
-                                    <artifactId>jbehave-site-resources</artifactId>
-                                    <version>${jbehave.site-resources.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>unpack-jbehave-reports-resources</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave</groupId>
-                                    <artifactId>jbehave-core</artifactId>
-                                    <version>${jbehave.version}</version>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                    <includes>**\/*.css,**\/*.ftl,**\/*.js</includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -96,6 +40,16 @@
                 <artifactId>bdd-web-app_cucumber</artifactId>
                 <version>${bdd-web-app.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.bdd-web-app</groupId>
+                <artifactId>bdd-web-app-demo-taxi-app</artifactId>
+                <version>${bdd-web-app.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bdd-web-app</groupId>
+                <artifactId>bdd-web-app-demo-testdata-sim</artifactId>
+                <version>${bdd-web-app.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -103,7 +57,14 @@
         <dependency>
             <groupId>org.bdd-web-app</groupId>
             <artifactId>bdd-web-app_cucumber</artifactId>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bdd-web-app</groupId>
+            <artifactId>bdd-web-app-demo-taxi-app</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.bdd-web-app</groupId>
+            <artifactId>bdd-web-app-demo-testdata-sim</artifactId>
         </dependency>
     </dependencies>
 

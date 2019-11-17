@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.taxi.testlevel.steps;
 
-import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.steps.RegistrationSteps;
 import io.cucumber.java.en.Given;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import static org.junit.Assert.fail;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps(testLevel = 1)
 @Slf4j
 public class RegistrationStepsTestLevel extends RegistrationSteps {
 

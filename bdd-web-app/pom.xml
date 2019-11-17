@@ -19,13 +19,16 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- Long-term dependencies. Update only if it is absolutely necessary. -->
-        <cucumber.version>4.7.4</cucumber.version>
         <spring.version>5.1.5.RELEASE</spring.version>
         <restassured.version>3.3.0</restassured.version>
         <cglib.version>3.2.10</cglib.version>
         <slf4j.version>1.7.26</slf4j.version>
         <lombok.version>1.18.6</lombok.version>
         <guava.version>27.1-jre</guava.version>
+
+        <!-- Mid-term dependencies. Update when new minor version is available. Major only by good reason -->
+        <cucumber.version>4.7.4</cucumber.version>
+        <cucumber-reporting.version>4.10.0</cucumber-reporting.version>
 
         <!-- Short-term dependencies. Update when new version is available. -->
         <selenium.version>3.141.59</selenium.version>
@@ -189,10 +192,22 @@
             <!-- Spring -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-            <dependency>
+            <!--<dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>-->
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+               <version>2.1.8.RELEASE</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -211,10 +226,17 @@
                 <version>${cucumber.version}</version>
             </dependency>
 
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- JUnit -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-spring</artifactId>
+                <version>${cucumber.version}</version>
+            </dependency>
 
+            <dependency>
+                <groupId>net.masterthought</groupId>
+                <artifactId>cucumber-reporting</artifactId>
+                <version>${cucumber-reporting.version}</version>
+            </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
             <!-- Selenium -->
@@ -334,9 +356,19 @@
         <!-- Spring -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -351,6 +383,16 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

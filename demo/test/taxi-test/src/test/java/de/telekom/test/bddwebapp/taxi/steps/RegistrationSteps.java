@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.RegistrationPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -19,7 +18,6 @@ import static org.junit.Assert.assertTrue;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Steps
 public class RegistrationSteps extends AbstractTaxiSteps {
 
     @Given("the openend registration page")
