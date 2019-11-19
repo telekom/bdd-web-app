@@ -1,22 +1,23 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.taxi.TaxiAppApplication;
+import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
+import de.telekom.test.bddwebapp.taxi.config.TestConfig;
 import io.cucumber.core.logging.Logger;
 import io.cucumber.core.logging.LoggerFactory;
 import io.cucumber.java.Before;
-import org.springframework.boot.test.context.SpringBootContextLoader;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Class to use spring application context while running cucumber
  */
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@ContextConfiguration(classes = {TaxiAppApplication.class}, loader = SpringBootContextLoader.class)
-@ComponentScan("de.telekom.test.bddwebapp")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TestConfig.class)
 public class Configuration {
-
 
     private static final Logger LOG = LoggerFactory.getLogger(Configuration.class);
 

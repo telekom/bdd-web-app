@@ -50,7 +50,7 @@ public abstract class SeleniumSteps extends ApiSteps {
     @Autowired
     protected StoryInteractionParameterConverter storyInteractionParameterConverter;
 
-    protected synchronized <T extends Page> T createExpectedPage(Class<T> expectedPage) {
+    protected <T extends Page> T createExpectedPage(Class<T> expectedPage) {
         WebDriver driver = webDriverWrapper.getDriver();
         T page;
         try {
