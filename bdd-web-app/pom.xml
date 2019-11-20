@@ -29,6 +29,7 @@
         <!-- Mid-term dependencies. Update when new minor version is available. Major only by good reason -->
         <cucumber.version>4.7.4</cucumber.version>
         <cucumber-reporting.version>4.10.0</cucumber-reporting.version>
+        <cucumber-reports.version>1.3.5</cucumber-reports.version>
 
         <!-- Short-term dependencies. Update when new version is available. -->
         <selenium.version>3.141.59</selenium.version>
@@ -232,12 +233,6 @@
                 <version>${cucumber.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>net.masterthought</groupId>
-                <artifactId>cucumber-reporting</artifactId>
-                <version>${cucumber-reporting.version}</version>
-            </dependency>
-
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
             <!-- Selenium -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -390,11 +385,6 @@
             <artifactId>cucumber-spring</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>net.masterthought</groupId>
-            <artifactId>cucumber-reporting</artifactId>
-        </dependency>
-
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
         <!-- Selenium -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -488,6 +478,12 @@
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.2</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

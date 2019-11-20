@@ -1,15 +1,16 @@
 package de.telekom.test.bddwebapp.cucumber.hook;
 
-import de.telekom.test.bddwebapp.cucumber.extension.AfterFeature;
-import de.telekom.test.bddwebapp.cucumber.extension.BeforeAll;
-import de.telekom.test.bddwebapp.cucumber.extension.BeforeFeature;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+
+import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.*;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -31,17 +32,22 @@ public class WebDriverLifeCycle {
     @Autowired
     protected BrowserDriverUpdater browserDriverUpdater;
 
-    @BeforeAll
-    public void beforeStories() {
-        if (!customizingStories.isApiOnlyForAllStories()) {
-            browserDriverUpdater.updateDriver();
+    @Before
+    public void updateDriver() {
+        if (isBeforeAll("updateDriver")) {
+            if (!customizingStories.isApiOnlyForAllStories()) {
+                browserDriverUpdater.updateDriver();
+            }
         }
     }
 
-    @BeforeFeature
-    public void beforeStory() {
-        if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
-            webDriverWrapper.loadWebdriver();
+    @Before
+    public void loadWebdriver() {
+        if (isBeforeFeature("loadWebdriver")) {
+            if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
+                webDriverWrapper.quit();
+                webDriverWrapper.loadWebdriver();
+            }
         }
     }
 
@@ -51,16 +57,6 @@ public class WebDriverLifeCycle {
             webDriverWrapper.quit();
             webDriverWrapper.loadWebdriver();
         }
-    }
-
-    @AfterFeature
-    public void afterStory() {
-        webDriverWrapper.quit();
-    }
-
-    @AfterFeature
-    public void afterStories() {
-        webDriverWrapper.quit();
     }
 
 }

@@ -41,7 +41,7 @@ public class LoginSteps extends AbstractTaxiSteps {
         open(appendUrl(taxiAppUrl, LoginPage.URL));
     }
 
-    @When("the user logs in with $username $password")
+    @When("the user logs in with {} {}")
     public void theUserLogsIn(String username, String password) {
         LoginPage loginPage = getCurrentPage();
         loginPage.setUsername(username);
