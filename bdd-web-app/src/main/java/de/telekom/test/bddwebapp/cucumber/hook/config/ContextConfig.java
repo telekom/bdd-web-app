@@ -1,9 +1,7 @@
-package de.telekom.test.bddwebapp.taxi.config;
+package de.telekom.test.bddwebapp.cucumber.hook.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -14,5 +12,5 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
  */
 @Configuration
 @ComponentScan("de.telekom.test.bddwebapp")
-public class TestConfig {
+public class ContextConfig {
 }

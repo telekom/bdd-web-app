@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.interaction.steps
 
+import de.telekom.test.bddwebapp.cucumber.hook.InteractionLifeCycle
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction
 import de.telekom.test.bddwebapp.interaction.StoryInteraction
 import spock.lang.Specification
@@ -13,9 +14,9 @@ import spock.lang.Specification
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-class InteractionLifecycleStepsTest extends Specification {
+class InteractionLifeCycleTest extends Specification {
 
-    def steps = new InteractionLifecycleSteps()
+    def steps = new InteractionLifeCycle()
 
     def "setup"() {
         steps.scenarioInteraction = Mock(ScenarioInteraction)

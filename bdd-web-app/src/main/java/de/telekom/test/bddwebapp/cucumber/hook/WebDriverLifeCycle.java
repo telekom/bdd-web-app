@@ -1,8 +1,8 @@
-package de.telekom.test.bddwebapp.frontend.steps;
+package de.telekom.test.bddwebapp.cucumber.hook;
 
-import de.telekom.test.bddwebapp.cucumber.AfterFeature;
-import de.telekom.test.bddwebapp.cucumber.BeforeAll;
-import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
+import de.telekom.test.bddwebapp.cucumber.extension.AfterFeature;
+import de.telekom.test.bddwebapp.cucumber.extension.BeforeAll;
+import de.telekom.test.bddwebapp.cucumber.extension.BeforeFeature;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
@@ -20,8 +20,7 @@ import org.springframework.stereotype.Component;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Component
-public class WebDriverLifecycleSteps {
+public class WebDriverLifeCycle {
 
     @Autowired
     protected CurrentStory currentStory;

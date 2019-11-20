@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.interaction.steps;
+package de.telekom.test.bddwebapp.cucumber.hook;
 
-import de.telekom.test.bddwebapp.cucumber.BeforeFeature;
+import de.telekom.test.bddwebapp.cucumber.extension.BeforeFeature;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import io.cucumber.java.Before;
@@ -16,8 +16,7 @@ import org.springframework.stereotype.Component;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Component
-public class InteractionLifecycleSteps {
+public class InteractionLifeCycle {
 
     @Autowired
     protected ScenarioInteraction scenarioInteraction;

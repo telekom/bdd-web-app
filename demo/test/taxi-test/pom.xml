@@ -39,16 +39,19 @@
                 <groupId>org.bdd-web-app</groupId>
                 <artifactId>bdd-web-app_cucumber</artifactId>
                 <version>${bdd-web-app.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.bdd-web-app</groupId>
                 <artifactId>bdd-web-app-demo-taxi-app</artifactId>
                 <version>${bdd-web-app.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.bdd-web-app</groupId>
                 <artifactId>bdd-web-app-demo-testdata-sim</artifactId>
                 <version>${bdd-web-app.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

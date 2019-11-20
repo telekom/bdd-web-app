@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.cucumber;
+package de.telekom.test.bddwebapp.cucumber.extension;
 
 public @interface BeforeFeature {
 

@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.steps
 
+import de.telekom.test.bddwebapp.cucumber.hook.WebDriverLifeCycle
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory
@@ -16,9 +17,9 @@ import spock.lang.Unroll
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-class WebDriverLifecycleStepsTest extends Specification {
+class WebDriverLifeCycleTest extends Specification {
 
-    def steps = new WebDriverLifecycleSteps()
+    def steps = new WebDriverLifeCycle()
 
     def "setup"() {
         steps.currentStory = Mock(CurrentStory)
