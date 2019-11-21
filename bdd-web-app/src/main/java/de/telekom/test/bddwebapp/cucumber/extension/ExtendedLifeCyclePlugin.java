@@ -8,7 +8,6 @@ import java.util.Set;
 public class ExtendedLifeCyclePlugin implements ConcurrentEventListener {
 
     private static Set<String> allFeaturesStarted = new HashSet<>();
-    private static Set<String> allFeaturesFinished = new HashSet<>();
 
     private EventHandler<TestCaseStarted> testCaseStarted = event -> {
         ExtendedLifeCycle.resetBeforeAll();
@@ -19,14 +18,11 @@ public class ExtendedLifeCyclePlugin implements ConcurrentEventListener {
     };
 
     private EventHandler<TestCaseFinished> testCaseFinished = event -> {
-        if (!allFeaturesFinished.contains(event.testCase.getUri())) {
-            ExtendedLifeCycle.resetAfterFeature();
-            allFeaturesFinished.add(event.testCase.getUri());
-        }
+        PluginWebDriverReference.getWebDriverWrapper().quit();
     };
 
     private EventHandler<TestRunFinished> testRunFinished = event -> {
-        // TODO quit webdriver
+        PluginWebDriverReference.getWebDriverWrapper().quit();
     };
 
     @Override

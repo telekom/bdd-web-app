@@ -4,11 +4,8 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.PostConstruct;
 
 import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.*;
 
@@ -32,7 +29,7 @@ public class WebDriverLifeCycle {
     @Autowired
     protected BrowserDriverUpdater browserDriverUpdater;
 
-    @Before
+    @Before(order = BEFORE_ALL_ORDER)
     public void updateDriver() {
         if (isBeforeAll("updateDriver")) {
             if (!customizingStories.isApiOnlyForAllStories()) {
@@ -41,7 +38,7 @@ public class WebDriverLifeCycle {
         }
     }
 
-    @Before
+    @Before(order = BEFORE_FEATURE_ORDER)
     public void loadWebdriver() {
         if (isBeforeFeature("loadWebdriver")) {
             if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {

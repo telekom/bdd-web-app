@@ -3,12 +3,13 @@ package de.telekom.test.bddwebapp.taxi.steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationPriceVO;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Before;
 import org.springframework.beans.factory.annotation.Value;
 
+import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.BEFORE_FEATURE_ORDER;
 import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.isBeforeFeature;
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
@@ -32,7 +33,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
     private String testDataSimUrl;
 
-    @Before
+    @Before(order = BEFORE_FEATURE_ORDER)
     public void theReservationIsDeletedInTheSimulator() {
         if (isBeforeFeature("theReservationIsDeletedInTheSimulator")) {
             testDataSimRequest()
@@ -43,7 +44,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         }
     }
 
-    @Given("example reservation between $earliestStartTime and $latestStartTime")
+    @Given("example reservation between {param} and {param}")
     public void exampleReservation(String earliestStartTime, String latestStartTime) {
         ReservationVO reservation = testDataSimRequest()
                 .given()
@@ -57,7 +58,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         storyInteraction.remember("reservation", reservation);
     }
 
-    @Given("the price is $price € with $passengers other passengers between $startTime and $endTime")
+    @Given("the price is {param} € with {param} other passengers between {param} and {param}")
     public void thePriceIsWithOtherPassengers(String price, String passengers, String startTime, String endTime) {
         ReservationPriceVO reservationPrice = new ReservationPriceVO();
         reservationPrice.setPrice(price);
@@ -108,7 +109,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         assertTrue(reservationPage.isReservationNotPossible());
     }
 
-    @Then("between $startTime and $endTime the price is $price at $passengers passengers")
+    @Then("between {param} and {param} the price is {param} at {param} passengers")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
         String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);

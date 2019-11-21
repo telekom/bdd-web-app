@@ -26,7 +26,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
         theRegistrationPageIsShown();
     }
 
-    @Given("registered user as $testobject")
+    @Given("registered user as {string}")
     public void registeredUser(String testobject) {
         testDataSimRequest().post("/testdata/user").then().statusCode(200);
         storyInteraction.rememberObject(testobject, recallResponseAsMap());
@@ -37,7 +37,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
         open(appendUrl(taxiAppUrl, RegistrationPage.URL));
     }
 
-    @When("the user register with $testData")
+    @When("the user register with {}")
     public void theUserRegister(DataTable testData) {
         storyInteractionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
     }

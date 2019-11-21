@@ -29,7 +29,6 @@ public class StoryInteractionParameterConverter {
     @Autowired
     private StoryInteraction storyInteraction;
 
-    // @AsParameterConverter TODO implement for cucumber
     public String getValueFromKeyOrValueOrConcatenated(String keyOrValueOrConcatenated) {
         if (isConcatenatedKey(keyOrValueOrConcatenated)) {
             return concatenatedKey(keyOrValueOrConcatenated);

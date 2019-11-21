@@ -5,7 +5,7 @@ import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.isBeforeAll;
+import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.*;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -23,9 +23,9 @@ public class InteractionLifeCycle  {
     @Autowired
     protected StoryInteraction storyInteraction;
 
-    @Before
+    @Before(order = BEFORE_FEATURE_ORDER)
     public void startStoryInteraction() {
-        if (isBeforeAll("startStoryInteraction")) {
+        if (isBeforeFeature("startStoryInteraction")) {
             storyInteraction.startInteraction();
         }
     }

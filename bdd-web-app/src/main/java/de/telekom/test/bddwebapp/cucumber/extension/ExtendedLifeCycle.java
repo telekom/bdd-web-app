@@ -5,9 +5,11 @@ import java.util.Set;
 
 public class ExtendedLifeCycle {
 
+    public static final int BEFORE_ALL_ORDER = 0;
+    public static final int BEFORE_FEATURE_ORDER = 10;
+
     private final static Set<String> beforeAllAlreadyExecutedMethods = new HashSet<>();
     private final static Set<String> beforeFeatureAlreadyExecutedMethods = new HashSet<>();
-    private final static Set<String> afterFeatureAlreadyExecutedMethods = new HashSet<>();
 
     private ExtendedLifeCycle() {
     }
@@ -36,7 +38,4 @@ public class ExtendedLifeCycle {
         beforeFeatureAlreadyExecutedMethods.clear();
     }
 
-    public static void resetAfterFeature() {
-        afterFeatureAlreadyExecutedMethods.clear();
-    }
 }
