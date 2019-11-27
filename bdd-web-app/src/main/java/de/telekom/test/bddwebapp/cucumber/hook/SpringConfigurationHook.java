@@ -31,7 +31,7 @@ public class SpringConfigurationHook {
      */
     @Before(order = BEFORE_ALL_ORDER)
     public void setUpSpringContext() {
-        if (isBeforeAll("setUpSpringContext")) {
+        if (isBeforeAll()) {
             LOG.info("-------------- Spring Context Initialized For Executing Cucumber Tests --------------");
             PluginWebDriverReference.setWebDriverWrapper(webDriverWrapper);
         }

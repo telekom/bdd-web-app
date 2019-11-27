@@ -8,34 +8,32 @@ public class ExtendedLifeCycle {
     public static final int BEFORE_ALL_ORDER = 0;
     public static final int BEFORE_FEATURE_ORDER = 10;
 
-    private final static Set<String> beforeAllAlreadyExecutedMethods = new HashSet<>();
-    private final static Set<String> beforeFeatureAlreadyExecutedMethods = new HashSet<>();
+    private static Integer testCaseCountBeforeAll = 0;
+
+    private static String currentFeature;
+    private static Integer testCaseCountCurrentFeature = 0;
 
     private ExtendedLifeCycle() {
     }
 
-    public static boolean isBeforeAll(String methodName) {
-        if (!beforeAllAlreadyExecutedMethods.contains(methodName)) {
-            beforeAllAlreadyExecutedMethods.add(methodName);
-            return true;
+    public static boolean isBeforeAll() {
+        return testCaseCountBeforeAll <= 1;
+    }
+
+    public static void increaseTestCaseCountForBeforeAll() {
+        testCaseCountBeforeAll++;
+    }
+
+    public static boolean isBeforeFeature() {
+        return testCaseCountCurrentFeature <= 1;
+    }
+
+    public static void increaseTestCaseCountForFeature(String feature) {
+        if (feature.equals(currentFeature)) {
+            testCaseCountCurrentFeature++;
+        } else {
+            currentFeature = feature;
+            testCaseCountCurrentFeature = 1;
         }
-        return false;
     }
-
-    public static void resetBeforeAll() {
-        beforeAllAlreadyExecutedMethods.clear();
-    }
-
-    public static boolean isBeforeFeature(String methodName) {
-        if (!beforeFeatureAlreadyExecutedMethods.contains(methodName)) {
-            beforeFeatureAlreadyExecutedMethods.add(methodName);
-            return true;
-        }
-        return false;
-    }
-
-    public static void resetBeforeFeature() {
-        beforeFeatureAlreadyExecutedMethods.clear();
-    }
-
 }

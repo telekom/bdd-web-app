@@ -35,7 +35,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
 
     @Before(order = BEFORE_FEATURE_ORDER)
     public void theReservationIsDeletedInTheSimulator() {
-        if (isBeforeFeature("theReservationIsDeletedInTheSimulator")) {
+        if (isBeforeFeature()) {
             testDataSimRequest()
                     .when()
                     .delete("/testdata/reservation")

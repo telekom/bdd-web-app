@@ -25,7 +25,7 @@ public class InteractionLifeCycle  {
 
     @Before(order = BEFORE_FEATURE_ORDER)
     public void startStoryInteraction() {
-        if (isBeforeFeature("startStoryInteraction")) {
+        if (isBeforeFeature()) {
             storyInteraction.startInteraction();
         }
     }

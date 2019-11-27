@@ -31,7 +31,7 @@ public class WebDriverLifeCycle {
 
     @Before(order = BEFORE_ALL_ORDER)
     public void updateDriver() {
-        if (isBeforeAll("updateDriver")) {
+        if (isBeforeAll()) {
             if (!customizingStories.isApiOnlyForAllStories()) {
                 browserDriverUpdater.updateDriver();
             }
@@ -40,7 +40,7 @@ public class WebDriverLifeCycle {
 
     @Before(order = BEFORE_FEATURE_ORDER)
     public void loadWebdriver() {
-        if (isBeforeFeature("loadWebdriver")) {
+        if (isBeforeFeature()) {
             if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
                 webDriverWrapper.quit();
                 webDriverWrapper.loadWebdriver();
