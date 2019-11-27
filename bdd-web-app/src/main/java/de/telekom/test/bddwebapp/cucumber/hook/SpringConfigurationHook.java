@@ -1,13 +1,13 @@
 package de.telekom.test.bddwebapp.cucumber.hook;
 
-import de.telekom.test.bddwebapp.cucumber.extension.PluginWebDriverReference;
+import de.telekom.test.bddwebapp.cucumber.extension.ApplicationContextReference;
 import de.telekom.test.bddwebapp.cucumber.hook.config.ContextConfig;
-import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import io.cucumber.core.logging.Logger;
 import io.cucumber.core.logging.LoggerFactory;
 import io.cucumber.java.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -24,7 +24,7 @@ public class SpringConfigurationHook {
     private static final Logger LOG = LoggerFactory.getLogger(SpringConfigurationHook.class);
 
     @Autowired
-    private WebDriverWrapper webDriverWrapper;
+    private ApplicationContext applicationContext;
 
     /**
      * Need this method so the cucumber will recognize this class as glue and load spring context configuration
@@ -33,7 +33,7 @@ public class SpringConfigurationHook {
     public void setUpSpringContext() {
         if (isBeforeAll()) {
             LOG.info("-------------- Spring Context Initialized For Executing Cucumber Tests --------------");
-            PluginWebDriverReference.setWebDriverWrapper(webDriverWrapper);
+            ApplicationContextReference.setApplicationContext(applicationContext);
         }
     }
 

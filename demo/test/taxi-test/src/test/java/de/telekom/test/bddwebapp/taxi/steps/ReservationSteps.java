@@ -44,7 +44,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         }
     }
 
-    @Given("example reservation between {param} and {param}")
+    @Given("example reservation between {} and {}")
     public void exampleReservation(String earliestStartTime, String latestStartTime) {
         ReservationVO reservation = testDataSimRequest()
                 .given()
@@ -58,7 +58,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         storyInteraction.remember("reservation", reservation);
     }
 
-    @Given("the price is {param} € with {param} other passengers between {param} and {param}")
+    @Given("the price is {} € with {} other passengers between {} and {}")
     public void thePriceIsWithOtherPassengers(String price, String passengers, String startTime, String endTime) {
         ReservationPriceVO reservationPrice = new ReservationPriceVO();
         reservationPrice.setPrice(price);
@@ -109,7 +109,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         assertTrue(reservationPage.isReservationNotPossible());
     }
 
-    @Then("between {param} and {param} the price is {param} at {param} passengers")
+    @Then("between {} and {} the price is {} at {} passengers")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
         String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);

@@ -2,9 +2,11 @@ package de.telekom.test.bddwebapp.steps;
 
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.datatable.dependency.com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -29,18 +31,11 @@ public class StoryInteractionParameterConverter {
     @Autowired
     private StoryInteraction storyInteraction;
 
-    public String getValueFromKeyOrValueOrConcatenated(String keyOrValueOrConcatenated) {
+    public Object getValueFromKeyOrValueOrConcatenated(String keyOrValueOrConcatenated) {
         if (isConcatenatedKey(keyOrValueOrConcatenated)) {
             return concatenatedKey(keyOrValueOrConcatenated);
         }
         return mapToValue(keyOrValueOrConcatenated);
-    }
-
-    public List<Map<String, String>> getRowsWithInteractionKey(DataTable examplesTable) {
-        List<Map<String, String>> rows = examplesTable.asMaps();
-        rows.forEach(map -> map.entrySet()
-                .forEach(entry -> entry.setValue(getValueFromKeyOrValueOrConcatenated(entry.getValue()))));
-        return rows;
     }
 
     protected boolean isKey(String keyOrValueOrConcatenated) {
@@ -53,22 +48,22 @@ public class StoryInteractionParameterConverter {
 
     protected String concatenatedKey(String concatenatedKey) {
         return of(concatenatedKey.split("\\" + CONCATENATED_LITERAL))
-                .map(this::mapToValue)
+                .map(keyOrValueOrConcatenated -> (String) mapToValue(keyOrValueOrConcatenated))
                 .collect(joining());
     }
 
-    protected String mapToValue(String keyOrValueOrConcatenated) {
+    protected <S> S mapToValue(String keyOrValueOrConcatenated) {
         if (isKey(keyOrValueOrConcatenated)) {
             return getStoryInteractionValue(keyOrValueOrConcatenated.substring(1));
         }
-        return keyOrValueOrConcatenated;
+        return (S) keyOrValueOrConcatenated;
     }
 
-    protected String getStoryInteractionValue(String key) {
-        String value = storyInteraction.recallNotNull(key).toString();
+    protected <S> S getStoryInteractionValue(String key) {
+        S value = storyInteraction.recallNotNull(key);
         // get list values as comma separated list, e.g. [value] is value or [value1,value2] is value1,value2
-        if (value.startsWith("[") && value.endsWith("]")) {
-            value = value.substring(1, value.length() - 1);
+        if (value instanceof String && ((String) value).startsWith("[") && ((String) value).endsWith("]")) {
+            value = (S) ((String) value).substring(1, ((String) value).length() - 1);
         }
         return value;
     }

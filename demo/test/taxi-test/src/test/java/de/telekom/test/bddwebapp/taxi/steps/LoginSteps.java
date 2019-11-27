@@ -25,7 +25,7 @@ public class LoginSteps extends AbstractTaxiSteps {
         theLoginPageIsShown();
     }
 
-    @Given("logged in customer {string}")
+    @Given("logged in customer {}")
     public void loggedInCustomer(String testobject) {
         testDataSimRequest().post("/testdata/user").then().statusCode(200);
         storyInteraction.rememberObject(testobject, recallResponseAsMap());
@@ -41,7 +41,7 @@ public class LoginSteps extends AbstractTaxiSteps {
         open(appendUrl(taxiAppUrl, LoginPage.URL));
     }
 
-    @When("the user logs in with {param} {param}")
+    @When("the user logs in with {} {}")
     public void theUserLogsIn(String username, String password) {
         LoginPage loginPage = getCurrentPage();
         loginPage.setUsername(username);
