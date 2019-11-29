@@ -1,6 +1,6 @@
 @ApiOnly
 Feature:
-  As a framwork user
+  As a framework user
   I would like to write api test without frontend instrumentalisation
   to use the framework for api tests only
 

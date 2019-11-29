@@ -25,7 +25,7 @@ import static java.util.Arrays.stream;
  * For details see the file license on the toplevel.
  */
 @Component
-public class CurrentStory {
+public class CurrentFeature {
 
     @Autowired
     private CustomizingStories customizingStories;

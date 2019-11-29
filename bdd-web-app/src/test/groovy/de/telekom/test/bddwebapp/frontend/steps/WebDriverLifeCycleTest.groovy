@@ -3,7 +3,7 @@ package de.telekom.test.bddwebapp.frontend.steps
 import de.telekom.test.bddwebapp.cucumber.hook.WebDriverLifeCycle
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper
-import de.telekom.test.bddwebapp.stories.customizing.CurrentStory
+import de.telekom.test.bddwebapp.stories.customizing.CurrentFeature
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -22,7 +22,7 @@ class WebDriverLifeCycleTest extends Specification {
     def steps = new WebDriverLifeCycle()
 
     def "setup"() {
-        steps.currentStory = Mock(CurrentStory)
+        steps.currentStory = Mock(CurrentFeature)
         steps.customizingStories = Mock(CustomizingStories)
         steps.webDriverWrapper = Mock(WebDriverWrapper)
         steps.browserDriverUpdater = Mock(BrowserDriverUpdater)

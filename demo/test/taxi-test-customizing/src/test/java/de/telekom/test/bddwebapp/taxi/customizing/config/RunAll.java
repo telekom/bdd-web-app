@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.config;
+package de.telekom.test.bddwebapp.taxi.customizing.config;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

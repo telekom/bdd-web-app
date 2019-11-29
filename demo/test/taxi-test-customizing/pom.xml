@@ -13,8 +13,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <surefire.version>2.22.1</surefire.version>
-        <jbehave.version>4.3.5</jbehave.version>
-        <jbehave.site-resources.version>3.3.1</jbehave.site-resources.version>
 
         <bdd-web-app.version>2.0-SNAPSHOT</bdd-web-app.version>
     </properties>
@@ -31,48 +29,6 @@
                     </includes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack-jbehave-site-resources</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave.site</groupId>
-                                    <artifactId>jbehave-site-resources</artifactId>
-                                    <version>${jbehave.site-resources.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>unpack-jbehave-reports-resources</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave</groupId>
-                                    <artifactId>jbehave-core</artifactId>
-                                    <version>${jbehave.version}</version>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                    <includes>**\/*.css,**\/*.ftl,**\/*.js</includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -82,6 +38,7 @@
                 <groupId>org.bdd-web-app</groupId>
                 <artifactId>bdd-web-app_cucumber</artifactId>
                 <version>${bdd-web-app.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -90,12 +47,11 @@
         <dependency>
             <groupId>org.bdd-web-app</groupId>
             <artifactId>bdd-web-app_cucumber</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.bdd-web-app</groupId>
             <artifactId>bdd-web-app-demo-taxi-test</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>${bdd-web-app.version}</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>

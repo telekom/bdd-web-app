@@ -1,6 +1,6 @@
 @TestLevel(testLevels = {0, 1})
 Feature:
-  As a framwork user
+  As a framework user
   I would like to write test steps for every test level
   to reuse test steps on different environments
 

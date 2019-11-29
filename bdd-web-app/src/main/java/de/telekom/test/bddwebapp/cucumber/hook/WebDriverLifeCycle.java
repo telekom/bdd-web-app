@@ -2,7 +2,7 @@ package de.telekom.test.bddwebapp.cucumber.hook;
 
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
-import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
+import de.telekom.test.bddwebapp.stories.customizing.CurrentFeature;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import io.cucumber.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.*;
 public class WebDriverLifeCycle {
 
     @Autowired
-    protected CurrentStory currentStory;
+    protected CurrentFeature currentStory;
     @Autowired
     protected CustomizingStories customizingStories;
     @Autowired

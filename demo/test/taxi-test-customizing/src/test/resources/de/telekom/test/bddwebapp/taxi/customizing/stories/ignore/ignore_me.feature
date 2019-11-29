@@ -1,8 +1,8 @@
-@Ignore
+@ignore
 Feature:
-  As a framwork user
+  As a framework user
   I expect that everything works with JUnit defaults
-  like the @Ignore Annotation for story classes
+  like the @ignore Annotation for features
 
-  Scenario: This step should not executed because the story is ignored
-    When this step fail
+  Scenario: This scenario should not executed because the feature is ignored
+    Then this step fail
