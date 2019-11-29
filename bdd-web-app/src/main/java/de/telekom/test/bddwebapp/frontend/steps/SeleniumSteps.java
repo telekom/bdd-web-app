@@ -5,8 +5,7 @@ import de.telekom.test.bddwebapp.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import de.telekom.test.bddwebapp.cucumber.hook.InteractionLifeCycle;
-import de.telekom.test.bddwebapp.steps.StoryInteractionParameterConverter;
+import de.telekom.test.bddwebapp.steps.InteractionParameterConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +44,7 @@ public abstract class SeleniumSteps extends ApiSteps {
     protected StoryInteraction storyInteraction;
 
     @Autowired
-    protected StoryInteractionParameterConverter storyInteractionParameterConverter;
+    protected InteractionParameterConverter interactionParameterConverter;
 
     protected <T extends Page> T createExpectedPage(Class<T> expectedPage) {
         WebDriver driver = webDriverWrapper.getDriver();

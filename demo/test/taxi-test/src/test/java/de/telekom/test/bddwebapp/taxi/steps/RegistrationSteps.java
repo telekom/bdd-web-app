@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import java.util.Map;
 
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
+import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -37,18 +38,18 @@ public class RegistrationSteps extends AbstractTaxiSteps {
         open(appendUrl(taxiAppUrl, RegistrationPage.URL));
     }
 
-    @When("the user register with {}")
+    @When("the user register with")
     public void theUserRegister(DataTable testData) {
-        // TODO
-//        storyInteractionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
+        scenarioInteraction.remember("RANDOM", randomNumeric(8));
+        interactionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
     }
 
-    private void theUserRegister(Map<String, String> testData) {
+    private void theUserRegister(Map<String, Object> testData) {
         RegistrationPage registrationPage = getCurrentPage();
-        registrationPage.setFirstName(testData.get("firstName"));
-        registrationPage.setLastName(testData.get("lastName"));
-        registrationPage.setUsername(testData.get("userName"));
-        registrationPage.setPassword(testData.get("password"));
+        registrationPage.setFirstName(testData.get("firstName").toString());
+        registrationPage.setLastName(testData.get("lastName").toString());
+        registrationPage.setUsername(testData.get("userName").toString());
+        registrationPage.setPassword(testData.get("password").toString());
         registrationPage.submitRegistration();
     }
 
