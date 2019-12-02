@@ -2,15 +2,9 @@ package de.telekom.test.bddwebapp.steps;
 
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import io.cucumber.datatable.DataTable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
@@ -78,14 +72,4 @@ public class InteractionParameterConverter {
         return value;
     }
 
-    public List<Map<String, Object>> getRowsWithInteractionKey(DataTable testData) {
-        List<Map<String, String>> rows = testData.asMaps();
-        List<Map<String, Object>> rowsWithValuesFromInteraction = new ArrayList<>();
-        rows.forEach(row -> {
-            Map<String, Object> rowWithValueFromInteraction = new HashMap<>();
-            row.forEach((key, valueOrInteractionKey) -> rowWithValueFromInteraction.put(key, getValueFromKeyOrValueOrConcatenated(valueOrInteractionKey)));
-            rowsWithValuesFromInteraction.add(rowWithValueFromInteraction);
-        });
-        return rowsWithValuesFromInteraction;
-    }
 }

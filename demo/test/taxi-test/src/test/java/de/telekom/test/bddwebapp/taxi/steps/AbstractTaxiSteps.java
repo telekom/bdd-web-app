@@ -1,7 +1,9 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
+import de.telekom.test.bddwebapp.cucumber.hook.parameter.DataTableInteractionParameterConverter;
 import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
 import io.restassured.specification.RequestSpecification;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 public abstract class AbstractTaxiSteps extends SeleniumSteps {
@@ -11,6 +13,9 @@ public abstract class AbstractTaxiSteps extends SeleniumSteps {
 
     @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
     protected String testDataSimUrl;
+
+    @Autowired
+    protected DataTableInteractionParameterConverter dataTableInteractionParameterConverter;
 
     protected RequestSpecification testDataSimRequest() {
         createRequest().baseUri(testDataSimUrl);

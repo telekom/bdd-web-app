@@ -41,7 +41,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
     @When("the user register with")
     public void theUserRegister(DataTable testData) {
         scenarioInteraction.remember("RANDOM", randomNumeric(8));
-        interactionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
+        dataTableInteractionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
     }
 
     private void theUserRegister(Map<String, Object> testData) {
