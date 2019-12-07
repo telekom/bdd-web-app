@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.bdd-web-app</groupId>
-    <artifactId>bdd-web-app-reactor</artifactId>
+    <artifactId>bdd-web-app_reactor</artifactId>
     <version>2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>bdd web-app reactor</name>
+    <name>bdd-web-app reactor</name>
 
     <modules>
-        <module>bdd-web-app</module>
+        <module>bdd-web-app_core</module>
         <module>bdd-web-app_cucumber</module>
         <module>demo/app/taxi-app</module>
         <module>demo/app/testdata-sim</module>

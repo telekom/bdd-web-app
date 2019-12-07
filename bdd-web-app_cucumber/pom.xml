@@ -176,7 +176,7 @@
 
             <dependency>
                 <groupId>org.bdd-web-app</groupId>
-                <artifactId>bdd-web-app</artifactId>
+                <artifactId>bdd-web-app_core</artifactId>
                 <version>${bdd-web-app.version}</version>
             </dependency>
 
@@ -213,7 +213,7 @@
 
         <dependency>
             <groupId>org.bdd-web-app</groupId>
-            <artifactId>bdd-web-app</artifactId>
+            <artifactId>bdd-web-app_core</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
