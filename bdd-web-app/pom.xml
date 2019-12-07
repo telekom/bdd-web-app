@@ -18,8 +18,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <!-- Long-term dependencies. Update only if it is absolutely necessary. -->
-        <spring.version>5.1.5.RELEASE</spring.version>
+        <!-- Long-term dependencies. Update major version only when necessary. -->
+        <spring-boot-starter-test.version>2.1.8.RELEASE</spring-boot-starter-test.version>
         <restassured.version>3.3.0</restassured.version>
         <cglib.version>3.2.10</cglib.version>
         <slf4j.version>1.7.26</slf4j.version>
@@ -190,9 +190,9 @@
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot-starter-test.version}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -334,9 +334,10 @@
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
         <!-- JBehave -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
