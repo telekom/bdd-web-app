@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
-import de.telekom.test.bddwebapp.api.ApiOnly;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import de.telekom.test.bddwebapp.steps.RestartBrowserBeforeScenario;
 import de.telekom.test.bddwebapp.stories.config.AlternativeWebDriverConfiguration;
@@ -47,29 +46,6 @@ public class CurrentStory {
             return null;
         }
         return customizingStories.getStoryClass(storyName);
-    }
-
-    public boolean isApiOnly() {
-        return isApiOnlyForAllStories() ||
-                isApiOnlyBaseType() ||
-                isApiOnlyAnnotationForCurrentStory();
-    }
-
-    private boolean isApiOnlyForAllStories() {
-        return customizingStories.isApiOnlyForAllStories();
-    }
-
-    private boolean isApiOnlyBaseType() {
-        Class clazz = getStoryClass();
-        return clazz != null &&
-                customizingStories.getApiOnlyBaseType() != null &&
-                customizingStories.getApiOnlyBaseType().isAssignableFrom(clazz);
-    }
-
-    private boolean isApiOnlyAnnotationForCurrentStory() {
-        Class clazz = getStoryClass();
-        return clazz != null &&
-                stream(clazz.getAnnotations()).anyMatch(a -> a.annotationType().equals(ApiOnly.class));
     }
 
     public boolean isRestartBrowserBeforeScenario() {

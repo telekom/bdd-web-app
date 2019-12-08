@@ -25,14 +25,6 @@ public class CustomizingStories {
 
     @Getter
     @Setter
-    private boolean apiOnlyForAllStories;
-
-    @Getter
-    @Setter
-    private Class<? extends AbstractStory> apiOnlyBaseType;
-
-    @Getter
-    @Setter
     private boolean restartBrowserBeforeScenarioForAllStories;
 
     @Getter
@@ -45,11 +37,6 @@ public class CustomizingStories {
 
     public Class getStoryClass(String name) {
         return storyClasses.get(name);
-    }
-
-    public boolean storyClassesContainsOnlyApiOnlyStories() {
-        return apiOnlyBaseType != null &&
-                storyClasses.values().stream().allMatch(storyClass -> storyClass.isAssignableFrom(apiOnlyBaseType));
     }
 
 }

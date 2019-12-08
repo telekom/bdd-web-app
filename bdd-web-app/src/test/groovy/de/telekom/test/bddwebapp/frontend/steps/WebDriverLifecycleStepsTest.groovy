@@ -5,7 +5,6 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories
 import spock.lang.Specification
-import spock.lang.Unroll
 
 /**
  * Unit test
@@ -27,76 +26,27 @@ class WebDriverLifecycleStepsTest extends Specification {
         steps.browserDriverUpdater = Mock(BrowserDriverUpdater)
     }
 
-    @Unroll
-    def "BeforeStories leads to driver update [apiOnly=#apiOnly | containsOnlyApiStories=#containsOnlyApiStories | invocationCount=#invocationCount]"() {
-        given:
-        steps.customizingStories.isApiOnlyForAllStories() >> apiOnly
-        steps.customizingStories.storyClassesContainsOnlyApiOnlyStories() >> containsOnlyApiStories
+    def "quit browser after every story"() {
         when:
-        steps.beforeStories()
-        then:
-        invocationCount * steps.browserDriverUpdater.updateDriver()
-        where:
-        apiOnly | containsOnlyApiStories || invocationCount
-        false   | false                  || 1
-        false   | true                   || 0
-        true    | false                  || 0
-        true    | true                   || 0
-    }
-
-    @Unroll
-    def "BeforeStory loads web driver [apiOnly=#apiOnly | restartBrowser=#restartBrowser | invocationCount=#invocationCount]"() {
-        given:
-        steps.currentStory.isApiOnly() >> apiOnly
-        steps.currentStory.isRestartBrowserBeforeScenario() >> restartBrowser
-        when:
-        steps.beforeStory()
-        then:
-        invocationCount * steps.webDriverWrapper.loadWebdriver()
-        where:
-        apiOnly | restartBrowser || invocationCount
-        false   | false          || 1
-        false   | true           || 0
-        true    | false          || 0
-        true    | true           || 0
-    }
-
-    def "AfterStory"() {
-        when:
-        steps.afterStory()
+        steps.quitBrowserAfterStory()
         then:
         steps.webDriverWrapper.quit()
     }
 
-    def "AfterStories"() {
+    def "quit browser after execution of the stories"() {
         when:
-        steps.afterStories()
+        steps.quitBrowserAfterStories()
         then:
         steps.webDriverWrapper.quit()
     }
 
-    def "BeforeScenario (normal)"() {
+    def "quit browser after scenario"() {
         given:
         steps.currentStory.isRestartBrowserBeforeScenario() >> restart
         when:
-        steps.beforeScenarioForNormal()
+        steps.quitBrowserAfterScenario()
         then:
         (restart ? 1 : 0) * steps.webDriverWrapper.quit()
-        (restart ? 1 : 0) * steps.webDriverWrapper.loadWebdriver()
-        where:
-        restart | _
-        true    | _
-        false   | _
-    }
-
-    def "BeforeScenario (example table)"() {
-        given:
-        steps.currentStory.isRestartBrowserBeforeScenario() >> restart
-        when:
-        steps.beforeScenarioForExample()
-        then:
-        (restart ? 1 : 0) * steps.webDriverWrapper.quit()
-        (restart ? 1 : 0) * steps.webDriverWrapper.loadWebdriver()
         where:
         restart | _
         true    | _

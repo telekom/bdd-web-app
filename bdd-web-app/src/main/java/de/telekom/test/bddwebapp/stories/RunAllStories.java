@@ -1,13 +1,11 @@
 package de.telekom.test.bddwebapp.stories;
 
 import com.github.valfirst.jbehave.junit.monitoring.JUnitReportingRunner;
-import de.telekom.test.bddwebapp.api.ApiOnly;
 import de.telekom.test.bddwebapp.steps.ScannedStepsFactory;
 import de.telekom.test.bddwebapp.stories.config.FaultTolerantStoryPathResolver;
 import de.telekom.test.bddwebapp.stories.config.ScannedStoryPaths;
 import de.telekom.test.bddwebapp.stories.config.ScreenshotStoryReporterBuilder;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStoryEmbedderMonitor;
-import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.Embedder;
@@ -17,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 
 import java.util.List;
-
-import static java.util.Arrays.stream;
 
 /**
  * Run all stories
@@ -55,23 +51,6 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
         Embedder embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
         return embedder;
-    }
-
-    @Override
-    public void run() {
-        if (apiOnly()) {
-            CustomizingStories storyClasses = getApplicationContext().getBean(CustomizingStories.class);
-            storyClasses.setApiOnlyForAllStories(true);
-        }
-        super.run();
-    }
-
-    /**
-     * Check this if instance has the @ApiOnly annotation
-     */
-    public boolean apiOnly() {
-        return stream(this.getClass().getAnnotations())
-                .anyMatch(annotation -> annotation.annotationType().equals(ApiOnly.class));
     }
 
     public abstract ApplicationContext getApplicationContext();

@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
-import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +14,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.List;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * Manage the current WebDriver instance.
@@ -35,15 +36,22 @@ public class WebDriverWrapper {
     @Autowired
     private List<WebDriverConfiguration> webDriverConfigurations;
 
-    @Autowired
-    private CurrentStory currentStory;
-
     @Getter
+    @Setter
+    private Class<? extends WebDriverConfiguration> alternativeWebDriverConfiguration;
+
     @Setter
     private WebDriver driver;
 
+    public WebDriver getDriver() {
+        if (isClosed()) {
+            loadWebdriver();
+        }
+        return driver;
+    }
+
     public WebDriverConfiguration getCurrentWebDriverConfiguration() {
-        return currentStory.getAlternativeWebDriverConfiguration()
+        return ofNullable(alternativeWebDriverConfiguration)
                 .map(this::getAlternativeWebDriverConfiguration)
                 .orElse(getDefaultWebDriverConfiguration());
     }

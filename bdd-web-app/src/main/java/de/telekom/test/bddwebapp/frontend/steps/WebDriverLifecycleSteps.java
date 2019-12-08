@@ -5,7 +5,10 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import org.jbehave.core.annotations.*;
+import org.jbehave.core.annotations.AfterScenario;
+import org.jbehave.core.annotations.AfterStories;
+import org.jbehave.core.annotations.AfterStory;
+import org.jbehave.core.annotations.BeforeStories;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,44 +33,25 @@ public class WebDriverLifecycleSteps {
     protected BrowserDriverUpdater browserDriverUpdater;
 
     @BeforeStories
-    public void beforeStories() {
-        if (!customizingStories.isApiOnlyForAllStories() && !customizingStories.storyClassesContainsOnlyApiOnlyStories()) {
-            browserDriverUpdater.updateDriver();
+    public void updateDriver() {
+        browserDriverUpdater.updateDriver();
+    }
+
+    @AfterScenario
+    public void quitBrowserAfterScenario() {
+        if (currentStory.isRestartBrowserBeforeScenario()) {
+            webDriverWrapper.quit();
         }
-    }
-
-    @BeforeStory
-    public void beforeStory() {
-        if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
-            webDriverWrapper.loadWebdriver();
-        }
-    }
-
-    @BeforeScenario(uponType = ScenarioType.NORMAL)
-    public void beforeScenarioForNormal() {
-        beforeScenario(ScenarioType.NORMAL);
-    }
-
-    @BeforeScenario(uponType = ScenarioType.EXAMPLE)
-    public void beforeScenarioForExample() {
-        beforeScenario(ScenarioType.EXAMPLE);
     }
 
     @AfterStory
-    public void afterStory() {
+    public void quitBrowserAfterStory() {
         webDriverWrapper.quit();
     }
 
     @AfterStories
-    public void afterStories() {
+    public void quitBrowserAfterStories() {
         webDriverWrapper.quit();
-    }
-
-    protected void beforeScenario(ScenarioType type) {
-        if (currentStory.isRestartBrowserBeforeScenario()) {
-            webDriverWrapper.quit();
-            webDriverWrapper.loadWebdriver();
-        }
     }
 
 }
