@@ -50,7 +50,7 @@ public class ScreenshotCreator {
      * @return The URL of the created screenshot as String. If no screenshot was created, the result is null.
      */
     public String createScreenshot(String storyFolder, String step, String status) {
-        if (webDriverWrapper.getDriver() == null) {
+        if (webDriverWrapper.isClosed()) {
             log.debug("No failure screenshot was taken because WebDriver is null. " +
                     "Maybe the WebDriver was closed or the current story is in ApiOnly mode");
             return null;

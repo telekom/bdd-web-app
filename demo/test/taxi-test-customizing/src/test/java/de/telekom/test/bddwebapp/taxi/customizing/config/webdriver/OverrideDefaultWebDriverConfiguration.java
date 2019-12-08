@@ -5,7 +5,6 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -24,9 +23,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfiguration {
 
-    @Autowired
-    private WebDriverWrapper webDriverWrapper;
-
     @PostConstruct
     public void overrideDefaultWebDriverConfiguration() {
         WebDriverWrapper.DEFAULT_WEB_DRIVER_CONFIGURATION = OverrideDefaultWebDriverConfiguration.class;
@@ -34,10 +30,10 @@ public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfig
 
     @Override
     public void afterLoad(WebDriver driver) {
-        webDriverWrapper.getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriverWrapper.getDriver().manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         // move browser to left
-        webDriverWrapper.getDriver().manage().window().setPosition(new Point(-1500, 0));
+        driver.manage().window().setPosition(new Point(-1500, 0));
     }
 
 }
