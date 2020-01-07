@@ -5,10 +5,7 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import org.jbehave.core.annotations.AfterScenario;
-import org.jbehave.core.annotations.AfterStories;
-import org.jbehave.core.annotations.AfterStory;
-import org.jbehave.core.annotations.BeforeStories;
+import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -35,6 +32,11 @@ public class WebDriverLifecycleSteps {
     @BeforeStories
     public void updateDriver() {
         browserDriverUpdater.updateDriver();
+    }
+
+    @BeforeStory
+    public void setAlternativeWebDriverConfiguration() {
+        currentStory.getAlternativeWebDriverConfiguration().ifPresent(webDriverWrapper::setAlternativeWebDriverConfiguration);
     }
 
     @AfterScenario

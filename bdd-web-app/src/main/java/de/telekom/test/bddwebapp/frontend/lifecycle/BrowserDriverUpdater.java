@@ -39,7 +39,8 @@ public class BrowserDriverUpdater {
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
-        String browser = webDriverWrapper.getCurrentWebDriverConfiguration().getBrowser();
+        WebDriverConfiguration currentWebDriverConfiguration = webDriverWrapper.getCurrentWebDriverConfiguration();
+        String browser = currentWebDriverConfiguration.getBrowser();
         DriverManagerType driverManagerType = mapToDriverManagerType(browser);
         if (driverManagerType == null) {
             log.info("No driver update available for " + browser);
