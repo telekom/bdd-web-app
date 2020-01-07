@@ -34,10 +34,10 @@ public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfig
 
     @Override
     public void afterLoad(WebDriver driver) {
-        webDriverWrapper.getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        webDriverWrapper.getDriver().manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         // move browser to left
-        webDriverWrapper.getDriver().manage().window().setPosition(new Point(-1500, 0));
+        driver.manage().window().setPosition(new Point(-1500, 0));
     }
 
 }

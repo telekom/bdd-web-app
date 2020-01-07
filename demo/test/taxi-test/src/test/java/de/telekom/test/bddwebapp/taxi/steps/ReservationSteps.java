@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
+import de.telekom.test.bddwebapp.cucumber.extension.BeforeFeature;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationPriceVO;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
@@ -9,7 +10,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Value;
 
-import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.BEFORE_FEATURE_ORDER;
 import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.isBeforeFeature;
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
@@ -33,15 +33,13 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
     private String testDataSimUrl;
 
-    @Before(order = BEFORE_FEATURE_ORDER)
+    @BeforeFeature
     public void theReservationIsDeletedInTheSimulator() {
-        if (isBeforeFeature()) {
-            testDataSimRequest()
-                    .when()
-                    .delete("/testdata/reservation")
-                    .then()
-                    .statusCode(200);
-        }
+        testDataSimRequest()
+                .when()
+                .delete("/testdata/reservation")
+                .then()
+                .statusCode(200);
     }
 
     @Given("example reservation between {} and {}")

@@ -24,10 +24,6 @@ public class CustomizingStories {
 
     @Getter
     @Setter
-    private boolean apiOnlyForAllStories;
-
-    @Getter
-    @Setter
     private boolean restartBrowserBeforeScenarioForAllStories;
 
     public void setStoryClass(Class clazz, String name) {

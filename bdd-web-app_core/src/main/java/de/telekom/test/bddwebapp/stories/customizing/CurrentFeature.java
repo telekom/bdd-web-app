@@ -1,16 +1,10 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
-import de.telekom.test.bddwebapp.api.ApiOnly;
-import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import de.telekom.test.bddwebapp.steps.RestartBrowserBeforeScenario;
-import de.telekom.test.bddwebapp.stories.config.AlternativeWebDriverConfiguration;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.lang.annotation.Annotation;
-import java.util.Optional;
 
 import static java.util.Arrays.stream;
 
@@ -49,21 +43,6 @@ public class CurrentFeature {
         return customizingStories.getStoryClass(storyName);
     }
 
-    public boolean isApiOnly() {
-        return isApiOnlyForAllStories() ||
-                isApiOnlyAnnotationForCurrentStory();
-    }
-
-    private boolean isApiOnlyForAllStories() {
-        return customizingStories.isApiOnlyForAllStories();
-    }
-
-    private boolean isApiOnlyAnnotationForCurrentStory() {
-        Class clazz = getStoryClass();
-        return clazz != null &&
-                stream(clazz.getAnnotations()).anyMatch(a -> a.annotationType().equals(ApiOnly.class));
-    }
-
     public boolean isRestartBrowserBeforeScenario() {
         return isRestartBrowserBeforeScenarioForAllStories() ||
                 isRestartBrowserBeforeScenarioForCurrentStory();
@@ -77,15 +56,6 @@ public class CurrentFeature {
         Class clazz = getStoryClass();
         return clazz != null && stream(clazz.getAnnotations())
                 .anyMatch(a -> a.annotationType().equals(RestartBrowserBeforeScenario.class));
-    }
-
-    public Optional<Class<? extends WebDriverConfiguration>> getAlternativeWebDriverConfiguration() {
-        Class clazz = getStoryClass();
-        Annotation alternativeWebDriverConfiguration;
-        if (clazz != null && (alternativeWebDriverConfiguration = clazz.getAnnotation(AlternativeWebDriverConfiguration.class)) != null) {
-            return Optional.of(((AlternativeWebDriverConfiguration) alternativeWebDriverConfiguration).value());
-        }
-        return Optional.empty();
     }
 
 }

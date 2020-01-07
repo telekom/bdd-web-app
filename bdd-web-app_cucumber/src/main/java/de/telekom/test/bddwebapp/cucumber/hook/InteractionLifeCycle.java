@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.cucumber.hook;
 
+import de.telekom.test.bddwebapp.cucumber.extension.BeforeFeature;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import io.cucumber.java.Before;
@@ -16,18 +17,16 @@ import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.*;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class InteractionLifeCycle  {
+public class InteractionLifeCycle {
 
     @Autowired
     protected ScenarioInteraction scenarioInteraction;
     @Autowired
     protected StoryInteraction storyInteraction;
 
-    @Before(order = BEFORE_FEATURE_ORDER)
+    @BeforeFeature
     public void startStoryInteraction() {
-        if (isBeforeFeature()) {
-            storyInteraction.startInteraction();
-        }
+        storyInteraction.startInteraction();
     }
 
     @Before

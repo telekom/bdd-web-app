@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 
@@ -41,9 +40,15 @@ public class WebDriverWrapper {
     @Setter
     private Class<? extends WebDriverConfiguration> alternativeWebDriverConfiguration;
 
-    @Getter
     @Setter
     private WebDriver driver;
+
+    public WebDriver getDriver() {
+        if (isClosed()) {
+            loadWebdriver();
+        }
+        return driver;
+    }
 
     public WebDriverConfiguration getCurrentWebDriverConfiguration() {
         return ofNullable(alternativeWebDriverConfiguration)

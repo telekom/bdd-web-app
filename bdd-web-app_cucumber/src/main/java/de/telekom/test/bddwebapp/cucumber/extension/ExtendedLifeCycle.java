@@ -1,12 +1,6 @@
 package de.telekom.test.bddwebapp.cucumber.extension;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class ExtendedLifeCycle {
-
-    public static final int BEFORE_ALL_ORDER = 0;
-    public static final int BEFORE_FEATURE_ORDER = 10;
 
     private static Integer testCaseCountBeforeAll = 0;
 

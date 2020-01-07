@@ -1,13 +1,15 @@
 package de.telekom.test.bddwebapp.cucumber.hook;
 
+import de.telekom.test.bddwebapp.cucumber.extension.BeforeFeature;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentFeature;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import io.cucumber.java.Before;
+import io.cucumber.java.After;
+import org.junit.AfterClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCycle.*;
+import javax.annotation.PostConstruct;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -29,31 +31,25 @@ public class WebDriverLifeCycle {
     @Autowired
     protected BrowserDriverUpdater browserDriverUpdater;
 
-    @Before(order = BEFORE_ALL_ORDER)
+    @PostConstruct
     public void updateDriver() {
-        if (isBeforeAll()) {
-            if (!customizingStories.isApiOnlyForAllStories()) {
-                browserDriverUpdater.updateDriver();
-            }
-        }
+        browserDriverUpdater.updateDriver();
     }
 
-    @Before(order = BEFORE_FEATURE_ORDER)
-    public void loadWebdriver() {
-        if (isBeforeFeature()) {
-            if (!currentStory.isRestartBrowserBeforeScenario() && !currentStory.isApiOnly()) {
-                webDriverWrapper.quit();
-                webDriverWrapper.loadWebdriver();
-            }
-        }
+    @BeforeFeature
+    public void quitBrowserAfterStory() {
+        webDriverWrapper.quit();
     }
 
-    @Before
-    public void beforeScenario() {
+    @AfterClass
+    public void quitBrowserAfterScenario() {
         if (currentStory.isRestartBrowserBeforeScenario()) {
             webDriverWrapper.quit();
-            webDriverWrapper.loadWebdriver();
         }
+    }
+
+    public void quitBrowserAfterStories() {
+        webDriverWrapper.quit();
     }
 
 }
