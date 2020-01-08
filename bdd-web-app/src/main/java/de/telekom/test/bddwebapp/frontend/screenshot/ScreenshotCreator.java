@@ -75,6 +75,7 @@ public class ScreenshotCreator {
     protected String screenshotName(String step, String status) {
         step = step.replaceAll("\\s", "_"); // replace space by underscore
         step = step.replaceAll("\"[.*\"]", ""); // remove params
+        step = step.replaceAll("[/:*?\\\"<>|]", ""); // remove forbidden windows characters (fits for linux file systems too)
         return step + "_" + new Date().getTime() + "_" + status;
     }
 
