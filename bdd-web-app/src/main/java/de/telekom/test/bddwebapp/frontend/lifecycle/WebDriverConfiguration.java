@@ -182,9 +182,10 @@ public interface WebDriverConfiguration {
 
     default DesiredCapabilities htmlUnitOptions(DesiredCapabilities capabilities) {
         DesiredCapabilities htmlUnitCapabilities = new DesiredCapabilities();
+        htmlUnitCapabilities.setBrowserName("htmlunit");
         htmlUnitCapabilities.setJavascriptEnabled(true);
         htmlUnitCapabilities.merge(capabilities);
-        return capabilities;
+        return htmlUnitCapabilities;
     }
 
     default WebDriver loadHtmlUnit(DesiredCapabilities capabilities) {
