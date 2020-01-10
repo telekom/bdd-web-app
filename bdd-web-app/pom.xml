@@ -31,8 +31,8 @@
         <htmlunit-driver.version>2.36.0</htmlunit-driver.version>
         <htmlunit.version>2.36.0</htmlunit.version>
         <webdrivermanager.version>3.7.1</webdrivermanager.version>
-        <jbehave.version>4.6.1</jbehave.version>
-        <jbehave.version.junit-runner>2.3.0</jbehave.version.junit-runner>
+        <jbehave.version>4.4</jbehave.version>
+        <jbehave-junit-runner>2.2.0</jbehave-junit-runner>
         <jbehave-site-resources.version>3.3.1</jbehave-site-resources.version>
 
         <!-- Unit test dependencies -->
@@ -207,7 +207,7 @@
             <dependency>
                 <groupId>com.github.valfirst</groupId>
                 <artifactId>jbehave-junit-runner</artifactId>
-                <version>${jbehave.version.junit-runner}</version>
+                <version>${jbehave-junit-runner}</version>
             </dependency>
             <dependency>
                 <groupId>org.jbehave.site</groupId>
