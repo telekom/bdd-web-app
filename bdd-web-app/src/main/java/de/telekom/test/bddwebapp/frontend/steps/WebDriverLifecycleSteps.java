@@ -9,6 +9,8 @@ import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
  *
@@ -37,8 +39,13 @@ public class WebDriverLifecycleSteps {
 
     @BeforeStory
     public void setAlternativeWebDriverConfiguration() {
-        Class<? extends WebDriverConfiguration> nullableAlternativeWebDriverConfiguration = currentStory.getAlternativeWebDriverConfiguration().orElseGet(null);
-        webDriverWrapper.setAlternativeWebDriverConfiguration(nullableAlternativeWebDriverConfiguration);
+        Optional<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = currentStory.getAlternativeWebDriverConfiguration();
+        if (alternativeWebDriverConfiguration.isPresent()) {
+            webDriverWrapper.setAlternativeWebDriverConfiguration(alternativeWebDriverConfiguration.get());
+        } else {
+            webDriverWrapper.resetAlternativeWebDriverConfiguration();
+        }
+
     }
 
     @AfterScenario
