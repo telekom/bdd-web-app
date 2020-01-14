@@ -9,8 +9,6 @@ import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Optional;
-
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
  *
