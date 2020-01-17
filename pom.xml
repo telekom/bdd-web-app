@@ -18,6 +18,7 @@
         <module>demo/test/taxi-test</module>
         <module>demo/test/taxi-test-ger</module>
         <module>demo/test/taxi-test-customizing</module>
+        <module>demo/test/taxi-test-multithreading</module>
     </modules>
 
 </project>
