@@ -1,6 +1,13 @@
 package de.telekom.test.bddwebapp.interaction;
 
 import lombok.Setter;
+import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.aop.target.ThreadLocalTargetSource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,7 +22,9 @@ import org.springframework.stereotype.Component;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Configuration
 @Component
+@Scope(scopeName = "prototype")
 public class StoryInteraction extends FlatInteraction {
 
     @Setter
@@ -34,5 +43,23 @@ public class StoryInteraction extends FlatInteraction {
     public void rememberObjectFromScenarioInteraction(String entityKey, String objectKey) {
         super.rememberObject(entityKey, objectKey, scenarioInteraction.recallObjectNotNull(entityKey, objectKey));
     }
+
+    @Bean(destroyMethod = "destroy")
+    public ThreadLocalTargetSource threadLocalStoryInteraction() {
+        ThreadLocalTargetSource result = new ThreadLocalTargetSource();
+        result.setTargetBeanName("storyInteraction");
+        return result;
+    }
+
+
+    @Primary
+    @Bean(name = "proxiedThreadLocalTargetSourceStoryInteraction")
+    public ProxyFactoryBean proxiedThreadLocalTargetSourceStoryInteraction(@Qualifier("threadLocalStoryInteraction") ThreadLocalTargetSource threadLocalStoryInteraction) {
+        ProxyFactoryBean result = new ProxyFactoryBean();
+        result.setProxyTargetClass(true);
+        result.setTargetSource(threadLocalStoryInteraction);
+        return result;
+    }
+
 
 }

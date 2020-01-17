@@ -40,9 +40,17 @@ public class WebDriverWrapper {
     @Autowired
     private CurrentStory currentStory;
 
-    @Getter
-    @Setter
-    private WebDriver driver;
+
+    public WebDriver getDriver() {
+        return threadLocal.get();
+    }
+
+    public void setDriver(WebDriver driver) {
+        threadLocal.set(driver);
+    }
+
+    private ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+
 
     public WebDriverConfiguration getCurrentWebDriverConfiguration() {
         return currentStory.getAlternativeWebDriverConfiguration()
@@ -65,40 +73,40 @@ public class WebDriverWrapper {
     public void loadWebdriver() {
         WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
         if (isBlank(webDriverConfiguration.getGridURL())) {
-            driver = webDriverConfiguration.loadLocalWebdriver();
+            setDriver( webDriverConfiguration.loadLocalWebdriver());
         } else {
-            driver = webDriverConfiguration.loadRemoteWebdriver();
+            setDriver( webDriverConfiguration.loadRemoteWebdriver());
         }
-        webDriverConfiguration.afterLoad(driver);
+        webDriverConfiguration.afterLoad(getDriver());
     }
 
     public void quit() {
-        if (driver != null) {
+        if (getDriver() != null) {
             try {
-                driver.quit();
+                getDriver() .quit();
             } catch (UnreachableBrowserException unreachableBrowserException) {
                 log.error(unreachableBrowserException.getMessage());
             }
         }
-        driver = null;
+        threadLocal.remove();
     }
 
     public boolean isClosed() {
-        return driver == null;
+        return getDriver() == null;
     }
 
     public String createScreenshot(String path) {
         try {
             log.info("Create screenshot to '{}'", path);
-            if (driver == null) {
+            if (getDriver() == null) {
                 log.error("Can not create screenshot because webdriver is null!");
                 return null;
             }
-            if (driver instanceof HtmlUnitDriver) {
+            if (getDriver() instanceof HtmlUnitDriver) {
                 log.error("Can not create screenshots for htmlunit!");
                 return null;
             }
-            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
             File destFile = new File(path);
             FileUtils.copyFile(screenshot, destFile);
             return destFile.getAbsolutePath();
