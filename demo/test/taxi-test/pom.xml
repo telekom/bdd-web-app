@@ -17,7 +17,7 @@
         <jbehave.site-resources.version>3.3.1</jbehave.site-resources.version>
         <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
 
-        <bdd-web-app.version>1.4</bdd-web-app.version>
+        <bdd-web-app.version>1.4.1-SNAPSHOT</bdd-web-app.version>
     </properties>
 
     <build>
