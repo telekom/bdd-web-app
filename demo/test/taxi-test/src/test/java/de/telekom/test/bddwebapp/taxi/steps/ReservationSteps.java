@@ -8,7 +8,6 @@ import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.springframework.beans.factory.annotation.Value;
 
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
@@ -27,15 +26,9 @@ import static org.junit.Assert.assertNotNull;
 @Steps
 public class ReservationSteps extends AbstractTaxiSteps {
 
-    @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
-    private String taxiAppUrl;
-
-    @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
-    private String testDataSimUrl;
-
     @BeforeStory
     public void theReservationIsDeletedInTheSimulator() {
-        testDataSimRequest()
+        testDataSimJsonRequest()
                 .when()
                 .delete("/testdata/reservation")
                 .then()
@@ -44,7 +37,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
 
     @Given("example reservation between $earliestStartTime and $latestStartTime")
     public void exampleReservation(String earliestStartTime, String latestStartTime) {
-        ReservationVO reservation = testDataSimRequest()
+        ReservationVO reservation = testDataSimJsonRequest()
                 .given()
                 .queryParam("earliestStartTime", earliestStartTime)
                 .queryParam("latestStartTime", latestStartTime)
@@ -64,7 +57,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         reservationPrice.setStartTime(startTime);
         reservationPrice.setEndTime(endTime);
 
-        testDataSimRequest()
+        testDataSimJsonRequest()
                 .given()
                 .body(reservationPrice)
                 .when()

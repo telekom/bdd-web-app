@@ -30,7 +30,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
 
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
-        testDataSimRequest().post("/testdata/user").then().statusCode(200);
+        testDataSimJsonRequest().post("/testdata/user").then().statusCode(200);
         storyInteraction.rememberObject(testobject, recallResponseAsMap());
     }
 

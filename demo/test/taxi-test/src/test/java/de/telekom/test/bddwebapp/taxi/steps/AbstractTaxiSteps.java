@@ -20,7 +20,12 @@ public abstract class AbstractTaxiSteps extends SeleniumSteps {
         storyInteraction.remember("RANDOM", randomNumeric(8));
     }
 
-    protected RequestSpecification testDataSimRequest() {
+    protected RequestSpecification taxiAppJsonRequest() {
+        createRequest().baseUri(taxiAppUrl);
+        return jsonConfig();
+    }
+
+    protected RequestSpecification testDataSimJsonRequest() {
         createRequest().baseUri(testDataSimUrl);
         return jsonConfig();
     }
