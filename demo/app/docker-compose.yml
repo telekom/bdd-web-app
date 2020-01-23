@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  taxi-app:
+    build: ./taxi-app
+    ports:
+      - "5000:5000"
+    links:
+      - testdata-sim
+
+  testdata-sim:
+    build: ./testdata-sim
+    ports:
+      - "6000:6000"
