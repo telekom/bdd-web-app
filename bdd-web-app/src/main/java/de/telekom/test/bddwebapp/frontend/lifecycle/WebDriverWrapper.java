@@ -56,7 +56,7 @@ public class WebDriverWrapper {
                 .orElse(getDefaultWebDriverConfiguration());
     }
 
-    public void resetAlternativeWebDriverConfiguration(){
+    public void resetAlternativeWebDriverConfiguration() {
         alternativeWebDriverConfiguration = null;
     }
 
@@ -74,37 +74,37 @@ public class WebDriverWrapper {
 
     public void loadWebdriver() {
         WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
-        driver = webDriverConfiguration.loadWebdriver();
-        webDriverConfiguration.afterLoad(driver);
+        setDriver(webDriverConfiguration.loadWebdriver());
+        webDriverConfiguration.afterLoad(getDriver());
     }
 
     public void quit() {
-        if (driver != null) {
+        if (getDriver() != null) {
             try {
-                driver.quit();
+                getDriver().quit();
             } catch (UnreachableBrowserException unreachableBrowserException) {
                 log.error(unreachableBrowserException.getMessage());
             }
         }
-        driver = null;
+        setDriver(null);
     }
 
     public boolean isClosed() {
-        return driver == null;
+        return getDriver() == null;
     }
 
     public String createScreenshot(String path) {
         try {
             log.info("Create screenshot to '{}'", path);
-            if (driver == null) {
+            if (getDriver() == null) {
                 log.error("Can not create screenshot because webdriver is null!");
                 return null;
             }
-            if (driver instanceof HtmlUnitDriver) {
+            if (getDriver() instanceof HtmlUnitDriver) {
                 log.error("Can not create screenshots for htmlunit!");
                 return null;
             }
-            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
             File destFile = new File(path);
             FileUtils.copyFile(screenshot, destFile);
             return destFile.getAbsolutePath();
