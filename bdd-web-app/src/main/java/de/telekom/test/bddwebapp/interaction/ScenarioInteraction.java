@@ -1,6 +1,11 @@
 package de.telekom.test.bddwebapp.interaction;
 
 import lombok.Setter;
+import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.aop.target.ThreadLocalTargetSource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -64,6 +69,22 @@ public class ScenarioInteraction extends FlatInteraction {
      */
     public void rememberObjectFromStoryInteraction(String entityKey, String objectKey) {
         rememberObject(entityKey, objectKey, storyInteraction.recallObjectNotNull(entityKey, objectKey));
+    }
+
+    @Bean(destroyMethod = "destroy")
+    public ThreadLocalTargetSource threadLocalScenarioInteraction() {
+        ThreadLocalTargetSource result = new ThreadLocalTargetSource();
+        result.setTargetBeanName("scenarioInteraction");
+        return result;
+    }
+
+    @Primary
+    @Bean(name = "proxiedThreadLocalTargetSourceScenarioInteraction")
+    public ProxyFactoryBean proxiedThreadLocalTargetSourceScenarioInteraction(@Qualifier("threadLocalScenarioInteraction") ThreadLocalTargetSource threadLocalScenarioInteraction) {
+        ProxyFactoryBean result = new ProxyFactoryBean();
+        result.setProxyTargetClass(true);
+        result.setTargetSource(threadLocalScenarioInteraction);
+        return result;
     }
 
 }

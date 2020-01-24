@@ -40,14 +40,14 @@ public class WebDriverWrapper {
     @Setter
     private Class<? extends WebDriverConfiguration> alternativeWebDriverConfiguration;
 
-    @Setter
-    private WebDriver driver;
+    private ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
 
     public WebDriver getDriver() {
-        if (isClosed()) {
-            loadWebdriver();
-        }
-        return driver;
+        return threadLocal.get();
+    }
+
+    public void setDriver(WebDriver driver) {
+        threadLocal.set(driver);
     }
 
     public WebDriverConfiguration getCurrentWebDriverConfiguration() {
