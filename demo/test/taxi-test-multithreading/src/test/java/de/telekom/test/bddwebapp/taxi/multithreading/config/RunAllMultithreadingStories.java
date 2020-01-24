@@ -8,8 +8,14 @@ import org.jbehave.core.failures.BatchFailures;
 import org.jbehave.core.reporters.ReportsCount;
 import org.springframework.context.ApplicationContext;
 
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import static java.nio.file.Files.copy;
+import static java.nio.file.Paths.get;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -27,26 +33,22 @@ public class RunAllMultithreadingStories extends RunAllStories {
     }
 
     @Override
-    public String storiesBasePath() {
-        return "de.telekom.test.bddwebapp.taxi.multithreading.stories";
+    public List<String> storyPaths() {
+        String storyBasePath = "de/telekom/test/bddwebapp/taxi/multithreading/stories/login";
+        List<String> storyPaths = new ArrayList<>();
+        storyPaths.add(storyBasePath + "/login.story");
+        for (int i = 2; i <= 100; i++) {
+            storyPaths.add(storyBasePath + "/login" + i + ".story");
+        }
+        return storyPaths;
     }
 
     @Override
     public Embedder configuredEmbedder() {
         Embedder embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
-        embedder.embedderControls().useThreads(2);
+        embedder.embedderControls().useThreads(4).ignoreFailureInStories();
         return embedder;
     }
 
-    @Override
-    public List<String> storyPaths() {
-        String story = super.storyPaths().get(0);
-        // run story 10 times to test multithreading behaviour
-        List<String> storyPathsMultiple = new LinkedList<>();
-        for (int i = 0; i < 10; i++) {
-            storyPathsMultiple.add(story);
-        }
-        return storyPathsMultiple;
-    }
 }
