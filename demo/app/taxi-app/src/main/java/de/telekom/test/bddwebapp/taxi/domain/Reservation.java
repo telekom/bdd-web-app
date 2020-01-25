@@ -17,7 +17,7 @@ import java.util.Date;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESERVATION_ID_SEQ")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "RESERVATION_ID_SEQ")
     @SequenceGenerator(name = "RESERVATION_ID_SEQ", sequenceName = "RESERVATION_ID_SEQ", allocationSize = 100)
     private Integer reservationId;
 

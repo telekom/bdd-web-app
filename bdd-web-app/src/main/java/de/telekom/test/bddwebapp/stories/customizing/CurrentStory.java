@@ -3,8 +3,6 @@ package de.telekom.test.bddwebapp.stories.customizing;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import de.telekom.test.bddwebapp.steps.RestartBrowserBeforeScenario;
 import de.telekom.test.bddwebapp.stories.config.AlternativeWebDriverConfiguration;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,11 +27,18 @@ public class CurrentStory {
     @Autowired
     private CustomizingStories customizingStories;
 
-    @Getter
-    @Setter
-    private String storyPath;
+    private final ThreadLocal<String> storyPath = new ThreadLocal<>();
+
+    public String getStoryPath() {
+        return storyPath.get();
+    }
+
+    public void setStoryPath(String storyPath) {
+        this.storyPath.set(storyPath);
+    }
 
     public String getStoryName() {
+        String storyPath = getStoryPath();
         if (storyPath == null) {
             return null;
         }

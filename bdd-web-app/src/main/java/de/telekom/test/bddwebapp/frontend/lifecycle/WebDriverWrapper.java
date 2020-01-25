@@ -1,7 +1,5 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -36,28 +34,34 @@ public class WebDriverWrapper {
     @Autowired
     private List<WebDriverConfiguration> webDriverConfigurations;
 
-    @Getter
-    @Setter
-    private Class<? extends WebDriverConfiguration> alternativeWebDriverConfiguration;
+    private final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
 
-    private ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+    private final ThreadLocal<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = new ThreadLocal<>();
 
     public WebDriver getDriver() {
-        return threadLocal.get();
+        return this.webDriver.get();
     }
 
-    public void setDriver(WebDriver driver) {
-        threadLocal.set(driver);
+    public void setDriver(WebDriver webDriver) {
+        this.webDriver.set(webDriver);
     }
 
-    public WebDriverConfiguration getCurrentWebDriverConfiguration() {
-        return ofNullable(alternativeWebDriverConfiguration)
-                .map(this::getAlternativeWebDriverConfiguration)
-                .orElse(getDefaultWebDriverConfiguration());
+    public Class<? extends WebDriverConfiguration> getAlternativeWebDriverConfiguration() {
+        return this.alternativeWebDriverConfiguration.get();
+    }
+
+    public void setAlternativeWebDriverConfiguration(Class<? extends WebDriverConfiguration> alternativeWebDriverConfiguration) {
+        this.alternativeWebDriverConfiguration.set(alternativeWebDriverConfiguration);
     }
 
     public void resetAlternativeWebDriverConfiguration() {
-        alternativeWebDriverConfiguration = null;
+        this.alternativeWebDriverConfiguration.set(null);
+    }
+
+    public WebDriverConfiguration getCurrentWebDriverConfiguration() {
+        return ofNullable(alternativeWebDriverConfiguration.get())
+                .map(this::getAlternativeWebDriverConfiguration)
+                .orElse(getDefaultWebDriverConfiguration());
     }
 
     public WebDriverConfiguration getAlternativeWebDriverConfiguration(Class<? extends WebDriverConfiguration> alternativeWebDriverConfigurationClass) {

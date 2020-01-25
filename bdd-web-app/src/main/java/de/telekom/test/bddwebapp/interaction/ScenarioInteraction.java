@@ -6,6 +6,7 @@ import org.springframework.aop.target.ThreadLocalTargetSource;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.Map;
  * For details see the file license on the toplevel.
  */
 @Component
+@Scope(scopeName = "prototype")
 public class ScenarioInteraction extends FlatInteraction {
 
     public static final String BODY = "BODY";
