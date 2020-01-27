@@ -39,6 +39,10 @@ public class WebDriverWrapper {
     private final ThreadLocal<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = new ThreadLocal<>();
 
     public WebDriver getDriver() {
+        WebDriver webDriver = this.webDriver.get();
+        if(webDriver == null){
+            loadWebdriver();
+        }
         return this.webDriver.get();
     }
 
