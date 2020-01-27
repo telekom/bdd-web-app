@@ -17,7 +17,7 @@ maven-build:
   stage: build
   image: maven:3-jdk-8
   tags:
-    - run03_docker
+    - run_docker
   script:
     - mvn install -f demo/app/pom.xml
   artifacts:
@@ -29,6 +29,8 @@ maven-build:
 docker-build-taxi-app:
   stage: package
   image: docker:stable
+  tags:
+    - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
     - docker build --pull --tag ${CI_REGISTRY_IMAGE}/telekom:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file taxi-app/Dockerfile
@@ -37,6 +39,8 @@ docker-build-taxi-app:
 docker-build-testdata-sim:
   stage: package
   image: docker:stable
+  tags:
+    - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
     - docker build --pull --tag ${CI_REGISTRY_IMAGE}/telekom:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file testdata-sim/Dockerfile
@@ -45,6 +49,8 @@ docker-build-testdata-sim:
 version:
   stage: version
   image: alpine
+  tags:
+    - run_docker
   script:
     - echo $IMAGE_TAG
     - echo $IMAGE_TAG > version
