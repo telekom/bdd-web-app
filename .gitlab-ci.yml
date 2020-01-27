@@ -20,8 +20,8 @@ maven-build:
     - mvn install -f pom.xml
   artifacts:
     paths:
-      - taxi-app/target/taxi-app.jar
-      - testdata-sim/target/testdata-sim.jar
+      - demo/app/taxi-app/target/taxi-app.jar
+      - demo/app/testdata-sim/target/testdata-sim.jar
     expire_in: 1 week
 
 docker-build-taxi-app:
