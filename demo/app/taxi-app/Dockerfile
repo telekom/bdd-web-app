@@ -2,8 +2,7 @@ FROM openjdk:8-jdk-alpine
 
 ENV reservation-service.url="http://testdata-sim:6000/testdata-sim/api"
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} taxi-app.jar
+COPY target/taxi-app.jar taxi-app.jar
 ENTRYPOINT ["java","-jar","/taxi-app.jar"]
 
 USER 1000
