@@ -19,7 +19,7 @@ maven-build:
   tags:
     - run03_docker
   script:
-    - mvn install -f pom.xml
+    - mvn install -f demo/app/pom.xml
   artifacts:
     paths:
       - demo/app/taxi-app/target/taxi-app.jar
