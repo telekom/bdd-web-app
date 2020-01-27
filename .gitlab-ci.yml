@@ -16,6 +16,8 @@ variables:
 maven-build:
   stage: build
   image: maven:3-jdk-8
+  tags:
+    - run03_docker
   script:
     - mvn install -f pom.xml
   artifacts:
