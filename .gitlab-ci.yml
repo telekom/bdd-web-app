@@ -34,8 +34,8 @@ docker-build-taxi-app:
     - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/telekom:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file taxi-app/Dockerfile
-    - docker push ${CI_REGISTRY_IMAGE}/telekom:${IMAGE_TAG}
+    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/app:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file taxi-app/Dockerfile
+    - docker push ${CI_REGISTRY_IMAGE}/app:${IMAGE_TAG}
 
 docker-build-testdata-sim:
   stage: package
@@ -44,8 +44,8 @@ docker-build-testdata-sim:
     - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/telekom:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file testdata-sim/Dockerfile
-    - docker push ${CI_REGISTRY_IMAGE}/telekom:${IMAGE_TAG}
+    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/sim:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file testdata-sim/Dockerfile
+    - docker push ${CI_REGISTRY_IMAGE}/sim:${IMAGE_TAG}
 
 version:
   stage: version
