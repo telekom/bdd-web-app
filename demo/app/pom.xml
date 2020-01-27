@@ -5,20 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.test</groupId>
-    <artifactId>bdd-web-app-reactor</artifactId>
+    <artifactId>bdd-web-app-demo</artifactId>
     <version>1.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>bdd web-app reactor</name>
+    <name>BDD-Web-App Demo Apps</name>
 
     <modules>
-        <module>bdd-web-app</module>
-        <module>demo/app</module>
-        <module>demo/test/taxi-test</module>
-        <module>demo/test/taxi-test-ger</module>
-        <module>demo/test/taxi-test-testlevel</module>
-        <module>demo/test/taxi-test-customizing</module>
-        <module>demo/test/taxi-test-multithreading</module>
+        <module>taxi-app</module>
+        <module>testdata-sim</module>
     </modules>
 
 </project>

@@ -3,11 +3,22 @@ FROM openjdk:8-jdk-alpine
 ENV taxi-app.url="http://taxi-app:5000/taxi-app"
 
 ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} bdd-web-app-demo-testdata-sim-1.6-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/bdd-web-app-demo-testdata-sim-1.6-SNAPSHOT.jar"]
+COPY ${JAR_FILE} testdata-sim.jar
+ENTRYPOINT ["java","-jar","/testdata-sim.jar"]
 
 USER 1000
 
 # labels ##################################################################
-ARG GIT_URL=https://github.com/telekom/bdd-web-app.git
-LABEL de.telekom.test.bddwebapp.git.url=${GIT_URL}
+ARG CONTAINER_REGISTRY
+ARG IMAGE_TAG
+ARG GIT_URL
+ARG GIT_BRANCH
+ARG GIT_HASH
+ARG BUILD_NO
+
+LABEL de.telekom.test.bddwebapp.registry=${CONTAINER_REGISTRY} \
+      de.telekom.test.bddwebapp.tag=${IMAGE_TAG} \
+      de.telekom.test.bddwebapp.git.url=${GIT_URL} \
+      de.telekom.test.bddwebapp.git.branch=${GIT_BRANCH} \
+      de.telekom.test.bddwebapp.git.hash=${GIT_HASH} \
+      de.telekom.test.bddwebapp.build.no=${BUILD_NO}
