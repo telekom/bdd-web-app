@@ -50,6 +50,8 @@ docker-build-testdata-sim:
 docker-build-smoketests:
   stage: package
   image: docker:stable
+  tags:
+    - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
     - docker build --pull --tag ${CI_REGISTRY_IMAGE}/smoketests:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file demo/test/taxi-test-docker/Dockerfile  ./demo/test/taxi-test-docker/
