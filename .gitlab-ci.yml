@@ -21,10 +21,12 @@ maven-build:
     - run_docker
   script:
     - mvn install -f demo/app/pom.xml
+    - mvn install -f demo/test/taxi-test-docker/pom.xml -DskipTests
   artifacts:
     paths:
       - demo/app/taxi-app/target/taxi-app.jar
       - demo/app/testdata-sim/target/testdata-sim.jar
+      - demo/test/taxi-test-docker/target/smoke-tests.jar
     expire_in: 1 week
 
 docker-build-taxi-app:
