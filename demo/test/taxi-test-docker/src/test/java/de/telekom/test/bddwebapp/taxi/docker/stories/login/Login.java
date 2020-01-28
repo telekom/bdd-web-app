@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.taxi.stories.actuator;
+package de.telekom.test.bddwebapp.taxi.docker.stories.login;
 
-import de.telekom.test.bddwebapp.taxi.config.AbstractTaxiStory;
+import de.telekom.test.bddwebapp.taxi.docker.config.AbstractTaxiStory;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -9,5 +9,5 @@ import de.telekom.test.bddwebapp.taxi.config.AbstractTaxiStory;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class Actuator extends AbstractTaxiStory {
+public class Login extends AbstractTaxiStory {
 }

@@ -1,12 +1,10 @@
-package de.telekom.test.bddwebapp.taxi.steps;
+package de.telekom.test.bddwebapp.taxi.docker.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
-import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
+import de.telekom.test.bddwebapp.taxi.steps.AbstractTaxiSteps;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.hamcrest.Matchers.is;
 
 /**

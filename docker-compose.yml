@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  taxi-app:
+    build: demo/app/taxi-app
+    ports:
+      - "5000:5000"
+    links:
+      - testdata-sim
+
+  testdata-sim:
+    build: demo/app/testdata-sim
+    ports:
+      - "6000:6000"
+
+  smoketest:
+    build: demo/test/taxi-test-docker
+    depends_on:
+      - taxi-app
+      - testdata-sim
+    links:
+      - taxi-app
+      - testdata-sim
