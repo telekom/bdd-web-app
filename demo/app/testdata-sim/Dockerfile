@@ -5,8 +5,6 @@ ENV taxi-app.url="http://taxi-app:5000/taxi-app"
 COPY target/testdata-sim.jar testdata-sim.jar
 ENTRYPOINT ["java","-jar","/testdata-sim.jar"]
 
-USER 1000
-
 # labels ##################################################################
 ARG CONTAINER_REGISTRY
 ARG IMAGE_TAG

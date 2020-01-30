@@ -5,8 +5,6 @@ ENV reservation-service.url="http://testdata-sim:6000/testdata-sim/api"
 COPY target/taxi-app.jar taxi-app.jar
 ENTRYPOINT ["java","-jar","/taxi-app.jar"]
 
-USER 1000
-
 # labels ##################################################################
 ARG CONTAINER_REGISTRY
 ARG IMAGE_TAG
