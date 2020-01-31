@@ -18,7 +18,7 @@ import static java.util.Collections.shuffle;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class RunAllMultithreadingStories extends RunAllStories {
+public class RunAllMultithreadingLoginStories extends RunAllStories {
 
     @Override
     public ApplicationContext getApplicationContext() {
@@ -30,9 +30,6 @@ public class RunAllMultithreadingStories extends RunAllStories {
     public List<String> storyPaths() {
         List<String> storyPaths = new ArrayList<>();
         storyPaths.addAll(multiplyStories("login"));
-        storyPaths.addAll(multiplyStories("registration"));
-        storyPaths.addAll(multiplyStories("reservation"));
-        shuffle(storyPaths);
         return storyPaths;
     }
 
