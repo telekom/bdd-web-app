@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.test</groupId>
-    <artifactId>bdd-web-app-demo-taxi-test-docker</artifactId>
+    <artifactId>bdd-web-app-demo-taxi-test-docker-smoketest</artifactId>
     <version>1.6-SNAPSHOT</version>
 
     <properties>

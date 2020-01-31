@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
+import static java.lang.System.nanoTime;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 /**
@@ -30,7 +32,6 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @Transactional
     public void saveReservation(String username, ReservationVO reservationVO) {
         User user = getUser(username);
 

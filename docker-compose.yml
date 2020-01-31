@@ -7,6 +7,13 @@ services:
       - "5000:5000"
     links:
       - testdata-sim
+    depends_on:
+      - testdata-sim
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/actuator/readiness"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   testdata-sim:
     build: demo/app/testdata-sim
@@ -14,7 +21,7 @@ services:
       - "6000:6000"
 
   smoketest:
-    build: demo/test/taxi-test-docker
+    build: demo/test/taxi-test-docker-smoketest
     depends_on:
       - taxi-app
       - testdata-sim

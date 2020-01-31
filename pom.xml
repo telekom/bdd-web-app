@@ -19,7 +19,7 @@
         <module>demo/test/taxi-test-testlevel</module>
         <module>demo/test/taxi-test-customizing</module>
         <module>demo/test/taxi-test-multithreading</module>
-        <module>demo/test/taxi-test-docker</module>
+        <module>demo/test/taxi-test-docker-smoketest</module>
     </modules>
 
 </project>

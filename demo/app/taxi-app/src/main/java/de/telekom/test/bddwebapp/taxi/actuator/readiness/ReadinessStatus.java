@@ -1,21 +1,22 @@
 package de.telekom.test.bddwebapp.taxi.actuator.readiness;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Data
 @Slf4j
 @Component
 public class ReadinessStatus {
 
+    @Getter
     private final Map<String, SystemReadinessStatus> systemStatusMap = new HashMap<>();
 
     public ReadinessStatus() {
-
+        systemStatusMap.put("DB", new SystemReadinessStatus(true));
+        systemStatusMap.put("TESTDATA-SIM", new SystemReadinessStatus(true));
     }
 
     public SystemReadinessStatus getStatus(String systemName) {
