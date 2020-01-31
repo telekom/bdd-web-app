@@ -25,7 +25,7 @@ maven-build:
     paths:
       - demo/app/taxi-app/target/taxi-app.jar
       - demo/app/testdata-sim/target/testdata-sim.jar
-      - demo/test/taxi-test-docker/target/smoke-tests.jar
+      - demo/test/taxi-test-docker-smoketest/target/smoke-tests.jar
     expire_in: 1 week
 
 docker-build-taxi-app:
