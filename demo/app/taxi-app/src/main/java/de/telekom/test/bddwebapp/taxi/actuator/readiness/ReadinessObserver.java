@@ -33,7 +33,7 @@ public class ReadinessObserver {
     public void observe() {
         log.info("[READINESS] Observer is checking if external services are ready");
         checkDbReadiness();
-        checkTestdataSimReadiness();
+//        checkTestdataSimReadiness();
         log.info("[READINESS] Observer finished checking external services");
     }
 
