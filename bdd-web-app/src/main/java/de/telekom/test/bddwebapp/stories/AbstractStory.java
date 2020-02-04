@@ -30,7 +30,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * @author Nils Villwock - Idea to disable report generation after story execution to prevent false positive
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2020 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
