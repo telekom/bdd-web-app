@@ -18,12 +18,10 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.SystemUtils.isJavaAwtHeadless;
 
 /**
  * The configuration for all supported and tested browsers.
@@ -202,12 +200,29 @@ public interface WebDriverConfiguration {
         if (isNotBlank(browser)) {
             return browser;
         }
-        if (GraphicsEnvironment.isHeadless()) {
+        if (isHeadless()) {
             return "htmlunit";
         } else {
             return "chrome";
         }
     }
+
+    default boolean isHeadless() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.contains("os x") && "sun.awt.HToolkit".equals(System.getProperty("awt.toolkit"))) {
+            return true;
+        } else {
+            String display = System.getenv("DISPLAY");
+            return ("linux".equals(osName) ||
+                    "sunos".equals(osName) ||
+                    "freebsd".equals(osName) ||
+                    "netbsd".equals(osName) ||
+                    "openbsd".equals(osName) ||
+                    "aix".equals(osName)) &&
+                    (display == null || display.trim().isEmpty());
+        }
+    }
+
 
     /**
      * Path for portable browser
