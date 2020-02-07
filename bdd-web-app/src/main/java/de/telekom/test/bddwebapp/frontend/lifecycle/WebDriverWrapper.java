@@ -40,7 +40,7 @@ public class WebDriverWrapper {
 
     public WebDriver getDriver() {
         WebDriver webDriver = this.webDriver.get();
-        if(webDriver == null){
+        if (webDriver == null) {
             loadWebdriver();
         }
         return this.webDriver.get();

@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -19,6 +18,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -38,7 +38,7 @@ public interface WebDriverConfiguration {
 
     default WebDriver loadWebdriver() {
         String browser = getBrowser();
-        LoggerFactory.getLogger(WebDriverConfiguration.class).info("Browser is set to: " + browser);
+        LoggerFactory.getLogger(WebDriverConfiguration.class).info("WebDriver is set to " + browser);
         DesiredCapabilities extraCapabilities = extraCapabilities(browser);
         if (isRemoteWebdriver()) {
             return loadRemoteWebdriver(extraCapabilities);
@@ -202,9 +202,9 @@ public interface WebDriverConfiguration {
         if (isNotBlank(browser)) {
             return browser;
         }
-        if(isJavaAwtHeadless()){
+        if (GraphicsEnvironment.isHeadless()) {
             return "htmlunit";
-        }else{
+        } else {
             return "chrome";
         }
     }

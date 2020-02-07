@@ -16,8 +16,6 @@ import org.springframework.context.ApplicationContext;
 public class RunAllTaxiDockerStories extends RunAllStories {
 
     public static void main(String[] args) {
-        System.setProperty("browser", "htmlunit");
-
         JUnitCore junit = new JUnitCore();
         junit.addListener(new TextListener(System.out));
         Result result = junit.run(RunAllTaxiDockerStories.class);
