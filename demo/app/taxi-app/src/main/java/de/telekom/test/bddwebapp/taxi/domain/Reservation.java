@@ -17,7 +17,8 @@ import java.util.Date;
 public class Reservation {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "RESERVATION_ID_SEQ")
+    @SequenceGenerator(name = "RESERVATION_ID_SEQ", sequenceName = "RESERVATION_ID_SEQ", allocationSize = 100)
     private Long reservationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
