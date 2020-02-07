@@ -32,6 +32,7 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Transactional
     public void saveReservation(String username, ReservationVO reservationVO) {
         User user = getUser(username);
 
