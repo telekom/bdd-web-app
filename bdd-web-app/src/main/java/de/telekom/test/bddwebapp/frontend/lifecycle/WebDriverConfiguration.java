@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.SystemUtils.isJavaAwtHeadless;
 
 /**
  * The configuration for all supported and tested browsers.
@@ -200,7 +202,11 @@ public interface WebDriverConfiguration {
         if (isNotBlank(browser)) {
             return browser;
         }
-        return "chrome";
+        if(isJavaAwtHeadless()){
+            return "htmlunit";
+        }else{
+            return "chrome";
+        }
     }
 
     /**
