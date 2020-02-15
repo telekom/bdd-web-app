@@ -2,7 +2,10 @@ package de.telekom.test.bddwebapp.taxi.domain;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
@@ -17,8 +20,7 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_ID_SEQ")
-    @SequenceGenerator(name = "USER_ID_SEQ", sequenceName = "USER_ID_SEQ", allocationSize = 100)
+    @GeneratedValue
     private Long userId;
 
     @Column(unique = true)

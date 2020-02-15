@@ -17,12 +17,11 @@ import java.util.Date;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "RESERVATION_ID_SEQ")
-    @SequenceGenerator(name = "RESERVATION_ID_SEQ", sequenceName = "RESERVATION_ID_SEQ", allocationSize = 100)
+    @GeneratedValue
     private Long reservationId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @ManyToOne
+    @JoinColumn
     private User user;
 
     private String date;

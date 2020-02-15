@@ -9,17 +9,17 @@
     <version>1.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>bdd web-app reactor</name>
+    <name>bdd web-app demo</name>
 
     <modules>
-        <module>bdd-web-app</module>
-        <module>demo/app</module>
-        <module>demo/test/taxi-test</module>
-        <module>demo/test/taxi-test-ger</module>
-        <module>demo/test/taxi-test-testlevel</module>
-        <module>demo/test/taxi-test-customizing</module>
-        <module>demo/test/taxi-test-multithreading</module>
-        <module>demo/test/taxi-test-docker-smoketest</module>
+        <module>app/taxi-app</module>
+        <module>app/testdata-sim</module>
+        <module>test/taxi-test</module>
+        <module>test/taxi-test-ger</module>
+        <module>test/taxi-test-testlevel</module>
+        <module>test/taxi-test-customizing</module>
+        <module>test/taxi-test-multithreading</module>
+        <module>test/taxi-test-docker-smoketest</module>
     </modules>
 
 </project>
