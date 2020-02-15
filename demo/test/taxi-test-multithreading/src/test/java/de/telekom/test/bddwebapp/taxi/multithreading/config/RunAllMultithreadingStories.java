@@ -31,7 +31,6 @@ public class RunAllMultithreadingStories extends RunAllStories {
         List<String> storyPaths = new ArrayList<>();
         storyPaths.addAll(multiplyStories("login"));
         storyPaths.addAll(multiplyStories("registration"));
-        storyPaths.addAll(multiplyStories("reservation"));
         shuffle(storyPaths);
         return storyPaths;
     }
@@ -40,7 +39,7 @@ public class RunAllMultithreadingStories extends RunAllStories {
         String storyBasePath = "de/telekom/test/bddwebapp/taxi/multithreading/stories/";
         List<String> storyPaths = new ArrayList<>();
         storyPaths.add(storyBasePath + story + ".story");
-        for (int i = 2; i <= 100; i++) {
+        for (int i = 2; i <= 49; i++) {
             storyPaths.add(storyBasePath + story + i + ".story");
         }
         return storyPaths;
