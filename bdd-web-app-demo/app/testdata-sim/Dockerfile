@@ -1,7 +1,5 @@
 FROM openjdk:8-jdk-alpine
 
-ENV taxi-app.url="http://taxi-app:5000/taxi-app"
-
 COPY target/testdata-sim.jar testdata-sim.jar
 ENTRYPOINT ["java","-jar","/testdata-sim.jar"]
 

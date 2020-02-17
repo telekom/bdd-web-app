@@ -2,7 +2,9 @@ version: "3"
 
 services:
   taxi-app:
-    build: demo/app/taxi-app
+    build: bdd-web-app-demo/app/taxi-app
+    environment:
+      reservation-service.url: "http://testdata-sim:6000/testdata-sim/api"
     ports:
       - "5000:5000"
     links:
@@ -16,12 +18,17 @@ services:
       retries: 5
 
   testdata-sim:
-    build: demo/app/testdata-sim
+    build: bdd-web-app-demo/app/testdata-sim
+    environment:
+      taxi-app.url: "http://taxi-app:5000/taxi-app"
     ports:
       - "6000:6000"
 
   smoketest:
-    build: demo/test/taxi-test-docker-smoketest
+    build: bdd-web-app-demo/test/taxi-test-docker-smoketest
+    environment:
+      taxi-app.url: "http://taxi-app:5000/taxi-app"
+      testdata-sim.url: "http://testdata-sim:6000/testdata-sim"
     depends_on:
       - taxi-app
       - testdata-sim
