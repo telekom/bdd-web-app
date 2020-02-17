@@ -1,8 +1,9 @@
 FROM openjdk:8-jdk-alpine
 
 COPY target/taxi-app.jar taxi-app.jar
-ENTRYPOINT ["java","-jar","/taxi-app.jar"]
+ENTRYPOINT java $JAVA_OPTS -jar /taxi-app.jar $MAIN_OPTS
 
+RUN addgroup -S bdd-web-app && adduser -u 1000 -S app -G bdd-web-app
 USER 1000
 
 # labels ##################################################################

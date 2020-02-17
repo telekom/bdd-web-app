@@ -1,8 +1,9 @@
 FROM openjdk:8-jdk-alpine
 
 COPY target/testdata-sim.jar testdata-sim.jar
-ENTRYPOINT ["java","-jar","/testdata-sim.jar"]
+ENTRYPOINT java $JAVA_OPTS -jar /testdata-sim.jar $MAIN_OPTS
 
+RUN addgroup -S bdd-web-app && adduser -u 1000 -S app -G bdd-web-app
 USER 1000
 
 # labels ##################################################################
