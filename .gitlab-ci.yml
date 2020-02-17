@@ -38,7 +38,7 @@ docker-build-taxi-app:
     - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/app:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file demo/app/taxi-app/Dockerfile ./demo/app/taxi-app/
+    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/app:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file bdd-web-app-demo/app/taxi-app/Dockerfile ./bdd-web-app-demo/app/taxi-app/
     - docker push ${CI_REGISTRY_IMAGE}/app:${IMAGE_TAG}
 
 docker-build-testdata-sim:
@@ -48,7 +48,7 @@ docker-build-testdata-sim:
     - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/sim:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file demo/app/testdata-sim/Dockerfile  ./demo/app/testdata-sim/
+    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/sim:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file bdd-web-app-demo/app/testdata-sim/Dockerfile  ./bdd-web-app-demo/app/testdata-sim/
     - docker push ${CI_REGISTRY_IMAGE}/sim:${IMAGE_TAG}
 
 docker-build-smoketests:
@@ -58,7 +58,7 @@ docker-build-smoketests:
     - run_docker
   script:
     - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/smoketests:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file demo/test/taxi-test-docker-smoketest/Dockerfile  ./demo/test/taxi-test-docker-smoketest/
+    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/smoketests:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file bdd-web-app-demo/test/taxi-test-docker-smoketest/Dockerfile  ./bdd-web-app-demo/test/taxi-test-docker-smoketest/
     - docker push ${CI_REGISTRY_IMAGE}/smoketests:${IMAGE_TAG}
 
 version:
