@@ -22,6 +22,7 @@ maven-build:
   script:
     - mvn install -f demo/app/taxi-app/pom.xml
     - mvn install -f demo/app/testdata-sim/pom.xml
+    - mvn install -f demo/test/taxi-test/pom.xml -DskipTests
     - mvn install -f demo/test/taxi-test-docker-smoketest/pom.xml -DskipTests
   artifacts:
     paths:
