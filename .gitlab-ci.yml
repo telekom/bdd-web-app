@@ -20,10 +20,10 @@ maven-build:
   tags:
     - run_docker
   script:
-    - mvn install -f demo/app/taxi-app/pom.xml
-    - mvn install -f demo/app/testdata-sim/pom.xml
-    - mvn install -f demo/test/taxi-test/pom.xml -DskipTests
-    - mvn install -f demo/test/taxi-test-docker-smoketest/pom.xml -DskipTests
+    - mvn install -f bdd-web-app-demo/app/taxi-app/pom.xml
+    - mvn install -f bdd-web-app-demo/app/testdata-sim/pom.xml
+    - mvn install -f bdd-web-app-demo/test/taxi-test/pom.xml -DskipTests
+    - mvn install -f bdd-web-app-demo/test/taxi-test-docker-smoketest/pom.xml -DskipTests
   artifacts:
     paths:
       - demo/app/taxi-app/target/taxi-app.jar
