@@ -20,7 +20,9 @@ maven-build:
   tags:
     - run_docker
   script:
-    - mvn install -f pom.xml -DskipTests
+    - mvn install -f demo/app/taxi-app/pom.xml
+    - mvn install -f demo/app/testdata-sim/pom.xml
+    - mvn install -f demo/test/pom.xml -DskipTests
   artifacts:
     paths:
       - demo/app/taxi-app/target/taxi-app.jar
