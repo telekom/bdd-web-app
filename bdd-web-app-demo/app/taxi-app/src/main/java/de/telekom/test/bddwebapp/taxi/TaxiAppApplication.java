@@ -6,6 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
  * For details see the file license on the toplevel.
  */
 @SpringBootApplication
+@EnableScheduling
 public class TaxiAppApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

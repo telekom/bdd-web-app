@@ -29,11 +29,11 @@ public class ReadinessObserver {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Scheduled(fixedRate = 120 * 1000, initialDelay = 60 * 1000)
+    @Scheduled(fixedRate = 60 * 1000, initialDelay = 30 * 1000)
     public void observe() {
         log.info("[READINESS] Observer is checking if external services are ready");
         checkDbReadiness();
-//        checkTestdataSimReadiness();
+        checkTestdataSimReadiness();
         log.info("[READINESS] Observer finished checking external services");
     }
 
