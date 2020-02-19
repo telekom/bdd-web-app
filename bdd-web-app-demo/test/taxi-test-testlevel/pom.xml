@@ -30,7 +30,6 @@
                         <include>**/RunAllTestlevel0TaxiStories.java</include>
                         <include>**/RunAllTestlevel1TaxiStories.java</include>
                         <include>**/RunAllTestlevel2TaxiStories.java</include>
-                        <include>**/RunAllTestlevel2ApiOnlyTaxiStories.java</include>
                     </includes>
                 </configuration>
             </plugin>
