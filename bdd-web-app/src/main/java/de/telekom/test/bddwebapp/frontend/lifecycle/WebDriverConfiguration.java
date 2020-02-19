@@ -16,14 +16,15 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static java.lang.System.getProperty;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.SystemUtils.isJavaAwtHeadless;
 
 /**
  * The configuration for all supported and tested browsers.
@@ -38,7 +39,7 @@ public interface WebDriverConfiguration {
 
     default WebDriver loadWebdriver() {
         String browser = getBrowser();
-        LoggerFactory.getLogger(WebDriverConfiguration.class).info("WebDriver is set to " + browser);
+        getLogger().info("WebDriver is set to " + browser);
         DesiredCapabilities extraCapabilities = extraCapabilities(browser);
         if (isRemoteWebdriver()) {
             return loadRemoteWebdriver(extraCapabilities);
@@ -81,7 +82,7 @@ public interface WebDriverConfiguration {
 
     default WebDriver loadRemoteWebdriver(DesiredCapabilities capabilities) {
         String gridURL = getGridURL();
-        LoggerFactory.getLogger(WebDriverConfiguration.class).info("Running on: " + gridURL);
+        getLogger().info("Running on: " + gridURL);
         try {
             return new RemoteWebDriver(new URL(gridURL), remoteWebDriverOptions(capabilities));
         } catch (MalformedURLException e) {
@@ -91,6 +92,10 @@ public interface WebDriverConfiguration {
 
     default FirefoxOptions firefoxOptions(DesiredCapabilities capabilities) {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
+        if (isHeadless()) {
+            getLogger().info("Firefox is set to headless mode");
+            firefoxOptions.setHeadless(true);
+        }
         firefoxOptions.merge(capabilities);
         return firefoxOptions;
     }
@@ -99,7 +104,7 @@ public interface WebDriverConfiguration {
         FirefoxOptions firefoxOptions = firefoxOptions(capabilities);
         String browserPath = getBrowserPath();
         if (isNotBlank(browserPath)) {
-            LoggerFactory.getLogger(WebDriverConfiguration.class).info("Load portable firefox instance from '{}'", browserPath);
+            getLogger().info("Load portable firefox instance from '{}'", browserPath);
             firefoxOptions.setBinary(browserPath);
         }
         return new FirefoxDriver(firefoxOptions);
@@ -107,6 +112,10 @@ public interface WebDriverConfiguration {
 
     default ChromeOptions chromeOptions(DesiredCapabilities capabilities) {
         ChromeOptions chromeOptions = new ChromeOptions();
+        if (isHeadless()) {
+            getLogger().info("Chrome is set to headless mode");
+            chromeOptions.setHeadless(true);
+        }
         chromeOptions.merge(capabilities);
         return chromeOptions;
     }
@@ -115,7 +124,7 @@ public interface WebDriverConfiguration {
         ChromeOptions chromeOptions = chromeOptions(capabilities);
         String browserPath = getBrowserPath();
         if (isNotBlank(browserPath)) {
-            LoggerFactory.getLogger(WebDriverConfiguration.class).info("Load portable chrome instance from '{}'", browserPath);
+            getLogger().info("Load portable chrome instance from '{}'", browserPath);
             chromeOptions.setBinary(browserPath);
         }
         return new ChromeDriver(chromeOptions);
@@ -123,6 +132,9 @@ public interface WebDriverConfiguration {
 
     default EdgeOptions edgeOptions(DesiredCapabilities capabilities) {
         EdgeOptions edgeOptions = new EdgeOptions();
+        if (isHeadless()) {
+            getLogger().warn("No headless mode for edge available!");
+        }
         edgeOptions.merge(capabilities);
         return edgeOptions;
     }
@@ -138,6 +150,9 @@ public interface WebDriverConfiguration {
 
     default InternetExplorerOptions internetExplorerOptions(DesiredCapabilities capabilities) {
         InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+        if (isHeadless()) {
+            getLogger().warn("No headless mode for internet explorer available!");
+        }
         internetExplorerOptions.merge(capabilities);
         return internetExplorerOptions;
     }
@@ -153,6 +168,9 @@ public interface WebDriverConfiguration {
 
     default OperaOptions operaOptions(DesiredCapabilities capabilities) {
         OperaOptions operaOptions = new OperaOptions();
+        if (isHeadless()) {
+            getLogger().warn("No headless mode for Opera available!");
+        }
         operaOptions.merge(capabilities);
         return operaOptions;
     }
@@ -161,7 +179,7 @@ public interface WebDriverConfiguration {
         OperaOptions operaOptions = operaOptions(capabilities);
         String browserPath = getBrowserPath();
         if (isNotBlank(browserPath)) {
-            LoggerFactory.getLogger(WebDriverConfiguration.class).info("Load portable opera instance from '{}'", browserPath);
+            getLogger().info("Load portable opera instance from '{}'", browserPath);
             operaOptions.setBinary(browserPath);
         }
         return new OperaDriver(operaOptions);
@@ -169,6 +187,9 @@ public interface WebDriverConfiguration {
 
     default SafariOptions safariOptions(DesiredCapabilities capabilities) {
         SafariOptions safariOptions = new SafariOptions();
+        if (isHeadless()) {
+            getLogger().warn("No headless mode for Safari available!");
+        }
         safariOptions.merge(capabilities);
         return safariOptions;
     }
@@ -198,22 +219,42 @@ public interface WebDriverConfiguration {
     }
 
     default String getBrowser() {
-        String browser = System.getProperty("browser");
+        String browser = getProperty("browser");
         if (isNotBlank(browser)) {
             return browser;
         }
-        if (GraphicsEnvironment.isHeadless()) {
+        if (isHeadless()) {
             return "htmlunit";
         } else {
             return "chrome";
         }
     }
 
+    default boolean isHeadless() {
+        // set to headless manually
+        if (getProperty("headless") != null && Boolean.valueOf(getProperty("headless"))) {
+            getLogger().info("Test execution is set to headless!");
+            return true;
+        }
+        // disabled headless detection
+        if (getProperty("headlessDetection") != null && !Boolean.valueOf(getProperty("headlessDetection"))) {
+            getLogger().info("Headless detection is set to false.");
+            return false;
+        }
+        // headless detection
+        else if (GraphicsEnvironment.isHeadless()) {
+            getLogger().info("Headless execution detected! You can disable this check with \"headlessDetection=false\".");
+            return true;
+        }
+        // regular execution
+        return false;
+    }
+
     /**
      * Path for portable browser
      */
     default String getBrowserPath() {
-        String browserPath = System.getProperty("browser.path");
+        String browserPath = getProperty("browser.path");
         if (isNotBlank(browserPath)) {
             return browserPath;
         }
@@ -221,11 +262,15 @@ public interface WebDriverConfiguration {
     }
 
     default String getGridURL() {
-        String urlStr = System.getProperty("gridURL");
+        String urlStr = getProperty("gridURL");
         if (isNotBlank(urlStr)) {
             return urlStr;
         }
         return null;
+    }
+
+    default Logger getLogger() {
+        return LoggerFactory.getLogger(WebDriverConfiguration.class);
     }
 
 }

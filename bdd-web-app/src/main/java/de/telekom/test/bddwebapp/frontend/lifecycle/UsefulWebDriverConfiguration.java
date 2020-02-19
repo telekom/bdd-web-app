@@ -31,21 +31,12 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
     private boolean maximizeBrowser;
 
     @Override
-    public WebDriver loadChrome(DesiredCapabilities capabilities) {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setExperimentalOption("useAutomationExtension", false);
-        chromeOptions.merge(capabilities);
-        String browserPath = getBrowserPath();
-        if (isNotBlank(browserPath)) {
-            LoggerFactory.getLogger(WebDriverConfiguration.class).info("Load portable chrome instance from '{}'", browserPath);
-            chromeOptions.setBinary(browserPath);
-        }
-        return new ChromeDriver(chromeOptions);
-    }
-
-    @Override
     public FirefoxOptions firefoxOptions(DesiredCapabilities capabilities) {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
+        if (isHeadless()) {
+            getLogger().info("Firefox is set to headless mode");
+            firefoxOptions.setHeadless(true);
+        }
         capabilities.setCapability("overlappingCheckDisabled", true);
         firefoxOptions.merge(capabilities);
         return firefoxOptions;
@@ -54,6 +45,10 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
     @Override
     public ChromeOptions chromeOptions(DesiredCapabilities capabilities) {
         ChromeOptions chromeOptions = new ChromeOptions();
+        if (isHeadless()) {
+            getLogger().info("Chrome is set to headless mode");
+            chromeOptions.setHeadless(true);
+        }
         capabilities.setCapability("disable-restore-session-state", true);
         capabilities.setCapability("disable-application-cache", true);
         capabilities.setCapability("useAutomationExtension", false);
