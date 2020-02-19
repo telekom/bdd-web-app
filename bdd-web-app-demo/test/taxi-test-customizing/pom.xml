@@ -27,7 +27,7 @@
                 <version>${surefire.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/RunAllTaxiStories.java</include>
+                        <include>**/RunAllCustomizingTaxiStories.java</include>
                     </includes>
                 </configuration>
             </plugin>
