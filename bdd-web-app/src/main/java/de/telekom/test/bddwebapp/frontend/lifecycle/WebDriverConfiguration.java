@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.lifecycle;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,9 +23,6 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import static java.lang.System.getProperty;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
  * The configuration for all supported and tested browsers.
@@ -70,7 +68,7 @@ public interface WebDriverConfiguration {
     }
 
     default boolean isRemoteWebdriver() {
-        return isNotBlank(getGridURL());
+        return StringUtils.isNotBlank(getGridURL());
     }
 
     default DesiredCapabilities remoteWebDriverOptions(DesiredCapabilities capabilities) {
@@ -103,7 +101,7 @@ public interface WebDriverConfiguration {
     default WebDriver loadFirefox(DesiredCapabilities capabilities) {
         FirefoxOptions firefoxOptions = firefoxOptions(capabilities);
         String browserPath = getBrowserPath();
-        if (isNotBlank(browserPath)) {
+        if (StringUtils.isNotBlank(browserPath)) {
             getLogger().info("Load portable firefox instance from '{}'", browserPath);
             firefoxOptions.setBinary(browserPath);
         }
@@ -123,7 +121,7 @@ public interface WebDriverConfiguration {
     default WebDriver loadChrome(DesiredCapabilities capabilities) {
         ChromeOptions chromeOptions = chromeOptions(capabilities);
         String browserPath = getBrowserPath();
-        if (isNotBlank(browserPath)) {
+        if (StringUtils.isNotBlank(browserPath)) {
             getLogger().info("Load portable chrome instance from '{}'", browserPath);
             chromeOptions.setBinary(browserPath);
         }
@@ -142,7 +140,7 @@ public interface WebDriverConfiguration {
     default WebDriver loadEdge(DesiredCapabilities capabilities) {
         EdgeOptions edgeOptions = edgeOptions(capabilities);
         String browserPath = getBrowserPath();
-        if (isNotBlank(browserPath)) {
+        if (StringUtils.isNotBlank(browserPath)) {
             throw new IllegalArgumentException("Can't use 'browserPath' for edge browser. Portable is not supported!");
         }
         return new EdgeDriver(edgeOptions);
@@ -160,7 +158,7 @@ public interface WebDriverConfiguration {
     default WebDriver loadInternetExplorer(DesiredCapabilities capabilities) {
         InternetExplorerOptions internetExplorerOptions = internetExplorerOptions(capabilities);
         String browserPath = getBrowserPath();
-        if (isNotBlank(browserPath)) {
+        if (StringUtils.isNotBlank(browserPath)) {
             throw new IllegalArgumentException("Can't use 'browserPath' for Internet Explorer. Portable is not supported!");
         }
         return new InternetExplorerDriver(internetExplorerOptions);
@@ -178,7 +176,7 @@ public interface WebDriverConfiguration {
     default WebDriver loadOpera(DesiredCapabilities capabilities) {
         OperaOptions operaOptions = operaOptions(capabilities);
         String browserPath = getBrowserPath();
-        if (isNotBlank(browserPath)) {
+        if (StringUtils.isNotBlank(browserPath)) {
             getLogger().info("Load portable opera instance from '{}'", browserPath);
             operaOptions.setBinary(browserPath);
         }
@@ -197,7 +195,7 @@ public interface WebDriverConfiguration {
     default WebDriver loadSafari(DesiredCapabilities capabilities) {
         SafariOptions safariOptions = safariOptions(capabilities);
         String browserPath = getBrowserPath();
-        if (isNotBlank(browserPath)) {
+        if (StringUtils.isNotBlank(browserPath)) {
             throw new IllegalArgumentException("Can't use 'browserPath' for Safari. Portable is not supported!");
         }
         return new SafariDriver(safariOptions);
@@ -219,8 +217,8 @@ public interface WebDriverConfiguration {
     }
 
     default String getBrowser() {
-        String browser = getProperty("browser");
-        if (isNotBlank(browser)) {
+        String browser = System.getProperty("browser");
+        if (StringUtils.isNotBlank(browser)) {
             return browser;
         }
         if (isHeadless()) {
@@ -232,16 +230,17 @@ public interface WebDriverConfiguration {
 
     default boolean isHeadless() {
         // set to headless manually
-        if (getProperty("headless") != null && Boolean.valueOf(getProperty("headless"))) {
-            getLogger().info("Test execution is set to headless!");
-            return true;
+        if (StringUtils.isNotBlank(System.getProperty("headless"))) {
+            boolean headless = Boolean.valueOf(System.getProperty("headless"));
+            getLogger().info(String.format("Test execution is set to headless=%s!", headless));
+            return headless;
         }
         // headless detection
         if (GraphicsEnvironment.isHeadless()) {
-            getLogger().info("Headless execution detected! You can override this with \"headless=true\".");
+            getLogger().info("Headless execution detected! You can override this with \"headless=false\".");
             return true;
         } else {
-            getLogger().info("Execution with graphical user interface detected! You can override this with \"headless=false\".");
+            getLogger().info("Execution with graphical user interface detected! You can override this with \"headless=true\".");
             return false;
         }
     }
@@ -250,16 +249,16 @@ public interface WebDriverConfiguration {
      * Path for portable browser
      */
     default String getBrowserPath() {
-        String browserPath = getProperty("browser.path");
-        if (isNotBlank(browserPath)) {
+        String browserPath = System.getProperty("browser.path");
+        if (StringUtils.isNotBlank(browserPath)) {
             return browserPath;
         }
         return null;
     }
 
     default String getGridURL() {
-        String urlStr = getProperty("gridURL");
-        if (isNotBlank(urlStr)) {
+        String urlStr = System.getProperty("gridURL");
+        if (StringUtils.isNotBlank(urlStr)) {
             return urlStr;
         }
         return null;
