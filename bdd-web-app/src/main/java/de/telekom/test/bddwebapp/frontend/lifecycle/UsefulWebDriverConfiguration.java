@@ -48,8 +48,8 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
         if (isHeadless()) {
             getLogger().info("Chrome is set to headless mode");
             chromeOptions.setHeadless(true);
+            chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         }
-        chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         capabilities.setCapability("disable-restore-session-state", true);
         capabilities.setCapability("disable-application-cache", true);
         capabilities.setCapability("useAutomationExtension", false);
