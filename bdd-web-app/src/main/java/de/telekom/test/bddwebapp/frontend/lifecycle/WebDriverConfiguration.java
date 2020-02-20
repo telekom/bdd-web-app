@@ -236,18 +236,14 @@ public interface WebDriverConfiguration {
             getLogger().info("Test execution is set to headless!");
             return true;
         }
-        // disabled headless detection
-        if (getProperty("headlessDetection") != null && !Boolean.valueOf(getProperty("headlessDetection"))) {
-            getLogger().info("Headless detection is set to false.");
+        // headless detection
+        if (GraphicsEnvironment.isHeadless()) {
+            getLogger().info("Headless execution detected! You can override this with \"headless=true\".");
+            return true;
+        } else {
+            getLogger().info("Execution with graphical user interface detected! You can override this with \"headless=false\".");
             return false;
         }
-        // headless detection
-        else if (GraphicsEnvironment.isHeadless()) {
-            getLogger().info("Headless execution detected! You can disable this check with \"headlessDetection=false\".");
-            return true;
-        }
-        // regular execution
-        return false;
     }
 
     /**
