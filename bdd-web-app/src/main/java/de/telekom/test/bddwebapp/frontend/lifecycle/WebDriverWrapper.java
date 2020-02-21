@@ -84,7 +84,6 @@ public class WebDriverWrapper {
     public void loadWebdriver() {
         WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
 
-        WebDriverException lastException = new WebDriverException();
         for (int i = 0; i < 3; i++) {
             try {
                 WebDriver webDriver = webDriverConfiguration.loadWebdriver();
@@ -98,11 +97,9 @@ public class WebDriverWrapper {
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
-                lastException = e;
             }
         }
-        log.error("Too many tries loading webdriver! Rethrow webdriver exception.");
-        throw lastException;
+        log.error("Too many tries loading webdriver!");
     }
 
     public void quit() {
