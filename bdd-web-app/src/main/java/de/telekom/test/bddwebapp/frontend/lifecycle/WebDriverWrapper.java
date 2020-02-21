@@ -5,7 +5,6 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,23 +82,8 @@ public class WebDriverWrapper {
 
     public void loadWebdriver() {
         WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
-
-        for (int i = 0; i < 3; i++) {
-            try {
-                WebDriver webDriver = webDriverConfiguration.loadWebdriver();
-                setDriver(webDriver);
-                webDriverConfiguration.afterLoad(getDriver());
-                return;
-            } catch (WebDriverException e) {
-                try {
-                    log.error("Error loading webdriver. Try again.", e);
-                    Thread.sleep(100);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
-        log.error("Too many tries loading webdriver!");
+        setDriver(webDriverConfiguration.loadWebdriver());
+        webDriverConfiguration.afterLoad(getDriver());
     }
 
     public void quit() {
@@ -125,7 +109,7 @@ public class WebDriverWrapper {
                 return null;
             }
             if (getDriver() instanceof HtmlUnitDriver) {
-                log.info("Can not create screenshots for htmlunit!");
+                log.error("Can not create screenshots for htmlunit!");
                 return null;
             }
             File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
