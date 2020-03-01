@@ -26,7 +26,7 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bdd-web-app</artifactId>
-                <version>1.6-SNAPSHOT</version>
+                <version>1.6</version>
             </dependency>
 ```
 
