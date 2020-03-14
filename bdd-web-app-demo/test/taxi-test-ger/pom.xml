@@ -12,9 +12,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <surefire.version>2.22.1</surefire.version>
-        <jbehave.version>4.3.5</jbehave.version>
-        <jbehave.site-resources.version>3.3.1</jbehave.site-resources.version>
+        <surefire.version>2.22.2</surefire.version>
+        <jbehave.version>4.6.2</jbehave.version>
 
         <bdd-web-app.version>1.7-SNAPSHOT</bdd-web-app.version>
     </properties>
@@ -35,24 +34,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
-                    <execution>
-                        <id>unpack-jbehave-site-resources</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave.site</groupId>
-                                    <artifactId>jbehave-site-resources</artifactId>
-                                    <version>${jbehave.site-resources.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>unpack-jbehave-reports-resources</id>
                         <phase>compile</phase>
