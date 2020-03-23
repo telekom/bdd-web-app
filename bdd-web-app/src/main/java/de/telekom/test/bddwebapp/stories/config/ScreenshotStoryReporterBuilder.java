@@ -20,9 +20,11 @@ public interface ScreenshotStoryReporterBuilder {
 
     default StoryReporterBuilder screenshotStoryReporterBuilder() {
         Format screenshotReportForm = getApplicationContext().getBean(ScreenshotReportForm.class);
-        return new StoryReporterBuilder().withCrossReference(new CrossReference())
-                .withFormats(Format.TXT, Format.CONSOLE, Format.STATS, Format.XML, screenshotReportForm)
-                .withCodeLocation(CodeLocations.codeLocationFromClass(getClass())).withFailureTrace(true);
+        return new StoryReporterBuilder()
+                .withFormats(screenshotReportForm)
+                .withCodeLocation(CodeLocations.codeLocationFromClass(getClass()))
+                .withFailureTrace(true)
+                .withCrossReference(new CrossReference());
     }
 
     ApplicationContext getApplicationContext();
