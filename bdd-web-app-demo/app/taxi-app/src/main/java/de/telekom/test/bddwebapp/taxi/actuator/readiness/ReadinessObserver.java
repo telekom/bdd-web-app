@@ -41,7 +41,7 @@ public class ReadinessObserver {
         SystemReadinessStatus dbStatus = readinessStatus.getStatus("DB");
         try {
             log.info("[DB] Check database availability to check readiness");
-            List<Object> results = jdbcTemplate.query("select 1 from dual", new SingleColumnRowMapper<>());
+            List<Object> results = jdbcTemplate.query("select 1", new SingleColumnRowMapper<>());
             if (!results.isEmpty()) {
                 dbStatus.setSuccessfulState();
             } else {
