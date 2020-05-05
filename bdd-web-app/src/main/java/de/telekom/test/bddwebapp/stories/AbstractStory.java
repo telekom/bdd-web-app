@@ -13,11 +13,6 @@ import org.jbehave.core.steps.InjectableStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**

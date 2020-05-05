@@ -231,7 +231,7 @@ public interface WebDriverConfiguration {
     default boolean isHeadless() {
         // set to headless manually
         if (StringUtils.isNotBlank(System.getProperty("headless"))) {
-            boolean headless = Boolean.valueOf(System.getProperty("headless"));
+            boolean headless = Boolean.parseBoolean(System.getProperty("headless"));
             getLogger().info(String.format("Test execution is set to headless=%s!", headless));
             return headless;
         }

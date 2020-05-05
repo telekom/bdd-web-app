@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Objects;
 
 /**
- * Abstract base class for page objects for jquery frontends.
+ * Abstract base class for page objects for jquery frontend.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>

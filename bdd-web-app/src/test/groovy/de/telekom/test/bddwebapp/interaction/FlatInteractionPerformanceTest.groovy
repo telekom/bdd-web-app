@@ -38,12 +38,12 @@ class FlatInteractionPerformanceTest extends Specification {
 
     def "remember deep map"() {
         given:
-        Map<String, Object> complexTestdata = _complexMap(10, new HashMap<>())
-        println "Given items: " + _count(complexTestdata)
+        Map<String, Object> complexTestData = _complexMap(10, new HashMap<>())
+        println "Given items: " + _count(complexTestData)
         def key = itemKeyForValue0(10)
         when:
         Date start = new Date()
-        abstractInteraction.remember("key", complexTestdata)
+        abstractInteraction.remember("key", complexTestData)
         println "Remember duration in ms: " + duration(start)
         start = new Date()
         def value = abstractInteraction.recall(key)
@@ -56,12 +56,12 @@ class FlatInteractionPerformanceTest extends Specification {
 
     def "remember very deep map"() {
         given:
-        Map<String, Object> complexTestdata = _complexMap(1000, new HashMap<>())
-        println "Given items: " + _count(complexTestdata)
+        Map<String, Object> complexTestData = _complexMap(1000, new HashMap<>())
+        println "Given items: " + _count(complexTestData)
         def key = itemKeyForValue0(1000)
         when:
         Date start = new Date()
-        abstractInteraction.remember("key", complexTestdata)
+        abstractInteraction.remember("key", complexTestData)
         println "Remember duration in ms: " + duration(start)
         start = new Date()
         def value = abstractInteraction.recall(key)
@@ -72,12 +72,12 @@ class FlatInteractionPerformanceTest extends Specification {
         println "Items after remember: " + _count(abstractInteraction.getContext())
     }
 
-    Map<String, Object> _complexMap(int deep, Map<String, Object> complexTestdata) {
+    Map<String, Object> _complexMap(int deep, Map<String, Object> complexTestData) {
         if (deep == 0) {
             return exampleJson
         }
-        complexTestdata.put(("key" + deep), [_complexMap(--deep, new HashMap<String, Object>(complexTestdata))])
-        return complexTestdata
+        complexTestData.put(("key" + deep), [_complexMap(--deep, new HashMap<String, Object>(complexTestData))])
+        return complexTestData
     }
 
     int _count(Map<String, Object> testData) {

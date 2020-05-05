@@ -13,7 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <surefire.version>2.22.2</surefire.version>
-        <jbehave.version>4.6.2</jbehave.version>
+        <jbehave.version>4.6.3</jbehave.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 
         <bdd-web-app.version>1.7-SNAPSHOT</bdd-web-app.version>

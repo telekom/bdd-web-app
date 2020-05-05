@@ -19,35 +19,35 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <!-- Long-term dependencies. Update major version only when necessary. -->
-        <spring-boot-starter-test.version>2.1.8.RELEASE</spring-boot-starter-test.version>
-        <restassured.version>3.3.0</restassured.version>
-        <cglib.version>3.2.10</cglib.version>
-        <slf4j.version>1.7.26</slf4j.version>
-        <lombok.version>1.18.6</lombok.version>
-        <guava.version>27.1-jre</guava.version>
+        <spring-boot-starter-test.version>2.1.13.RELEASE</spring-boot-starter-test.version>
+        <restassured.version>4.3.0</restassured.version>
+        <cglib.version>3.3.0</cglib.version>
+        <slf4j.version>1.7.30</slf4j.version>
+        <lombok.version>1.18.12</lombok.version>
+        <guava.version>29.0-jre</guava.version>
 
         <!-- Short-term dependencies. Update when new version is available. -->
         <selenium.version>3.141.59</selenium.version>
-        <htmlunit-driver.version>2.38.0</htmlunit-driver.version>
-        <htmlunit.version>2.38.0</htmlunit.version>
+        <htmlunit-driver.version>2.40.0</htmlunit-driver.version>
+        <htmlunit.version>2.40.0</htmlunit.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
-        <jbehave.version>4.6.2</jbehave.version>
+        <jbehave.version>4.6.3</jbehave.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
 
         <!-- Unit test dependencies -->
-        <groovy-all.version>2.4.15</groovy-all.version>
-        <spock-core.version>1.2-groovy-2.4</spock-core.version>
-        <byte-buddy.version>1.9.10</byte-buddy.version>
-        <objenesis.version>3.0.1</objenesis.version>
+        <groovy-all.version>2.4.9</groovy-all.version>
+        <spock-core.version>1.3-groovy-2.4</spock-core.version>
+        <byte-buddy.version>1.10.10</byte-buddy.version>
+        <objenesis.version>3.1</objenesis.version>
 
         <!-- Deploy dependencies -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <lombok-maven-plugin.version>1.18.6.0</lombok-maven-plugin.version>
-        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <lombok-maven-plugin.version>1.18.12.0</lombok-maven-plugin.version>
+        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
 
         <!-- Build dependencies -->
-        <gmavenplus-plugin.version>1.7.1</gmavenplus-plugin.version>
+        <gmavenplus-plugin.version>1.9.0</gmavenplus-plugin.version>
     </properties>
 
     <licenses>
@@ -177,6 +177,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy</artifactId>
+                        <version>${groovy-all.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

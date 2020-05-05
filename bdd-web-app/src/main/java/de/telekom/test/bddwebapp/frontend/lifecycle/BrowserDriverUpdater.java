@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
- * Pushes the WebDriver updates for several browser. Is integrated into the JBehave lifecycle via LifecylceSteps.
+ * Pushes the WebDriver updates for several browser. Is integrated into the JBehave lifecycle via WebDriverLifecycleSteps.
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
