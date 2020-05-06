@@ -33,26 +33,16 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+                <version>${jbehave.version}</version>
                 <executions>
                     <execution>
-                        <id>unpack-jbehave-reports-resources</id>
+                        <id>unpack-view-resources</id>
                         <phase>compile</phase>
                         <goals>
-                            <goal>unpack</goal>
+                            <goal>unpack-view-resources</goal>
                         </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.jbehave</groupId>
-                                    <artifactId>jbehave-core</artifactId>
-                                    <version>${jbehave.version}</version>
-                                    <outputDirectory>${project.build.directory}/jbehave/view</outputDirectory>
-                                    <includes>**\/*.css,**\/*.ftl,**\/*.js</includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
