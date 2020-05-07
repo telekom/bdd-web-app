@@ -32,6 +32,7 @@
         <htmlunit.version>2.40.0</htmlunit.version>
         <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <jbehave.version>4.6.3</jbehave.version>
+        <jbehave-site-resources.version>3.3.1</jbehave-site-resources.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
 
         <!-- Unit test dependencies -->
@@ -212,6 +213,12 @@
                 <type>zip</type>
             </dependency>
             <dependency>
+                <groupId>org.jbehave.site</groupId>
+                <artifactId>jbehave-site-resources</artifactId>
+                <version>${jbehave-site-resources.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
                 <groupId>com.github.valfirst</groupId>
                 <artifactId>jbehave-junit-runner</artifactId>
                 <version>${jbehave-junit-runner}</version>
@@ -332,6 +339,11 @@
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
             <classifier>resources</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave.site</groupId>
+            <artifactId>jbehave-site-resources</artifactId>
             <type>zip</type>
         </dependency>
         <dependency>

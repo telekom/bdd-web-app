@@ -20,7 +20,7 @@ public class RunAllCustomizingTaxiStories extends RunAllStories {
 
     @Override
     public String storiesBasePath() {
-        return "de.telekom.test.bddwebapp.taxi.stories";
+        return "de.telekom.test.bddwebapp.taxi.customizing.stories";
     }
 
 }
