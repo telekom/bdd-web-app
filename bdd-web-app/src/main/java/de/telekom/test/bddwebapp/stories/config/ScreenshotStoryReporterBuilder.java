@@ -5,6 +5,7 @@ import org.jbehave.core.io.CodeLocations;
 import org.jbehave.core.reporters.CrossReference;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
+import org.jbehave.core.reporters.SurefireReporter;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -21,10 +22,11 @@ public interface ScreenshotStoryReporterBuilder {
     default StoryReporterBuilder screenshotStoryReporterBuilder() {
         Format screenshotReportForm = getApplicationContext().getBean(ScreenshotReportForm.class);
         return new StoryReporterBuilder()
-                .withFormats(screenshotReportForm)
+                .withFormats(Format.STATS, screenshotReportForm)
                 .withCodeLocation(CodeLocations.codeLocationFromClass(getClass()))
                 .withFailureTrace(true)
-                .withCrossReference(new CrossReference());
+                .withCrossReference(new CrossReference())
+                .withSurefireReporter(new SurefireReporter(getClass()));
     }
 
     ApplicationContext getApplicationContext();
