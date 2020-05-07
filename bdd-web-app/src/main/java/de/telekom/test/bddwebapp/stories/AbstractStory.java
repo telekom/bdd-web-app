@@ -61,7 +61,7 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
     public boolean isExecutedByJUnitRunner() {
         // the test class here is a indicator that the story is run by maven build and not by junit-class
         String testClass = System.getProperty("test");
-         return isBlank(testClass);
+        return isBlank(testClass);
     }
 
     public abstract ApplicationContext getApplicationContext();

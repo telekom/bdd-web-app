@@ -22,11 +22,17 @@ interface Interaction {
 
     /**
      * Store some data in the interaction context for later use.
+     *
+     * @param key   interaction key
+     * @param value interaction value
      */
     void remember(String key, Object value);
 
     /**
      * Store some data in the interaction context for later use. Use enum as key.
+     *
+     * @param key interaction key
+     * @param value interaction value
      */
     default void remember(Enum key, Object value) {
         remember(key.toString(), value);
@@ -34,6 +40,10 @@ interface Interaction {
 
     /**
      * Get some data in the interaction context.
+     *
+     * @param <S> type for value from interaction context
+     * @param key interaction key
+     * @return value from interaction context
      */
     default <S> S recall(String key) {
         return (S) getContext().get(key);
@@ -41,21 +51,44 @@ interface Interaction {
 
     /**
      * Get some data in the interaction context. Use enum as key.
+     *
+     * @param <S> type for value from interaction context
+     * @param key interaction key
+     * @return value from interaction context
      */
     default <S> S recall(Enum key) {
         return recall(key.toString());
     }
 
+    /**
+     * Get some data in the interaction context. Throw assertion error if value is not found.
+     *
+     * @param <S> type for value from interaction context
+     * @param key interaction key
+     * @return value from interaction context
+     */
     default <S> S recallNotNull(String key) {
         S value = recall(key);
         assertNotNull(String.format("Recalled '%s' for story interaction value '%s'", value, key), value);
         return value;
     }
 
+    /**
+     * Get some data in the interaction context. Throw assertion error if value is not found.
+     *
+     * @param <S> type for value from interaction context
+     * @param key interaction key
+     * @return value from interaction context
+     */
     default <S> S recallNotNull(Enum key) {
         return recallNotNull(key.toString());
     }
 
+    /**
+     * Get all value from interaction context.
+     *
+     * @return values from interaction context
+     */
     Map<String, Object> getContext();
 
     // -------------------------------------------------------------------------

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Holds context variables that are needed in the entire JBehave Story.
- * <p/>
+ * <p>
  * An Interaction is a spring bean which keeps ThreadLocal state information of a single specification execution available across different steps. The
  * Interaction is setup and torn down before and after every specification execution.
  *
@@ -32,6 +32,8 @@ public class StoryInteraction extends FlatInteraction {
 
     /**
      * Store some data from scenario interaction to the story interaction context for later use.
+     *
+     * @param key interaction key
      */
     public void rememberFromScenarioInteraction(String key) {
         super.remember(key, scenarioInteraction.recallNotNull(key));
@@ -39,6 +41,9 @@ public class StoryInteraction extends FlatInteraction {
 
     /**
      * Store an object from scenario interaction for an specific entity in the story interaction context for later use. Recall this object with recallObject().
+     *
+     * @param entityKey interaction key - entity part
+     * @param objectKey interaction key - object part
      */
     public void rememberObjectFromScenarioInteraction(String entityKey, String objectKey) {
         super.rememberObject(entityKey, objectKey, scenarioInteraction.recallObjectNotNull(entityKey, objectKey));

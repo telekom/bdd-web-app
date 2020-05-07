@@ -26,6 +26,8 @@ public interface RestAssuredSteps {
 
     /**
      * Recall the current response from story interaction. The response is set a RequestInteractionFilter.
+     *
+     * @return Response
      */
     Response recallResponse();
 

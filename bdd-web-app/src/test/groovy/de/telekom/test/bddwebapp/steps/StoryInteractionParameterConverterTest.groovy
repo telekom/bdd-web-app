@@ -17,10 +17,10 @@ class StoryInteractionParameterConverterTest extends Specification {
 
     def storyInteractionParameterConverter = new StoryInteractionParameterConverter()
 
-    def setup(){
+    def setup() {
         storyInteractionParameterConverter.storyInteraction = Mock(StoryInteraction)
     }
-    
+
     def "simple value"() {
         when:
         def value = storyInteractionParameterConverter.getValueFromKeyOrValueOrConcatenated('value')
@@ -83,7 +83,7 @@ class StoryInteractionParameterConverterTest extends Specification {
         when:
         def rows = storyInteractionParameterConverter.getRowsWithInteractionKey(examplesTable)
         then:
-        rows == [['attribute': 'value'],['attribute': 'value2']]
+        rows == [['attribute': 'value'], ['attribute': 'value2']]
     }
 
 }

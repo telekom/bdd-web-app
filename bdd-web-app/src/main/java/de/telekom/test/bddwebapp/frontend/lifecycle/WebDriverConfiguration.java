@@ -247,6 +247,8 @@ public interface WebDriverConfiguration {
 
     /**
      * Path for portable browser
+     *
+     * @return path
      */
     default String getBrowserPath() {
         String browserPath = System.getProperty("browser.path");

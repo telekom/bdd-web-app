@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * Holds context variables that are needed in the entire JBehave Scenario.
- * <p/>
+ * <p>
  * An Interaction is a spring bean which keeps ThreadLocal state information of a single specification execution available across different steps. The
  * Interaction is setup and torn down before and after every specification execution.
  * <p>
@@ -61,6 +61,8 @@ public class ScenarioInteraction extends FlatInteraction {
 
     /**
      * Store some data from story interaction to the scenario interaction context
+     *
+     * @param key interaction key
      */
     public void rememberFromStoryInteraction(String key) {
         remember(key, storyInteraction.recallNotNull(key));
@@ -68,6 +70,9 @@ public class ScenarioInteraction extends FlatInteraction {
 
     /**
      * Store an object from story interaction for an specific entity in the scenario interaction context. Recall this object with recallObject().
+     *
+     * @param entityKey interaction key - entity part
+     * @param objectKey interaction key - object part
      */
     public void rememberObjectFromStoryInteraction(String entityKey, String objectKey) {
         rememberObject(entityKey, objectKey, storyInteraction.recallObjectNotNull(entityKey, objectKey));

@@ -51,6 +51,9 @@ public class FlatInteraction implements Interaction {
      * Store some test data in the interaction context for later use.
      * Saves every key on every hierarchy as individual objects for lists and maps.
      * Be careful when saving very large and deep maps as this approach increases the amount of data exponentially!
+     *
+     * @param key   interaction key
+     * @param value interaction value
      */
     public void remember(String key, Object value) {
         if (value instanceof Map) {
@@ -67,6 +70,10 @@ public class FlatInteraction implements Interaction {
 
     /**
      * Get some data in the interaction context.
+     *
+     * @param <S> type for value from interaction context
+     * @param key interaction key
+     * @return value from interaction context
      */
     public <S> S recall(String key) {
         // try to get the value by key first
@@ -81,6 +88,10 @@ public class FlatInteraction implements Interaction {
     /**
      * Get the value from a complex type by reflection, even in hierarchical objects.
      * In some way the opposite way of the remember operation.
+     *
+     * @param <S> type for value from interaction context
+     * @param key interaction key
+     * @return value from interaction context
      */
     public <S> S recallByHierarchy(String key) {
         if (key.contains(".")) {

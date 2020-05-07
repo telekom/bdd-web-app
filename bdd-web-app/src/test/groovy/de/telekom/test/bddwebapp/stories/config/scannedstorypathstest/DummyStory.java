@@ -49,7 +49,7 @@ public abstract class DummyStory extends AbstractStory {
         };
     }
 
-    public void run()  {
+    public void run() {
     }
 
 }
