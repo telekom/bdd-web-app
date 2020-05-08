@@ -92,6 +92,7 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
             @Override
             public void parse(String s) {
                 scenarioTitle = s.substring(16);
+                scenarioTitle = scenarioTitle.replace("*", ".*");
             }
 
             @Override
