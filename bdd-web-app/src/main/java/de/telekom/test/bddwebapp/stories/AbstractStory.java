@@ -101,7 +101,7 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
                 if (!meta.hasProperty("title")) {
                     return true;
                 }
-                return meta.getProperty("title").trim().startsWith(scenarioTitle);
+                return meta.getProperty("title").trim().matches(scenarioTitle);
             }
         });
     }
