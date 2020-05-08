@@ -25,8 +25,7 @@ public interface ScreenshotStoryReporterBuilder {
                 .withFormats(Format.STATS, screenshotReportForm)
                 .withCodeLocation(CodeLocations.codeLocationFromClass(getClass()))
                 .withFailureTrace(true)
-                .withCrossReference(new CrossReference())
-                .withSurefireReporter(new SurefireReporter(getClass()));
+                .withCrossReference(new CrossReference());
     }
 
     ApplicationContext getApplicationContext();

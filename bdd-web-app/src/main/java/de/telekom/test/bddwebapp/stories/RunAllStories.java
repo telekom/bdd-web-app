@@ -10,6 +10,8 @@ import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.junit.JUnitStories;
+import org.jbehave.core.reporters.StoryReporterBuilder;
+import org.jbehave.core.reporters.SurefireReporter;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
@@ -31,9 +33,18 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
     @Override
     public Configuration configuration() {
         Configuration configuration = new MostUsefulConfiguration();
-        configuration.useStoryReporterBuilder(screenshotStoryReporterBuilder());
+        StoryReporterBuilder storyReporterBuilder = screenshotStoryReporterBuilder();
+        SurefireReporter surefireReporter = surefireReporterConfiguration();
+        storyReporterBuilder.withSurefireReporter(surefireReporter);
+        configuration.useStoryReporterBuilder(storyReporterBuilder);
         configuration.useStoryPathResolver(removeStoryFromClassNameStoryPathResolver());
         return configuration;
+    }
+
+    public SurefireReporter surefireReporterConfiguration() {
+        SurefireReporter.Options surefireOptions = new SurefireReporter.Options();
+        surefireOptions.doIncludeProperties(false); // set this to true often causes issues with encoding
+        return new SurefireReporter(getClass());
     }
 
     @Override
