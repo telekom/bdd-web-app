@@ -7,7 +7,6 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,8 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfiguration {
 
-    @PostConstruct
-    public void overrideDefaultWebDriverConfiguration() {
+    public OverrideDefaultWebDriverConfiguration() {
         WebDriverWrapper.DEFAULT_WEB_DRIVER_CONFIGURATION = OverrideDefaultWebDriverConfiguration.class;
     }
 
