@@ -83,13 +83,13 @@ public class WebDriverWrapper {
     public void loadWebdriver() {
         WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
         setDriver(webDriverConfiguration.loadWebdriver());
-        webDriverConfiguration.afterLoad(getDriver());
+        webDriverConfiguration.afterLoad(webDriver.get());
     }
 
     public void quit() {
-        if (getDriver() != null) {
+        if (webDriver.get() != null) {
             try {
-                getDriver().quit();
+                webDriver.get().quit();
             } catch (UnreachableBrowserException unreachableBrowserException) {
                 log.error(unreachableBrowserException.getMessage());
             }
@@ -98,21 +98,21 @@ public class WebDriverWrapper {
     }
 
     public boolean isClosed() {
-        return getDriver() == null;
+        return webDriver.get() == null;
     }
 
     public String createScreenshot(String path) {
         try {
             log.info("Create screenshot to '{}'", path);
-            if (getDriver() == null) {
+            if (webDriver.get() == null) {
                 log.error("Can not create screenshot because webdriver is null!");
                 return null;
             }
-            if (getDriver() instanceof HtmlUnitDriver) {
+            if (webDriver.get() instanceof HtmlUnitDriver) {
                 log.error("Can not create screenshots for htmlunit!");
                 return null;
             }
-            File screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+            File screenshot = ((TakesScreenshot) webDriver.get()).getScreenshotAs(OutputType.FILE);
             File destFile = new File(path);
             FileUtils.copyFile(screenshot, destFile);
             return destFile.getAbsolutePath();
