@@ -9,8 +9,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
 
         <bdd-web-app.version>1.8-SNAPSHOT</bdd-web-app.version>
     </properties>
@@ -34,7 +33,8 @@
                             <finalName>smoke</finalName>
                             <archive>
                                 <manifest>
-                                    <mainClass>de.telekom.test.bddwebapp.taxi.docker.config.RunAllTaxiDockerStories</mainClass>
+                                    <mainClass>de.telekom.test.bddwebapp.taxi.docker.config.RunAllTaxiDockerStories
+                                    </mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
