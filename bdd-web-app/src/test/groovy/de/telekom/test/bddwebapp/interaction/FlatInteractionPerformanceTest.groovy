@@ -56,9 +56,9 @@ class FlatInteractionPerformanceTest extends Specification {
 
     def "remember very deep map"() {
         given:
-        Map<String, Object> complexTestData = _complexMap(1000, new HashMap<>())
+        Map<String, Object> complexTestData = _complexMap(500, new HashMap<>())
         println "Given items: " + _count(complexTestData)
-        def key = itemKeyForValue0(1000)
+        def key = itemKeyForValue0(500)
         when:
         Date start = new Date()
         abstractInteraction.remember("key", complexTestData)

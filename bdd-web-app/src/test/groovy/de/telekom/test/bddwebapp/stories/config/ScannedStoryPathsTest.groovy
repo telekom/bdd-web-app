@@ -21,7 +21,7 @@ class ScannedStoryPathsTest extends Specification {
         }
 
         String storiesBasePath() {
-            return Package.getPackage(this.class).name
+            return this.class.getPackage().getName()
         }
     }
 
