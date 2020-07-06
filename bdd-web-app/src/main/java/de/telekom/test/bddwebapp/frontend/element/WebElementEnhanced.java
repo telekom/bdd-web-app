@@ -121,7 +121,11 @@ public class WebElementEnhanced extends WebElementProxy {
     }
 
     public boolean exists() {
-        return check(o -> getWebElement() /* invoke web element */);
+        return check(o -> {
+            WebElement webElement = getWebElement();  /* invoke web element in firefox, chrome etc. */
+            webElement.isDisplayed(); /* invoke web element in htmlunit */
+            return o;
+        });
     }
 
     public boolean hasChildren(By by) {
