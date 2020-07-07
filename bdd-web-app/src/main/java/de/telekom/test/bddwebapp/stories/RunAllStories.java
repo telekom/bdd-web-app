@@ -9,12 +9,15 @@ import de.telekom.test.bddwebapp.stories.customizing.CurrentStoryEmbedderMonitor
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.embedder.Embedder;
+import org.jbehave.core.io.UnderscoredToCapitalized;
 import org.jbehave.core.junit.JUnitStories;
+import org.jbehave.core.reporters.FreemarkerViewGenerator;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -35,6 +38,7 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
         StoryReporterBuilder storyReporterBuilder = screenshotStoryReporterBuilder();
         configuration.useStoryReporterBuilder(storyReporterBuilder);
         configuration.useStoryPathResolver(removeStoryFromClassNameStoryPathResolver());
+        configuration.useViewGenerator(new FreemarkerViewGenerator(new UnderscoredToCapitalized(), FreemarkerViewGenerator.class, StandardCharsets.UTF_8));
         return configuration;
     }
 
