@@ -27,7 +27,7 @@ public class RunAllGerTaxiStories extends RunAllStories {
 
     @Override
     public Configuration configuration() {
-        Configuration configuration = germanKeywordsConfiguration();
+        var configuration = germanKeywordsConfiguration();
         configuration.useStoryReporterBuilder(screenshotStoryReporterBuilder());
         return configuration;
     }

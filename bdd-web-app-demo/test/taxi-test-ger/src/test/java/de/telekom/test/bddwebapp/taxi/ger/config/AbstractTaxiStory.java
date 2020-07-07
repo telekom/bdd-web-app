@@ -22,7 +22,7 @@ public abstract class AbstractTaxiStory extends AbstractStory {
 
     @Override
     public Configuration configuration() {
-        Configuration configuration = germanKeywordsConfiguration();
+        var configuration = germanKeywordsConfiguration();
         configuration.useStoryReporterBuilder(screenshotStoryReporterBuilder());
         return configuration;
     }

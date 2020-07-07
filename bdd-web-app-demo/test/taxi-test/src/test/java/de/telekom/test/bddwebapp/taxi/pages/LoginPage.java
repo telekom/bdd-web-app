@@ -64,12 +64,9 @@ public class LoginPage extends JQueryPage {
         return alertWarningDiv.getText().contains("invalid");
     }
 
-    public boolean isUsernameFieldShown() {
-        return usernameInput.exists();
-    }
-
     @Override
     public String getURL() {
         return URL;
     }
+
 }

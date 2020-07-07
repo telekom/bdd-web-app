@@ -20,9 +20,9 @@ import java.util.Locale;
 public class GermanKeywordsConfiguration{
 
     public static Configuration germanKeywordsConfiguration() {
-        Locale de = new Locale("de");
-        Keywords keywords = new LocalizedKeywords(de);
-        Configuration configuration = new MostUsefulConfiguration();
+        var de = new Locale("de");
+        var keywords = new LocalizedKeywords(de);
+        var configuration = new MostUsefulConfiguration();
         configuration.useKeywords(keywords);
         configuration.useStepCollector(new MarkUnmatchedStepsAsPending(keywords));
         configuration.useStoryParser(new RegexStoryParser(configuration));

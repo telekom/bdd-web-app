@@ -21,8 +21,8 @@ public class NoJsWebDriverConfiguration extends UsefulWebDriverConfiguration {
     public ChromeOptions chromeOptions(DesiredCapabilities capabilities) {
         log.info("Use alternative WebDriverConfiguration: noJsWebDriverConfiguration");
 
-        ChromeOptions chromeOptions = super.chromeOptions(capabilities);
-        HashMap<String, Object> chromePrefs = new HashMap<>();
+        var chromeOptions = super.chromeOptions(capabilities);
+        var chromePrefs = new HashMap<>();
         chromePrefs.put("profile.default_content_setting_values.javascript", 2);
         chromeOptions.setExperimentalOption("prefs", chromePrefs);
         return chromeOptions;
@@ -32,7 +32,7 @@ public class NoJsWebDriverConfiguration extends UsefulWebDriverConfiguration {
     public DesiredCapabilities htmlUnitOptions(DesiredCapabilities capabilities) {
         log.info("Use alternative WebDriverConfiguration: noJsWebDriverConfiguration");
 
-        DesiredCapabilities htmlUnitCapabilities = super.htmlUnitOptions(capabilities);
+        var htmlUnitCapabilities = super.htmlUnitOptions(capabilities);
         htmlUnitCapabilities.setJavascriptEnabled(false);
         return htmlUnitCapabilities;
     }

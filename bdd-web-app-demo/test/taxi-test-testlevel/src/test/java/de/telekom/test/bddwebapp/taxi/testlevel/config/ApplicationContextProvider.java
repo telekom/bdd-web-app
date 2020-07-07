@@ -15,7 +15,7 @@ public class ApplicationContextProvider {
     private static final ApplicationContext applicationContext = createApplicationContext();
 
     private static AnnotationConfigApplicationContext createApplicationContext() {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+        var applicationContext = new AnnotationConfigApplicationContext();
         applicationContext.register(TestConfig.class);
         applicationContext.refresh();
         return applicationContext;
