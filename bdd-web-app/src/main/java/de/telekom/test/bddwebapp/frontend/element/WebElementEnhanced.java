@@ -56,7 +56,7 @@ public class WebElementEnhanced extends WebElementProxy {
     }
 
     public void waitFor(Function<WebDriver, Boolean> function, int maxWaitTimeInSeconds, String errorMessage) {
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
+        var webDriverWait = new WebDriverWait(webDriver, maxWaitTimeInSeconds);
         webDriverWait.withMessage(errorMessage);
         webDriverWait.until(function);
     }
@@ -122,7 +122,7 @@ public class WebElementEnhanced extends WebElementProxy {
 
     public boolean exists() {
         return check(o -> {
-            WebElement webElement = getWebElement();  /* invoke web element in firefox, chrome etc. */
+            var webElement = getWebElement();  /* invoke web element in firefox, chrome etc. */
             webElement.isDisplayed(); /* invoke web element in htmlunit */
             return o;
         });

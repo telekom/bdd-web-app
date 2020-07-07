@@ -31,10 +31,10 @@ import static org.springframework.util.ClassUtils.resolveClassName;
 public interface ScannedStoryPaths {
 
     default List<String> scannedStoryPaths() {
-        ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
+        var provider = new ClassPathScanningCandidateComponentProvider(false);
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
         provider.addExcludeFilter(new AnnotationTypeFilter(Ignore.class));
-        Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
+        var components = provider.findCandidateComponents(storiesBasePath());
         StoryPathResolver storyPathResolver = configuration().storyPathResolver();
         return components.stream()
                 .map(beanDefinition -> resolveClassName(requireNonNull(beanDefinition.getBeanClassName()), getDefaultClassLoader()))
@@ -43,11 +43,11 @@ public interface ScannedStoryPaths {
     }
 
     default List<String> testLevelStoryPaths(int testLevel) {
-        ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
+        var provider = new ClassPathScanningCandidateComponentProvider(false);
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
         provider.addExcludeFilter(new AnnotationTypeFilter(Ignore.class));
-        Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
-        StoryPathResolver storyPathResolver = configuration().storyPathResolver();
+        var components = provider.findCandidateComponents(storiesBasePath());
+        var storyPathResolver = configuration().storyPathResolver();
         return components.stream()
                 .map(beanDefinition -> resolveClassName(requireNonNull(beanDefinition.getBeanClassName()), getDefaultClassLoader()))
                 .filter(aClass -> {

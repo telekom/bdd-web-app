@@ -39,7 +39,7 @@ public class WebDriverLifecycleSteps {
 
     @BeforeStory
     public void setAlternativeWebDriverConfiguration() {
-        Optional<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = currentStory.getAlternativeWebDriverConfiguration();
+        var alternativeWebDriverConfiguration = currentStory.getAlternativeWebDriverConfiguration();
         if (alternativeWebDriverConfiguration.isPresent()) {
             webDriverWrapper.setAlternativeWebDriverConfiguration(alternativeWebDriverConfiguration.get());
         } else {

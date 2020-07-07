@@ -34,8 +34,8 @@ public class ScreenshotReportForm extends Format {
     @Override
     public StoryReporter createStoryReporter(FilePrintStreamFactory factory, StoryReporterBuilder builder) {
         factory.useConfiguration(builder.fileConfiguration("html"));
-        ScreenshotCreator screenshotCreator = new ScreenshotCreator(builder, webDriverWrapper);
-        ScreenshotHtmlOutput screenshotHtmlOutput = new ScreenshotHtmlOutput(factory.createPrintStream(), builder, Boolean.parseBoolean(screenshotsOnSuccess), screenshotCreator);
+        var screenshotCreator = new ScreenshotCreator(builder, webDriverWrapper);
+        var screenshotHtmlOutput = new ScreenshotHtmlOutput(factory.createPrintStream(), builder, Boolean.parseBoolean(screenshotsOnSuccess), screenshotCreator);
         return screenshotHtmlOutput.doReportFailureTrace(builder.reportFailureTrace()).doCompressFailureTrace(builder.compressFailureTrace());
     }
 

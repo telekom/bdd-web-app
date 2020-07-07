@@ -34,8 +34,8 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
 
     @Override
     public Configuration configuration() {
-        Configuration configuration = new MostUsefulConfiguration();
-        StoryReporterBuilder storyReporterBuilder = screenshotStoryReporterBuilder();
+        var configuration = new MostUsefulConfiguration();
+        var storyReporterBuilder = screenshotStoryReporterBuilder();
         configuration.useStoryReporterBuilder(storyReporterBuilder);
         configuration.useStoryPathResolver(removeStoryFromClassNameStoryPathResolver());
         configuration.useViewGenerator(new FreemarkerViewGenerator(new UnderscoredToCapitalized(), FreemarkerViewGenerator.class, StandardCharsets.UTF_8));
@@ -54,7 +54,7 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
 
     @Override
     public Embedder configuredEmbedder() {
-        Embedder embedder = super.configuredEmbedder();
+        var embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
         return embedder;
     }

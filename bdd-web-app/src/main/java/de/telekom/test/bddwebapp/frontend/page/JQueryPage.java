@@ -33,7 +33,7 @@ public abstract class JQueryPage extends Page {
             }
         };
 
-        Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+        var wait = new WebDriverWait(driver, 30);
         wait.until(noAjaxRequestActive);
     }
 

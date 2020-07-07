@@ -38,7 +38,7 @@ public class CurrentStory {
     }
 
     public String getStoryName() {
-        String storyPath = getStoryPath();
+        var storyPath = getStoryPath();
         if (storyPath == null) {
             return null;
         }
@@ -46,7 +46,7 @@ public class CurrentStory {
     }
 
     public Class getStoryClass() {
-        String storyName = getStoryName();
+        var storyName = getStoryName();
         if (storyName == null) {
             return null;
         }
@@ -64,20 +64,20 @@ public class CurrentStory {
     }
 
     private boolean isRestartBrowserBeforeScenarioBaseType() {
-        Class clazz = getStoryClass();
+        var clazz = getStoryClass();
         return clazz != null &&
                 customizingStories.getRestartBrowserBeforeScenarioBaseType() != null &&
                 customizingStories.getRestartBrowserBeforeScenarioBaseType().isAssignableFrom(clazz);
     }
 
     private boolean isRestartBrowserBeforeScenarioForCurrentStory() {
-        Class clazz = getStoryClass();
+        var clazz = getStoryClass();
         return clazz != null && stream(clazz.getAnnotations())
                 .anyMatch(a -> a.annotationType().equals(RestartBrowserBeforeScenario.class));
     }
 
     public Optional<Class<? extends WebDriverConfiguration>> getAlternativeWebDriverConfiguration() {
-        Class clazz = getStoryClass();
+        var clazz = getStoryClass();
         Annotation alternativeWebDriverConfiguration;
         if (clazz != null && (alternativeWebDriverConfiguration = clazz.getAnnotation(AlternativeWebDriverConfiguration.class)) != null) {
             return Optional.of(((AlternativeWebDriverConfiguration) alternativeWebDriverConfiguration).value());

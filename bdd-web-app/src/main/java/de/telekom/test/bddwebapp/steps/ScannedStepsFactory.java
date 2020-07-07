@@ -24,13 +24,13 @@ import static java.util.Comparator.comparingInt;
 public interface ScannedStepsFactory {
 
     default InjectableStepsFactory scannedStepsFactory() {
-        List<Object> steps = new ArrayList(getApplicationContext().getBeansWithAnnotation(Steps.class).values());
+        var steps = new ArrayList(getApplicationContext().getBeansWithAnnotation(Steps.class).values());
         return new InstanceStepsFactory(configuration(), steps);
     }
 
     default InjectableStepsFactory testLevelStepsFactory(int testLevel) {
-        List<Object> selectedSteps = new ArrayList<>();
-        List<Object> stepsMatchingTestLevel = getApplicationContext().getBeansWithAnnotation(Steps.class).values().stream()
+        var selectedSteps = new ArrayList<>();
+        var stepsMatchingTestLevel = getApplicationContext().getBeansWithAnnotation(Steps.class).values().stream()
                 .filter(step -> step.getClass().getAnnotation(Steps.class).testLevel() <= testLevel)
                 .collect(Collectors.toList());
         stepsMatchingTestLevel.forEach(currentStep -> stepsMatchingTestLevel.stream()
@@ -41,7 +41,7 @@ public interface ScannedStepsFactory {
     }
 
     default int getTestLevel() {
-        Integer testLevel = getApplicationContext().getEnvironment().getProperty("testLevel", Integer.class);
+        var testLevel = getApplicationContext().getEnvironment().getProperty("testLevel", Integer.class);
         if (testLevel == null) {
             return 0;
         }

@@ -58,8 +58,8 @@ public class ScreenshotCreator {
 
         try {
             log.info(format("Make Screenshot for story folder: \"{0}\" step: \"{1}\"", storyFolder, step));
-            String screenshotName = screenshotName(step, status);
-            String screenshotPath = screenshotPath(storyFolder, screenshotName);
+            var screenshotName = screenshotName(step, status);
+            var screenshotPath = screenshotPath(storyFolder, screenshotName);
 
             screenshotPath = webDriverWrapper.createScreenshot(screenshotPath);
             if (isNoneBlank(screenshotPath) && screenshotIsNotEmpty(screenshotPath)) {
@@ -85,8 +85,8 @@ public class ScreenshotCreator {
 
     protected boolean screenshotIsNotEmpty(String screenshotPath) {
         try {
-            BufferedImage bufferedImage = ImageIO.read(new FileInputStream(screenshotPath));
-            Raster raster = bufferedImage.getData();
+            var bufferedImage = ImageIO.read(new FileInputStream(screenshotPath));
+            var raster = bufferedImage.getData();
             return range(0, raster.getWidth()).anyMatch(x ->
                     range(0, raster.getHeight()).anyMatch(y -> bufferedImage.getRGB(x, y) != 0xFFFFFFFF));
         } catch (IOException e) {

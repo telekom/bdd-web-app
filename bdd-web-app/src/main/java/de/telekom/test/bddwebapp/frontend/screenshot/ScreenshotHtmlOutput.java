@@ -60,7 +60,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
     }
 
     protected boolean successfulScreenshot(String step) {
-        String screenshotPath = screenshotCreator.createScreenshot(currentStoryFolder, step, "successful");
+        var screenshotPath = screenshotCreator.createScreenshot(currentStoryFolder, step, "successful");
         if (isNoneBlank(screenshotPath)) {
             this.print(this.format("successfulWithScreenshot", "{0} {1}\n", screenshotPath, step));
             return true;
@@ -76,7 +76,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
     }
 
     protected boolean failedScreenshot(String step, Throwable storyFailure) {
-        String screenshotPath = screenshotCreator.createScreenshot(currentStoryFolder, step, "failed");
+        var screenshotPath = screenshotCreator.createScreenshot(currentStoryFolder, step, "failed");
         if (isNoneBlank(screenshotPath)) {
             String stackTrace = ExceptionUtils.getStackTrace(storyFailure.getCause());
             this.print(this.format("failedWithScreenshot", "{3} {0} ({1})\n({2})\n", step, "FAILED", stackTrace, screenshotPath));

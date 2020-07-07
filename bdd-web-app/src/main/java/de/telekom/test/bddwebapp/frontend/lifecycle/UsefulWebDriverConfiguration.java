@@ -28,7 +28,7 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
 
     @Override
     public FirefoxOptions firefoxOptions(DesiredCapabilities capabilities) {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        var firefoxOptions = new FirefoxOptions();
         if (isHeadless()) {
             getLogger().info("Firefox is set to headless mode");
             firefoxOptions.setHeadless(true);
@@ -40,7 +40,7 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
 
     @Override
     public ChromeOptions chromeOptions(DesiredCapabilities capabilities) {
-        ChromeOptions chromeOptions = new ChromeOptions();
+        var chromeOptions = new ChromeOptions();
         if (isHeadless()) {
             getLogger().info("Chrome is set to headless mode");
             chromeOptions.setHeadless(true);

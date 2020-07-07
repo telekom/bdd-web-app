@@ -96,7 +96,7 @@ interface Interaction {
     // -------------------------------------------------------------------------
 
     default void rememberObject(String entityKey, String objectKey, Object value) {
-        Object object = recall(entityKey);
+        var object = recall(entityKey);
 
         Map<String, Object> objectMap;
         if (object instanceof Map) {
@@ -129,12 +129,12 @@ interface Interaction {
     }
 
     default <S> S recallObject(String objectKey, String attributeKey) {
-        String key = objectKey + OBJECT_KEY_SEPARATOR + attributeKey;
+        var key = objectKey + OBJECT_KEY_SEPARATOR + attributeKey;
         return recall(key);
     }
 
     default <S> S recallObjectNotNull(String objectKey, String attributeKey) {
-        String key = objectKey + OBJECT_KEY_SEPARATOR + attributeKey;
+        var key = objectKey + OBJECT_KEY_SEPARATOR + attributeKey;
         return recallNotNull(key);
     }
 
@@ -155,7 +155,7 @@ interface Interaction {
     }
 
     default <S> Map<String, S> recallMapOrCreateNew(String key) {
-        Map<String, S> map = recallMap(key);
+        var map = recallMap(key);
         if (map == null) {
             remember(key, new HashMap<String, S>());
         }
@@ -171,7 +171,7 @@ interface Interaction {
     // -------------------------------------------------------------------------
 
     default <S> void rememberToList(String key, S value) {
-        List<S> list = recallListOrCreateNew(key);
+        var list = recallListOrCreateNew(key);
         list.add(value);
         remember(key, list);
     }
@@ -189,7 +189,7 @@ interface Interaction {
     }
 
     default <S> List<S> recallListOrCreateNew(String key) {
-        List<S> list = recallList(key);
+        var list = recallList(key);
         if (list == null) {
             remember(key, new ArrayList<S>());
         }

@@ -24,7 +24,7 @@ public class RequestInteractionFilter implements Filter {
     private final ScenarioInteraction scenarioInteraction;
 
     public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext ctx) {
-        Response response = ctx.next(requestSpec, responseSpec);
+        var response = ctx.next(requestSpec, responseSpec);
         scenarioInteraction.remember(ApiSteps.RESPONSE_INTERACTION_KEY, response);
         return response;
     }

@@ -39,16 +39,16 @@ public class BrowserDriverUpdater {
      * https://developer.github.com/v3/#rate-limiting
      */
     public void updateDriver() {
-        WebDriverConfiguration currentWebDriverConfiguration = webDriverWrapper.getCurrentWebDriverConfiguration();
-        String browser = currentWebDriverConfiguration.getBrowser();
-        DriverManagerType driverManagerType = mapToDriverManagerType(browser);
+        var currentWebDriverConfiguration = webDriverWrapper.getCurrentWebDriverConfiguration();
+        var browser = currentWebDriverConfiguration.getBrowser();
+        var driverManagerType = mapToDriverManagerType(browser);
         if (driverManagerType == null) {
             log.info("No driver update available for " + browser + " browser");
             return;
         }
         log.info("Update driver for " + browser);
 
-        WebDriverManager webDriverManager = WebDriverManager.getInstance(driverManagerType);
+        var webDriverManager = WebDriverManager.getInstance(driverManagerType);
         if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
             webDriverManager.proxy(proxyHost + ":" + proxyPort);
         }

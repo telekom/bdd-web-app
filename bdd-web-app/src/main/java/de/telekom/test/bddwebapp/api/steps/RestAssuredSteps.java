@@ -40,7 +40,7 @@ public interface RestAssuredSteps {
     }
 
     default RequestSpecification createRequest() {
-        RequestSpecification request = given().log().all().expect().log().all().request();
+        var request = given().log().all().expect().log().all().request();
         rememberRequest(request);
         return request;
     }
@@ -59,11 +59,11 @@ public interface RestAssuredSteps {
     }
 
     default RequestSpecification baseUri(String host, String apiPath) {
-        RequestSpecification requestSpecification = recallRequest();
+        var requestSpecification = recallRequest();
         try {
-            URI baseURI = new URI(host);
+            var baseURI = new URI(host);
             requestSpecification.baseUri(baseURI.toString()).basePath(apiPath);
-            int port = baseURI.getPort() > 0 ? baseURI.getPort() : determineStandardPortForScheme(baseURI.getScheme());
+            var port = baseURI.getPort() > 0 ? baseURI.getPort() : determineStandardPortForScheme(baseURI.getScheme());
             requestSpecification.port(port);
         } catch (Exception ex) {
             throw new RuntimeException("Error setting baseUri for recallRequest", ex);
@@ -94,12 +94,12 @@ public interface RestAssuredSteps {
     }
 
     default RequestSpecification jsonConfig() {
-        RestAssuredConfig restAssuredConfig = new RestAssuredConfig()
+        var restAssuredConfig = new RestAssuredConfig()
                 .decoderConfig(new DecoderConfig("UTF-8"))
                 .encoderConfig(new EncoderConfig("UTF-8", "UTF-8"))
                 .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
 
-        RequestSpecification requestSpecification = recallRequest();
+        var requestSpecification = recallRequest();
         requestSpecification.config(restAssuredConfig);
         requestSpecification.header("Accept", ContentType.JSON.toString());
         requestSpecification.header("Content-Type", ContentType.JSON.toString());

@@ -42,7 +42,7 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
 
     @Override
     public Configuration configuration() {
-        Configuration configuration = new MostUsefulConfiguration();
+        var configuration = new MostUsefulConfiguration();
         configuration.useStoryReporterBuilder(screenshotStoryReporterBuilder());
         configuration.useStoryPathResolver(removeStoryFromClassNameStoryPathResolver());
         configuration.useViewGenerator(new FreemarkerViewGenerator(new UnderscoredToCapitalized(), FreemarkerViewGenerator.class, StandardCharsets.UTF_8));
@@ -56,7 +56,7 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
 
     @Override
     public Embedder configuredEmbedder() {
-        Embedder embedder = super.configuredEmbedder();
+        var embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
 
         // deactivate view generation for single story runs to prevent false positive
@@ -75,12 +75,12 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
 
     public boolean isExecutedByJUnitRunner() {
         // the test class here is a indicator that the story is run by maven build and not by junit-class
-        String testClass = System.getProperty("test");
+        var testClass = System.getProperty("test");
         return isBlank(testClass);
     }
 
     public Optional<String> metaFilters() {
-        String metaFilters = System.getProperty("metaFilters");
+        var metaFilters = System.getProperty("metaFilters");
         return Optional.ofNullable(metaFilters);
     }
 

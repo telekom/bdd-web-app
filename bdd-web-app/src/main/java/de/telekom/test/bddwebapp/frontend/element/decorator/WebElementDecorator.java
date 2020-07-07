@@ -33,7 +33,7 @@ public class WebElementDecorator implements FieldDecorator {
     private final WebDriver webDriver;
 
     public Object decorate(ClassLoader loader, Field field) {
-        DefaultElementLocatorFactory defaultElementLocatorFactory = new DefaultElementLocatorFactory(webDriver);
+        var defaultElementLocatorFactory = new DefaultElementLocatorFactory(webDriver);
         if (isWebElementEnhanced(field)) {
             return getEnhancedObject(field, defaultElementLocatorFactory);
         }
@@ -55,9 +55,9 @@ public class WebElementDecorator implements FieldDecorator {
     }
 
     protected Object getEnhancedObject(Field field, DefaultElementLocatorFactory defaultElementLocatorFactory) {
-        Enhancer e = new Enhancer();
+        var e = new Enhancer();
         e.setSuperclass(field.getType());
-        ElementLocator locator = defaultElementLocatorFactory.createLocator(field);
+        var locator = defaultElementLocatorFactory.createLocator(field);
         e.setCallback(new WebElementHandler(webDriver, locator));
         return e.create();
     }

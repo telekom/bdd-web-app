@@ -49,7 +49,7 @@ public class WebElementHandler implements MethodInterceptor {
     }
 
     protected Object invokeWebElementEnhanced(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        WebElementEnhanced webElementEnhanced = (WebElementEnhanced) o;
+        var webElementEnhanced = (WebElementEnhanced) o;
         if (!"setWebDriver".equals(method.getName())) {
             webElementEnhanced.setWebDriver(webDriver);
         }
@@ -65,11 +65,11 @@ public class WebElementHandler implements MethodInterceptor {
     }
 
     protected Object invokeListContainingWebElementEnhanced(Object[] objects, MethodProxy methodProxy) throws Throwable {
-        List<WebElementEnhanced> webElementEnhanceds = locator.findElements().stream()
+        var webElementEnhancedList = locator.findElements().stream()
                 .map(webElement -> new WebElementEnhanced(webElement, webDriver))
                 .collect(toList());
         try {
-            return methodProxy.invoke(webElementEnhanceds, objects);
+            return methodProxy.invoke(webElementEnhancedList, objects);
         } catch (InvocationTargetException e) {
             throw e.getCause();
         }

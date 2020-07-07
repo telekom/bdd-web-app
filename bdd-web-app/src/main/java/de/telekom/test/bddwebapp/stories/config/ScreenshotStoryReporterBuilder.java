@@ -19,7 +19,7 @@ import org.springframework.context.ApplicationContext;
 public interface ScreenshotStoryReporterBuilder {
 
     default StoryReporterBuilder screenshotStoryReporterBuilder() {
-        Format screenshotReportForm = getApplicationContext().getBean(ScreenshotReportForm.class);
+        var screenshotReportForm = getApplicationContext().getBean(ScreenshotReportForm.class);
         return new StoryReporterBuilder()
                 .withFormats(Format.STATS, screenshotReportForm)
                 .withCodeLocation(CodeLocations.codeLocationFromClass(getClass()))
