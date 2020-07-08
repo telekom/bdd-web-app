@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11-jdk-alpine
 
 COPY target/testdata-sim.jar testdata-sim.jar
 ENTRYPOINT java $JAVA_OPTS -jar /testdata-sim.jar $MAIN_OPTS
