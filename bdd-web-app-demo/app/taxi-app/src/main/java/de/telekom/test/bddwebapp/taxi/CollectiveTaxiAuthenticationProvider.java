@@ -31,11 +31,11 @@ public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvi
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String name = authentication.getName();
-        String password = getPassword(authentication);
-        List<GrantedAuthority> grantedAuths = new ArrayList<>();
+        var name = authentication.getName();
+        var password = getPassword(authentication);
+        var grantedAuths = new ArrayList<GrantedAuthority>();
         grantedAuths.add(ROLE_USER);
-        UsernamePasswordAuthenticationToken passwordAuthenticationToken = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+        var passwordAuthenticationToken = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
         if (!isPasswordValid(name, password)) {
             passwordAuthenticationToken.setAuthenticated(false);
             passwordAuthenticationToken.setDetails("username_password_invalid");

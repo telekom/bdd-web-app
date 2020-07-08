@@ -34,7 +34,7 @@ public class TestDataController {
 
     @PostMapping("reservation")
     public ReservationVO createExampleReservation(@RequestParam String earliestStartTime, @RequestParam String latestStartTime) {
-        ReservationVO reservation = testDataBuilder.createExampleReservation(earliestStartTime, latestStartTime);
+        var reservation = testDataBuilder.createExampleReservation(earliestStartTime, latestStartTime);
         reservationSimulatorConfig.setCurrentReservation(reservation);
         return reservationSimulatorConfig.getCurrentReservation();
     }

@@ -34,12 +34,12 @@ public class ReservationService {
 
     @Transactional
     public void saveReservation(String username, ReservationVO reservationVO) {
-        User user = getUser(username);
+        var user = getUser(username);
 
         // only one reservation at a time
         reservationRepository.deleteByUser(user);
 
-        Reservation reservation = new Reservation();
+        var reservation = new Reservation();
         copyProperties(reservationVO, reservation);
         reservation.setUser(user);
         reservation.setCreationDate(new Date());
@@ -47,13 +47,13 @@ public class ReservationService {
     }
 
     public ReservationVO getReservation(String username) {
-        User user = getUser(username);
-        List<Reservation> reservations = reservationRepository.findByUser(user);
+        var user = getUser(username);
+        var reservations = reservationRepository.findByUser(user);
         if (reservations.isEmpty()) {
             return null;
         }
-        Reservation reservation = reservations.get(0);
-        ReservationVO reservationVO = new ReservationVO();
+        var reservation = reservations.get(0);
+        var reservationVO = new ReservationVO();
         copyProperties(reservation, reservationVO);
         return reservationVO;
     }

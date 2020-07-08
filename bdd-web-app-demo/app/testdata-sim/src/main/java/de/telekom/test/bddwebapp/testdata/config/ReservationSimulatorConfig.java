@@ -39,7 +39,7 @@ public class ReservationSimulatorConfig {
     }
 
     public void updatePrice(ReservationPriceVO givenPrice) {
-        List<ReservationPriceVO> reservationPrices = getCurrentReservation().getReservationPrices();
+        var reservationPrices = getCurrentReservation().getReservationPrices();
         reservationPrices.removeIf(currentPrice -> currentPrice.getStartTime().equals(givenPrice.getStartTime()));
         reservationPrices.add(givenPrice);
     }

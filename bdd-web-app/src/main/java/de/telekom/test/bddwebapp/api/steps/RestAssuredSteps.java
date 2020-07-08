@@ -71,7 +71,7 @@ public interface RestAssuredSteps {
         return requestSpecification;
     }
 
-    default int determineStandardPortForScheme(String scheme) {
+    private int determineStandardPortForScheme(String scheme) {
         if (scheme.equalsIgnoreCase("https")) {
             return 443;
         } else {

@@ -20,7 +20,7 @@ public class ReadinessStatus {
     }
 
     public SystemReadinessStatus getStatus(String systemName) {
-        SystemReadinessStatus systemReadinessStatus = systemStatusMap.get(systemName);
+        var systemReadinessStatus = systemStatusMap.get(systemName);
         if (systemReadinessStatus == null) {
             log.warn("Unknown status for system [{}]", systemName);
             systemReadinessStatus = new SystemReadinessStatus(true);

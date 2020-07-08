@@ -35,21 +35,21 @@ public class TestDataBuilder {
     private String taxiAppUrl;
 
     public RegistrationVO createNewUser() {
-        HttpHeaders headers = new HttpHeaders();
+        var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        var map = new LinkedMultiValueMap<String, String>();
         map.add("firstName", "Hans");
         map.add("lastName", "Müller");
         map.add("username", randomNumeric(8) + "@user.de");
         map.add("password", "password");
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+        var request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(taxiAppUrl + "/registration", request, String.class);
+        var response = restTemplate.postForEntity(taxiAppUrl + "/registration", request, String.class);
         if (!response.getStatusCode().is3xxRedirection()) {
             throw new RuntimeException("Error creation user test data!");
         }
 
-        RegistrationVO registration = new RegistrationVO();
+        var registration = new RegistrationVO();
         registration.setFirstName(map.getFirst("firstName"));
         registration.setLastName(map.getFirst("lastName"));
         registration.setUsername(map.getFirst("username"));
@@ -58,8 +58,8 @@ public class TestDataBuilder {
     }
 
     public ReservationVO createExampleReservation(String earliestStartTime, String latestStartTime) {
-        ReservationVO reservation = new ReservationVO();
-        Date tomorrow = new Date(new Date().getTime() + 86400000L);
+        var reservation = new ReservationVO();
+        var tomorrow = new Date(new Date().getTime() + 86400000L);
         reservation.setDate(new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
         reservation.setDeparture("Alexanderplatz, Berlin");
         reservation.setDestination("Flughafen Berlin-Tegel");

@@ -67,7 +67,7 @@ public interface WebDriverConfiguration {
         return new DesiredCapabilities();
     }
 
-    default boolean isRemoteWebdriver() {
+    private boolean isRemoteWebdriver() {
         return StringUtils.isNotBlank(getGridURL());
     }
 
@@ -266,7 +266,7 @@ public interface WebDriverConfiguration {
         return null;
     }
 
-    default Logger getLogger() {
+    private Logger getLogger() {
         return LoggerFactory.getLogger(WebDriverConfiguration.class);
     }
 
