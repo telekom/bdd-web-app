@@ -48,16 +48,6 @@ docker-build-testdata-sim:
     - docker build --pull --tag ${CI_REGISTRY_IMAGE}/sim:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_URL --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file bdd-web-app-demo/app/testdata-sim/Dockerfile  ./bdd-web-app-demo/app/testdata-sim/
     - docker push ${CI_REGISTRY_IMAGE}/sim:${IMAGE_TAG}
 
-docker-build-smoketests:
-  stage: package
-  image: docker:stable
-  tags:
-    - run_docker
-  script:
-    - docker login --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD} ${CI_REGISTRY}
-    - docker build --pull --tag ${CI_REGISTRY_IMAGE}/smoketests:${IMAGE_TAG} --build-arg BUILD_NO --build-arg GIT_BRANCH --build-arg GIT_HASH --build-arg IMAGE_TAG --build-arg CONTAINER_REGISTRY --file bdd-web-app-demo/test/taxi-test-docker-smoketest/Dockerfile  ./bdd-web-app-demo/test/taxi-test-docker-smoketest/
-    - docker push ${CI_REGISTRY_IMAGE}/smoketests:${IMAGE_TAG}
-
 version:
   stage: version
   image: alpine
