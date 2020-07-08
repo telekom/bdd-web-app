@@ -22,13 +22,10 @@ maven-build:
   script:
     - mvn install -f bdd-web-app-demo/app/taxi-app/pom.xml
     - mvn install -f bdd-web-app-demo/app/testdata-sim/pom.xml
-    - mvn install -f bdd-web-app-demo/test/taxi-test/pom.xml -DskipTests=true
-    - mvn install -f bdd-web-app-demo/test/taxi-test-docker-smoketest/pom.xml -DskipTests=true
   artifacts:
     paths:
       - bdd-web-app-demo/app/taxi-app/target/taxi-app.jar
       - bdd-web-app-demo/app/testdata-sim/target/testdata-sim.jar
-      - bdd-web-app-demo/test/taxi-test-docker-smoketest/target/smoke-tests.jar
     expire_in: 1 week
 
 docker-build-taxi-app:
