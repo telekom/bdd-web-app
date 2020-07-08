@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.screenshot;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.jbehave.core.failures.PendingStepFound;
 import org.jbehave.core.model.Story;
@@ -20,6 +21,7 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Slf4j
 public class ScreenshotHtmlOutput extends HtmlOutput {
 
     protected final boolean screenshotsOnSuccess;
@@ -54,6 +56,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
 
     @Override
     public void successful(String step) {
+        log.info("Successful execution of step: \"" + step + "\"");
         if (!screenshotsOnSuccess || !step.contains("Then") || !successfulScreenshot(step)) {
             super.successful(step);
         }
@@ -70,6 +73,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
 
     @Override
     public void failed(String step, Throwable storyFailure) {
+        log.info("Failed execution of step: \"" + step + "\"");
         if (storyFailure instanceof PendingStepFound || !failedScreenshot(step, storyFailure)) {
             super.failed(step, storyFailure);
         }
