@@ -19,7 +19,6 @@ public class RunAllTestlevel0TaxiStories extends RunAllStories {
 
     @Override
     public Configuration configuration() {
-        System.setProperty("testLevel", "0");
         return super.configuration();
     }
 

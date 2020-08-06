@@ -1,7 +1,7 @@
 Narrative:
 As a framwork user
 I would like to write test steps for test level 1 only
-to implement the same steps for other test levels different
+in order to implement the same steps for other test levels different
 
 Scenario: Successful login
 Given registered user as user

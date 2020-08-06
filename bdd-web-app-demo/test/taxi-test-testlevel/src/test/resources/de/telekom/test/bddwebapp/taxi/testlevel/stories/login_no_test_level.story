@@ -1,7 +1,7 @@
 Narrative:
 As a framwork user
 I would like to write test steps for every test level
-to reuse test steps on different environments
+in order to reuse test steps on different environments
 
 Scenario: Successful login
 Given registered user as user
