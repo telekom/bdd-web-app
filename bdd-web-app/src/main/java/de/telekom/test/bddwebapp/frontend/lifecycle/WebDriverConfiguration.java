@@ -75,7 +75,7 @@ public interface WebDriverConfiguration {
         DesiredCapabilities remoteWebDriverCapabilities = new DesiredCapabilities();
         remoteWebDriverCapabilities.setJavascriptEnabled(true);
         remoteWebDriverCapabilities.merge(capabilities);
-        return capabilities;
+        return remoteWebDriverCapabilities;
     }
 
     default WebDriver loadRemoteWebdriver(DesiredCapabilities capabilities) {
