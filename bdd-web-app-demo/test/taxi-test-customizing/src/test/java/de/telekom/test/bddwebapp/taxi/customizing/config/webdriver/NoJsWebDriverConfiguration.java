@@ -1,31 +1,20 @@
 package de.telekom.test.bddwebapp.taxi.customizing.config.webdriver;
 
 import de.telekom.test.bddwebapp.frontend.lifecycle.UsefulWebDriverConfiguration;
-import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Component
 @Slf4j
 public class NoJsWebDriverConfiguration extends UsefulWebDriverConfiguration {
 
     @Override
-    public ChromeOptions chromeOptions(DesiredCapabilities capabilities) {
-        log.info("Use alternative WebDriverConfiguration: noJsWebDriverConfiguration");
-
-        var chromeOptions = super.chromeOptions(capabilities);
-        var chromePrefs = new HashMap<>();
-        chromePrefs.put("profile.default_content_setting_values.javascript", 2);
-        chromeOptions.setExperimentalOption("prefs", chromePrefs);
-        return chromeOptions;
+    public DesiredCapabilities extraCapabilities(String browser) {
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        desiredCapabilities.setCapability(CapabilityType.SUPPORTS_JAVASCRIPT, false);
+        return desiredCapabilities;
     }
 
     @Override

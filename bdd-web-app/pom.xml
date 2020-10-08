@@ -17,7 +17,7 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Long-term dependencies. Update major version only when necessary. -->
-        <spring.version>5.1.16.RELEASE</spring.version> <!-- usable with spring-boot-starter-test 2.1.x -->
+        <spring.version>5.1.18.RELEASE</spring.version> <!-- usable with spring-boot-starter-test 2.1.x -->
         <restassured.version>4.3.1</restassured.version>
         <cglib.version>3.3.0</cglib.version>
         <logback-classic.version>1.2.3</logback-classic.version>
@@ -26,15 +26,15 @@
 
         <!-- Short-term dependencies. Update when new version is available. -->
         <selenium.version>3.141.59</selenium.version>
-        <htmlunit.version>2.41.0</htmlunit.version>
-        <webdrivermanager.version>4.0.0</webdrivermanager.version>
+        <htmlunit.version>2.44.0</htmlunit.version>
+        <webdrivermanager.version>4.2.2</webdrivermanager.version>
         <jbehave.version>4.6.3</jbehave.version>
         <jbehave-site-resources.version>3.3.1</jbehave-site-resources.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
 
         <!-- Unit test dependencies -->
         <spock-core.version>2.0-M3-groovy-3.0</spock-core.version>
-        <byte-buddy.version>1.10.13</byte-buddy.version>
+        <byte-buddy.version>1.10.16</byte-buddy.version>
         <objenesis.version>3.1</objenesis.version>
 
         <!-- Deploy dependencies -->
