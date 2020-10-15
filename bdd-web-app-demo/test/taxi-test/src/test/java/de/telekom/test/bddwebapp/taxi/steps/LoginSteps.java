@@ -29,16 +29,6 @@ public class LoginSteps extends AbstractTaxiSteps {
     @Autowired
     private RegistrationSteps registrationSteps;
 
-    @Autowired
-    private CurrentStory currentStory;
-
-    @BeforeStory
-    public void sadas() {
-        Meta storyMetaData = currentStory.getStoryMetaData();
-        if (!storyMetaData.isEmpty())
-            System.out.println(storyMetaData.toString());
-    }
-
     @Given("the opened login page")
     public void theOpenedLoginPage() {
         theUserOpensTheLoginPage();
