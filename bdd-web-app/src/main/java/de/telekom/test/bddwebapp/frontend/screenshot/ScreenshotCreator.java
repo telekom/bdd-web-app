@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

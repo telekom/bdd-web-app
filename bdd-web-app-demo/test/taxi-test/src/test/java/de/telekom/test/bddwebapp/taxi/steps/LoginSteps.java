@@ -1,10 +1,13 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.taxi.pages.LoginPage;
+import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.Meta;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
@@ -25,6 +28,16 @@ public class LoginSteps extends AbstractTaxiSteps {
 
     @Autowired
     private RegistrationSteps registrationSteps;
+
+    @Autowired
+    private CurrentStory currentStory;
+
+    @BeforeStory
+    public void sadas() {
+        Meta storyMetaData = currentStory.getStoryMetaData();
+        if (!storyMetaData.isEmpty())
+            System.out.println(storyMetaData.toString());
+    }
 
     @Given("the opened login page")
     public void theOpenedLoginPage() {

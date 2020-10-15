@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.screenshot;
 
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.jbehave.core.failures.PendingStepFound;
@@ -26,14 +27,17 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
 
     protected final boolean screenshotsOnSuccess;
     protected final ScreenshotCreator screenshotCreator;
+    protected final CurrentStory currentStory;
 
     protected String currentStoryFolder;
 
     public ScreenshotHtmlOutput(PrintStream output, StoryReporterBuilder reporterBuilder,
-                                boolean screenshotsOnSuccess, ScreenshotCreator screenshotCreator) {
+                                boolean screenshotsOnSuccess, ScreenshotCreator screenshotCreator,
+                                CurrentStory currentStory) {
         super(output, reporterBuilder.keywords());
         this.screenshotsOnSuccess = screenshotsOnSuccess;
         this.screenshotCreator = screenshotCreator;
+        this.currentStory = currentStory;
         successScreenshotPattern();
         failedScreenshotPattern();
     }
@@ -52,6 +56,7 @@ public class ScreenshotHtmlOutput extends HtmlOutput {
     public void beforeStory(Story story, boolean givenStory) {
         super.beforeStory(story, givenStory);
         currentStoryFolder = story.getName() + "_" + new Date().getTime();
+        currentStory.setStoryMetaData(story.getMeta());
     }
 
     @Override

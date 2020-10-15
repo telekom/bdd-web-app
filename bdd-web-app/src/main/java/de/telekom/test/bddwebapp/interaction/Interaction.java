@@ -31,7 +31,7 @@ interface Interaction {
     /**
      * Store some data in the interaction context for later use. Use enum as key.
      *
-     * @param key interaction key
+     * @param key   interaction key
      * @param value interaction value
      */
     default void remember(Enum key, Object value) {

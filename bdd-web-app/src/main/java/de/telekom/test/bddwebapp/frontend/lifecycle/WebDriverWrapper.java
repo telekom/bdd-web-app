@@ -30,13 +30,10 @@ import static java.util.Optional.ofNullable;
 public class WebDriverWrapper {
 
     public static Class<? extends WebDriverConfiguration> DEFAULT_WEB_DRIVER_CONFIGURATION = UsefulWebDriverConfiguration.class;
-
+    private final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    private final ThreadLocal<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = new ThreadLocal<>();
     @Autowired
     private List<WebDriverConfiguration> webDriverConfigurations;
-
-    private final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
-
-    private final ThreadLocal<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = new ThreadLocal<>();
 
     public WebDriver getDriver() {
         var webDriver = this.webDriver.get();

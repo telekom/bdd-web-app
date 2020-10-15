@@ -6,7 +6,6 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingInt;

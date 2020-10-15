@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.frontend.screenshot;
 
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
+import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import org.jbehave.core.reporters.FilePrintStreamFactory;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporter;
@@ -27,6 +28,9 @@ public class ScreenshotReportForm extends Format {
     @Autowired
     private WebDriverWrapper webDriverWrapper;
 
+    @Autowired
+    private CurrentStory currentStory;
+
     public ScreenshotReportForm() {
         super("HTML");
     }
@@ -35,7 +39,8 @@ public class ScreenshotReportForm extends Format {
     public StoryReporter createStoryReporter(FilePrintStreamFactory factory, StoryReporterBuilder builder) {
         factory.useConfiguration(builder.fileConfiguration("html"));
         var screenshotCreator = new ScreenshotCreator(builder, webDriverWrapper);
-        var screenshotHtmlOutput = new ScreenshotHtmlOutput(factory.createPrintStream(), builder, Boolean.parseBoolean(screenshotsOnSuccess), screenshotCreator);
+        var screenshotHtmlOutput = new ScreenshotHtmlOutput(factory.createPrintStream(), builder,
+                Boolean.parseBoolean(screenshotsOnSuccess), screenshotCreator, currentStory);
         return screenshotHtmlOutput.doReportFailureTrace(builder.reportFailureTrace()).doCompressFailureTrace(builder.compressFailureTrace());
     }
 

@@ -3,6 +3,7 @@ package de.telekom.test.bddwebapp.stories.customizing;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import de.telekom.test.bddwebapp.steps.RestartBrowserBeforeScenario;
 import de.telekom.test.bddwebapp.stories.config.AlternativeWebDriverConfiguration;
+import org.jbehave.core.model.Meta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,10 +25,11 @@ import static java.util.Arrays.stream;
 @Component
 public class CurrentStory {
 
+    private final ThreadLocal<String> storyPath = new ThreadLocal<>();
+    private final ThreadLocal<Meta> storyMetaData = new ThreadLocal<>();
+
     @Autowired
     private CustomizingStories customizingStories;
-
-    private final ThreadLocal<String> storyPath = new ThreadLocal<>();
 
     public String getStoryPath() {
         return storyPath.get();
@@ -35,6 +37,14 @@ public class CurrentStory {
 
     public void setStoryPath(String storyPath) {
         this.storyPath.set(storyPath);
+    }
+
+    public Meta getStoryMetaData() {
+        return storyMetaData.get();
+    }
+
+    public void setStoryMetaData(Meta storyMetaData) {
+        this.storyMetaData.set(storyMetaData);
     }
 
     public String getStoryName() {

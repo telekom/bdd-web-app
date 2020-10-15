@@ -1,15 +1,12 @@
 package de.telekom.test.bddwebapp.frontend.steps;
 
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
-import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentStory;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import org.jbehave.core.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Optional;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests

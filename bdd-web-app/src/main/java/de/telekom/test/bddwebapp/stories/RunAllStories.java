@@ -12,7 +12,6 @@ import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.io.UnderscoredToCapitalized;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.FreemarkerViewGenerator;
-import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;

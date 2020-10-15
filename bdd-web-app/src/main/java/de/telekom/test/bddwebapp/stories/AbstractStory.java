@@ -60,7 +60,7 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
 
         // deactivate view generation for single story runs to prevent false positive
-        if(isExecutedByJUnitRunner()){
+        if (isExecutedByJUnitRunner()) {
             embedder.embedderControls().doGenerateViewAfterStories(false);
         }
 
