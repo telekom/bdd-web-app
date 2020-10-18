@@ -26,7 +26,7 @@ public class CustomizingStoryPathResolver extends UnderscoredCamelCaseResolver {
     }
 
     protected String resolveName(Class<? extends Embeddable> embeddableClass) {
-        String path = super.resolveName(embeddableClass);
+        var path = super.resolveName(embeddableClass);
         getStoryClasses().setStoryClass(embeddableClass, path);
         return path;
     }

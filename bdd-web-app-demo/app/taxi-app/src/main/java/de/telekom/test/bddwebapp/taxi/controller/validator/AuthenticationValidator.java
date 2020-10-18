@@ -18,11 +18,11 @@ import java.security.Principal;
 public class AuthenticationValidator {
 
     public boolean isAuthenticated(Principal principal, Model model) {
-        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) principal;
+        var authenticationToken = (UsernamePasswordAuthenticationToken) principal;
         if (authenticationToken == null || !StringUtils.hasText(authenticationToken.getName())) {
             return false;
         }
-        boolean authenticated = authenticationToken.isAuthenticated();
+        var authenticated = authenticationToken.isAuthenticated();
         if (!authenticated) {
             model.addAttribute("usernamePasswordInvalid", authenticationToken.getDetails() != null && authenticationToken.getDetails().toString().contains("username_password_invalid"));
         }

@@ -80,8 +80,8 @@ public class ReservationPage extends JQueryPage {
     }
 
     public String getPriceBetweenStartAndEndTime(String startTime, String endTime, String passengers) {
-        WebElement reservationTable = reservationDiv.findElement(By.className("table"));
-        List<WebElement> tableRows = reservationTable.findElements(By.tagName("tr"));
+        var reservationTable = reservationDiv.findElement(By.className("table"));
+        var tableRows = reservationTable.findElements(By.tagName("tr"));
         for (WebElement tableRow : tableRows) {
             List<WebElement> tableCols = tableRow.findElements(By.tagName("td"));
             if (tableCols.isEmpty()) continue; // head
@@ -100,7 +100,7 @@ public class ReservationPage extends JQueryPage {
     }
 
     public boolean javaScriptIsDisabled() {
-        String currentUrl = driver.getCurrentUrl();
+        var currentUrl = driver.getCurrentUrl();
         return currentUrl.contains("?") && currentUrl.contains("date")
                 && currentUrl.contains("earliestStartTime") && currentUrl.contains("latestStartTime");
     }

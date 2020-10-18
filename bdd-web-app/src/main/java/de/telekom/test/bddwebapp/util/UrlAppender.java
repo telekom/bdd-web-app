@@ -13,16 +13,15 @@ import java.util.Map;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-
 public class UrlAppender {
 
     private UrlAppender() {
     }
 
     public static String appendUrl(String url, String... appenders) {
-        StringBuilder urlBuilder = new StringBuilder(url);
-        for (String appender : appenders) {
-            boolean alreadyAppended = false;
+        var urlBuilder = new StringBuilder(url);
+        for (var appender : appenders) {
+            var alreadyAppended = false;
             if (urlBuilder.toString().endsWith("/") && appender.startsWith("/")) {
                 urlBuilder.append(StringUtils.substring(appender, 1));
                 alreadyAppended = true;
@@ -41,8 +40,8 @@ public class UrlAppender {
 
     public static String appendQueryParams(String url, Map<String, String> queryParams) {
         if (queryParams != null && queryParams.size() > 0) {
-            StringBuilder query = new StringBuilder();
-            boolean isFirstparameter = true;
+            var query = new StringBuilder();
+            var isFirstparameter = true;
             for (String key : queryParams.keySet()) {
                 if (isFirstparameter) {
                     isFirstparameter = false;

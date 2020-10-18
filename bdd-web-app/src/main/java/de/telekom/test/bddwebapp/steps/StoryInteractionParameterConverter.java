@@ -38,7 +38,7 @@ public class StoryInteractionParameterConverter {
     }
 
     public List<Map<String, String>> getRowsWithInteractionKey(ExamplesTable examplesTable) {
-        List<Map<String, String>> rows = examplesTable.getRows();
+        var rows = examplesTable.getRows();
         rows.forEach(map -> map.entrySet()
                 .forEach(entry -> entry.setValue(getValueFromKeyOrValueOrConcatenated(entry.getValue()))));
         return rows;
@@ -66,7 +66,7 @@ public class StoryInteractionParameterConverter {
     }
 
     protected String getStoryInteractionValue(String key) {
-        String value = storyInteraction.recallNotNull(key).toString();
+        var value = storyInteraction.recallNotNull(key).toString();
         // get list values as comma separated list, e.g. [value] is value or [value1,value2] is value1,value2
         if (value.startsWith("[") && value.endsWith("]")) {
             value = value.substring(1, value.length() - 1);

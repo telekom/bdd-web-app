@@ -30,16 +30,13 @@ import static java.util.Optional.ofNullable;
 public class WebDriverWrapper {
 
     public static Class<? extends WebDriverConfiguration> DEFAULT_WEB_DRIVER_CONFIGURATION = UsefulWebDriverConfiguration.class;
-
+    private final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
+    private final ThreadLocal<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = new ThreadLocal<>();
     @Autowired
     private List<WebDriverConfiguration> webDriverConfigurations;
 
-    private final ThreadLocal<WebDriver> webDriver = new ThreadLocal<>();
-
-    private final ThreadLocal<Class<? extends WebDriverConfiguration>> alternativeWebDriverConfiguration = new ThreadLocal<>();
-
     public WebDriver getDriver() {
-        WebDriver webDriver = this.webDriver.get();
+        var webDriver = this.webDriver.get();
         if (webDriver == null) {
             loadWebdriver();
         }
@@ -81,7 +78,7 @@ public class WebDriverWrapper {
     }
 
     public void loadWebdriver() {
-        WebDriverConfiguration webDriverConfiguration = getCurrentWebDriverConfiguration();
+        var webDriverConfiguration = getCurrentWebDriverConfiguration();
         setDriver(webDriverConfiguration.loadWebdriver());
         webDriverConfiguration.afterLoad(webDriver.get());
     }
@@ -112,8 +109,8 @@ public class WebDriverWrapper {
                 log.error("Can not create screenshots for htmlunit!");
                 return null;
             }
-            File screenshot = ((TakesScreenshot) webDriver.get()).getScreenshotAs(OutputType.FILE);
-            File destFile = new File(path);
+            var screenshot = ((TakesScreenshot) webDriver.get()).getScreenshotAs(OutputType.FILE);
+            var destFile = new File(path);
             FileUtils.copyFile(screenshot, destFile);
             return destFile.getAbsolutePath();
         } catch (Exception e) {

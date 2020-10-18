@@ -5,14 +5,12 @@ import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.io.StoryPathResolver;
 import org.junit.Ignore;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toList;
@@ -31,10 +29,10 @@ import static org.springframework.util.ClassUtils.resolveClassName;
 public interface ScannedStoryPaths {
 
     default List<String> scannedStoryPaths() {
-        ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
+        var provider = new ClassPathScanningCandidateComponentProvider(false);
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
         provider.addExcludeFilter(new AnnotationTypeFilter(Ignore.class));
-        Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
+        var components = provider.findCandidateComponents(storiesBasePath());
         StoryPathResolver storyPathResolver = configuration().storyPathResolver();
         return components.stream()
                 .map(beanDefinition -> resolveClassName(requireNonNull(beanDefinition.getBeanClassName()), getDefaultClassLoader()))
@@ -43,11 +41,11 @@ public interface ScannedStoryPaths {
     }
 
     default List<String> testLevelStoryPaths(int testLevel) {
-        ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
+        var provider = new ClassPathScanningCandidateComponentProvider(false);
         provider.addIncludeFilter(new AssignableTypeFilter(AbstractStory.class));
         provider.addExcludeFilter(new AnnotationTypeFilter(Ignore.class));
-        Set<BeanDefinition> components = provider.findCandidateComponents(storiesBasePath());
-        StoryPathResolver storyPathResolver = configuration().storyPathResolver();
+        var components = provider.findCandidateComponents(storiesBasePath());
+        var storyPathResolver = configuration().storyPathResolver();
         return components.stream()
                 .map(beanDefinition -> resolveClassName(requireNonNull(beanDefinition.getBeanClassName()), getDefaultClassLoader()))
                 .filter(aClass -> {

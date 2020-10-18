@@ -51,7 +51,7 @@ public class StoryInteraction extends FlatInteraction {
 
     @Bean(destroyMethod = "destroy")
     public ThreadLocalTargetSource threadLocalStoryInteraction() {
-        ThreadLocalTargetSource result = new ThreadLocalTargetSource();
+        var result = new ThreadLocalTargetSource();
         result.setTargetBeanName("storyInteraction");
         return result;
     }
@@ -60,7 +60,7 @@ public class StoryInteraction extends FlatInteraction {
     @Primary
     @Bean(name = "proxiedThreadLocalTargetSourceStoryInteraction")
     public ProxyFactoryBean proxiedThreadLocalTargetSourceStoryInteraction(@Qualifier("threadLocalStoryInteraction") ThreadLocalTargetSource threadLocalStoryInteraction) {
-        ProxyFactoryBean result = new ProxyFactoryBean();
+        var result = new ProxyFactoryBean();
         result.setProxyTargetClass(true);
         result.setTargetSource(threadLocalStoryInteraction);
         return result;

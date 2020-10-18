@@ -38,10 +38,10 @@ public class ReadinessObserver {
     }
 
     private void checkDbReadiness() {
-        SystemReadinessStatus dbStatus = readinessStatus.getStatus("DB");
+        var dbStatus = readinessStatus.getStatus("DB");
         try {
             log.info("[DB] Check database availability to check readiness");
-            List<Object> results = jdbcTemplate.query("select 1", new SingleColumnRowMapper<>());
+            var results = jdbcTemplate.query("select 1", new SingleColumnRowMapper<>());
             if (!results.isEmpty()) {
                 dbStatus.setSuccessfulState();
             } else {
@@ -53,7 +53,7 @@ public class ReadinessObserver {
     }
 
     private void checkTestdataSimReadiness() {
-        SystemReadinessStatus apiStatus = readinessStatus.getStatus("TESTDATA-SIM");
+        var apiStatus = readinessStatus.getStatus("TESTDATA-SIM");
         if (!apiStatus.isReady() || apiStatus.isSuccessfulRequestExpired()) {
             log.info("[TESTDATA-SIM] is not ready. Calling health endpoint to check readiness");
             try {

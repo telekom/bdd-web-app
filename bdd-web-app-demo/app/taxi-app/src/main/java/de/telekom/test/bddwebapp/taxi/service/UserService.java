@@ -34,7 +34,7 @@ public class UserService {
         if ("error@test.de".equals(registration.getUsername())) {
             throw new RuntimeException("unexpected error");
         }
-        User user = new User();
+        var user = new User();
         copyProperties(registration, user);
         user.setPassword(sha3hash(registration.getPassword()));
         user.setCreationDate(new Date());
@@ -42,7 +42,7 @@ public class UserService {
     }
 
     public boolean isUsernameAndPasswordValid(String username, String password) {
-        User user = findUserByUsername(username);
+        var user = findUserByUsername(username);
         return user != null && checkPassword(password, user);
     }
 
@@ -54,15 +54,14 @@ public class UserService {
         if (!StringUtils.hasText(user.getPassword()) || !StringUtils.hasText(password)) {
             return false;
         }
-        String hash = sha3hash(password);
+        var hash = sha3hash(password);
         return user.getPassword().equals(hash);
     }
 
     private String sha3hash(String password) {
-        SHA3.DigestSHA3 md = new SHA3.DigestSHA3(256);
+        var md = new SHA3.DigestSHA3(256);
         md.update(password.getBytes(StandardCharsets.UTF_8));
-        byte[] digest = md.digest();
-        return Hex.toHexString(digest);
+        return Hex.toHexString(md.digest());
     }
 
 }

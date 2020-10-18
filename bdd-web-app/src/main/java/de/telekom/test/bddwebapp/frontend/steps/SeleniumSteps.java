@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
@@ -51,10 +50,10 @@ public abstract class SeleniumSteps extends ApiSteps {
     protected StoryInteractionParameterConverter storyInteractionParameterConverter;
 
     protected synchronized <T extends Page> T createExpectedPage(Class<T> expectedPage) {
-        WebDriver driver = webDriverWrapper.getDriver();
+        var driver = webDriverWrapper.getDriver();
         T page;
         try {
-            Constructor<T> constructor = expectedPage.getConstructor(WebDriver.class);
+            var constructor = expectedPage.getConstructor(WebDriver.class);
             page = constructor.newInstance(driver);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
@@ -79,12 +78,12 @@ public abstract class SeleniumSteps extends ApiSteps {
     }
 
     protected String getUrlWithHost(String hostIncludingPort, String contextPath, String path, Map<String, String> queryParams) {
-        String url = appendUrl(hostIncludingPort, contextPath, path);
+        var url = appendUrl(hostIncludingPort, contextPath, path);
         return appendQueryParams(url, queryParams);
     }
 
     protected void open(String url) {
-        WebDriver driver = webDriverWrapper.getDriver();
+        var driver = webDriverWrapper.getDriver();
         driver.get(url);
     }
 

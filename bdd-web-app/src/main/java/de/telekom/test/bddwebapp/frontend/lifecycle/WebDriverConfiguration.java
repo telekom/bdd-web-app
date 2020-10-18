@@ -36,9 +36,9 @@ import java.net.URL;
 public interface WebDriverConfiguration {
 
     default WebDriver loadWebdriver() {
-        String browser = getBrowser();
+        var browser = getBrowser();
         getLogger().info("WebDriver is set to " + browser);
-        DesiredCapabilities extraCapabilities = extraCapabilities(browser);
+        var extraCapabilities = extraCapabilities(browser);
         if (isRemoteWebdriver()) {
             return loadRemoteWebdriver(extraCapabilities);
         }
@@ -67,19 +67,19 @@ public interface WebDriverConfiguration {
         return new DesiredCapabilities();
     }
 
-    default boolean isRemoteWebdriver() {
+    private boolean isRemoteWebdriver() {
         return StringUtils.isNotBlank(getGridURL());
     }
 
     default DesiredCapabilities remoteWebDriverOptions(DesiredCapabilities capabilities) {
-        DesiredCapabilities remoteWebDriverCapabilities = new DesiredCapabilities();
+        var remoteWebDriverCapabilities = new DesiredCapabilities();
         remoteWebDriverCapabilities.setJavascriptEnabled(true);
         remoteWebDriverCapabilities.merge(capabilities);
         return remoteWebDriverCapabilities;
     }
 
     default WebDriver loadRemoteWebdriver(DesiredCapabilities capabilities) {
-        String gridURL = getGridURL();
+        var gridURL = getGridURL();
         getLogger().info("Running on: " + gridURL);
         try {
             return new RemoteWebDriver(new URL(gridURL), remoteWebDriverOptions(capabilities));
@@ -89,7 +89,7 @@ public interface WebDriverConfiguration {
     }
 
     default FirefoxOptions firefoxOptions(DesiredCapabilities capabilities) {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        var firefoxOptions = new FirefoxOptions();
         if (isHeadless()) {
             getLogger().info("Firefox is set to headless mode");
             firefoxOptions.setHeadless(true);
@@ -99,8 +99,8 @@ public interface WebDriverConfiguration {
     }
 
     default WebDriver loadFirefox(DesiredCapabilities capabilities) {
-        FirefoxOptions firefoxOptions = firefoxOptions(capabilities);
-        String browserPath = getBrowserPath();
+        var firefoxOptions = firefoxOptions(capabilities);
+        var browserPath = getBrowserPath();
         if (StringUtils.isNotBlank(browserPath)) {
             getLogger().info("Load portable firefox instance from '{}'", browserPath);
             firefoxOptions.setBinary(browserPath);
@@ -109,7 +109,7 @@ public interface WebDriverConfiguration {
     }
 
     default ChromeOptions chromeOptions(DesiredCapabilities capabilities) {
-        ChromeOptions chromeOptions = new ChromeOptions();
+        var chromeOptions = new ChromeOptions();
         if (isHeadless()) {
             getLogger().info("Chrome is set to headless mode");
             chromeOptions.setHeadless(true);
@@ -119,8 +119,8 @@ public interface WebDriverConfiguration {
     }
 
     default WebDriver loadChrome(DesiredCapabilities capabilities) {
-        ChromeOptions chromeOptions = chromeOptions(capabilities);
-        String browserPath = getBrowserPath();
+        var chromeOptions = chromeOptions(capabilities);
+        var browserPath = getBrowserPath();
         if (StringUtils.isNotBlank(browserPath)) {
             getLogger().info("Load portable chrome instance from '{}'", browserPath);
             chromeOptions.setBinary(browserPath);
@@ -129,7 +129,7 @@ public interface WebDriverConfiguration {
     }
 
     default EdgeOptions edgeOptions(DesiredCapabilities capabilities) {
-        EdgeOptions edgeOptions = new EdgeOptions();
+        var edgeOptions = new EdgeOptions();
         if (isHeadless()) {
             getLogger().warn("No headless mode for edge available!");
         }
@@ -138,8 +138,8 @@ public interface WebDriverConfiguration {
     }
 
     default WebDriver loadEdge(DesiredCapabilities capabilities) {
-        EdgeOptions edgeOptions = edgeOptions(capabilities);
-        String browserPath = getBrowserPath();
+        var edgeOptions = edgeOptions(capabilities);
+        var browserPath = getBrowserPath();
         if (StringUtils.isNotBlank(browserPath)) {
             throw new IllegalArgumentException("Can't use 'browserPath' for edge browser. Portable is not supported!");
         }
@@ -147,7 +147,7 @@ public interface WebDriverConfiguration {
     }
 
     default InternetExplorerOptions internetExplorerOptions(DesiredCapabilities capabilities) {
-        InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+        var internetExplorerOptions = new InternetExplorerOptions();
         if (isHeadless()) {
             getLogger().warn("No headless mode for internet explorer available!");
         }
@@ -156,8 +156,8 @@ public interface WebDriverConfiguration {
     }
 
     default WebDriver loadInternetExplorer(DesiredCapabilities capabilities) {
-        InternetExplorerOptions internetExplorerOptions = internetExplorerOptions(capabilities);
-        String browserPath = getBrowserPath();
+        var internetExplorerOptions = internetExplorerOptions(capabilities);
+        var browserPath = getBrowserPath();
         if (StringUtils.isNotBlank(browserPath)) {
             throw new IllegalArgumentException("Can't use 'browserPath' for Internet Explorer. Portable is not supported!");
         }
@@ -165,7 +165,7 @@ public interface WebDriverConfiguration {
     }
 
     default OperaOptions operaOptions(DesiredCapabilities capabilities) {
-        OperaOptions operaOptions = new OperaOptions();
+        var operaOptions = new OperaOptions();
         if (isHeadless()) {
             getLogger().warn("No headless mode for Opera available!");
         }
@@ -174,8 +174,8 @@ public interface WebDriverConfiguration {
     }
 
     default WebDriver loadOpera(DesiredCapabilities capabilities) {
-        OperaOptions operaOptions = operaOptions(capabilities);
-        String browserPath = getBrowserPath();
+        var operaOptions = operaOptions(capabilities);
+        var browserPath = getBrowserPath();
         if (StringUtils.isNotBlank(browserPath)) {
             getLogger().info("Load portable opera instance from '{}'", browserPath);
             operaOptions.setBinary(browserPath);
@@ -184,7 +184,7 @@ public interface WebDriverConfiguration {
     }
 
     default SafariOptions safariOptions(DesiredCapabilities capabilities) {
-        SafariOptions safariOptions = new SafariOptions();
+        var safariOptions = new SafariOptions();
         if (isHeadless()) {
             getLogger().warn("No headless mode for Safari available!");
         }
@@ -193,8 +193,8 @@ public interface WebDriverConfiguration {
     }
 
     default WebDriver loadSafari(DesiredCapabilities capabilities) {
-        SafariOptions safariOptions = safariOptions(capabilities);
-        String browserPath = getBrowserPath();
+        var safariOptions = safariOptions(capabilities);
+        var browserPath = getBrowserPath();
         if (StringUtils.isNotBlank(browserPath)) {
             throw new IllegalArgumentException("Can't use 'browserPath' for Safari. Portable is not supported!");
         }
@@ -202,7 +202,7 @@ public interface WebDriverConfiguration {
     }
 
     default DesiredCapabilities htmlUnitOptions(DesiredCapabilities capabilities) {
-        DesiredCapabilities htmlUnitCapabilities = new DesiredCapabilities();
+        var htmlUnitCapabilities = new DesiredCapabilities();
         htmlUnitCapabilities.setBrowserName("htmlunit");
         htmlUnitCapabilities.setJavascriptEnabled(true);
         htmlUnitCapabilities.merge(capabilities);
@@ -217,7 +217,7 @@ public interface WebDriverConfiguration {
     }
 
     default String getBrowser() {
-        String browser = System.getProperty("browser");
+        var browser = System.getProperty("browser");
         if (StringUtils.isNotBlank(browser)) {
             return browser;
         }
@@ -231,7 +231,7 @@ public interface WebDriverConfiguration {
     default boolean isHeadless() {
         // set to headless manually
         if (StringUtils.isNotBlank(System.getProperty("headless"))) {
-            boolean headless = Boolean.parseBoolean(System.getProperty("headless"));
+            var headless = Boolean.parseBoolean(System.getProperty("headless"));
             getLogger().info(String.format("Test execution is set to headless=%s!", headless));
             return headless;
         }
@@ -251,7 +251,7 @@ public interface WebDriverConfiguration {
      * @return path
      */
     default String getBrowserPath() {
-        String browserPath = System.getProperty("browser.path");
+        var browserPath = System.getProperty("browser.path");
         if (StringUtils.isNotBlank(browserPath)) {
             return browserPath;
         }
@@ -259,14 +259,14 @@ public interface WebDriverConfiguration {
     }
 
     default String getGridURL() {
-        String urlStr = System.getProperty("gridURL");
+        var urlStr = System.getProperty("gridURL");
         if (StringUtils.isNotBlank(urlStr)) {
             return urlStr;
         }
         return null;
     }
 
-    default Logger getLogger() {
+    private Logger getLogger() {
         return LoggerFactory.getLogger(WebDriverConfiguration.class);
     }
 

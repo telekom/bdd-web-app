@@ -37,7 +37,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
 
     @Given("example reservation between $earliestStartTime and $latestStartTime")
     public void exampleReservation(String earliestStartTime, String latestStartTime) {
-        ReservationVO reservation = testDataSimJsonRequest()
+        var reservation = testDataSimJsonRequest()
                 .given()
                 .queryParam("earliestStartTime", earliestStartTime)
                 .queryParam("latestStartTime", latestStartTime)
@@ -51,7 +51,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
 
     @Given("the price is $price € with $passengers other passengers between $startTime and $endTime")
     public void thePriceIsWithOtherPassengers(String price, String passengers, String startTime, String endTime) {
-        ReservationPriceVO reservationPrice = new ReservationPriceVO();
+        var reservationPrice = new ReservationPriceVO();
         reservationPrice.setPrice(price);
         reservationPrice.setPassengers(passengers);
         reservationPrice.setStartTime(startTime);
@@ -103,7 +103,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Then("between $startTime and $endTime the price is $price at $passengers passengers")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
-        String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);
+        var currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);
         assertNotNull(currentPrice);
         assertThat(currentPrice, is(price));
     }

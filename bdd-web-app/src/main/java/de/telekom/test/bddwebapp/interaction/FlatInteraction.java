@@ -60,7 +60,7 @@ public class FlatInteraction implements Interaction {
             ((Map) value).forEach((entryKey, entryValue) -> remember(key + OBJECT_KEY_SEPARATOR + entryKey.toString(), entryValue));
         }
         if (value instanceof List) {
-            List list = ((List) value);
+            var list = ((List) value);
             for (int i = 0; i < list.size(); i++) {
                 remember(key + String.format(LIST_ITEM_FORMAT, i), list.get(i));
             }
@@ -77,7 +77,7 @@ public class FlatInteraction implements Interaction {
      */
     public <S> S recall(String key) {
         // try to get the value by key first
-        S s = (S) getContext().get(key);
+        var s = (S) getContext().get(key);
         // try to get the value by the hierarchy
         if (s == null && key.contains(".")) {
             return recallByHierarchy(key);
@@ -95,9 +95,9 @@ public class FlatInteraction implements Interaction {
      */
     public <S> S recallByHierarchy(String key) {
         if (key.contains(".")) {
-            String[] paths = key.split("\\.");
-            String objectKey = paths[0];
-            Object object = recall(objectKey);
+            var paths = key.split("\\.");
+            var objectKey = paths[0];
+            var object = recall(objectKey);
             if (object != null && !object.getClass().isPrimitive()
                     && !(object instanceof Map || object instanceof String || object instanceof Number)) {
                 for (int i = 1; i < paths.length; i++) {
@@ -130,7 +130,7 @@ public class FlatInteraction implements Interaction {
      */
     public void logAllPossibleKeysWithType() {
         log.info("Log all possible keys with type:");
-        Map<String, Class> keysWithType = context.entrySet().stream()
+        var keysWithType = context.entrySet().stream()
                 .collect(toMap(Entry::getKey, entry -> entry.getValue().getClass()));
         log.info(mapToString(keysWithType));
     }

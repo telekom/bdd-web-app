@@ -28,7 +28,7 @@ public class RunAllMultithreadingStories extends RunAllStories {
 
     @Override
     public List<String> storyPaths() {
-        List<String> storyPaths = new ArrayList<>();
+        var storyPaths = new ArrayList<String>();
         storyPaths.addAll(multiplyStories("login"));
         storyPaths.addAll(multiplyStories("registration"));
         shuffle(storyPaths);
@@ -36,8 +36,8 @@ public class RunAllMultithreadingStories extends RunAllStories {
     }
 
     public List<String> multiplyStories(String story) {
-        String storyBasePath = "de/telekom/test/bddwebapp/taxi/multithreading/stories/";
-        List<String> storyPaths = new ArrayList<>();
+        var storyBasePath = "de/telekom/test/bddwebapp/taxi/multithreading/stories/";
+        var storyPaths = new ArrayList<String>();
         storyPaths.add(storyBasePath + story + ".story");
         for (int i = 2; i <= 49; i++) {
             storyPaths.add(storyBasePath + story + i + ".story");
@@ -47,7 +47,7 @@ public class RunAllMultithreadingStories extends RunAllStories {
 
     @Override
     public Embedder configuredEmbedder() {
-        Embedder embedder = super.configuredEmbedder();
+        var embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
         embedder.embedderControls().useThreads(4).ignoreFailureInStories();
         return embedder;

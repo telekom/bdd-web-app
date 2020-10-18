@@ -16,9 +16,9 @@ import org.springframework.context.ApplicationContext;
 public class RunAllTaxiDockerStories extends RunAllStories {
 
     public static void main(String[] args) {
-        JUnitCore junit = new JUnitCore();
+        var junit = new JUnitCore();
         junit.addListener(new TextListener(System.out));
-        Result result = junit.run(RunAllTaxiDockerStories.class);
+        var result = junit.run(RunAllTaxiDockerStories.class);
         if (!result.wasSuccessful()) {
             System.exit(1);
         }

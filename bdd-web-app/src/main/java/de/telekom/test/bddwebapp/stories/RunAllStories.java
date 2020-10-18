@@ -12,7 +12,6 @@ import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.io.UnderscoredToCapitalized;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.FreemarkerViewGenerator;
-import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
@@ -34,8 +33,8 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
 
     @Override
     public Configuration configuration() {
-        Configuration configuration = new MostUsefulConfiguration();
-        StoryReporterBuilder storyReporterBuilder = screenshotStoryReporterBuilder();
+        var configuration = new MostUsefulConfiguration();
+        var storyReporterBuilder = screenshotStoryReporterBuilder();
         configuration.useStoryReporterBuilder(storyReporterBuilder);
         configuration.useStoryPathResolver(removeStoryFromClassNameStoryPathResolver());
         configuration.useViewGenerator(new FreemarkerViewGenerator(new UnderscoredToCapitalized(), FreemarkerViewGenerator.class, StandardCharsets.UTF_8));
@@ -54,7 +53,7 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
 
     @Override
     public Embedder configuredEmbedder() {
-        Embedder embedder = super.configuredEmbedder();
+        var embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
         return embedder;
     }

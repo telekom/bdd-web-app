@@ -4,7 +4,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Objects;
@@ -33,7 +32,7 @@ public abstract class JQueryPage extends Page {
             }
         };
 
-        Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+        var wait = new WebDriverWait(driver, 30);
         wait.until(noAjaxRequestActive);
     }
 

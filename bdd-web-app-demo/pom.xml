@@ -6,10 +6,15 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo</artifactId>
-    <version>1.7.1</version>
+    <version>1.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>bdd web-app demo</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
+    </properties>
 
     <modules>
         <module>app/taxi-app</module>
