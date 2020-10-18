@@ -4,7 +4,6 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.UsefulWebDriverConfiguration
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Overwrite the default configuration and add a new behaviour after browser load.
@@ -53,7 +51,7 @@ public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfig
     @Override
     public WebDriver loadRemoteWebdriver(DesiredCapabilities capabilities) {
         String gridURL = getGridURL();
-        getLogger().info("Running on: " + gridURL);
+        log.info("Running on: " + gridURL);
         try {
             return new RemoteWebDriver(new URL(gridURL), remoteWebDriverOptions(capabilities));
         } catch (MalformedURLException e) {

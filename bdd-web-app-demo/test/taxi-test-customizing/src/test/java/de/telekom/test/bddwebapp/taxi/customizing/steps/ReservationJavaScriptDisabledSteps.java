@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.seleniumgrid.steps;
+package de.telekom.test.bddwebapp.taxi.customizing.steps;
 
 import de.telekom.test.bddwebapp.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;

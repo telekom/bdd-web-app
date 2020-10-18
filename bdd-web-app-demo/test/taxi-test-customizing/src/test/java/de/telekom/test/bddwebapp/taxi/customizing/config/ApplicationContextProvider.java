@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.seleniumgrid.config;
+package de.telekom.test.bddwebapp.taxi.customizing.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

@@ -6,7 +6,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8</version>
     <packaging>pom</packaging>
 
     <name>bdd web-app demo</name>
@@ -25,6 +25,7 @@
         <module>test/taxi-test-customizing</module>
         <module>test/taxi-test-multithreading</module>
         <module>test/taxi-test-docker-smoketest</module>
+        <module>test/taxi-test-selenium-grid</module>
     </modules>
 
 </project>

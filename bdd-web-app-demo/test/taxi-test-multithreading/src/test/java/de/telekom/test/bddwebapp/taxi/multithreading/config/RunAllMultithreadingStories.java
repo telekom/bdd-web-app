@@ -47,7 +47,7 @@ public class RunAllMultithreadingStories extends RunAllStories {
 
     @Override
     public Embedder configuredEmbedder() {
-        var embedder = super.configuredEmbedder();
+        Embedder embedder = super.configuredEmbedder();
         embedder.useEmbedderMonitor(new CurrentStoryEmbedderMonitor(getApplicationContext()));
         embedder.embedderControls().useThreads(4).ignoreFailureInStories();
         return embedder;

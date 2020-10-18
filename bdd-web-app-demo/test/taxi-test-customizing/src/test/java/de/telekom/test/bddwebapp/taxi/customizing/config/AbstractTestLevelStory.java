@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.seleniumgrid.config;
+package de.telekom.test.bddwebapp.taxi.customizing.config;
 
 import de.telekom.test.bddwebapp.stories.AbstractStory;
 import org.jbehave.core.steps.InjectableStepsFactory;

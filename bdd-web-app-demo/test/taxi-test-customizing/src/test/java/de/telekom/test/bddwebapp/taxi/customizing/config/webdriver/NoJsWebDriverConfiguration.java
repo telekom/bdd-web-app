@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.seleniumgrid.config.webdriver;
+package de.telekom.test.bddwebapp.taxi.customizing.config.webdriver;
 
 import de.telekom.test.bddwebapp.frontend.lifecycle.UsefulWebDriverConfiguration;
 import lombok.extern.slf4j.Slf4j;

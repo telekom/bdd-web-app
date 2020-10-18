@@ -1,8 +1,8 @@
-package de.telekom.test.bddwebapp.taxi.seleniumgrid.stories.nojs;
+package de.telekom.test.bddwebapp.taxi.customizing.stories.nojs;
 
 import de.telekom.test.bddwebapp.stories.config.AlternativeWebDriverConfiguration;
-import de.telekom.test.bddwebapp.taxi.seleniumgrid.config.AbstractTestLevelStory;
-import de.telekom.test.bddwebapp.taxi.seleniumgrid.config.webdriver.NoJsWebDriverConfiguration;
+import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
+import de.telekom.test.bddwebapp.taxi.customizing.config.webdriver.NoJsWebDriverConfiguration;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}

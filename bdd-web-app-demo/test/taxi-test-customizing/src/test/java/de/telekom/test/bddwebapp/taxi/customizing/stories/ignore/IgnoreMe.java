@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.taxi.seleniumgrid.stories.ignore;
+package de.telekom.test.bddwebapp.taxi.customizing.stories.ignore;
 
-import de.telekom.test.bddwebapp.taxi.seleniumgrid.config.AbstractTestLevelStory;
+import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
 import org.junit.Ignore;
 
 /**
