@@ -5,14 +5,14 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo-taxi-test-ger</artifactId>
-    <version>1.8</version>
+    <version>1.8.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
 
         <jbehave.version>4.6.3</jbehave.version>
-        <bdd-web-app.version>1.8</bdd-web-app.version>
+        <bdd-web-app.version>1.8.1</bdd-web-app.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 

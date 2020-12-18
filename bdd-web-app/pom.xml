@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app</artifactId>
-    <version>1.8</version>
+    <version>1.8.1</version>
 
     <name>BDD web application testing framework</name>
     <url>https://github.com/telekom/bdd-web-app</url>
@@ -17,16 +17,16 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Long-term dependencies. Update major version only when necessary. -->
-        <spring.version>5.1.18.RELEASE</spring.version> <!-- usable with spring-boot-starter-test 2.1.x -->
-        <restassured.version>4.3.1</restassured.version>
+        <spring.version>5.1.20.RELEASE</spring.version> <!-- usable with spring-boot-starter-test 2.1.x -->
+        <restassured.version>4.3.3</restassured.version>
         <cglib.version>3.3.0</cglib.version>
         <logback-classic.version>1.2.3</logback-classic.version>
-        <lombok.version>1.18.12</lombok.version>
+        <lombok.version>1.18.16</lombok.version>
         <guava.version>29.0-jre</guava.version>
 
         <!-- Short-term dependencies. Update when new version is available. -->
         <selenium.version>3.141.59</selenium.version>
-        <htmlunit.version>2.44.0</htmlunit.version>
+        <htmlunit.version>2.45.0</htmlunit.version>
         <webdrivermanager.version>4.2.2</webdrivermanager.version>
         <jbehave.version>4.6.3</jbehave.version>
         <jbehave-site-resources.version>3.3.1</jbehave-site-resources.version>
@@ -40,7 +40,7 @@
         <!-- Deploy dependencies -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <lombok-maven-plugin.version>1.18.12.0</lombok-maven-plugin.version>
+        <lombok-maven-plugin.version>1.18.16.0</lombok-maven-plugin.version>
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
 
         <!-- Build dependencies -->

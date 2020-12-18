@@ -1,10 +1,13 @@
 package de.telekom.test.bddwebapp.taxi.docker.config;
 
 import de.telekom.test.bddwebapp.stories.RunAllStories;
+import org.junit.internal.RealSystem;
 import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.StandardEnvironment;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -16,12 +19,11 @@ import org.springframework.context.ApplicationContext;
 public class RunAllTaxiDockerStories extends RunAllStories {
 
     public static void main(String[] args) {
+        ApplicationContextProvider.createApplicationContext(args);
         var junit = new JUnitCore();
         junit.addListener(new TextListener(System.out));
         var result = junit.run(RunAllTaxiDockerStories.class);
-        if (!result.wasSuccessful()) {
-            System.exit(1);
-        }
+        System.exit(result.wasSuccessful() ? 0 : 1);
     }
 
     @Override

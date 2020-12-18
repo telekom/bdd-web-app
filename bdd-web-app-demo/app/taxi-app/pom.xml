@@ -5,22 +5,24 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo-taxi-app</artifactId>
-    <version>1.8</version>
+    <version>1.8.1</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.10.RELEASE</version>
+        <version>2.2.12.RELEASE</version>
         <relativePath/>
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <jquery.version>3.5.1</jquery.version>
-        <bootstrap.version>4.5.2</bootstrap.version>
-        <bcprov-jdk15on.version>1.66</bcprov-jdk15on.version>
+        <bootstrap.version>4.5.3</bootstrap.version>
+        <bcprov-jdk15on.version>1.67</bcprov-jdk15on.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
@@ -120,7 +122,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <release>11</release>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>
