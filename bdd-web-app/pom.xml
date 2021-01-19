@@ -26,16 +26,16 @@
 
         <!-- Short-term dependencies. Update when new version is available. -->
         <selenium.version>3.141.59</selenium.version>
-        <htmlunit.version>2.45.0</htmlunit.version>
-        <webdrivermanager.version>4.2.2</webdrivermanager.version>
+        <htmlunit.version>2.46.0</htmlunit.version>
+        <webdrivermanager.version>4.3.1</webdrivermanager.version>
         <jbehave.version>4.8.1</jbehave.version>
         <jbehave-site-resources.version>3.3.1</jbehave-site-resources.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
         <commons-lang3.version>3.11</commons-lang3.version>
 
         <!-- Unit test dependencies -->
-        <spock-core.version>2.0-M3-groovy-3.0</spock-core.version>
-        <byte-buddy.version>1.10.16</byte-buddy.version>
+        <spock-core.version>2.0-M4-groovy-3.0</spock-core.version>
+        <byte-buddy.version>1.10.19</byte-buddy.version>
         <objenesis.version>3.1</objenesis.version>
 
         <!-- Deploy dependencies -->
