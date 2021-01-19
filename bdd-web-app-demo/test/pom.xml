@@ -9,7 +9,7 @@
     <version>1.9</version>
     <packaging>pom</packaging>
 
-    <name>bdd web-app demo</name>
+    <name>bdd web-app tests</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,14 +17,13 @@
     </properties>
 
     <modules>
-        <module>app</module>
-        <module>test/taxi-test</module>
-        <module>test/taxi-test-ger</module>
-        <module>test/taxi-test-testlevel</module>
-        <module>test/taxi-test-customizing</module>
-        <module>test/taxi-test-multithreading</module>
-        <module>test/taxi-test-docker-smoketest</module>
-        <module>test/taxi-test-selenium-grid</module>
+        <module>taxi-test</module>
+        <module>taxi-test-ger</module>
+        <module>taxi-test-testlevel</module>
+        <module>taxi-test-customizing</module>
+        <module>taxi-test-multithreading</module>
+        <module>taxi-test-docker-smoketest</module>
+        <module>taxi-test-selenium-grid</module>
     </modules>
 
 </project>

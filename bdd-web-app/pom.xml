@@ -7,7 +7,7 @@
     <artifactId>bdd-web-app</artifactId>
     <version>1.9</version>
 
-    <name>BDD web application testing framework</name>
+    <name>bdd web application testing framework</name>
     <url>https://github.com/telekom/bdd-web-app</url>
     <description>Setup BDD-test-projects for web applications fast and easy</description>
     <inceptionYear>2017</inceptionYear>
@@ -28,9 +28,10 @@
         <selenium.version>3.141.59</selenium.version>
         <htmlunit.version>2.45.0</htmlunit.version>
         <webdrivermanager.version>4.2.2</webdrivermanager.version>
-        <jbehave.version>4.6.3</jbehave.version>
+        <jbehave.version>4.8.1</jbehave.version>
         <jbehave-site-resources.version>3.3.1</jbehave-site-resources.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
+        <commons-lang3.version>3.11</commons-lang3.version>
 
         <!-- Unit test dependencies -->
         <spock-core.version>2.0-M3-groovy-3.0</spock-core.version>
@@ -185,6 +186,11 @@
                     <release>11</release>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.4</version>
+            </plugin>
         </plugins>
     </build>
 
@@ -208,6 +214,11 @@
             <dependency>
                 <groupId>org.jbehave</groupId>
                 <artifactId>jbehave-core</artifactId>
+                <version>${jbehave.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
                 <version>${jbehave.version}</version>
             </dependency>
             <dependency>
@@ -289,6 +300,12 @@
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
@@ -339,6 +356,10 @@
         <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-maven-plugin</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jbehave</groupId>
@@ -408,6 +429,11 @@
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
         <!-- Misc. -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>

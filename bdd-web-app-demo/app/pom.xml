@@ -11,6 +11,11 @@
 
     <name>bdd web-app apps</name>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
+    </properties>
+
     <modules>
         <module>taxi-app</module>
         <module>testdata-sim</module>
