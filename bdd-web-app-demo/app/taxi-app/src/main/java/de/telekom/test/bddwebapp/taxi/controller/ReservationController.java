@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.controller;
 
+
 import de.telekom.test.bddwebapp.taxi.controller.validator.AuthenticationValidator;
 import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationPricesVO;
 import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationVO;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -27,14 +29,13 @@ import java.security.Principal;
 @Controller
 public class ReservationController {
 
+    private final WebClient webClient = WebClient.create();
+
     @Autowired
     private AuthenticationValidator authenticationValidator;
 
     @Autowired
     private ReservationService reservationService;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Value("${reservation-service.url:http://localhost:6000/testdata-sim/api}")
     private String reservationServiceUrl;
@@ -52,7 +53,12 @@ public class ReservationController {
     public @ResponseBody
     ReservationPricesVO reservation(Principal principal, @Valid @RequestBody ReservationVO reservation) {
         reservationService.saveReservation(principal.getName(), reservation);
-        return restTemplate.postForObject(reservationServiceUrl + "/reservation", reservation, ReservationPricesVO.class);
+        return webClient.post()
+                .uri(reservationServiceUrl + "/reservation")
+                .body(BodyInserters.fromValue(reservation))
+                .retrieve()
+                .bodyToMono(ReservationPricesVO.class)
+                .block();
     }
 
 }

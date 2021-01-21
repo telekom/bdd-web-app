@@ -2,16 +2,13 @@ package de.telekom.test.bddwebapp.testdata.builder;
 
 import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,32 +25,32 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 @Component
 public class TestDataBuilder {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final WebClient webClient = WebClient.create();
 
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
     private String taxiAppUrl;
 
     public RegistrationVO createNewUser() {
-        var headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        var map = new LinkedMultiValueMap<String, String>();
-        map.add("firstName", "Hans");
-        map.add("lastName", "Müller");
-        map.add("username", randomNumeric(8) + "@user.de");
-        map.add("password", "password");
-        var request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+        var body = new LinkedMultiValueMap<String, String>();
+        body.add("firstName", "Hans");
+        body.add("lastName", "Müller");
+        body.add("username", randomNumeric(8) + "@user.de");
+        body.add("password", "password");
 
-        var response = restTemplate.postForEntity(taxiAppUrl + "/registration", request, String.class);
-        if (!response.getStatusCode().is3xxRedirection()) {
-            throw new RuntimeException("Error creation user test data!");
-        }
+        webClient.post()
+                .uri(taxiAppUrl + "/registration")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                .body(BodyInserters.fromFormData(body))
+                .retrieve()
+                .bodyToMono(RegistrationVO.class)
+                .onErrorMap(e -> new RuntimeException("Error creation user test data!"))
+                .block();
 
         var registration = new RegistrationVO();
-        registration.setFirstName(map.getFirst("firstName"));
-        registration.setLastName(map.getFirst("lastName"));
-        registration.setUsername(map.getFirst("username"));
-        registration.setPassword(map.getFirst("password"));
+        registration.setFirstName(body.getFirst("firstName"));
+        registration.setLastName(body.getFirst("lastName"));
+        registration.setUsername(body.getFirst("username"));
+        registration.setPassword(body.getFirst("password"));
         return registration;
     }
 
