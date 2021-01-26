@@ -1,12 +1,13 @@
 package de.telekom.test.bddwebapp.testdata.controller;
 
 import de.telekom.test.bddwebapp.testdata.config.ReservationSimulatorConfig;
-import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEventVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 import javax.validation.Valid;
 
@@ -27,8 +28,9 @@ public class ReservationApiController {
     private ReservationSimulatorConfig reservationSimulatorConfig;
 
     @PostMapping("reservation")
-    public ReservationVO reservation(@Valid @RequestBody ReservationVO reservation) {
-        return reservationSimulatorConfig.reserve(reservation);
+    public Flux<ReservationPriceEventVO> reservation(@Valid ReservationEventVO reservation) {
+        ReservationEventVO reserve = reservationSimulatorConfig.reserve(reservation);
+        return Flux.fromIterable(reserve.getReservationPrices());
     }
 
 }

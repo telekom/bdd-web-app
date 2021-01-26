@@ -3,8 +3,8 @@ package de.telekom.test.bddwebapp.testdata.controller;
 import de.telekom.test.bddwebapp.testdata.builder.TestDataBuilder;
 import de.telekom.test.bddwebapp.testdata.config.ReservationSimulatorConfig;
 import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
-import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceVO;
-import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEventVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +33,7 @@ public class TestDataController {
     }
 
     @PostMapping("reservation")
-    public ReservationVO createExampleReservation(@RequestParam String earliestStartTime, @RequestParam String latestStartTime) {
+    public ReservationEventVO createExampleReservation(@RequestParam String earliestStartTime, @RequestParam String latestStartTime) {
         var reservation = testDataBuilder.createExampleReservation(earliestStartTime, latestStartTime);
         reservationSimulatorConfig.setCurrentReservation(reservation);
         return reservationSimulatorConfig.getCurrentReservation();
@@ -45,7 +45,7 @@ public class TestDataController {
     }
 
     @PutMapping("prices")
-    public void updateOfferedPrice(@RequestBody ReservationPriceVO reservationPrice) {
+    public void updateOfferedPrice(@RequestBody ReservationPriceEventVO reservationPrice) {
         reservationSimulatorConfig.updatePrice(reservationPrice);
     }
 

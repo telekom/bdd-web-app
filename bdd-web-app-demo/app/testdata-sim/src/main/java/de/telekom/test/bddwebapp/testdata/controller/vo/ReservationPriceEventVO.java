@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi.controller.vo;
+package de.telekom.test.bddwebapp.testdata.controller.vo;
 
 import lombok.Data;
 
@@ -10,7 +10,9 @@ import lombok.Data;
  * For details see the file license on the toplevel.
  */
 @Data
-public class ReservationPriceVO {
+public class ReservationPriceEventVO {
+
+    private String message;
 
     private String startTime;
     private String endTime;

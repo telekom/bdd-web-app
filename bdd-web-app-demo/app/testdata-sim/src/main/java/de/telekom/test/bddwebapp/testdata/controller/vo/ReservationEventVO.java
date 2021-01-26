@@ -15,15 +15,16 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode
-public class ReservationVO {
+public class ReservationEventVO {
+
+    private String username;
 
     private String date;
     private String departure;
     private String earliestStartTime;
     private String destination;
     private String latestStartTime;
-    private String message;
 
-    private List<ReservationPriceVO> reservationPrices = new ArrayList<>();
+    private List<ReservationPriceEventVO> reservationPrices = new ArrayList<>();
 
 }

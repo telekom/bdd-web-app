@@ -2,21 +2,12 @@ package de.telekom.test.bddwebapp.taxi.controller;
 
 
 import de.telekom.test.bddwebapp.taxi.controller.validator.AuthenticationValidator;
-import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationPricesVO;
-import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationVO;
 import de.telekom.test.bddwebapp.taxi.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 
-import javax.validation.Valid;
 import java.security.Principal;
 
 /**
@@ -29,16 +20,11 @@ import java.security.Principal;
 @Controller
 public class ReservationController {
 
-    private final WebClient webClient = WebClient.create();
-
     @Autowired
     private AuthenticationValidator authenticationValidator;
 
     @Autowired
     private ReservationService reservationService;
-
-    @Value("${reservation-service.url:http://localhost:6000/testdata-sim/api}")
-    private String reservationServiceUrl;
 
     @GetMapping("reservation")
     public String reservation(Principal principal, Model model) {
@@ -47,18 +33,6 @@ public class ReservationController {
             return "reservation";
         }
         return "redirect:login";
-    }
-
-    @PostMapping("reservation")
-    public @ResponseBody
-    ReservationPricesVO reservation(Principal principal, @Valid @RequestBody ReservationVO reservation) {
-        reservationService.saveReservation(principal.getName(), reservation);
-        return webClient.post()
-                .uri(reservationServiceUrl + "/reservation")
-                .body(BodyInserters.fromValue(reservation))
-                .retrieve()
-                .bodyToMono(ReservationPricesVO.class)
-                .block();
     }
 
 }

@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.testdata.builder;
 
 import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
-import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -54,8 +54,8 @@ public class TestDataBuilder {
         return registration;
     }
 
-    public ReservationVO createExampleReservation(String earliestStartTime, String latestStartTime) {
-        var reservation = new ReservationVO();
+    public ReservationEventVO createExampleReservation(String earliestStartTime, String latestStartTime) {
+        var reservation = new ReservationEventVO();
         var tomorrow = new Date(new Date().getTime() + 86400000L);
         reservation.setDate(new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
         reservation.setDeparture("Alexanderplatz, Berlin");

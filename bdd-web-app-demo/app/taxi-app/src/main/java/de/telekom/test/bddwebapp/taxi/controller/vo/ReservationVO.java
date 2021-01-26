@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class ReservationVO {
 
+    private String username;
+
     @NotBlank
     private String date;
 
