@@ -30,8 +30,8 @@ public class ReadinessObserver {
     @Scheduled(fixedRate = 60 * 1000, initialDelay = 30 * 1000)
     public void observe() {
         log.info("[READINESS] Observer is checking if external services are ready");
-        checkDbReadiness();
-        checkTestdataSimReadiness();
+//        checkDbReadiness();
+//        checkTestdataSimReadiness();
         log.info("[READINESS] Observer finished checking external services");
     }
 

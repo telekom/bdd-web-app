@@ -83,6 +83,11 @@ public class ReservationSteps extends AbstractTaxiSteps {
         reservationPage.submitReservation();
     }
 
+    @When("wait for event")
+    public void waitForEvent() throws InterruptedException {
+        Thread.sleep(5000);
+    }
+
     @Then("the reservation page is shown")
     public void theReservationPageIsShown() {
         createExpectedPage(ReservationPage.class);
@@ -103,9 +108,10 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Then("between $startTime and $endTime the price is $price at $passengers passengers")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
-        var currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);
-        assertNotNull(currentPrice);
-        assertThat(currentPrice, is(price));
+        var reservationPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
+        assertTrue(reservationPrice.isPresent());
+        assertThat(reservationPrice.get().getPrice(), is(price));
+        assertThat(reservationPrice.get().getPassengers(), is(passengers));
     }
 
 }

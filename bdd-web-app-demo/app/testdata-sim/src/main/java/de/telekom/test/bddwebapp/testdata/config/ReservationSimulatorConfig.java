@@ -1,12 +1,15 @@
 package de.telekom.test.bddwebapp.testdata.config;
 
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEntryVO;
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEventVO;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
-
-import static java.util.List.of;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -18,7 +21,8 @@ import static java.util.List.of;
 @Component
 public class ReservationSimulatorConfig {
 
-    private Optional<ReservationEventVO> currentReservation;
+    @Getter
+    private Optional<ReservationEventVO> currentReservation = Optional.empty();
 
     public void setCurrentReservation(ReservationEventVO reservation) {
         currentReservation = Optional.of(reservation);
@@ -28,23 +32,21 @@ public class ReservationSimulatorConfig {
         currentReservation = Optional.empty();
     }
 
-    public ReservationEventVO getCurrentReservation() {
-        return currentReservation.orElseThrow(() -> new RuntimeException("Please setup reservation test data!"));
-    }
-
     public ReservationEventVO reserve(ReservationEventVO reservationEvent) {
         return currentReservation.orElseGet(() -> {
-            ReservationPriceEventVO reservationPrice = new ReservationPriceEventVO();
-            reservationPrice.setMessage("No offers available!");
-            reservationEvent.setReservationPrices(of(reservationPrice));
+            reservationEvent.setReservationPriceEvent(new ReservationPriceEventVO("No offers available!"));
             return reservationEvent;
         });
     }
 
-    public void updatePrice(ReservationPriceEventVO reservationPriceEvent) {
-        var reservationPrices = getCurrentReservation().getReservationPrices();
-        reservationPrices.removeIf(currentPrice -> currentPrice.getStartTime().equals(reservationPriceEvent.getStartTime()));
-        reservationPrices.add(reservationPriceEvent);
+    public void updatePrice(ReservationPriceEntryVO priceEntry) {
+        List<ReservationPriceEntryVO> reservationPrices = currentReservation.orElseThrow(() -> new RuntimeException("Please setup reservation test data!"))
+                .getReservationPriceEvent().getReservationPrices();
+        reservationPrices.removeIf(currentPrice -> currentPrice.getStartTime().equals(priceEntry.getStartTime()));
+        reservationPrices.add(priceEntry);
+        ReservationPriceEventVO reservationPriceEvent = new ReservationPriceEventVO("Update reservation price at "+new Date());
+        reservationPriceEvent.getReservationPrices().addAll(reservationPrices);
+        currentReservation.get().setReservationPriceEvent(reservationPriceEvent);
     }
 
 }

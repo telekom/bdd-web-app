@@ -2,12 +2,13 @@ package de.telekom.test.bddwebapp.taxi.pages;
 
 import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -79,19 +80,23 @@ public class ReservationPage extends JQueryPage {
         return reservationDiv.getText().contains("not possible");
     }
 
-    public String getPriceBetweenStartAndEndTime(String startTime, String endTime, String passengers) {
+    public Optional<ReservationPrice> getPriceBetweenStartAndEndTime(String startTime, String endTime) {
         var reservationTable = reservationDiv.findElement(By.className("table"));
         var tableRows = reservationTable.findElements(By.tagName("tr"));
-        for (WebElement tableRow : tableRows) {
-            List<WebElement> tableCols = tableRow.findElements(By.tagName("td"));
-            if (tableCols.isEmpty()) continue; // head
-            String currentStartTimeAndEndtime = tableCols.get(0).getText().trim();
-            String currentPassengers = tableCols.get(1).getText().trim();
-            if (currentStartTimeAndEndtime.contains(startTime) && currentStartTimeAndEndtime.contains(endTime) && currentPassengers.equals(passengers)) {
-                return tableCols.get(2).getText().trim();
-            }
-        }
-        return null;
+        return tableRows.stream()
+                .map(tableRow -> tableRow.findElements(By.tagName("td")))
+                .filter(tableCols -> {
+                    if (tableCols.isEmpty()) {
+                        return false; // head
+                    }
+                    var startTimeAndEndTime = tableCols.get(0).getText().trim();
+                    return startTimeAndEndTime.contains(startTime) && startTimeAndEndTime.contains(endTime);
+                }).map(tableCols -> {
+                    var startTimeAndEndTime = tableCols.get(0).getText().trim();
+                    var passengers = tableCols.get(1).getText().trim();
+                    var price = tableCols.get(2).getText().trim();
+                    return new ReservationPrice(startTimeAndEndTime, passengers, price);
+                }).findFirst();
     }
 
     @Override
@@ -104,4 +109,15 @@ public class ReservationPage extends JQueryPage {
         return currentUrl.contains("?") && currentUrl.contains("date")
                 && currentUrl.contains("earliestStartTime") && currentUrl.contains("latestStartTime");
     }
+
+    @AllArgsConstructor
+    @Getter
+    public class ReservationPrice {
+
+        private final String startTimeAndEndTime;
+        private final String passengers;
+        private final String price;
+
+    }
+
 }

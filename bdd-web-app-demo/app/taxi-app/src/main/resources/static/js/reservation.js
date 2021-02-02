@@ -18,7 +18,7 @@ function reserve() {
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "api/reservation",
+        url: "api/reservations",
         data: JSON.stringify(reservation),
         dataType: 'json',
         cache: false,
@@ -28,7 +28,7 @@ function reserve() {
             $('#reserve').removeClass("btn-primary btn-warning");
             $('#reserve').removeClass("btn-primary btn-success");
 
-            if (data == null || data.length == 0) {
+            if (data.reservationPrices == null || data.reservationPrices.length == 0) {
                 $('#reserve').addClass("btn-warning");
                 var reservationHtml = "<h4>The reservation is not possible!</h4>";
                 $('#reservation').html(reservationHtml);
@@ -38,8 +38,8 @@ function reserve() {
                 reservationHtml += "<table class='table table-striped'>";
                 reservationHtml += "<thead><tr><th>Period</th><th>Passengers</th><th>Price</th></tr></thead>";
                 reservationHtml += "<tbody>";
-                $(data).each(function (index) {
-                    var reservationPrice = data[index];
+                $(data.reservationPrices).each(function (index) {
+                    var reservationPrice = data.reservationPrices[index];
                     reservationHtml += "<tr><td>" + reservationPrice.startTime + "h - " + reservationPrice.endTime + "h</td><td>" + reservationPrice.passengers + "</td><td><strong>" + reservationPrice.price + " € </strong></td></tr>";
                 });
                 reservationHtml += "</tbody>";

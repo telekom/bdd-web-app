@@ -2,6 +2,7 @@ package de.telekom.test.bddwebapp.testdata.builder;
 
 import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEventVO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -62,6 +63,7 @@ public class TestDataBuilder {
         reservation.setDestination("Flughafen Berlin-Tegel");
         reservation.setEarliestStartTime(earliestStartTime);
         reservation.setLatestStartTime(latestStartTime);
+        reservation.setReservationPriceEvent(new ReservationPriceEventVO("Update reservation price event"));
         return reservation;
     }
 

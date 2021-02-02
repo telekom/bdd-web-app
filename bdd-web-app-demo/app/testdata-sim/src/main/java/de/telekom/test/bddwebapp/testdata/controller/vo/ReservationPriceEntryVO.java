@@ -1,8 +1,6 @@
-package de.telekom.test.bddwebapp.taxi.controller.vo;
+package de.telekom.test.bddwebapp.testdata.controller.vo;
 
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -12,10 +10,11 @@ import java.util.List;
  * For details see the file license on the toplevel.
  */
 @Data
-public class ReservationPriceEventVO {
+public class ReservationPriceEntryVO {
 
-    private String message;
-
-    private List<ReservationPriceEntryVO> reservationPrices;
+    private String startTime;
+    private String endTime;
+    private String price;
+    private String passengers;
 
 }

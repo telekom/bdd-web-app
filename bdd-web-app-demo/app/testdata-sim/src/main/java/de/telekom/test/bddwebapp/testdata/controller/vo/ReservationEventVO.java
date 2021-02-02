@@ -25,6 +25,6 @@ public class ReservationEventVO {
     private String destination;
     private String latestStartTime;
 
-    private List<ReservationPriceEventVO> reservationPrices = new ArrayList<>();
+    private ReservationPriceEventVO reservationPriceEvent;
 
 }

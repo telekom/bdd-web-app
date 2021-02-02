@@ -1,6 +1,13 @@
 package de.telekom.test.bddwebapp.testdata.controller.vo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -9,14 +16,20 @@ import lombok.Data;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Data
+@Getter
 public class ReservationPriceEventVO {
 
-    private String message;
+    public static final ReservationPriceEventVO NO_PRICES_YET = new ReservationPriceEventVO("No prices yet!");
 
-    private String startTime;
-    private String endTime;
-    private String price;
-    private String passengers;
+    private final String message;
+
+    private final Date date;
+
+    private final List<ReservationPriceEntryVO> reservationPrices = new ArrayList<>();
+
+    public ReservationPriceEventVO(String message) {
+        this.message = message;
+        this.date = new Date();
+    }
 
 }
