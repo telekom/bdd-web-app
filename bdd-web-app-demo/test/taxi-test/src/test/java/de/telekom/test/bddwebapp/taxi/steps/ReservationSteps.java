@@ -85,7 +85,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
 
     @When("wait for event")
     public void waitForEvent() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(1000);
     }
 
     @Then("the reservation page is shown")

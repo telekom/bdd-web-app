@@ -18,7 +18,7 @@ public class ReadinessObserver {
 
     private final WebClient webClient = WebClient.create();
 
-    @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
+    @Value("${testdata-sim.url}")
     private String testdataSim;
 
     @Autowired
@@ -30,8 +30,8 @@ public class ReadinessObserver {
     @Scheduled(fixedRate = 60 * 1000, initialDelay = 30 * 1000)
     public void observe() {
         log.info("[READINESS] Observer is checking if external services are ready");
-//        checkDbReadiness();
-//        checkTestdataSimReadiness();
+        checkDbReadiness();
+        checkTestdataSimReadiness();
         log.info("[READINESS] Observer finished checking external services");
     }
 

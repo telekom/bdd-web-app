@@ -22,7 +22,7 @@ public class ApiReservationController {
 
     private final WebClient webClient = WebClient.create();
 
-    @Value("${reservation-service.url:http://localhost:5001/testdata-sim/api/reservations}")
+    @Value("${reservation-service.url}")
     private String reservationServiceUrl;
 
     @Autowired
