@@ -15,21 +15,22 @@ $.SSE('api/reservations', {
 }).start();
 
 function updateReservation(data) {
-    $('#reserve').removeClass("btn-primary btn-warning");
-    $('#reserve').removeClass("btn-primary btn-success");
+    let $reserve = $('#reserve');
+    $reserve.removeClass("btn-primary btn-warning");
+    $reserve.removeClass("btn-primary btn-success");
 
-    if (data.reservationPrices == null || data.reservationPrices.length == 0) {
-        $('#reserve').addClass("btn-warning");
-        var reservationHtml = "<h4>The reservation is not possible!</h4>";
+    if (data.reservationPrices == null || data.reservationPrices.length === 0) {
+        $reserve.addClass("btn-warning");
+        let reservationHtml = "<h4>The reservation is not possible!</h4>";
         $('#reservation').html(reservationHtml);
     } else {
-        $('#reserve').addClass("btn-success");
-        var reservationHtml = "<h2>Reservation successful!</h2>";
+        $reserve.addClass("btn-success");
+        let reservationHtml = "<h2>Reservation successful!</h2>";
         reservationHtml += "<table class='table table-striped'>";
         reservationHtml += "<thead><tr><th>Period</th><th>Passengers</th><th>Price</th></tr></thead>";
         reservationHtml += "<tbody>";
         $(data.reservationPrices).each(function (index) {
-            var reservationPrice = data.reservationPrices[index];
+            let reservationPrice = data.reservationPrices[index];
             reservationHtml += "<tr><td>" + reservationPrice.startTime + "h - " + reservationPrice.endTime + "h</td><td>" + reservationPrice.passengers + "</td><td><strong>" + reservationPrice.price + " € </strong></td></tr>";
         });
         reservationHtml += "</tbody>";
@@ -42,9 +43,10 @@ function updateReservation(data) {
 }
 
 function onReservationError(e) {
-    $('#reserve').removeClass("btn-primary btn-warning");
-    $('#reserve').removeClass("btn-primary btn-success");
-    $('#reserve').addClass("btn-warning");
+    let $reserve = $('#reserve');
+    $reserve.removeClass("btn-primary btn-warning");
+    $reserve.removeClass("btn-primary btn-success");
+    $reserve.addClass("btn-warning");
 
     var reservationHtml = "<h4>Sorry, an error has occurred!</h4>";
     $('#reservation').html(reservationHtml);

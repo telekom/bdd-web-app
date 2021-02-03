@@ -3,6 +3,7 @@ package de.telekom.test.bddwebapp.taxi.service;
 import de.telekom.test.bddwebapp.taxi.controller.vo.RegistrationVO;
 import de.telekom.test.bddwebapp.taxi.domain.User;
 import de.telekom.test.bddwebapp.taxi.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,23 +12,21 @@ import org.springframework.util.StringUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.Random;
 
-import static java.lang.System.nanoTime;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2020 Daniel Keiss, Deutsche Telekom IT GmbH
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public void register(RegistrationVO registration) {
         // error in the control flow to demonstrate the reporting

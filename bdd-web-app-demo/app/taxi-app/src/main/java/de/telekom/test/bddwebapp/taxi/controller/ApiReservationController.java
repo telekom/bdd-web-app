@@ -3,6 +3,7 @@ package de.telekom.test.bddwebapp.taxi.controller;
 import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationPriceEventVO;
 import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationVO;
 import de.telekom.test.bddwebapp.taxi.service.ReservationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -14,21 +15,19 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 @RequestMapping("api")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ApiReservationController {
-
-    private final WebClient webClient = WebClient.create();
 
     @Value("${reservation-service.url}")
     private String reservationServiceUrl;
 
-    @Autowired
-    private ReservationService reservationService;
+    private final WebClient webClient = WebClient.create();
+    private final ReservationService reservationService;
 
-    @PostMapping("reservations")
+        @PostMapping("reservations")
     public Mono<ReservationPriceEventVO> createReservation(Principal principal, @RequestBody @Valid ReservationVO reservation) {
         reservationService.saveReservation(principal.getName(), reservation);
         reservation.setUsername(principal.getName());

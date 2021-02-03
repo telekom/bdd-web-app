@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.actuator.readiness;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,18 +15,15 @@ import java.util.Map;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ReadinessObserver {
-
-    private final WebClient webClient = WebClient.create();
 
     @Value("${testdata-sim.url}")
     private String testdataSim;
 
-    @Autowired
-    private ReadinessStatus readinessStatus;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final WebClient webClient = WebClient.create();
+    private final ReadinessStatus readinessStatus;
+    private final JdbcTemplate jdbcTemplate;
 
     @Scheduled(fixedRate = 60 * 1000, initialDelay = 30 * 1000)
     public void observe() {

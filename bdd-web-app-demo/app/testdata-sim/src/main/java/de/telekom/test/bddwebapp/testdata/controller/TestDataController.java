@@ -5,7 +5,7 @@ import de.telekom.test.bddwebapp.testdata.config.ReservationSimulatorConfig;
 import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEntryVO;
-import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEventVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,19 +14,17 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2020 Daniel Keiss, Deutsche Telekom IT GmbH
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @RestController
 @RequestMapping("testdata")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TestDataController {
 
-    @Autowired
-    private TestDataBuilder testDataBuilder;
-
-    @Autowired
-    private ReservationSimulatorConfig reservationSimulatorConfig;
+    private final TestDataBuilder testDataBuilder;
+    private final ReservationSimulatorConfig reservationSimulatorConfig;
 
     @PostMapping("user")
     public RegistrationVO createNewUser() {
