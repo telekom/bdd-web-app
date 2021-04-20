@@ -1,5 +1,5 @@
 @ignore
-Feature:
+Feature: Ignore me
   As a framework user
   I expect that everything works with JUnit defaults
   like the @ignore Annotation for features

@@ -20,9 +20,4 @@ import org.springframework.core.env.Environment;
 @ComponentScan("de.telekom.test.bddwebapp")
 public class TestConfig {
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
 }

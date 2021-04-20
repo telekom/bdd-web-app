@@ -5,5 +5,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan({"de.telekom.test.bddwebapp"})
-public class SpringConfig {
+public class TestConfig {
 }

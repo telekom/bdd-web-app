@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.stories.customizing;
 
-import de.telekom.test.bddwebapp.steps.RestartBrowserBeforeScenario;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,36 +25,19 @@ public class CurrentFeature {
 
     @Getter
     @Setter
-    private String storyPath;
-
-    public String getStoryName() {
-        if (storyPath == null) {
-            return null;
-        }
-        return storyPath.substring(storyPath.lastIndexOf("/") + 1, storyPath.lastIndexOf("."));
-    }
-
-    public Class getStoryClass() {
-        String storyName = getStoryName();
-        if (storyName == null) {
-            return null;
-        }
-        return customizingStories.getStoryClass(storyName);
-    }
+    private String feature;
 
     public boolean isRestartBrowserBeforeScenario() {
         return isRestartBrowserBeforeScenarioForAllStories() ||
                 isRestartBrowserBeforeScenarioForCurrentStory();
     }
 
-    private boolean isRestartBrowserBeforeScenarioForAllStories() {
-        return customizingStories.isRestartBrowserBeforeScenarioForAllStories();
+    private boolean isRestartBrowserBeforeScenarioForCurrentStory() {
+        return customizingStories.getRestartBrowserBeforeScenarioThisFeatures().stream().anyMatch(s -> s.equals(feature));
     }
 
-    private boolean isRestartBrowserBeforeScenarioForCurrentStory() {
-        Class clazz = getStoryClass();
-        return clazz != null && stream(clazz.getAnnotations())
-                .anyMatch(a -> a.annotationType().equals(RestartBrowserBeforeScenario.class));
+    private boolean isRestartBrowserBeforeScenarioForAllStories() {
+        return customizingStories.isRestartBrowserBeforeScenarioForAllStories();
     }
 
 }

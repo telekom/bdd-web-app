@@ -6,14 +6,13 @@ import de.telekom.test.bddwebapp.cucumber.WebDriverLifeCycle;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import de.telekom.test.bddwebapp.steps.InteractionParameterConverter;
-import io.cucumber.java.After;
+import de.telekom.test.bddwebapp.stories.customizing.CurrentFeature;
+import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import io.cucumber.java.Scenario;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-
-import javax.annotation.PreDestroy;
 
 import static de.telekom.test.bddwebapp.cucumber.ApplicationContextReference.setApplicationContext;
 import static de.telekom.test.bddwebapp.cucumber.ExtendedLifeCycle.*;
@@ -43,6 +42,12 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps 
     @Autowired
     protected WebDriverLifeCycle webDriverLifeCycle;
 
+    @Autowired
+    protected CustomizingStories customizingStories;
+
+    @Autowired
+    protected CurrentFeature currentFeature;
+
     /**
      * Need this method so the cucumber will recognize this class as glue and load spring context configuration
      */
@@ -52,10 +57,16 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps 
 
         startScenarioInteraction();
 
-        increaseTestCaseCountForFeature(getFeatureName(scenario));
+        String featureName = getFeatureName(scenario);
+        increaseTestCaseCountForFeature(featureName);
         startStoryInteraction();
 
         setLogLevel();
+
+        currentFeature.setFeature(featureName);
+        if (scenario.getSourceTagNames() != null && scenario.getSourceTagNames().stream().anyMatch(s -> s.equals("@restartBrowserBeforeScenario"))) {
+            customizingStories.getRestartBrowserBeforeScenarioThisFeatures().add(featureName);
+        }
     }
 
     public void afterFeature(Scenario scenario) {

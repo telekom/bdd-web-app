@@ -5,7 +5,6 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -23,9 +22,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Slf4j
 public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfiguration {
-
-    @Autowired
-    private WebDriverWrapper webDriverWrapper;
 
     @PostConstruct
     public void overrideDefaultWebDriverConfiguration() {

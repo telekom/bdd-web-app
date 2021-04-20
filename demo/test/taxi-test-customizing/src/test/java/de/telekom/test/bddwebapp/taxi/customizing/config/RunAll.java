@@ -6,9 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"classpath:"},
-        plugin = {"de.telekom.test.bddwebapp.cucumber.extension.ExtendedLifeCyclePlugin"},
-        glue = {"de.telekom.test.bddwebapp.taxi.steps", "de.telekom.test.bddwebapp.cucumber.hook"},
+        features = {"src/test/resources/de/telekom/test/bddwebapp/taxi/customizing/stories"},
+        glue = {"de.telekom.test.bddwebapp.taxi.steps","de.telekom.test.bddwebapp.taxi.customizing.steps"},
         tags = "not @ignore")
 public class RunAll {
 }

@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,18 +22,11 @@ import java.util.Map;
 @Component
 public class CustomizingStories {
 
-    private final Map<String, Class> storyClasses = new HashMap();
+    @Getter
+    private final List<String> restartBrowserBeforeScenarioThisFeatures = new ArrayList<>();
 
     @Getter
     @Setter
     private boolean restartBrowserBeforeScenarioForAllStories;
-
-    public void setStoryClass(Class clazz, String name) {
-        storyClasses.put(name, clazz);
-    }
-
-    public Class getStoryClass(String name) {
-        return storyClasses.get(name);
-    }
 
 }

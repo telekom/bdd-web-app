@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.cucumber.hook.AbstractCucumberSpringConfigurationSteps;
-import de.telekom.test.bddwebapp.taxi.config.SpringConfig;
+import de.telekom.test.bddwebapp.taxi.config.TestConfig;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.ParameterType;
@@ -20,7 +20,7 @@ import java.util.UUID;
  * For details see the file license on the toplevel.
  */
 @CucumberContextConfiguration
-@ContextConfiguration(classes = SpringConfig.class)
+@ContextConfiguration(classes = TestConfig.class)
 public class CucumberGlueSteps extends AbstractCucumberSpringConfigurationSteps {
 
     @Before(order = 0)
