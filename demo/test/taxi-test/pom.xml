@@ -41,6 +41,12 @@
                 <version>${bdd-web-app.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>5.1.20.RELEASE</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -48,6 +54,10 @@
         <dependency>
             <groupId>org.bdd-web-app</groupId>
             <artifactId>bdd-web-app_cucumber</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
         </dependency>
     </dependencies>
 

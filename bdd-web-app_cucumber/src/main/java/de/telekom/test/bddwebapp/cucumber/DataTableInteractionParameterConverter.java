@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.cucumber.hook.parameter;
+package de.telekom.test.bddwebapp.cucumber;
 
 import de.telekom.test.bddwebapp.steps.InteractionParameterConverter;
 import io.cucumber.datatable.DataTable;
@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2020 Daniel Keiss, Deutsche Telekom AG
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -28,11 +28,16 @@ public class DataTableInteractionParameterConverter {
     private InteractionParameterConverter interactionParameterConverter;
 
     public List<Map<String, Object>> getRowsWithInteractionKey(DataTable testData) {
-        List<Map<String, String>> rows = testData.asMaps();
-        List<Map<String, Object>> rowsWithValuesFromInteraction = new ArrayList<>();
+        var rows = testData.asMaps();
+        var rowsWithValuesFromInteraction = new ArrayList<Map<String, Object>>();
         rows.forEach(row -> {
             Map<String, Object> rowWithValueFromInteraction = new HashMap<>();
-            row.forEach((key, valueOrInteractionKey) -> rowWithValueFromInteraction.put(key, interactionParameterConverter.getValueFromKeyOrValueOrConcatenated(valueOrInteractionKey)));
+            row.forEach((key, valueOrInteractionKey) -> {
+                if(valueOrInteractionKey == null){
+                    valueOrInteractionKey = "";
+                }
+                rowWithValueFromInteraction.put(key, interactionParameterConverter.getValueFromKeyOrValueOrConcatenated(valueOrInteractionKey));
+            });
             rowsWithValuesFromInteraction.add(rowWithValueFromInteraction);
         });
         return rowsWithValuesFromInteraction;

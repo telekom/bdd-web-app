@@ -31,9 +31,9 @@ public class InteractionParameterConverter {
     @Autowired
     private StoryInteraction storyInteraction;
 
-    public Object getValueFromKeyOrValueOrConcatenated(String keyOrValueOrConcatenated) {
+    public <S> S getValueFromKeyOrValueOrConcatenated(String keyOrValueOrConcatenated) {
         if (isConcatenatedKey(keyOrValueOrConcatenated)) {
-            return concatenatedKey(keyOrValueOrConcatenated);
+            return (S) concatenatedKey(keyOrValueOrConcatenated);
         }
         return mapToValue(keyOrValueOrConcatenated);
     }

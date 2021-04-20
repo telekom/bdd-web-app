@@ -1,15 +1,11 @@
-package de.telekom.test.bddwebapp.cucumber.hook;
+package de.telekom.test.bddwebapp.cucumber;
 
-import de.telekom.test.bddwebapp.cucumber.extension.BeforeFeature;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.stories.customizing.CurrentFeature;
 import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
-import io.cucumber.java.After;
-import org.junit.AfterClass;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -20,6 +16,7 @@ import javax.annotation.PostConstruct;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
+@Component
 public class WebDriverLifeCycle {
 
     @Autowired
@@ -31,17 +28,14 @@ public class WebDriverLifeCycle {
     @Autowired
     protected BrowserDriverUpdater browserDriverUpdater;
 
-    @PostConstruct
     public void updateDriver() {
         browserDriverUpdater.updateDriver();
     }
 
-    @BeforeFeature
     public void quitBrowserAfterStory() {
         webDriverWrapper.quit();
     }
 
-    @AfterClass
     public void quitBrowserAfterScenario() {
         if (currentStory.isRestartBrowserBeforeScenario()) {
             webDriverWrapper.quit();

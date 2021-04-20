@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertNotNull;
-
 /**
  * Interface for Interactions
  *
@@ -48,7 +46,7 @@ interface Interaction {
 
     default <S> S recallNotNull(String key) {
         S value = recall(key);
-        assertNotNull(String.format("Recalled '%s' for story interaction value '%s'", value, key), value);
+        assert value != null;
         return value;
     }
 

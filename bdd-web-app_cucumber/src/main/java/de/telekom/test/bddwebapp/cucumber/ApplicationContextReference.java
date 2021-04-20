@@ -1,13 +1,13 @@
-package de.telekom.test.bddwebapp.cucumber.extension;
+package de.telekom.test.bddwebapp.cucumber;
 
 import org.springframework.context.ApplicationContext;
 
 public class ApplicationContextReference {
 
+    private static ApplicationContext applicationContext;
+
     private ApplicationContextReference() {
     }
-
-    private static ApplicationContext applicationContext;
 
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
