@@ -1,3 +1,4 @@
+@ignore
 Feature: Registration Error
   As a developer
   I would like to have a meaningful reporting for errors in the control flow,
