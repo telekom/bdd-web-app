@@ -11,9 +11,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
 
-        <jbehave.version>4.8.1</jbehave.version>
+        <jbehave.version>4.8.3</jbehave.version>
         <bdd-web-app.version>1.9-SNAPSHOT</bdd-web-app.version>
-        <commons-lang3.version>3.11</commons-lang3.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 

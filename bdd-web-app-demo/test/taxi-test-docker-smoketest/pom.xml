@@ -12,7 +12,7 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <bdd-web-app.version>1.9-SNAPSHOT</bdd-web-app.version>
-        <maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
