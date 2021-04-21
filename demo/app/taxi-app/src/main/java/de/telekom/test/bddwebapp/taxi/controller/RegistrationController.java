@@ -2,6 +2,7 @@ package de.telekom.test.bddwebapp.taxi.controller;
 
 import de.telekom.test.bddwebapp.taxi.controller.vo.RegistrationVO;
 import de.telekom.test.bddwebapp.taxi.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,15 +13,15 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RegistrationController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration() {

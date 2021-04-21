@@ -1,0 +1,93 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.telekom.test</groupId>
+    <artifactId>bdd-web-app-demo-taxi-test-selenium-grid</artifactId>
+    <version>1.9</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
+
+        <bdd-web-app.version>1.9-SNAPSHOT</bdd-web-app.version>
+        <jbehave.version>4.8.1</jbehave.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+                <version>${jbehave.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                        <version>${commons-lang3.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>unpack-view-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>unpack-view-resources</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>run-stories-as-embeddables</id>
+                        <phase>test</phase>
+                        <configuration>
+                            <scope>test</scope>
+                            <includes>
+                                <include>**/RunAllCustomizingTaxiStories.java</include>
+                            </includes>
+                        </configuration>
+                        <goals>
+                            <goal>run-stories-as-embeddables</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bdd-web-app</artifactId>
+                <version>${bdd-web-app.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bdd-web-app</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bdd-web-app-demo-taxi-test</artifactId>
+            <version>1.9</version>
+            <classifier>tests</classifier>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.controller;
 
 import de.telekom.test.bddwebapp.taxi.controller.validator.AuthenticationValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +14,15 @@ import java.security.Principal;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Controller
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class IndexController {
 
-    @Autowired
-    private AuthenticationValidator authenticationValidator;
+    private final AuthenticationValidator authenticationValidator;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root(Principal principal, Model model) {

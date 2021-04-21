@@ -3,8 +3,9 @@ package de.telekom.test.bddwebapp.testdata.controller;
 import de.telekom.test.bddwebapp.testdata.builder.TestDataBuilder;
 import de.telekom.test.bddwebapp.testdata.config.ReservationSimulatorConfig;
 import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
-import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceVO;
-import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEntryVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,19 +14,17 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @RestController
 @RequestMapping("testdata")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TestDataController {
 
-    @Autowired
-    private TestDataBuilder testDataBuilder;
-
-    @Autowired
-    private ReservationSimulatorConfig reservationSimulatorConfig;
+    private final TestDataBuilder testDataBuilder;
+    private final ReservationSimulatorConfig reservationSimulatorConfig;
 
     @PostMapping("user")
     public RegistrationVO createNewUser() {
@@ -33,10 +32,10 @@ public class TestDataController {
     }
 
     @PostMapping("reservation")
-    public ReservationVO createExampleReservation(@RequestParam String earliestStartTime, @RequestParam String latestStartTime) {
-        ReservationVO reservation = testDataBuilder.createExampleReservation(earliestStartTime, latestStartTime);
+    public ReservationEventVO createExampleReservation(@RequestParam String earliestStartTime, @RequestParam String latestStartTime) {
+        var reservation = testDataBuilder.createExampleReservation(earliestStartTime, latestStartTime);
         reservationSimulatorConfig.setCurrentReservation(reservation);
-        return reservationSimulatorConfig.getCurrentReservation();
+        return reservation;
     }
 
     @DeleteMapping("reservation")
@@ -45,8 +44,8 @@ public class TestDataController {
     }
 
     @PutMapping("prices")
-    public void updateOfferedPrice(@RequestBody ReservationPriceVO reservationPrice) {
-        reservationSimulatorConfig.updatePrice(reservationPrice);
+    public void updateOfferedPrice(@RequestBody ReservationPriceEntryVO priceEntry) {
+        reservationSimulatorConfig.updatePrice(priceEntry);
     }
 
 }

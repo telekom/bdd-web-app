@@ -1,0 +1,12 @@
+Erzählung:
+Als Entwickler
+möchte ich ein aussagekräftiges Reporting bei Fehlern im Kontrollfluss haben,
+um die Fehler schnell beheben zu können.
+
+Szenario: Registrierung
+Gegeben die geöffnete Registrierungsseite
+Wenn der Nutzer die Registrierung mit folgenden Daten durchführt
+|firstName|lastName|userName|password|
+|Hans|Müller|error@test.de|password|
+Dann wird die Loginseite angezeigt
+Und der Nutzer erhält die Nachricht, dass er registriert ist

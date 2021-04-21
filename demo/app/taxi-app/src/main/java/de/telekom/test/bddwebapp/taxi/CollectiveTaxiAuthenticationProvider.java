@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.taxi;
 
 import de.telekom.test.bddwebapp.taxi.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,30 +13,29 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvider {
 
     public final static SimpleGrantedAuthority ROLE_USER = new SimpleGrantedAuthority("ROLE_USER");
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String name = authentication.getName();
-        String password = getPassword(authentication);
-        List<GrantedAuthority> grantedAuths = new ArrayList<>();
+        var name = authentication.getName();
+        var password = getPassword(authentication);
+        var grantedAuths = new ArrayList<GrantedAuthority>();
         grantedAuths.add(ROLE_USER);
-        UsernamePasswordAuthenticationToken passwordAuthenticationToken = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+        var passwordAuthenticationToken = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
         if (!isPasswordValid(name, password)) {
             passwordAuthenticationToken.setAuthenticated(false);
             passwordAuthenticationToken.setDetails("username_password_invalid");

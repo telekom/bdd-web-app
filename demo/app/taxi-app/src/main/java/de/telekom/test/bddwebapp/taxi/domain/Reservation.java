@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -17,12 +17,11 @@ import java.util.Date;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "RESERVATION_ID_SEQ")
-    @SequenceGenerator(name = "RESERVATION_ID_SEQ", sequenceName = "RESERVATION_ID_SEQ", allocationSize = 100)
-    private Integer reservationId;
+    @GeneratedValue
+    private Long reservationId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @ManyToOne
+    @JoinColumn
     private User user;
 
     private String date;

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" href="css/sticky-footer.css">
 </head>
 <body>
@@ -24,6 +24,7 @@
             <div class="alert alert-success">You have successfully registered!</div>
         </div>
     </div>
+    <!--/*@thymesVar id="usernamePasswordInvalid" type="boolean"*/-->
     <div th:if="${usernamePasswordInvalid}" class="row">
         <div class="col-lg-6">
             <div class="alert alert-warning">Your login data is invalid!</div>

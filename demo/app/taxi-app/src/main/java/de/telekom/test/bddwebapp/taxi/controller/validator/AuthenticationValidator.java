@@ -10,7 +10,7 @@ import java.security.Principal;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2019 Daniel Keiss, Deutsche Telekom AG
+ * Copyright (c) 2021 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -18,11 +18,11 @@ import java.security.Principal;
 public class AuthenticationValidator {
 
     public boolean isAuthenticated(Principal principal, Model model) {
-        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) principal;
+        var authenticationToken = (UsernamePasswordAuthenticationToken) principal;
         if (authenticationToken == null || !StringUtils.hasText(authenticationToken.getName())) {
             return false;
         }
-        boolean authenticated = authenticationToken.isAuthenticated();
+        var authenticated = authenticationToken.isAuthenticated();
         if (!authenticated) {
             model.addAttribute("usernamePasswordInvalid", authenticationToken.getDetails() != null && authenticationToken.getDetails().toString().contains("username_password_invalid"));
         }
