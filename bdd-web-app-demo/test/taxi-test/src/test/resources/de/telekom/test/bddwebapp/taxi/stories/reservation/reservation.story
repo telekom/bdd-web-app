@@ -13,19 +13,26 @@ Scenario: Successful reservation, because there are now a offer available
 Given the price is 30,50 € with 0 other passengers between 10:00 and 10:30
 When reserve a shared taxi
 Then the reservation is successful
-And between 10:00 and 10:30 the price is 30,50 € at 0 passengers
+And the prices are
+|start|end|price|passengers|
+|10:00|10:15|30,50 €|0|
 
 Scenario: View updated prices for already booked reservations with other passengers
 Given the price is 30,50 € with 0 other passengers between 10:00 and 10:15
 And the price is 15,50 € with 2 other passengers between 10:15 and 10:30
 When the user open the reservation page
+And wait for event
 Then the reservation is successful
-And between 10:00 and 10:15 the price is 30,50 € at 0 passengers
-And between 10:15 and 10:30 the price is 15,50 € at 2 passengers
+And the prices are
+|start|end|price|passengers|
+|10:00|10:15|30,50 €|0|
+|10:15|10:30|15,50 €|2|
 
 Scenario: View updated prices for already booked reservations with other passengers without reloading
 Given the price is 30,50 € with 0 other passengers between 10:00 and 10:15
 And the price is 12,50 € with 4 other passengers between 10:15 and 10:30
 When wait for event
-Then between 10:00 and 10:15 the price is 30,50 € at 0 passengers
-And between 10:15 and 10:30 the price is 12,50 € at 4 passengers
+Then the prices are
+|start|end|price|passengers|
+|10:00|10:15|30,50 €|0|
+|10:15|10:30|12,50 €|4|

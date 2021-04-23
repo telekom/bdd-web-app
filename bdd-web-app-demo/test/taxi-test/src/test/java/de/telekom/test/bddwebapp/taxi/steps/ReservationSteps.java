@@ -8,12 +8,15 @@ import org.jbehave.core.annotations.BeforeStory;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
+
+import java.util.Map;
+import java.util.stream.IntStream;
 
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -105,13 +108,17 @@ public class ReservationSteps extends AbstractTaxiSteps {
         assertTrue(reservationPage.isReservationNotPossible());
     }
 
-    @Then("between $startTime and $endTime the price is $price at $passengers passengers")
-    public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
+    @Then("the prices are $exampleTable")
+    public void thePricesAre(ExamplesTable examplesTable) {
         ReservationPage reservationPage = getCurrentPage();
-        var reservationPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
-        assertTrue(reservationPrice.isPresent());
-        assertThat(reservationPrice.get().getPrice(), is(price));
-        assertThat(reservationPrice.get().getPassengers(), is(passengers));
+        var reservationPrices = reservationPage.getPrices();
+        assertTrue("No reservation prices set!", reservationPrices.size() > 0);
+        IntStream.range(0, examplesTable.getRowCount()).forEach(i -> {
+            ReservationPage.ReservationPrice reservationPrice = reservationPrices.get(i);
+            Map<String, String> row = examplesTable.getRow(i);
+            assertThat(reservationPrice.getPrice(), is(row.get("price")));
+            assertThat(reservationPrice.getPassengers(), is(row.get("passengers")));
+        });
     }
 
 }

@@ -8,7 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -80,23 +81,17 @@ public class ReservationPage extends JQueryPage {
         return reservationDiv.getText().contains("not possible");
     }
 
-    public Optional<ReservationPrice> getPriceBetweenStartAndEndTime(String startTime, String endTime) {
-        var reservationTable = reservationDiv.findElement(By.className("table"));
-        var tableRows = reservationTable.findElements(By.tagName("tr"));
+    public List<ReservationPrice> getPrices() {
+        var tableRows = driver.findElements(By.tagName("tr"));
         return tableRows.stream()
                 .map(tableRow -> tableRow.findElements(By.tagName("td")))
-                .filter(tableCols -> {
-                    if (tableCols.isEmpty()) {
-                        return false; // head
-                    }
-                    var startTimeAndEndTime = tableCols.get(0).getText().trim();
-                    return startTimeAndEndTime.contains(startTime) && startTimeAndEndTime.contains(endTime);
-                }).map(tableCols -> {
+                .filter(tableCols -> !tableCols.isEmpty())
+                .map(tableCols -> {
                     var startTimeAndEndTime = tableCols.get(0).getText().trim();
                     var passengers = tableCols.get(1).getText().trim();
                     var price = tableCols.get(2).getText().trim();
                     return new ReservationPrice(startTimeAndEndTime, passengers, price);
-                }).findFirst();
+                }).collect(Collectors.toList());
     }
 
     @Override
