@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom</groupId>
-    <artifactId>bdd-web-app-cucumber</artifactId>
+    <artifactId>bdd-web-app-jbehave</artifactId>
     <version>2.0-SNAPSHOT</version>
 
-    <name>BDD web application testing framework for cucumber</name>
+    <name>BDD web application testing framework for jbehave</name>
     <url>https://github.com/telekom/bdd-web-app</url>
     <description>Setup BDD-test-projects for web applications fast and easy</description>
     <inceptionYear>2017</inceptionYear>
@@ -17,7 +17,9 @@
 
         <maven.compiler.release>11</maven.compiler.release>
 
-        <cucumber.version>6.8.0</cucumber.version>
+        <jbehave.version>4.8.3</jbehave.version>
+        <jbehave-site-resources.version>3.4.1</jbehave-site-resources.version>
+        <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
         <bdd-web-app-core.version>2.0-SNAPSHOT</bdd-web-app-core.version>
 
         <!-- Deploy dependencies -->
@@ -25,6 +27,11 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+
+        <!-- Unit test dependencies -->
+        <spock-core.version>2.0-M4-groovy-3.0</spock-core.version>
+        <byte-buddy.version>1.10.19</byte-buddy.version>
+        <objenesis.version>3.1</objenesis.version>
 
         <!-- Build dependencies -->
         <gmavenplus-plugin.version>1.12.1</gmavenplus-plugin.version>
@@ -145,7 +152,6 @@
 
     <build>
         <plugins>
-            <!-- Spock unit test execution TODO
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
@@ -159,7 +165,6 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -185,25 +190,61 @@
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Cucumber -->
+            <!-- JBehave -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-java</artifactId>
-                <version>${cucumber.version}</version>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-core</artifactId>
+                <version>${jbehave.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+                <version>${jbehave.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-core</artifactId>
+                <version>${jbehave.version}</version>
+                <classifier>resources</classifier>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave.site</groupId>
+                <artifactId>jbehave-site-resources</artifactId>
+                <version>${jbehave-site-resources.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>com.github.valfirst</groupId>
+                <artifactId>jbehave-junit-runner</artifactId>
+                <version>${jbehave-junit-runner}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Testing -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-core</artifactId>
+                <version>${spock-core.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-junit</artifactId>
-                <version>${cucumber.version}</version>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-buddy.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-spring</artifactId>
-                <version>${cucumber.version}</version>
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>${objenesis.version}</version>
+                <scope>test</scope>
             </dependency>
 
         </dependencies>
@@ -221,22 +262,50 @@
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Cucumber -->
+        <!-- JBehave -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-maven-plugin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <classifier>resources</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave.site</groupId>
+            <artifactId>jbehave-site-resources</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.github.valfirst</groupId>
+            <artifactId>jbehave-junit-runner</artifactId>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Testing -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-spring</artifactId>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
         </dependency>
 
     </dependencies>

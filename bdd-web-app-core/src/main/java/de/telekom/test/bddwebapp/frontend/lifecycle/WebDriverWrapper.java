@@ -56,6 +56,10 @@ public class WebDriverWrapper {
                 .orElse(getDefaultWebDriverConfiguration());
     }
 
+    public void resetAlternativeWebDriverConfiguration() {
+        this.alternativeWebDriverConfiguration = null;
+    }
+
     public WebDriverConfiguration getAlternativeWebDriverConfiguration(Class<? extends WebDriverConfiguration> alternativeWebDriverConfigurationClass) {
         return webDriverConfigurations.stream()
                 .filter(webDriverConfiguration -> webDriverConfiguration.getClass().equals(alternativeWebDriverConfigurationClass))

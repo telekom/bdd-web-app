@@ -29,7 +29,7 @@
         <selenium.version>3.141.59</selenium.version>
         <htmlunit.version>2.46.0</htmlunit.version>
         <webdrivermanager.version>4.3.1</webdrivermanager.version>
-        <commons-lang3.version>3.11</commons-lang3.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
 
         <!-- Unit test dependencies -->
         <spock-core.version>2.0-M4-groovy-3.0</spock-core.version>
@@ -43,7 +43,7 @@
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
 
         <!-- Build dependencies -->
-        <gmavenplus-plugin.version>1.9.0</gmavenplus-plugin.version>
+        <gmavenplus-plugin.version>2.0.0</gmavenplus-plugin.version>
     </properties>
 
     <licenses>
