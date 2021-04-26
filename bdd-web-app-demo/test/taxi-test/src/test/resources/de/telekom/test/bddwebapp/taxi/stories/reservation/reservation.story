@@ -15,7 +15,7 @@ When reserve a shared taxi
 Then the reservation is successful
 And the prices are
 |start|end|price|passengers|
-|10:00|10:15|30,50 €|0|
+|10:00|10:30|30,50 €|0|
 
 Scenario: View updated prices for already booked reservations with other passengers
 Given the price is 30,50 € with 0 other passengers between 10:00 and 10:15

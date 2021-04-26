@@ -5,6 +5,7 @@ import de.telekom.test.bddwebapp.taxi.steps.ReservationSteps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 
 
 /**
@@ -37,6 +38,11 @@ public class ReservationStepsGer extends ReservationSteps {
         super.aSharedTaxiIsReservedBetween();
     }
 
+    @When("auf Event warten")
+    public void waitForEvent() throws InterruptedException {
+        super.waitForEvent();
+    }
+
     @Then("wird die Reservierungsseite angezeigt")
     public void theReservationPageIsShown() {
         super.theReservationPageIsShown();
@@ -52,9 +58,9 @@ public class ReservationStepsGer extends ReservationSteps {
         super.theReservationIsNotSuccessful();
     }
 
-    @Then("zwischen $startTime und $endTime Uhr beträgt der Preis $price bei $passengers Mitfahrern")
-    public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
-        super.thePriceIsBetweenAnd(startTime, endTime, price, passengers);
+    @Then("die Preise betragen $exampleTable")
+    public void thePricesAre(ExamplesTable examplesTable) {
+        thePricesAre(examplesTable, "start", "ende", "preis", "mitfahrer");
     }
 
 }

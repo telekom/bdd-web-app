@@ -15,6 +15,7 @@ import java.util.stream.IntStream;
 
 import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -110,14 +111,20 @@ public class ReservationSteps extends AbstractTaxiSteps {
 
     @Then("the prices are $exampleTable")
     public void thePricesAre(ExamplesTable examplesTable) {
+        thePricesAre(examplesTable, "start", "end", "price", "passengers");
+    }
+
+    protected void thePricesAre(ExamplesTable examplesTable, String startKey, String endKey, String priceKey, String passengerKey) {
         ReservationPage reservationPage = getCurrentPage();
         var reservationPrices = reservationPage.getPrices();
         assertTrue("No reservation prices set!", reservationPrices.size() > 0);
         IntStream.range(0, examplesTable.getRowCount()).forEach(i -> {
             ReservationPage.ReservationPrice reservationPrice = reservationPrices.get(i);
             Map<String, String> row = examplesTable.getRow(i);
-            assertThat(reservationPrice.getPrice(), is(row.get("price")));
-            assertThat(reservationPrice.getPassengers(), is(row.get("passengers")));
+            assertThat(reservationPrice.getStartTimeAndEndTime(), containsString(row.get(startKey)));
+            assertThat(reservationPrice.getStartTimeAndEndTime(), containsString(row.get(endKey)));
+            assertThat(reservationPrice.getPrice(), is(row.get(priceKey)));
+            assertThat(reservationPrice.getPassengers(), is(row.get(passengerKey)));
         });
     }
 
