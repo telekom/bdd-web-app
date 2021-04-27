@@ -50,7 +50,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.telekom</groupId>
+            <groupId>de.telekom.test</groupId>
             <artifactId>bdd-web-app-cucumber</artifactId>
         </dependency>
         <dependency>

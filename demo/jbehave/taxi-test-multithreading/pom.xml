@@ -65,7 +65,7 @@
         <dependencies>
             <dependency>
                 <groupId>de.telekom.test</groupId>
-                <artifactId>bdd-web-app</artifactId>
+                <artifactId>bdd-web-app-jbehave</artifactId>
                 <version>${bdd-web-app.version}</version>
             </dependency>
         </dependencies>
@@ -74,7 +74,7 @@
     <dependencies>
         <dependency>
             <groupId>de.telekom.test</groupId>
-            <artifactId>bdd-web-app</artifactId>
+            <artifactId>bdd-web-app-jbehave</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
