@@ -3,14 +3,13 @@
 	http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.bdd-web-app</groupId>
+    <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo-taxi-test-customizing</artifactId>
     <version>2.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
 
         <surefire.version>2.22.1</surefire.version>
 
@@ -35,7 +34,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>de.telekom</groupId>
+                <groupId>de.telekom.test</groupId>
                 <artifactId>bdd-web-app-cucumber</artifactId>
                 <version>${bdd-web-app.version}</version>
                 <scope>test</scope>
@@ -55,7 +54,7 @@
             <artifactId>bdd-web-app-cucumber</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.bdd-web-app</groupId>
+            <groupId>de.telekom.test</groupId>
             <artifactId>bdd-web-app-demo-taxi-test</artifactId>
             <version>${bdd-web-app.version}</version>
             <classifier>tests</classifier>
