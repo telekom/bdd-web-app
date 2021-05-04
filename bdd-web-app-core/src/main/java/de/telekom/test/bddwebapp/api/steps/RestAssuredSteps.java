@@ -63,6 +63,7 @@ public interface RestAssuredSteps {
             requestSpecification.baseUri(baseURI.toString()).basePath(apiPath);
             int port = baseURI.getPort() > 0 ? baseURI.getPort() : determineStandardPortForScheme(baseURI.getScheme());
             requestSpecification.port(port);
+            rememberRequest(requestSpecification);
         } catch (Exception ex) {
             throw new RuntimeException("Error setting baseUri for recallRequest", ex);
         }
