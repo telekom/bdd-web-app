@@ -1,13 +1,11 @@
-package de.telekom.test.bddwebapp.stories.customizing;
+package de.telekom.test.bddwebapp.cucumber.features;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Gives access to the current story about the Spring Context
@@ -20,7 +18,7 @@ import java.util.Map;
  * For details see the file license on the toplevel.
  */
 @Component
-public class CustomizingStories {
+public class CustomizingFeatures {
 
     @Getter
     private final List<String> restartBrowserBeforeScenarioThisFeatures = new ArrayList<>();

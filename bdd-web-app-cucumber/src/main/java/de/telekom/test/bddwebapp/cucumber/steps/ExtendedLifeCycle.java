@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.cucumber;
+package de.telekom.test.bddwebapp.cucumber.steps;
 
 import lombok.extern.slf4j.Slf4j;
 

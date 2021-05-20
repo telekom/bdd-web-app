@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.steps;
+package de.telekom.test.bddwebapp.interaction;
 
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;

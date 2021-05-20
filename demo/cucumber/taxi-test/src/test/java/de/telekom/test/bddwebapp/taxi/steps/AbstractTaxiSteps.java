@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.cucumber.DataTableInteractionParameterConverter;
+import de.telekom.test.bddwebapp.cucumber.steps.DataTableInteractionParameterConverter;
 import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
 import io.restassured.specification.RequestSpecification;
 import org.springframework.beans.factory.annotation.Autowired;

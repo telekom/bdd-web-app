@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.test</groupId>
-    <artifactId>bdd-web-app-demo-taxi-app</artifactId>
+    <artifactId>bddwebapp-demo-taxi-app</artifactId>
     <version>2.0</version>
 
     <parent>

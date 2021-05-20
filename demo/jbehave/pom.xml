@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.test</groupId>
-    <artifactId>bdd-web-app-jbehave-demo-root</artifactId>
+    <artifactId>bddwebapp-jbehave-demo-root</artifactId>
     <version>2.0</version>
     <packaging>pom</packaging>
 
@@ -25,5 +25,18 @@
         <module>taxi-test-docker-smoketest</module>
         <module>taxi-test-selenium-grid</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

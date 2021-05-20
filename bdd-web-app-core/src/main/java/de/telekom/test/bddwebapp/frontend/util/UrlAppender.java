@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.util;
+package de.telekom.test.bddwebapp.frontend.util;
 
 import org.apache.commons.lang3.StringUtils;
 

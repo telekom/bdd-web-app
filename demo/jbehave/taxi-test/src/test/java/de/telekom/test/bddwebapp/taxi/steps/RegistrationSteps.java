@@ -9,7 +9,7 @@ import org.jbehave.core.model.ExamplesTable;
 
 import java.util.Map;
 
-import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
+import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static org.junit.Assert.assertTrue;
 
 /**

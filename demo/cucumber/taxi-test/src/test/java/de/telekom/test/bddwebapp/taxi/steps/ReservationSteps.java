@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Value;
 
-import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
+import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,11 +1,9 @@
-package de.telekom.test.bddwebapp.stories.customizing;
+package de.telekom.test.bddwebapp.cucumber.features;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static java.util.Arrays.stream;
 
 /**
  * Gives access to the current story about the Spring Context
@@ -21,7 +19,7 @@ import static java.util.Arrays.stream;
 public class CurrentFeature {
 
     @Autowired
-    private CustomizingStories customizingStories;
+    private CustomizingFeatures customizingStories;
 
     @Getter
     @Setter

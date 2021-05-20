@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.cucumber;
+package de.telekom.test.bddwebapp.cucumber.steps;
 
-import de.telekom.test.bddwebapp.steps.InteractionParameterConverter;
+import de.telekom.test.bddwebapp.interaction.InteractionParameterConverter;
 import io.cucumber.datatable.DataTable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

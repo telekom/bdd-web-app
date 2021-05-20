@@ -5,7 +5,7 @@ import de.telekom.test.bddwebapp.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import de.telekom.test.bddwebapp.steps.InteractionParameterConverter;
+import de.telekom.test.bddwebapp.interaction.InteractionParameterConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import static de.telekom.test.bddwebapp.util.UrlAppender.appendQueryParams;
-import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
+import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendQueryParams;
+import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 /**

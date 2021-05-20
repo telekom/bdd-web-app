@@ -1,21 +1,20 @@
-package de.telekom.test.bddwebapp.cucumber.hook;
+package de.telekom.test.bddwebapp.cucumber.steps;
 
 import ch.qos.logback.classic.Level;
 import de.telekom.test.bddwebapp.api.steps.ApiSteps;
-import de.telekom.test.bddwebapp.cucumber.WebDriverLifeCycle;
+import de.telekom.test.bddwebapp.cucumber.features.CurrentFeature;
+import de.telekom.test.bddwebapp.cucumber.features.CustomizingFeatures;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import de.telekom.test.bddwebapp.steps.InteractionParameterConverter;
-import de.telekom.test.bddwebapp.stories.customizing.CurrentFeature;
-import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
+import de.telekom.test.bddwebapp.interaction.InteractionParameterConverter;
 import io.cucumber.java.Scenario;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import static de.telekom.test.bddwebapp.cucumber.ApplicationContextReference.setApplicationContext;
-import static de.telekom.test.bddwebapp.cucumber.ExtendedLifeCycle.*;
+import static de.telekom.test.bddwebapp.cucumber.steps.ApplicationContextReference.setApplicationContext;
+import static de.telekom.test.bddwebapp.cucumber.steps.ExtendedLifeCycle.*;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -43,7 +42,7 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps 
     protected WebDriverLifeCycle webDriverLifeCycle;
 
     @Autowired
-    protected CustomizingStories customizingStories;
+    protected CustomizingFeatures customizingStories;
 
     @Autowired
     protected CurrentFeature currentFeature;

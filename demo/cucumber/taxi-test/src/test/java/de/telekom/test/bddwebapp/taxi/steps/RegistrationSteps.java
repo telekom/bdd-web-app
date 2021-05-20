@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 
 import java.util.Map;
 
-import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
+import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.junit.Assert.assertTrue;
 

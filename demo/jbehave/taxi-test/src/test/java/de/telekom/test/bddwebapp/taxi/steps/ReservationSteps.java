@@ -9,7 +9,7 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
-import static de.telekom.test.bddwebapp.util.UrlAppender.appendUrl;
+import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

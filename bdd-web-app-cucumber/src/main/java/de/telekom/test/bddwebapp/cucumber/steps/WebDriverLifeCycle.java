@@ -1,9 +1,9 @@
-package de.telekom.test.bddwebapp.cucumber;
+package de.telekom.test.bddwebapp.cucumber.steps;
 
+import de.telekom.test.bddwebapp.cucumber.features.CurrentFeature;
+import de.telekom.test.bddwebapp.cucumber.features.CustomizingFeatures;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
-import de.telekom.test.bddwebapp.stories.customizing.CurrentFeature;
-import de.telekom.test.bddwebapp.stories.customizing.CustomizingStories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class WebDriverLifeCycle {
     @Autowired
     protected CurrentFeature currentStory;
     @Autowired
-    protected CustomizingStories customizingStories;
+    protected CustomizingFeatures customizingStories;
     @Autowired
     protected WebDriverWrapper webDriverWrapper;
     @Autowired

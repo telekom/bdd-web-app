@@ -4,16 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.test</groupId>
-    <artifactId>bdd-web-app-demo-taxi-test-customizing</artifactId>
+    <artifactId>bddwebapp-demo-cucumber-taxi-test-customizing</artifactId>
     <version>2.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-
-        <surefire.version>2.22.1</surefire.version>
-
-        <bdd-web-app.version>2.0-SNAPSHOT</bdd-web-app.version>
     </properties>
 
     <build>
@@ -21,7 +17,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
+                <version>2.22.1</version>
                 <configuration>
                     <includes>
                         <include>**/RunAllTaxiStories.java</include>
@@ -35,8 +31,8 @@
         <dependencies>
             <dependency>
                 <groupId>de.telekom.test</groupId>
-                <artifactId>bdd-web-app-cucumber</artifactId>
-                <version>${bdd-web-app.version}</version>
+                <artifactId>bddwebapp-cucumber</artifactId>
+                <version>2.0-SNAPSHOT</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -51,12 +47,12 @@
     <dependencies>
         <dependency>
             <groupId>de.telekom.test</groupId>
-            <artifactId>bdd-web-app-cucumber</artifactId>
+            <artifactId>bddwebapp-cucumber</artifactId>
         </dependency>
         <dependency>
             <groupId>de.telekom.test</groupId>
-            <artifactId>bdd-web-app-demo-taxi-test</artifactId>
-            <version>${bdd-web-app.version}</version>
+            <artifactId>bddwebapp-jbehave-demo-taxi-test</artifactId>
+            <version>2.0</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>
