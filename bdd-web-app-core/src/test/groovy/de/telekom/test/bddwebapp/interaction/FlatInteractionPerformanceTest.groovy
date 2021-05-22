@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.interaction
 
-import org.junit.Ignore
+
+import spock.lang.Ignore
 import spock.lang.Specification
 
 /**

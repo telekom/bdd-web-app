@@ -76,7 +76,7 @@ class ApiStepsTest extends Specification {
         when:
         apiSteps.createRequestWithBaseUriAndProxy("http://localhost", "test", "http://localhost", "1234")
         then:
-        1 * apiSteps.scenarioInteraction.remember("request", _ as RequestSpecification)
+        2 * apiSteps.scenarioInteraction.remember("request", _ as RequestSpecification)
         1 * request.basePath('test')
         1 * request.proxy('http://localhost', 1234)
         1 * request.port(80)
@@ -90,7 +90,7 @@ class ApiStepsTest extends Specification {
         when:
         apiSteps.createRequestWithJsonConfig("http://localhost", "test", "http://localhost", "1234")
         then:
-        1 * apiSteps.scenarioInteraction.remember("request", _ as RequestSpecification)
+        2 * apiSteps.scenarioInteraction.remember("request", _ as RequestSpecification)
         1 * request.basePath('test')
         1 * request.proxy('http://localhost', 1234)
         1 * request.port(80)
