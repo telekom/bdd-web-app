@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.multithreading.steps;
 
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
-import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.jbehave.steps.Steps;
 import org.jbehave.core.annotations.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 

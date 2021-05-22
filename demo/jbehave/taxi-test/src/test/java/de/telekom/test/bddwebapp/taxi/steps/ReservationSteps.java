@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.jbehave.steps.Steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationPriceVO;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
@@ -13,7 +13,6 @@ import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
 
 
 /**

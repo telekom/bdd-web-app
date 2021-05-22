@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.seleniumgrid.config;
 
-import de.telekom.test.bddwebapp.stories.AbstractStory;
+import de.telekom.test.bddwebapp.jbehave.stories.AbstractStory;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.springframework.context.ApplicationContext;
 

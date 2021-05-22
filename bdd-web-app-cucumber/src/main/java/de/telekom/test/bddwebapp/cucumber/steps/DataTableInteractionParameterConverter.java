@@ -33,7 +33,7 @@ public class DataTableInteractionParameterConverter {
         rows.forEach(row -> {
             Map<String, Object> rowWithValueFromInteraction = new HashMap<>();
             row.forEach((key, valueOrInteractionKey) -> {
-                if(valueOrInteractionKey == null){
+                if (valueOrInteractionKey == null) {
                     valueOrInteractionKey = "";
                 }
                 rowWithValueFromInteraction.put(key, interactionParameterConverter.getValueFromKeyOrValueOrConcatenated(valueOrInteractionKey));

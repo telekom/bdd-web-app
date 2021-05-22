@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.multithreading.config;
 
-import de.telekom.test.bddwebapp.stories.AbstractStory;
+import de.telekom.test.bddwebapp.jbehave.stories.AbstractStory;
 import org.springframework.context.ApplicationContext;
 
 /**

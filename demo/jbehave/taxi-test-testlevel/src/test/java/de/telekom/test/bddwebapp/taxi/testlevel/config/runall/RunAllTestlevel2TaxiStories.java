@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.testlevel.config.runall;
 
-import de.telekom.test.bddwebapp.stories.RunAllStories;
+import de.telekom.test.bddwebapp.jbehave.stories.RunAllStories;
 import de.telekom.test.bddwebapp.taxi.testlevel.config.ApplicationContextProvider;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.steps.InjectableStepsFactory;

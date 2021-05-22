@@ -1,11 +1,13 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.steps.Steps;
+import de.telekom.test.bddwebapp.jbehave.steps.Steps;
+import de.telekom.test.bddwebapp.jbehave.steps.StoryInteractionParameterConverter;
 import de.telekom.test.bddwebapp.taxi.pages.RegistrationPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -21,6 +23,9 @@ import static org.junit.Assert.assertTrue;
  */
 @Steps
 public class RegistrationSteps extends AbstractTaxiSteps {
+
+    @Autowired
+    private StoryInteractionParameterConverter storyInteractionParameterConverter;
 
     @Given("the openend registration page")
     public void theOpenRegistrationPage() {

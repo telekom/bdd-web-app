@@ -1,13 +1,9 @@
 package de.telekom.test.bddwebapp.taxi.docker.config;
 
-import de.telekom.test.bddwebapp.stories.RunAllStories;
-import org.junit.internal.RealSystem;
+import de.telekom.test.bddwebapp.jbehave.stories.RunAllStories;
 import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.core.env.StandardEnvironment;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}

@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.testlevel.stories.api;
 
-import de.telekom.test.bddwebapp.stories.config.TestLevel;
+import de.telekom.test.bddwebapp.jbehave.stories.config.TestLevel;
 import de.telekom.test.bddwebapp.taxi.testlevel.config.AbstractTestLevelStory;
 
 /**

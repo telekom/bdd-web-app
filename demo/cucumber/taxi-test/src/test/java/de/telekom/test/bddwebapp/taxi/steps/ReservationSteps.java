@@ -12,7 +12,6 @@ import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
 
 
 /**
@@ -106,9 +105,10 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Then("between {} and {} the price is {} at {} passengers")
     public void thePriceIsBetweenAnd(String startTime, String endTime, String price, String passengers) {
         ReservationPage reservationPage = getCurrentPage();
-        String currentPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime, passengers);
-        assertNotNull(currentPrice);
-        assertThat(currentPrice, is(price));
+        var reservationPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
+        assertTrue(reservationPrice.isPresent());
+        assertThat(reservationPrice.get().getPrice(), is(price));
+        assertThat(reservationPrice.get().getPassengers(), is(passengers));
     }
 
 }

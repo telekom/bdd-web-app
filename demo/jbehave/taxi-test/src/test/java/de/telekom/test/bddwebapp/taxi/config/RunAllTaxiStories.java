@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.config;
 
-import de.telekom.test.bddwebapp.stories.RunAllStories;
+import de.telekom.test.bddwebapp.jbehave.stories.RunAllStories;
 import org.springframework.context.ApplicationContext;
 
 /**

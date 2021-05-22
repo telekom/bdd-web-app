@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.ger.config;
 
 import org.jbehave.core.configuration.Configuration;
-import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.core.io.UnderscoredCamelCaseResolver;
@@ -17,7 +16,7 @@ import java.util.Locale;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class GermanKeywordsConfiguration{
+public class GermanKeywordsConfiguration {
 
     public static Configuration germanKeywordsConfiguration() {
         var de = new Locale("de");
