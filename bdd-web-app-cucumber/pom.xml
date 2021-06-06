@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-cucumber</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.0</version>
 
     <name>BDD web application testing framework for cucumber</name>
     <url>https://github.com/telekom/bdd-web-app</url>
@@ -18,7 +18,7 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <cucumber.version>6.8.0</cucumber.version>
-        <bdd-web-app-core.version>2.0-SNAPSHOT</bdd-web-app-core.version>
+        <bdd-web-app-core.version>2.0</bdd-web-app-core.version>
 
         <!-- Deploy dependencies -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
