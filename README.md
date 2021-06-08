@@ -19,11 +19,11 @@ Add this dependency to your test project. The dependency includes Cucumber, Spri
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber</artifactId>
-                <version>2.0</version>
+                <version>2.1-SNAPSHOT</version>
             </dependency>
 ```
 
-BDD-Web-App for Cucumber is also available for other build-automation-tools like gradle. You will find the artefacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.0/jar.
+BDD-Web-App for Cucumber is also available for other build-automation-tools like gradle. You will find the artefacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.1-SNAPSHOT/jar.
 
 ## Maven Integration JBehave
 
@@ -33,11 +33,11 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-jbehave</artifactId>
-                <version>2.0</version>
+                <version>2.1-SNAPSHOT</version>
             </dependency>
 ```
 
-BDD-Web-App for JBehave is also available for other build-automation-tools like gradle. You will find the artefacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.0/jar.
+BDD-Web-App for JBehave is also available for other build-automation-tools like gradle. You will find the artefacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.1-SNAPSHOT/jar.
 
 ## Example project
 
