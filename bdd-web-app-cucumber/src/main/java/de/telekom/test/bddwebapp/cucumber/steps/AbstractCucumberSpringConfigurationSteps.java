@@ -51,41 +51,62 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps 
      * Need this method so the cucumber will recognize this class as glue and load spring context configuration
      */
     public void setupBddWebApp(Scenario scenario) {
+        basicSetup(scenario);
+        updateWebdriver();
+    }
+
+    public void basicSetup(Scenario scenario) {
         setupApplicationContext();
-        increaseTestCaseCountForBeforeAll();
-
-        startScenarioInteraction();
-
-        String featureName = getFeatureName(scenario);
-        increaseTestCaseCountForFeature(featureName);
-        startStoryInteraction();
-
         setLogLevel();
 
-        currentFeature.setFeature(featureName);
+        increaseTestCaseCountForBeforeAll();
+        startScenarioInteraction();
+        handleFeature(scenario);
+        startStoryInteraction();
+    }
+
+    public void handleFeature(Scenario scenario) {
+        String featureName = getFeatureNameFromScenario(scenario);
+        increaseTestCaseCountForFeature(featureName);
+        setFeatureNameToCurrentSpringContext(featureName);
+        handleCustomFeatureAnnotations(featureName, scenario);
+    }
+
+    private void updateWebdriver() {
+        webDriverLifeCycle.updateDriver();
+    }
+
+    public void handleCustomFeatureAnnotations(String featureName, Scenario scenario) {
         if (scenario.getSourceTagNames() != null && scenario.getSourceTagNames().stream().anyMatch(s -> s.equals("@restartBrowserBeforeScenario"))) {
             customizingStories.getRestartBrowserBeforeScenarioThisFeatures().add(featureName);
         }
-    }
-
-    public void afterFeature(Scenario scenario) {
-        webDriverLifeCycle.quitBrowserAfterScenario();
-    }
-
-    public String getFeatureName(Scenario scenario) {
-        String id = scenario.getId();
-        String feature = id.replaceFirst(".+/", "");
-        feature = feature.replaceFirst(":.*", "");
-        return feature;
     }
 
     public void setupApplicationContext() {
         if (isBeforeAll()) {
             log.info("Setup application");
             setApplicationContext(applicationContext);
-
-            webDriverLifeCycle.updateDriver();
         }
+    }
+
+    public void setLogLevel() {
+        ch.qos.logback.classic.Logger rootLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
+        rootLogger.setLevel(Level.INFO);
+    }
+
+    public void afterFeature(Scenario scenario) {
+        webDriverLifeCycle.quitBrowserAfterScenario();
+    }
+
+    public String getFeatureNameFromScenario(Scenario scenario) {
+        String id = scenario.getId();
+        String feature = id.replaceFirst(".+/", "");
+        feature = feature.replaceFirst(":.*", "");
+        return feature;
+    }
+
+    public void setFeatureNameToCurrentSpringContext(String featureName) {
+        currentFeature.setFeature(featureName);
     }
 
     public void startScenarioInteraction() {
@@ -104,11 +125,6 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps 
 
     public String resolveInteractionKey(String interactionKey) {
         return interactionParameterConverter.getValueFromKeyOrValueOrConcatenated(interactionKey);
-    }
-
-    public void setLogLevel() {
-        ch.qos.logback.classic.Logger rootLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
-        rootLogger.setLevel(Level.INFO);
     }
 
 }

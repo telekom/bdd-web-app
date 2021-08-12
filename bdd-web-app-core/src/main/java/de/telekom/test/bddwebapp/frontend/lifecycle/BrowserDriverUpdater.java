@@ -40,7 +40,6 @@ public class BrowserDriverUpdater {
      * https://github.com/bonigarcia/webdrivermanager
      * https://developer.github.com/v3/#rate-limiting
      */
-    @PostConstruct
     public void updateDriver() {
         var currentWebDriverConfiguration = webDriverWrapper.getCurrentWebDriverConfiguration();
         var browser = currentWebDriverConfiguration.getBrowser();
