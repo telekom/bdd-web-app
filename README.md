@@ -19,7 +19,7 @@ Add this dependency to your test project. The dependency includes Cucumber, Spri
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber</artifactId>
-                <version>2.0</version>
+                <version>2.0.1</version>
             </dependency>
 ```
 
@@ -33,7 +33,7 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-jbehave</artifactId>
-                <version>2.0</version>
+                <version>2.0.1</version>
             </dependency>
 ```
 
