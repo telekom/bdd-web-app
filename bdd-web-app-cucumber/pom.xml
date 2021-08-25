@@ -7,9 +7,9 @@
     <artifactId>bddwebapp-cucumber</artifactId>
     <version>2.0.1</version>
 
-    <name>BDD web application testing framework for cucumber</name>
+    <name>bdd-web-app cucumber plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
-    <description>Setup BDD-test-projects for web applications fast and easy</description>
+    <description>Behavior-driven tests for web applications</description>
     <inceptionYear>2017</inceptionYear>
 
     <properties>

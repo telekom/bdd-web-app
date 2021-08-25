@@ -16,7 +16,13 @@ The included sample project allows a quick introduction to the test framework.
 - Use Spring in your test project.
 - Optional extension of Selenium-Web-Element.
 
-## Cucumber maven dependency
+## Cucumber 
+
+Lean Cucumber extension for application testing.
+
+![](readme/cucumber_login_example.png)
+
+### Maven dependency
 
 If you want to use Cucumber for your web application test project, add this maven dependency. The dependency includes Cucumber, Spring, Selenium, Webdrivermanager, and other components.
 
@@ -30,7 +36,13 @@ If you want to use Cucumber for your web application test project, add this mave
 
 The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.0.1/jar.
 
-## JBehave maven dependency
+## JBehave
+
+JBehave extension for application testing.
+
+![](readme/jbehave_login_example.png)
+
+### Maven dependency
 
 If you want to use JBehave for your web application test project, add this maven dependency. The dependency includes JBehave, Spring, Selenium, Webdrivermanager, and other components.
 
