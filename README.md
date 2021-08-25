@@ -44,10 +44,42 @@ If you want to use JBehave for your web application test project, add this maven
 
 The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.0.1/jar.
 
+## Browser support
+
+The default for BDD-Web-App is Google Chrome. If you don't want to use a different browser, you can you the system parameter: `browser=[BROWSER]`.
+You can set this as VM-Parameter too. For example: `-Dbrowser=htmlunit`.
+The webdriver for the given browser will be updated automatically before the first test runs.
+
+Supported and regularly tested browsers are:
+- chrome
+- firefox
+- htmlunit
+
+Further supported browsers (not recommend to use):
+- edge
+- internetexplorer
+- safari
+- opera
+
+### Portable browser
+
+You can use portable browsers by: `browser.path=[BROWSER_PATH]`.
+
+For example if you want to use firefox portable you can use this VM-Parameters: `-Dbrowser=firefox` `-Dbrowser.path="[Base_path]\FirefoxPortable\App\Firefox\firefox.exe"`.
+
+### Webdriver management
+
+The instrumentation drivers will be updated automatically before running the stories.
+
+In an intranet you will probably need a http proxy to update the drivers: `webdriver.proxy.host=[PROXY_HOST]` `webdriver.proxy.port=[PROXY_PORT]`
+
+When updating drivers, you will maybe get the status code 403 from Github. You can prevent this by setting a token. You will find the description here: https://github.com/bonigarcia/webdrivermanager.
+
 ## Example project
 
-In the bdd-web-app-demo folder, you will find the example web-application and the test-projects using bdd-web-app.
+In the bdd-web-app-demo folder, you will find the example web-application and the test-projects using bdd-web-app:
+https://github.com/telekom/bdd-web-app/tree/master/demo.
 
-# Additional information
+# Further information
 
-Additional information are here: https://github.com/telekom/bdd-web-app/wiki.
+Here you will find additional technical information and special features on the testing framework: https://github.com/telekom/bdd-web-app/wiki/BDD-Web-App-additional-information.
