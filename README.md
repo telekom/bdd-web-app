@@ -1,19 +1,24 @@
 # bdd-web-app
 
-BDD-Web-App is a lean test framework which solves the usual technical issues for web application integration tests.
+Use proven patterns for your behavior-driven test project. You can write the executable specifications in Cucumber and JBehave and benefit from years of web-application test automation experience.
+
+The opinionated test framework "bdd-web-app" should solve the usual technical issues for web application regression tests.
+It is based on Spring, Selenium, and Rest-assured. It can work with Cucumber or with JBehave and can be understood as a Plugin for these frameworks.
+The framework will help you managing test data in the lifecycle. The browser instrumentalization driver will be updated automatically. And further, you can work with spring in your test project.
+
 The included sample project allows a quick introduction to the test framework.
 
 ## Features
 
-- Integrating Selenium and REST-assured into test lifecycle.
-- Access everything in Spring. 
-- Reuse test data in test lifecycle with a common pattern.
-- Automatic WebDriver updates for Selenium.
-- Optional extension of Selenium-Web-Element. 
+- Test data lifecycle.
+- Access test data in Cucumber or JBehave with $. I.e., "Given account $myaccount".
+- Automatic webdriver updates.
+- Use Spring in your test project.
+- Optional extension of Selenium-Web-Element.
 
-## Maven Integration Cucumber
+## Cucumber maven dependency
 
-Add this dependency to your test project. The dependency includes Cucumber, Spring, Selenium, Webdrivermanager and other components for frontend testing:
+If you want to use Cucumber for your web application test project, add this maven dependency. The dependency includes Cucumber, Spring, Selenium, Webdrivermanager, and other components.
 
 ```xml
             <dependency>
@@ -23,11 +28,11 @@ Add this dependency to your test project. The dependency includes Cucumber, Spri
             </dependency>
 ```
 
-BDD-Web-App for Cucumber is also available for other build-automation-tools like gradle. You will find the artefacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.0.1/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.0.1/jar.
 
-## Maven Integration JBehave
+## JBehave maven dependency
 
-Add this dependency to your test project. The dependency includes JBehave, Spring, Selenium, Webdrivermanager and other components for frontend testing:
+If you want to use JBehave for your web application test project, add this maven dependency. The dependency includes JBehave, Spring, Selenium, Webdrivermanager, and other components.
 
 ```xml
             <dependency>
@@ -37,11 +42,11 @@ Add this dependency to your test project. The dependency includes JBehave, Sprin
             </dependency>
 ```
 
-BDD-Web-App for JBehave is also available for other build-automation-tools like gradle. You will find the artefacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.0.1/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.0.1/jar.
 
 ## Example project
 
-In the bdd-web-app-demo folder you find the example web-application and the test-projects using bdd-web-app.
+In the bdd-web-app-demo folder, you will find the example web-application and the test-projects using bdd-web-app.
 
 # Additional information
 
