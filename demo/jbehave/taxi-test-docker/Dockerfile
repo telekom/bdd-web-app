@@ -1,7 +1,4 @@
-FROM openjdk:8-jdk-alpine
-
-# Copy smoke-tests.jar
-COPY target/smoke-tests.jar /home/seluser
+FROM adoptopenjdk/openjdk11-openj9:alpine-jre
 
 ENV reservation-service.url="http://testdata-sim:6000/testdata-sim/api"
 ENV testdata-sim.url="http://testdata-sim:6000/testdata-sim"
