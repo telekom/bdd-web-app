@@ -20,6 +20,7 @@
         <module>taxi-test</module>
         <module>taxi-test-customizing</module>
         <module>taxi-test-docker</module>
+        <module>taxi-test-testcontainers</module>
     </modules>
 
 </project>
