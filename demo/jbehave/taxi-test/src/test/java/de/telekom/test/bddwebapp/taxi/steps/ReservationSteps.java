@@ -11,6 +11,7 @@ import org.jbehave.core.annotations.When;
 
 import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -109,7 +110,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
         ReservationPage reservationPage = getCurrentPage();
         var reservationPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
         assertTrue(reservationPrice.isPresent());
-        assertThat(reservationPrice.get().getPrice(), is(price));
+        assertThat(reservationPrice.get().getPrice(), containsString(price));
         assertThat(reservationPrice.get().getPassengers(), is(passengers));
     }
 
