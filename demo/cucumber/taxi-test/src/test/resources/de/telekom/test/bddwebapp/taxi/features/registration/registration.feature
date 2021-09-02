@@ -18,6 +18,7 @@ Feature: Registration
     And the user receives the message that the registration data is invalid
 
   Scenario: Successful registration
+    Given the openend registration page
     When the user register with
       | firstName | lastName | userName                  | password |
       | Hans      | Müller   | userName+$RANDOM+@test.de | password |
