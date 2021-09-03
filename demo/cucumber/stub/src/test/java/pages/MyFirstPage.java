@@ -1,7 +1,9 @@
 package pages;
 
+import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -12,13 +14,16 @@ import org.openqa.selenium.WebDriver;
  */
 public class MyFirstPage extends Page {
 
+    @FindBy(id = "myId")
+    private WebElementEnhanced webElementEnhanced;
+
     public MyFirstPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public String getURL() {
-        return "url";
+        return "";
     }
 
 }
