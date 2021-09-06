@@ -16,7 +16,7 @@ public class TestcontainersHook {
 
     @Before
     public void beforeScenario() {
-        webDriverConfig.getContainer().start();
+        webDriverConfig.getContainer().withExposedPorts(5000, 5001).start();
     }
 
     @After
