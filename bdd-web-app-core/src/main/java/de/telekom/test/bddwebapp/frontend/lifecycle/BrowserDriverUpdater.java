@@ -72,11 +72,6 @@ public class BrowserDriverUpdater {
                 return DriverManagerType.IEXPLORER;
             case "opera":
                 return DriverManagerType.OPERA;
-            case "phantomjs":
-                return DriverManagerType.PHANTOMJS;
-            case "standalone":
-            case "seleniumserverstandalone":
-                return DriverManagerType.SELENIUM_SERVER_STANDALONE;
         }
         return null;
     }

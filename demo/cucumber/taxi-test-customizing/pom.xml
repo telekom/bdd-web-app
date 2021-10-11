@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-cucumber-demo-taxi-test-customizing</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,7 +40,7 @@
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber</artifactId>
-                <version>2.0.1</version>
+                <version>2.0.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>de.telekom.test</groupId>
             <artifactId>bddwebapp-cucumber-demo-taxi-test</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>
