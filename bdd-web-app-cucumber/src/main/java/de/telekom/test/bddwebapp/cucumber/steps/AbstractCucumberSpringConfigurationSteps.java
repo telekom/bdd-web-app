@@ -99,8 +99,8 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps 
     }
 
     public String getFeatureNameFromScenario(Scenario scenario) {
-        String id = scenario.getId();
-        String feature = id.replaceFirst(".+/", "");
+        String uri = scenario.getUri().toString();
+        String feature = uri.replaceFirst(".+/", "");
         feature = feature.replaceFirst(":.*", "");
         return feature;
     }
