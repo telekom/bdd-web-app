@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.telekom.test</groupId>
-    <artifactId>bddwebapp-core</artifactId>
+    <artifactId>bddwebapp-cucumber-api</artifactId>
     <version>2.1</version>
 
-    <name>bdd-web-app core module</name>
+    <name>bdd-web-app cucumber plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
     <description>Behavior-driven tests for web applications</description>
     <inceptionYear>2017</inceptionYear>
@@ -17,30 +17,17 @@
 
         <maven.compiler.release>11</maven.compiler.release>
 
-        <!-- Long-term dependencies. Update major version when necessary. Update minor when available. -->
-        <spring.version>5.3.10</spring.version> <!-- usable with spring-boot-starter-test 2.5.x -->
-        <restassured.version>4.4.0</restassured.version>
-        <cglib.version>3.3.0</cglib.version>
-        <logback-classic.version>1.2.6</logback-classic.version>
-        <lombok.version>1.18.22</lombok.version>
-        <guava.version>31.0.1-jre</guava.version>
-
-        <!-- Short-term dependencies. Update when new version is available. -->
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-
-        <!-- Unit test dependencies -->
-        <spock-core.version>2.0-groovy-3.0</spock-core.version>
-        <byte-buddy.version>1.11.19</byte-buddy.version>
-        <objenesis.version>3.2</objenesis.version>
+        <cucumber.version>7.0.0</cucumber.version>
+        <bdd-web-app-core.version>2.1</bdd-web-app-core.version>
 
         <!-- Deploy dependencies -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <lombok-maven-plugin.version>1.18.12.0</lombok-maven-plugin.version>
+        <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
 
         <!-- Build dependencies -->
-        <gmavenplus-plugin.version>2.0.0</gmavenplus-plugin.version>
+        <gmavenplus-plugin.version>1.12.1</gmavenplus-plugin.version>
     </properties>
 
     <licenses>
@@ -155,12 +142,13 @@
         </profile>
     </profiles>
 
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.12.1</version>
+                <version>${gmavenplus-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -190,78 +178,35 @@
         <dependencies>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Spring -->
+            <!-- BDD-Web-App -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bddwebapp-core</artifactId>
+                <version>${bdd-web-app-core.version}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Logging -->
+            <!-- Cucumber -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
             <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback-classic.version}</version>
-            </dependency>
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- REST -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-            <dependency>
-                <groupId>io.rest-assured</groupId>
-                <artifactId>rest-assured</artifactId>
-                <version>${restassured.version}</version>
-            </dependency>
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Misc. -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons-lang3.version}</version>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-java</artifactId>
+                <version>${cucumber.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${cucumber.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib</artifactId>
-                <version>${cglib.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.annotation</groupId>
-                <artifactId>javax.annotation-api</artifactId>
-                <version>1.3.2</version>
-            </dependency>
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Testing -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-            <dependency>
-                <groupId>org.spockframework</groupId>
-                <artifactId>spock-core</artifactId>
-                <version>${spock-core.version}</version>
-                <scope>test</scope>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-spring</artifactId>
+                <version>${cucumber.version}</version>
             </dependency>
 
         </dependencies>
@@ -270,83 +215,31 @@
     <dependencies>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Spring -->
+        <!-- BDD-Web-App -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bddwebapp-core</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Logging -->
+        <!-- Cucumber -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- REST -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-        </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Misc. -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-        </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Testing -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-        <dependency>
-            <groupId>org.spockframework</groupId>
-            <artifactId>spock-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>${byte-buddy.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.objenesis</groupId>
-            <artifactId>objenesis</artifactId>
-            <version>${objenesis.version}</version>
-            <scope>test</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-spring</artifactId>
         </dependency>
 
     </dependencies>

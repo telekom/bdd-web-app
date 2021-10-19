@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-jbehave</artifactId>
-    <version>2.0.2</version>
+    <version>2.1</version>
 
     <name>bdd-web-app jbehave plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
@@ -20,7 +20,7 @@
         <jbehave.version>4.8.3</jbehave.version>
         <jbehave-site-resources.version>3.4.1</jbehave-site-resources.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
-        <bdd-web-app-core.version>2.0.2</bdd-web-app-core.version>
+        <bdd-web-app-core.version>2.1</bdd-web-app-core.version>
 
         <!-- Deploy dependencies -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
@@ -193,6 +193,12 @@
                 <version>${bdd-web-app-core.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bddwebapp-selenium</artifactId>
+                <version>${bdd-web-app-core.version}</version>
+            </dependency>
+
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
             <!-- JBehave -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -263,6 +269,11 @@
         <dependency>
             <groupId>de.telekom.test</groupId>
             <artifactId>bddwebapp-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bddwebapp-selenium</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

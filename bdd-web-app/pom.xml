@@ -6,7 +6,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app</artifactId>
-    <version>2.0.2</version>
+    <version>2.1</version>
     <packaging>pom</packaging>
 
     <name>bdd web-app reactor</name>
@@ -18,7 +18,9 @@
 
     <modules>
         <module>core</module>
+        <module>selenium</module>
         <module>cucumber</module>
+        <module>cucumber-api</module>
 		<module>jbehave</module>
     </modules>
 
