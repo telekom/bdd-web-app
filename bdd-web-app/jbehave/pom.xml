@@ -20,7 +20,7 @@
         <jbehave.version>4.8.3</jbehave.version>
         <jbehave-site-resources.version>3.4.1</jbehave-site-resources.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
-        <bdd-web-app-core.version>2.1</bdd-web-app-core.version>
+        <bdd-web-app-core.version>2.1-SNAPSHOT</bdd-web-app-core.version>
 
         <!-- Deploy dependencies -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>

@@ -7,7 +7,7 @@
     <artifactId>bddwebapp-cucumber-api</artifactId>
     <version>2.1-SNAPSHOT</version>
 
-    <name>bdd-web-app cucumber plugin</name>
+    <name>bdd-web-app cucumber api plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
     <description>Behavior-driven tests for web applications</description>
     <inceptionYear>2017</inceptionYear>

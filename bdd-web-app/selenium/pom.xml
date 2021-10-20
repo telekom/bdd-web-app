@@ -17,7 +17,7 @@
 
         <maven.compiler.release>11</maven.compiler.release>
 
-        <bdd-web-app-core.version>2.1</bdd-web-app-core.version>
+        <bdd-web-app-core.version>2.1-SNAPSHOT</bdd-web-app-core.version>
 
         <!-- Short-term dependencies. Update when new version is available. -->
         <selenium.version>3.141.59</selenium.version>
