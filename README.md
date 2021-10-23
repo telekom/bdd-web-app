@@ -42,7 +42,7 @@ Lean Cucumber extension for web service testing.
 
 #### Maven dependency
 
-If you want to use Cucumber for your web application test project, add this maven dependency. The dependency includes Cucumber, Spring, Selenium, Webdrivermanager, and other components.
+If you want to use Cucumber for your web application test project, add this maven dependency. The dependency includes Cucumber, Spring, REST-Assured and other components.
 
 ```xml
             <dependency>
