@@ -1,13 +1,16 @@
 package de.telekom.test.bddwebapp.taxi.pages;
 
-import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Optional;
 
 /**
@@ -22,48 +25,48 @@ public class ReservationPage extends JQueryPage {
     public static final String URL = "reservation";
 
     @FindBy(id = "date")
-    private WebElementEnhanced dateInput;
+    private WebElement dateInput;
 
     @FindBy(id = "departure")
-    private WebElementEnhanced departureInput;
+    private WebElement departureInput;
 
     @FindBy(id = "earliestStartTime")
-    private WebElementEnhanced earliestStartTimeInput;
+    private WebElement earliestStartTimeInput;
 
     @FindBy(id = "destination")
-    private WebElementEnhanced destinationInput;
+    private WebElement destinationInput;
 
     @FindBy(id = "latestStartTime")
-    private WebElementEnhanced latestStartTimeInput;
+    private WebElement latestStartTimeInput;
 
     @FindBy(id = "reserve")
-    private WebElementEnhanced reserveButton;
+    private WebElement reserveButton;
 
     @FindBy(id = "reservation")
-    private WebElementEnhanced reservationDiv;
+    private WebElement reservationDiv;
 
     public ReservationPage(WebDriver driver) {
         super(driver);
     }
 
     public void setDate(String date) {
-        dateInput.setValue(date);
+        setValue(dateInput, date);
     }
 
     public void setDeparture(String departure) {
-        departureInput.setValue(departure);
+        setValue(departureInput, departure);
     }
 
     public void setEarliestStartTime(String earliestStartTime) {
-        earliestStartTimeInput.setValue(earliestStartTime);
+        setValue(earliestStartTimeInput, earliestStartTime);
     }
 
     public void setDestination(String destination) {
-        destinationInput.setValue(destination);
+        setValue(destinationInput, destination);
     }
 
     public void setLatestStartTime(String latestStartTime) {
-        latestStartTimeInput.setValue(latestStartTime);
+        setValue(latestStartTimeInput, latestStartTime);
     }
 
     public void submitReservation() {
@@ -81,8 +84,8 @@ public class ReservationPage extends JQueryPage {
     }
 
     public Optional<ReservationPrice> getPriceBetweenStartAndEndTime(String startTime, String endTime) {
-        var reservationTable = reservationDiv.findElement(By.className("table"));
-        var tableRows = reservationTable.findElements(By.tagName("tr"));
+        waitFor(1000);
+        var tableRows = reservationDiv.findElements(By.tagName("tr"));
         return tableRows.stream()
                 .map(tableRow -> tableRow.findElements(By.tagName("td")))
                 .filter(tableCols -> {

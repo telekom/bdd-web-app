@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-jbehave</artifactId>
-    <version>2.1</version>
+    <version>2.2-SNAPSHOT</version>
 
     <name>bdd-web-app jbehave plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
@@ -14,13 +14,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <maven.compiler.release>11</maven.compiler.release>
 
+        <!-- Framework dependencies -->
+        <bdd-web-app-core.version>2.2-SNAPSHOT</bdd-web-app-core.version>
         <jbehave.version>4.8.3</jbehave.version>
         <jbehave-site-resources.version>3.4.1</jbehave-site-resources.version>
         <jbehave-junit-runner>2.3.0</jbehave-junit-runner>
-        <bdd-web-app-core.version>2.1</bdd-web-app-core.version>
 
         <!-- Deploy dependencies -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>

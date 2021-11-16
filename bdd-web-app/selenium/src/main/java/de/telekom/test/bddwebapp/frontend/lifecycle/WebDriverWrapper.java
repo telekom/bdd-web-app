@@ -8,7 +8,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -82,8 +81,8 @@ public class WebDriverWrapper {
         if (driver != null) {
             try {
                 driver.quit();
-            } catch (UnreachableBrowserException unreachableBrowserException) {
-                log.error(unreachableBrowserException.getMessage());
+            } catch (Exception exception) {
+                log.error(exception.getMessage());
             }
         }
         driver = null;

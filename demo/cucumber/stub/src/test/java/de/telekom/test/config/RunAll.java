@@ -1,4 +1,4 @@
-package config;
+package de.telekom.test.config;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = {"classpath:"},
         plugin = {"html:target/cucumber-html-report.html", "json:target/cucumber-json-report.json" },
-        glue = {"de.telekom.test.bddwebapp.taxi.steps"},
+        glue = {"de.telekom.test.steps"},
         tags = "not @ignore")
 public class RunAll {
 }

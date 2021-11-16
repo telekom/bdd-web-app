@@ -1,9 +1,9 @@
 package de.telekom.test.bddwebapp.taxi.pages;
 
-import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
 import groovy.util.logging.Slf4j;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -20,41 +20,41 @@ public class RegistrationPage extends JQueryPage {
     public static final String URL = "registration";
 
     @FindBy(id = "firstName")
-    private WebElementEnhanced firstNameInput;
+    private WebElement firstNameInput;
 
     @FindBy(id = "lastName")
-    private WebElementEnhanced lastNameInput;
+    private WebElement lastNameInput;
 
     @FindBy(id = "username")
-    private WebElementEnhanced usernameInput;
+    private WebElement usernameInput;
 
     @FindBy(id = "password")
-    private WebElementEnhanced passwordInput;
+    private WebElement passwordInput;
 
     @FindBy(xpath = "//button[@type='submit']")
-    private WebElementEnhanced submitButton;
+    private WebElement submitButton;
 
     @FindBy(css = "input:invalid")
-    private WebElementEnhanced validationError;
+    private WebElement validationError;
 
     public RegistrationPage(WebDriver driver) {
         super(driver);
     }
 
     public void setFirstName(String firstName) {
-        firstNameInput.setValue(firstName);
+        setValue(firstNameInput, firstName);
     }
 
     public void setLastName(String lastName) {
-        lastNameInput.setValue(lastName);
+        setValue(lastNameInput, lastName);
     }
 
     public void setUsername(String username) {
-        usernameInput.setValue(username);
+        setValue(usernameInput, username);
     }
 
     public void setPassword(String password) {
-        passwordInput.setValue(password);
+        setValue(passwordInput, password);
     }
 
     public void submitRegistration() {
@@ -66,7 +66,7 @@ public class RegistrationPage extends JQueryPage {
         if (driver instanceof HtmlUnitDriver) {
             return true;
         }
-        return validationError.exists() && validationError.isDisplayed();
+        return exists(validationError) && validationError.isDisplayed();
     }
 
     @Override

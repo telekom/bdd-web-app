@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-cucumber-demo-taxi-test-api</artifactId>
-    <version>2.1</version>
+    <version>2.2-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,7 +52,7 @@
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber-api</artifactId>
-                <version>2.1</version>
+                <version>2.2-SNAPSHOT</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

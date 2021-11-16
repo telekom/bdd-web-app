@@ -1,8 +1,8 @@
 package de.telekom.test.bddwebapp.taxi.pages;
 
-import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -17,33 +17,33 @@ public class LoginPage extends JQueryPage {
     public static final String URL = "login";
 
     @FindBy(id = "username")
-    private WebElementEnhanced usernameInput;
+    private WebElement usernameInput;
 
     @FindBy(id = "password")
-    private WebElementEnhanced passwordInput;
+    private WebElement passwordInput;
 
     @FindBy(xpath = "//button[@type='submit']")
-    private WebElementEnhanced submitButton;
+    private WebElement submitButton;
 
     @FindBy(partialLinkText = "Register")
-    private WebElementEnhanced registrationLink;
+    private WebElement registrationLink;
 
     @FindBy(className = "alert-success")
-    private WebElementEnhanced alertSuccessDiv;
+    private WebElement alertSuccessDiv;
 
     @FindBy(className = "alert-warning")
-    private WebElementEnhanced alertWarningDiv;
+    private WebElement alertWarningDiv;
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
     public void setUsername(String username) {
-        usernameInput.setValue(username);
+        setValue(usernameInput, username);
     }
 
     public void setPassword(String password) {
-        passwordInput.setValue(password);
+        setValue(passwordInput, password);
     }
 
     public void submitLogin() {
@@ -55,12 +55,12 @@ public class LoginPage extends JQueryPage {
     }
 
     public boolean registeredMessageIsShown() {
-        alertSuccessDiv.waitForExisting(1);
+        waitForExisting(alertSuccessDiv, 1);
         return alertSuccessDiv.getText().contains("registered");
     }
 
     public boolean loginDataIsInvalidMessageIsShown() {
-        alertWarningDiv.waitForExisting(1);
+        waitForExisting(alertWarningDiv, 1);
         return alertWarningDiv.getText().contains("invalid");
     }
 

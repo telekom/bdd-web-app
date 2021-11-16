@@ -1,4 +1,4 @@
-package config;
+package de.telekom.test.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * For details see the file license on the toplevel.
  */
 @Configuration
-@ComponentScan({"de.telekom.test.bddwebapp"})
+@ComponentScan({"de.telekom.test"})
 public class TestConfig {
 }

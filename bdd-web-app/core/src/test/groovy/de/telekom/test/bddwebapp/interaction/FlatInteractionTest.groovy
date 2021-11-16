@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.interaction
 
 import de.telekom.test.bddwebapp.interaction.flatinteractiontest.ComplexType
+import jdk.internal.misc.Unsafe
 import org.slf4j.Logger
 import spock.lang.Specification
 
@@ -19,17 +20,6 @@ import static org.apache.commons.lang3.reflect.FieldUtils.*
 class FlatInteractionTest extends Specification {
 
     def interaction = new FlatInteraction()
-
-    def log = Mock(Logger)
-
-    def setup() {
-        // getField(abstractInteraction.class, "log") doesn't work here
-        def logField = asList(getAllFields(interaction.class)).stream()
-                .filter({ field -> field.getType().isAssignableFrom(Logger) })
-                .findFirst().get()
-        removeFinalModifier(logField)
-        writeStaticField(logField, log, true)
-    }
 
     def "start interaction"() {
         when:
@@ -180,26 +170,6 @@ class FlatInteractionTest extends Specification {
         "KEY.hierarchy"                                                     | 0              | "KEY.complexValue"                                                     | "KEY.stringValue"                                                     | "value0"
         "KEY.complexValue.hierarchy"                                        | 1              | "KEY.complexValue.complexValue"                                        | "KEY.complexValue.stringValue"                                        | "value1"
         "KEY.complexValue.complexValue.complexValue.complexValue.hierarchy" | 4              | "KEY.complexValue.complexValue.complexValue.complexValue.complexValue" | "KEY.complexValue.complexValue.complexValue.complexValue.stringValue" | "value4"
-    }
-
-    def "log all possible keys with value"() {
-        given:
-        interaction.remember("KEY", [["key": "value"]])
-        when:
-        interaction.logAllPossibleKeysWithValue()
-        then:
-        1 * log.info("Log all possible keys with value:")
-        1 * log.info("KEY[0]={key=value},\nKEY[0].key=value,\nKEY=[{key=value}]")
-    }
-
-    def "log all possible keys with type"() {
-        given:
-        interaction.remember("KEY", [["key": "value"]])
-        when:
-        interaction.logAllPossibleKeysWithType()
-        then:
-        1 * log.info("Log all possible keys with type:")
-        1 * log.info("KEY[0]=class java.util.LinkedHashMap,\nKEY[0].key=class java.lang.String,\nKEY=class java.util.ArrayList")
     }
 
     enum TestDataEnum {

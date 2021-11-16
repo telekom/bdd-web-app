@@ -1,11 +1,11 @@
 package de.telekom.test.bddwebapp.frontend.page;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 /**
  * Abstract base class for page objects. Checks the current url when creating.
@@ -82,5 +82,94 @@ public abstract class Page {
      * So be careful with query params, you have to mask "?" by "\?".
      */
     public abstract String getURL();
+
+    public String getHtml(WebElement webElement) {
+        return webElement.getAttribute("innerHTML");
+    }
+
+    public void waitFor(Function<WebDriver, Boolean> function, int maxWaitTimeInSeconds, String errorMessage) {
+        WebDriverWait WebDriverWait = new WebDriverWait(driver, maxWaitTimeInSeconds);
+        WebDriverWait.withMessage(errorMessage);
+        WebDriverWait.until(function);
+    }
+
+    public void waitForExisting(WebElement webElement, int maxWaitTimeInSeconds) {
+        Function<WebDriver, Boolean> waitForExisting = webDriver -> exists(webElement);
+        waitFor(waitForExisting, maxWaitTimeInSeconds, "Element still not exists!");
+    }
+
+    public void waitForDisplayed(WebElement webElement, int maxWaitTimeInSeconds) {
+        Function<WebDriver, Boolean> waitForDisplayed = webDriver -> {
+            try {
+                return webElement.isDisplayed();
+            } catch (WebDriverException e) {
+                return false;
+            }
+        };
+        waitFor(waitForDisplayed, maxWaitTimeInSeconds, "Element: \"" + webElement + "\" is still not displayed!");
+    }
+
+    public void scrollTo(WebElement webElement) {
+        if (isJQueryAvailable(webElement)) {
+            scrollToWithJQuery(webElement);
+        } else {
+            scrollToWithDefaultJavaScript(webElement);
+        }
+    }
+
+    public boolean isJQueryAvailable(WebElement webElement) {
+        return (boolean) ((JavascriptExecutor) driver).executeScript("return typeof jQuery != 'undefined'", webElement);
+    }
+
+    public void scrollToWithJQuery(WebElement webElement) {
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, $(arguments[0]).offset().top - (window.innerHeight / 2))", webElement);
+        waitForDisplayed(webElement, 1);
+    }
+
+    public void scrollToWithDefaultJavaScript(WebElement webElement) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", webElement);
+        waitForDisplayed(webElement, 1);
+        // try it with a different strategy
+        if (!webElement.isDisplayed()) {
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, arguments[0]);", webElement);
+            waitForDisplayed(webElement, 1);
+        }
+    }
+
+    public void click(WebElement webElement) {
+        click(webElement, true);
+    }
+
+    public void click(WebElement webElement, boolean scrollTo) {
+        if (scrollTo) {
+            scrollTo(webElement);
+        }
+        webElement.click();
+    }
+
+    public void setValue(WebElement webElement, String value) {
+        webElement.clear();
+        webElement.sendKeys(value);
+    }
+
+    public boolean exists(WebElement webElement) {
+        return check(o -> webElement);
+    }
+
+    public boolean hasChildren(WebElement webElement, By by) {
+        return check(o -> webElement.findElement(by));
+    }
+
+    public boolean check(Function check) {
+        driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
+        try {
+            check.apply(Void.TYPE);
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            return false;
+        } finally {
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        }
+        return true;
+    }
 
 }

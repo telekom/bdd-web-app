@@ -1,8 +1,8 @@
-package pages;
+package de.telekom.test.pages;
 
-import de.telekom.test.bddwebapp.frontend.element.WebElementEnhanced;
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -15,7 +15,7 @@ import org.openqa.selenium.support.FindBy;
 public class MyFirstPage extends Page {
 
     @FindBy(id = "myId")
-    private WebElementEnhanced webElementEnhanced;
+    private WebElement webElement;
 
     public MyFirstPage(WebDriver driver) {
         super(driver);

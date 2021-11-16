@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.frontend.steps;
 
 import de.telekom.test.bddwebapp.api.steps.ApiSteps;
-import de.telekom.test.bddwebapp.frontend.element.decorator.WebElementDecorator;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import de.telekom.test.bddwebapp.frontend.page.Page;
 import de.telekom.test.bddwebapp.interaction.InteractionParameterConverter;
@@ -55,7 +54,7 @@ public abstract class SeleniumSteps extends ApiSteps {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
-        initElements(new WebElementDecorator(driver), page);
+        initElements(driver, page);
         page.checkPage();
         storyInteraction.remember(CURRENT_PAGE, page);
         log.info("Created page object for class " + expectedPage);

@@ -1,6 +1,6 @@
-package steps;
+package de.telekom.test.steps;
 
-import config.TestConfig;
+import de.telekom.test.config.TestConfig;
 import de.telekom.test.bddwebapp.cucumber.steps.AbstractCucumberSpringConfigurationSteps;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

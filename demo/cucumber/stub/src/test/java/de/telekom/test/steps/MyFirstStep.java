@@ -1,4 +1,4 @@
-package steps;
+package de.telekom.test.steps;
 
 import de.telekom.test.bddwebapp.frontend.steps.SeleniumSteps;
 import io.cucumber.java.en.Given;

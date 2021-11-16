@@ -96,7 +96,7 @@ public interface RestAssuredSteps {
         RestAssuredConfig restAssuredConfig = new RestAssuredConfig()
                 .decoderConfig(new DecoderConfig("UTF-8"))
                 .encoderConfig(new EncoderConfig("UTF-8", "UTF-8"))
-                .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
+                .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.JACKSON_2));
 
         RequestSpecification requestSpecification = recallRequest();
         requestSpecification.config(restAssuredConfig);
