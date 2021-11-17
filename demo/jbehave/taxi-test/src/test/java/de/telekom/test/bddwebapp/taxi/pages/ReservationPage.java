@@ -4,11 +4,13 @@ import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -81,7 +83,17 @@ public class ReservationPage extends JQueryPage {
     }
 
     public Optional<ReservationPrice> getPriceBetweenStartAndEndTime(String startTime, String endTime) {
-        waitFor(1000);
+        Function<WebDriver, Boolean> waitForUpdate = webDriver -> {
+            try {
+                WebElement tr = reservationDiv.findElement(By.tagName("tr"));
+                tr.findElements(By.tagName("td"));
+                return true;
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        };
+        waitFor(waitForUpdate, 2, "Table is still stale!");
+
         var tableRows = reservationDiv.findElements(By.tagName("tr"));
         return tableRows.stream()
                 .map(tableRow -> tableRow.findElements(By.tagName("td")))

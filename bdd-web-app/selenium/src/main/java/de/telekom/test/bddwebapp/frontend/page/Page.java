@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -41,7 +42,7 @@ public abstract class Page {
      * Used by checkPage().
      */
     public void checkUrl() {
-        Wait<WebDriver> wait = new WebDriverWait(driver, 15);
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(new UrlMatchesExpectation(getURL(), this.getClass().getName()));
     }
 
@@ -51,7 +52,7 @@ public abstract class Page {
      */
     public void checkPageState() {
         if (driver instanceof JavascriptExecutor) {
-            Wait<WebDriver> wait = new WebDriverWait(driver, 15);
+            Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
             wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
         }
     }
@@ -88,7 +89,7 @@ public abstract class Page {
     }
 
     public void waitFor(Function<WebDriver, Boolean> function, int maxWaitTimeInSeconds, String errorMessage) {
-        WebDriverWait WebDriverWait = new WebDriverWait(driver, maxWaitTimeInSeconds);
+        WebDriverWait WebDriverWait = new WebDriverWait(driver, Duration.ofSeconds(maxWaitTimeInSeconds));
         WebDriverWait.withMessage(errorMessage);
         WebDriverWait.until(function);
     }
@@ -161,13 +162,13 @@ public abstract class Page {
     }
 
     public boolean check(Function check) {
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(100));
         try {
             check.apply(Void.TYPE);
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             return false;
         } finally {
-            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         }
         return true;
     }
