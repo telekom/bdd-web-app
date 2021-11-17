@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps.testdata;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReservationVO {
 
     private String date;

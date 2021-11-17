@@ -1,5 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps.testdata;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Data;
  * For details see the file license on the toplevel.
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReservationPriceVO {
 
     private String startTime;
