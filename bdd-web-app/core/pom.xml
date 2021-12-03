@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-core</artifactId>
-    <version>2.2-SNAPSHOT</version>
+    <version>2.2</version>
 
     <name>bdd-web-app core module</name>
     <url>https://github.com/telekom/bdd-web-app</url>
@@ -144,7 +144,6 @@
                         </executions>
                         <configuration>
                             <sourcepath>target/generated-sources/delombok</sourcepath>
-                            <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
                     </plugin>
                 </plugins>

@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-cucumber-api</artifactId>
-    <version>2.2-SNAPSHOT</version>
+    <version>2.2</version>
 
     <name>bdd-web-app cucumber api plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
@@ -17,7 +17,7 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Framework dependencies -->
-        <bdd-web-app-core.version>2.2-SNAPSHOT</bdd-web-app-core.version>
+        <bdd-web-app-core.version>2.2</bdd-web-app-core.version>
         <cucumber.version>7.0.0</cucumber.version>
 
         <!-- Deploy dependencies -->
@@ -134,7 +134,6 @@
                         </executions>
                         <configuration>
                             <sourcepath>target/generated-sources/delombok</sourcepath>
-                            <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
                     </plugin>
                 </plugins>
