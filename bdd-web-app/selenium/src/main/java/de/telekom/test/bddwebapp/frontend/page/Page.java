@@ -154,7 +154,7 @@ public abstract class Page {
     }
 
     public boolean exists(WebElement webElement) {
-        return check(o -> webElement);
+        return check(o -> webElement.isEnabled());
     }
 
     public boolean hasChildren(WebElement webElement, By by) {
