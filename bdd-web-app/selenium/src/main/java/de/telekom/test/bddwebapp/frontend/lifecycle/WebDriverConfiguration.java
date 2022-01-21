@@ -13,6 +13,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -23,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 /**
  * The configuration for all supported and tested browsers.
@@ -71,11 +73,33 @@ public interface WebDriverConfiguration {
         return StringUtils.isNotBlank(getGridURL());
     }
 
+    private Optional<AbstractDriverOptions> getBrowserOptionsForRemoteDriver(DesiredCapabilities capabilities) {
+        String browser = getBrowser();
+        switch (browser.toLowerCase()) {
+            case "firefox":
+                return Optional.of(firefoxOptions(capabilities));
+            case "chrome":
+                return Optional.of(chromeOptions(capabilities));
+            case "edge":
+                return Optional.of(edgeOptions(capabilities));
+            case "ie":
+            case "internetexplorer":
+                return Optional.of(internetExplorerOptions(capabilities));
+            case "opera":
+                return Optional.of(operaOptions(capabilities));
+            case "safari":
+                return Optional.of(safariOptions(capabilities));
+        }
+        return Optional.empty();
+    }
+
     default DesiredCapabilities remoteWebDriverOptions(DesiredCapabilities capabilities) {
-        var remoteWebDriverCapabilities = new DesiredCapabilities();
-        remoteWebDriverCapabilities.setJavascriptEnabled(true);
-        remoteWebDriverCapabilities.merge(capabilities);
-        return remoteWebDriverCapabilities;
+        var remoteCaps = new DesiredCapabilities();
+        remoteCaps.setJavascriptEnabled(true);
+
+        Optional<AbstractDriverOptions> driverOptions = getBrowserOptionsForRemoteDriver(capabilities);
+        driverOptions.ifPresentOrElse(remoteCaps::merge, () -> remoteCaps.merge(capabilities));
+        return remoteCaps;
     }
 
     default WebDriver loadRemoteWebdriver(DesiredCapabilities capabilities) {

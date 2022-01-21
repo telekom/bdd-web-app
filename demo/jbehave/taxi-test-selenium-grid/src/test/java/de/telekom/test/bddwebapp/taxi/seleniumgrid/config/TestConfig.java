@@ -20,7 +20,7 @@ public class TestConfig {
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        System.setProperty("gridURL", "http://localhost:5566/wd/hub");
+        System.setProperty("gridURL", "http://localhost:4444");
         return new PropertySourcesPlaceholderConfigurer();
     }
 
