@@ -1,6 +1,6 @@
-package de.telekom.test.bddwebapp.stories.config.scannedstorypathstest;
+package de.telekom.test.bddwebapp.jbehave.stories.config.scannedstorypathstest;
 
-import org.junit.Ignore;
+import de.telekom.test.bddwebapp.jbehave.stories.config.TestLevel;
 
 /**
  * Unit test
@@ -11,7 +11,7 @@ import org.junit.Ignore;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Ignore
-public class IgnoredStory extends DummyStory {
+@TestLevel(testLevels = {0, 1})
+public class TestLevel01Story extends DummyStory {
 
 }

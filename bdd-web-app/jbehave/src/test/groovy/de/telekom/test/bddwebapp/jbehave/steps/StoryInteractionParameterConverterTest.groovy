@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.steps
+package de.telekom.test.bddwebapp.jbehave.steps
 
 import de.telekom.test.bddwebapp.interaction.StoryInteraction
 import de.telekom.test.bddwebapp.jbehave.steps.StoryInteractionParameterConverter

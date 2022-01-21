@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.stories.config.scannedstorypathstest;
+package de.telekom.test.bddwebapp.jbehave.stories.config.scannedstorypathstest;
 
 import org.jbehave.core.ConfigurableEmbedder;
 import org.junit.runner.Description;

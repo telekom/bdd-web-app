@@ -1,4 +1,6 @@
-package de.telekom.test.bddwebapp.stories.config.scannedstorypathstest;
+package de.telekom.test.bddwebapp.jbehave.stories.config.scannedstorypathstest;
+
+import de.telekom.test.bddwebapp.jbehave.stories.config.TestLevel;
 
 /**
  * Unit test
@@ -9,6 +11,7 @@ package de.telekom.test.bddwebapp.stories.config.scannedstorypathstest;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class SimpleStory extends DummyStory {
+@TestLevel(testLevels = {0})
+public class TestLevel0Story extends DummyStory {
 
 }

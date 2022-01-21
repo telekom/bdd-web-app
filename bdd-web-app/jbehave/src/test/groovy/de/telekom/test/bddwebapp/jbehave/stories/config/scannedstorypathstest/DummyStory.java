@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.stories.config.scannedstorypathstest;
+package de.telekom.test.bddwebapp.jbehave.stories.config.scannedstorypathstest;
 
 import de.telekom.test.bddwebapp.jbehave.stories.AbstractStory;
 import org.jbehave.core.configuration.Configuration;

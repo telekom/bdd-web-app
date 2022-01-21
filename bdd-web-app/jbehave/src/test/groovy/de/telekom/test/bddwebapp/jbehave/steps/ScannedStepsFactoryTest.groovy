@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.steps
+package de.telekom.test.bddwebapp.jbehave.steps
 
 import de.telekom.test.bddwebapp.jbehave.steps.ScannedStepsFactory
 import de.telekom.test.bddwebapp.jbehave.steps.Steps
