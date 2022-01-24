@@ -29,7 +29,7 @@ public class ExtendedLifeCycle {
         if (feature.equals(currentFeature)) {
             testCaseCountCurrentFeature++;
         } else {
-            log.info("Execution for new feature {0} is started", feature);
+            log.info("Execution for new feature {} is started", feature);
             currentFeature = feature;
             testCaseCountCurrentFeature = 0;
         }

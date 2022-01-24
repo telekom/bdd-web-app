@@ -86,8 +86,6 @@ public abstract class AbstractStory extends JUnitStory implements ScannedStepsFa
 
     /**
      * Adding meta matcher for execution of single scenarios, e.g. with the intellij plugin "jbehave debug single scenario"
-     *
-     * @param embedder
      */
     public void supportForSingleScenarioExecution(Embedder embedder) {
         embedder.metaMatchers().put("+scenario_title", new MetaFilter.MetaMatcher() {

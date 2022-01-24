@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.customizing.stories.ignore;
 
-import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
+import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractCustomizingStory;
 import org.junit.Ignore;
 
 /**
@@ -14,5 +14,5 @@ import org.junit.Ignore;
  * For details see the file license on the toplevel.
  */
 @Ignore
-public class IgnoreMe extends AbstractTestLevelStory {
+public class IgnoreMe extends AbstractCustomizingStory {
 }

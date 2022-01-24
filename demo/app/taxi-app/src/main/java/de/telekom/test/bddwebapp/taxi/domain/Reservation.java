@@ -1,9 +1,11 @@
 package de.telekom.test.bddwebapp.taxi.domain;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -13,7 +15,10 @@ import java.util.Date;
  * For details see the file license on the toplevel.
  */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class Reservation {
 
     @Id
@@ -38,4 +43,16 @@ public class Reservation {
 
     private Date modificationDate;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Reservation that = (Reservation) o;
+        return reservationId != null && Objects.equals(reservationId, that.reservationId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

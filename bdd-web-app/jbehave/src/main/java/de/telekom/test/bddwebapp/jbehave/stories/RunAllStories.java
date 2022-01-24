@@ -66,9 +66,7 @@ public abstract class RunAllStories extends JUnitStories implements ScannedSteps
         }
 
         // adding meta filter support for -DmetaFilters=...
-        metaFilters().ifPresent(metaFilters -> {
-            embedder.useMetaFilters(asList(metaFilters.split(";")));
-        });
+        metaFilters().ifPresent(metaFilters -> embedder.useMetaFilters(asList(metaFilters.split(";"))));
 
         return embedder;
     }

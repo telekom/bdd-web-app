@@ -124,7 +124,7 @@ public class ReservationPage extends JQueryPage {
 
     @AllArgsConstructor
     @Getter
-    public class ReservationPrice {
+    public static class ReservationPrice {
 
         private final String startTimeAndEndTime;
         private final String passengers;

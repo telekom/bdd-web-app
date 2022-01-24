@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 /**
  * Overwrite the default configuration and add a new behaviour after browser load.
@@ -30,8 +30,8 @@ public class OverrideDefaultWebDriverConfiguration extends UsefulWebDriverConfig
 
     @Override
     public void afterLoad(WebDriver driver) {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         // move browser to left
         driver.manage().window().setPosition(new Point(-1500, 0));
     }

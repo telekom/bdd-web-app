@@ -5,11 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -125,7 +121,7 @@ public class ReservationPage extends JQueryPage {
 
     @AllArgsConstructor
     @Getter
-    public class ReservationPrice {
+    public static class ReservationPrice {
 
         private final String startTimeAndEndTime;
         private final String passengers;

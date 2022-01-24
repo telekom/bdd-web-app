@@ -48,7 +48,7 @@ function onReservationError(e) {
     $reserve.removeClass("btn-primary btn-success");
     $reserve.addClass("btn-warning");
 
-    var reservationHtml = "<h4>Sorry, an error has occurred!</h4>";
+    const reservationHtml = "<h4>Sorry, an error has occurred!</h4>";
     $('#reservation').html(reservationHtml);
 
     console.log("ERROR : ", e);
@@ -56,7 +56,7 @@ function onReservationError(e) {
 }
 
 function reserve() {
-    var reservation = {}
+    const reservation = {};
     reservation["date"] = $("#date").val();
     reservation["departure"] = $("#departure").val();
     reservation["earliestStartTime"] = $("#earliestStartTime").val();

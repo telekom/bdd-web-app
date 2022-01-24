@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.customizing.stories.login;
 
 import de.telekom.test.bddwebapp.jbehave.steps.RestartBrowserBeforeScenario;
-import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
+import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractCustomizingStory;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -11,5 +11,5 @@ import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
  * For details see the file license on the toplevel.
  */
 @RestartBrowserBeforeScenario
-public class CleanSessionBeforeScenario extends AbstractTestLevelStory {
+public class CleanSessionBeforeScenario extends AbstractCustomizingStory {
 }

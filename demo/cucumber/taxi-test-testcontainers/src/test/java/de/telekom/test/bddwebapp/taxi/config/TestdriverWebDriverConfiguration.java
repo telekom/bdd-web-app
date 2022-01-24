@@ -3,7 +3,6 @@ package de.telekom.test.bddwebapp.taxi.config;
 import de.telekom.test.bddwebapp.frontend.lifecycle.UsefulWebDriverConfiguration;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,6 @@ import org.testcontainers.containers.BrowserWebDriverContainer;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL;
 

@@ -2,17 +2,13 @@ package de.telekom.test.bddwebapp.frontend.lifecycle;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import java.time.Duration;
 
 /**
  * A useful configuration with some additions to selenium default for all supported and tested browsers.
@@ -59,8 +55,8 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
 
     @Override
     public void afterLoad(WebDriver driver) {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
         if (maximizeBrowser) {
             driver.manage().window().maximize();
         }

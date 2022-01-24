@@ -19,8 +19,6 @@ public class ApplicationContextProvider {
     private static AnnotationConfigApplicationContext applicationContext;
 
     public static AnnotationConfigApplicationContext createApplicationContext(String[] args) {
-        System.out.println(args);
-
         applicationContext = new AnnotationConfigApplicationContext();
         ConfigurableEnvironment environment = applicationContext.getEnvironment();
         Properties props = new Properties();

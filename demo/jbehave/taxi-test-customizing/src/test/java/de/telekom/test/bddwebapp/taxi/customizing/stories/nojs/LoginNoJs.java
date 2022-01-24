@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.customizing.stories.nojs;
 
 import de.telekom.test.bddwebapp.jbehave.stories.config.AlternativeWebDriverConfiguration;
-import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractTestLevelStory;
+import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractCustomizingStory;
 import de.telekom.test.bddwebapp.taxi.customizing.config.webdriver.NoJsWebDriverConfiguration;
 
 /**
@@ -12,6 +12,6 @@ import de.telekom.test.bddwebapp.taxi.customizing.config.webdriver.NoJsWebDriver
  * For details see the file license on the toplevel.
  */
 @AlternativeWebDriverConfiguration(NoJsWebDriverConfiguration.class)
-public class LoginNoJs extends AbstractTestLevelStory {
+public class LoginNoJs extends AbstractCustomizingStory {
 
 }

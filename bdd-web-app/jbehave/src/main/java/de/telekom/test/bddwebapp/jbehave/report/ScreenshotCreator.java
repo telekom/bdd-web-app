@@ -9,9 +9,9 @@ import org.jbehave.core.reporters.StoryReporterBuilder;
 import javax.imageio.ImageIO;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import static java.text.MessageFormat.format;
@@ -104,11 +104,7 @@ public class ScreenshotCreator {
     }
 
     protected String reportUrl(String storyFolder, String screenshotName) {
-        try {
-            screenshotName = URLEncoder.encode(screenshotName, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            log.error("Exception at screenshot name url encoding", e);
-        }
+        screenshotName = URLEncoder.encode(screenshotName, StandardCharsets.UTF_8);
         return format(SCREENSHOT_PATH, "..", storyFolder, screenshotName);
     }
 

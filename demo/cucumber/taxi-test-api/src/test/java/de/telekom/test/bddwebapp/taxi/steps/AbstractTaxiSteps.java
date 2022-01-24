@@ -2,7 +2,6 @@ package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.api.steps.ApiSteps;
 import de.telekom.test.bddwebapp.cucumber.steps.DataTableInteractionParameterConverter;
-import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import io.restassured.specification.RequestSpecification;
 import org.springframework.beans.factory.annotation.Autowired;

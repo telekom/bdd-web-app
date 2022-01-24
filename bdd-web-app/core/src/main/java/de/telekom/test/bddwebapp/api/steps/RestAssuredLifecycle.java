@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-import static java.util.Arrays.asList;
+import java.util.List;
 
 /**
  * Regulating the lifecycle of the browser for JBehave frontend tests
@@ -27,7 +27,7 @@ public class RestAssuredLifecycle {
 
     @PostConstruct
     public void beforeStories() {
-        RestAssured.filters(asList(new RequestInteractionFilter(scenarioInteraction)));
+        RestAssured.filters(List.of(new RequestInteractionFilter(scenarioInteraction)));
     }
 
 }

@@ -82,7 +82,7 @@ public interface RestAssuredSteps {
         if (isBlank(proxyHost) || isBlank(proxyPort)) {
             return recallRequest();
         }
-        return proxy(proxyHost, new Integer(proxyPort));
+        return proxy(proxyHost, Integer.valueOf(proxyPort));
     }
 
     default RequestSpecification proxy(String proxyHost, Integer proxyPort) {

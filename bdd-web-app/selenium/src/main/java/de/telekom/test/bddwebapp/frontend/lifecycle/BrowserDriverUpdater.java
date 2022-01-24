@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 /**
@@ -56,7 +54,7 @@ public class BrowserDriverUpdater {
         }
         webDriverManager.setup();
 
-        log.info("Updated instrumentalization driver for " + driverManagerType.toString() + "(" + browser + ")");
+        log.info("Updated instrumentalization driver for " + driverManagerType + "(" + browser + ")");
     }
 
     private DriverManagerType mapToDriverManagerType(String browser) {

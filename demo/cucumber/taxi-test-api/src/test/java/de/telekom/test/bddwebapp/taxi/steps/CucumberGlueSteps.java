@@ -2,7 +2,6 @@ package de.telekom.test.bddwebapp.taxi.steps;
 
 import de.telekom.test.bddwebapp.cucumber.steps.AbstractCucumberSpringConfigurationSteps;
 import de.telekom.test.bddwebapp.taxi.config.TestConfig;
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.Scenario;

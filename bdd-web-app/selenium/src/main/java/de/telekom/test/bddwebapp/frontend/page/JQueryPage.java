@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Objects;
 
 /**
@@ -27,13 +28,13 @@ public abstract class JQueryPage extends Page {
     public synchronized void waitForAjaxToComplete() {
         ExpectedCondition<Boolean> noAjaxRequestActive = (WebDriver webDriver) -> {
             try {
-                return (Boolean) ((JavascriptExecutor) Objects.requireNonNull(webDriver)).executeScript("return jQuery.active == 0");
+                return (Boolean) ((JavascriptExecutor) Objects.requireNonNull(webDriver)).executeScript("return jQuery.active === 0");
             } catch (WebDriverException e) {
                 return true;
             }
         };
 
-        Wait<WebDriver> wait = new WebDriverWait(driver, 30);
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(noAjaxRequestActive);
     }
 
