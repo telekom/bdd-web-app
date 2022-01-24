@@ -1,5 +1,5 @@
 Narrative:
-As a framwork user
+As a framework user
 I would like to write test steps for test level 1 only
 to implement the same steps for other test levels different
 

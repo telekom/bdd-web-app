@@ -1,5 +1,5 @@
 Narrative:
-As a framwork user
+As a framework user
 I expect that everything works with JUnit defaults
 like the @Ignore Annotation for story classes
 

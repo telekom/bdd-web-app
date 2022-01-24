@@ -1,5 +1,5 @@
 Narrative:
-As a framwork user
+As a framework user
 I would like to use special web driver configurations
 to test for example the behaviour when java script is disabled
 
