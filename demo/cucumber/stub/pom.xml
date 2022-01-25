@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-cucumber-demo-stub</artifactId>
-    <version>2.3-SNAPSHOT</version>
+    <version>2.3</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,13 +52,13 @@
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber</artifactId>
-                <version>2.3-SNAPSHOT</version>
+                <version>2.3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>5.3.10</version>
+                <version>5.3.15</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

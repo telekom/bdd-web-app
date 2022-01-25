@@ -30,11 +30,11 @@ If you want to use Cucumber for your web application test project, add this mave
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber</artifactId>
-                <version>2.3-SNAPSHOT</version>
+                <version>2.3</version>
             </dependency>
 ```
 
-The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.3-SNAPSHOT/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.3/jar.
 
 ### Cucumber-API
 
@@ -48,11 +48,11 @@ If you want to use Cucumber for your web application test project, add this mave
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber-api</artifactId>
-                <version>2.3-SNAPSHOT</version>
+                <version>2.3</version>
             </dependency>
 ```
 
-The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber-api/2.3-SNAPSHOT/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber-api/2.3/jar.
 
 ## JBehave
 
@@ -68,11 +68,11 @@ If you want to use JBehave for your web application test project, add this maven
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-jbehave</artifactId>
-                <version>2.3-SNAPSHOT</version>
+                <version>2.3</version>
             </dependency>
 ```
 
-The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.3-SNAPSHOT/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.3/jar.
 
 ## Browser support
 

@@ -30,27 +30,27 @@ class ScannedStoryPathsTest extends Specification {
         when:
         def storyPaths = scannedStoryPaths.scannedStoryPaths()
         then:
-        storyPaths == ["de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/simple_story.story",
-                       "de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/test_level01_story.story",
-                       "de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/test_level0_story.story",
-                       "de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/test_level1_story.story"]
+        storyPaths == ["de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/simple_story.story",
+                       "de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/test_level01_story.story",
+                       "de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/test_level0_story.story",
+                       "de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/test_level1_story.story"]
     }
 
     def "test test level 0 story paths"() {
         when:
         def storyPaths = scannedStoryPaths.testLevelStoryPaths(0)
         then:
-        storyPaths == ["de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/simple_story.story",
-                       "de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/test_level01_story.story",
-                       "de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/test_level0_story.story"]
+        storyPaths == ["de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/simple_story.story",
+                       "de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/test_level01_story.story",
+                       "de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/test_level0_story.story"]
     }
 
     def "test test level 1 story paths"() {
         when:
         def storyPaths = scannedStoryPaths.testLevelStoryPaths(1)
         then:
-        storyPaths == ["de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/test_level01_story.story",
-                       "de/telekom/test/bddwebapp/stories/config/scannedstorypathstest/test_level1_story.story"]
+        storyPaths == ["de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/test_level01_story.story",
+                       "de/telekom/test/bddwebapp/jbehave/stories/config/scannedstorypathstest/test_level1_story.story"]
     }
 
 }
