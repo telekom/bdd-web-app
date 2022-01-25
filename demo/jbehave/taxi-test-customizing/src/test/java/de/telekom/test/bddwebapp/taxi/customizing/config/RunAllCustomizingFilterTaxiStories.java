@@ -15,7 +15,7 @@ import java.util.List;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-public class RunAllCustomizingTaxiStories extends RunAllStories {
+public class RunAllCustomizingFilterTaxiStories extends RunAllStories {
 
     @Override
     public ApplicationContext getApplicationContext() {
@@ -37,7 +37,7 @@ public class RunAllCustomizingTaxiStories extends RunAllStories {
     @Override
     public Embedder configuredEmbedder() {
         var embedder = super.configuredEmbedder();
-        embedder.useMetaFilters(List.of("-execute error"));
+        embedder.useMetaFilters(List.of("+execute successful"));
         return embedder;
     }
 

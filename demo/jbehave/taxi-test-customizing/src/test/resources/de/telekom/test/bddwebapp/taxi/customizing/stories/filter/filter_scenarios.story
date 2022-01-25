@@ -12,3 +12,8 @@ Scenario: Filter based on execute error
 Meta: @execute error
 When set parameter to x
 Then parameter is y
+
+Scenario: Filter based on execute error
+Meta: @execute error
+When set parameter to x
+Then parameter is y
