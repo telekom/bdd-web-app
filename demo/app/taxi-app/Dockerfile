@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-alpine
+FROM adoptopenjdk/openjdk11-openj9:alpine-jre
 
 COPY target/taxi-app.jar taxi-app.jar
 ENTRYPOINT java $JAVA_OPTS -jar /taxi-app.jar $MAIN_OPTS
