@@ -5,7 +5,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-cucumber-api</artifactId>
-    <version>2.3</version>
+    <version>2.4-SHAPSHOT</version>
 
     <name>bdd-web-app cucumber api plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
@@ -17,16 +17,16 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Framework dependencies -->
-        <bdd-web-app-core.version>2.3</bdd-web-app-core.version>
-        <cucumber.version>7.2.3</cucumber.version>
+        <bdd-web-app-core.version>2.4-SHAPSHOT</bdd-web-app-core.version>
+        <cucumber.version>7.3.4</cucumber.version>
 
         <!-- Deploy/Build dependencies -->
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
-        <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
         <gmavenplus-plugin.version>1.13.1</gmavenplus-plugin.version>
-        <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     </properties>
 
 
