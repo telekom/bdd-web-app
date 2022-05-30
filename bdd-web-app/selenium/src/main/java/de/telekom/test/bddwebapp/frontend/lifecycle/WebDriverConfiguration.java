@@ -10,8 +10,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -53,8 +51,6 @@ public interface WebDriverConfiguration {
             case "ie":
             case "internetexplorer":
                 return loadInternetExplorer(extraCapabilities);
-            case "opera":
-                return loadOpera(extraCapabilities);
             case "safari":
                 return loadSafari(extraCapabilities);
             case "htmlunit":
@@ -90,8 +86,6 @@ public interface WebDriverConfiguration {
             case "ie":
             case "internetexplorer":
                 return Optional.of(internetExplorerOptions(capabilities));
-            case "opera":
-                return Optional.of(operaOptions(capabilities));
             case "safari":
                 return Optional.of(safariOptions(capabilities));
         }
@@ -191,25 +185,6 @@ public interface WebDriverConfiguration {
             throw new IllegalArgumentException("Can't use 'browserPath' for Internet Explorer. Portable is not supported!");
         }
         return new InternetExplorerDriver(internetExplorerOptions);
-    }
-
-    default OperaOptions operaOptions(DesiredCapabilities capabilities) {
-        var operaOptions = new OperaOptions();
-        if (isHeadless()) {
-            getLogger().warn("No headless mode for Opera available!");
-        }
-        operaOptions.merge(capabilities);
-        return operaOptions;
-    }
-
-    default WebDriver loadOpera(DesiredCapabilities capabilities) {
-        var operaOptions = operaOptions(capabilities);
-        var browserPath = getBrowserPath();
-        if (StringUtils.isNotBlank(browserPath)) {
-            getLogger().info("Load portable opera instance from '{}'", browserPath);
-            operaOptions.setBinary(browserPath);
-        }
-        return new OperaDriver(operaOptions);
     }
 
     default SafariOptions safariOptions(DesiredCapabilities capabilities) {
