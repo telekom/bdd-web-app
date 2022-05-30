@@ -24,6 +24,7 @@
         <module>taxi-test-multithreading</module>
         <module>taxi-test-docker</module>
         <module>taxi-test-selenium-grid</module>
+        <module>taxi-test-htmlunit</module>
     </modules>
 
 </project>

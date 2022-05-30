@@ -19,7 +19,6 @@
         <!-- Framework dependencies -->
         <bdd-web-app-core.version>2.4-SHAPSHOT</bdd-web-app-core.version>
         <selenium.version>4.1.4</selenium.version>
-        <htmlunit.version>3.61.0</htmlunit.version>
         <webdrivermanager.version>5.1.1</webdrivermanager.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
 
@@ -69,16 +68,6 @@
                 <groupId>io.github.bonigarcia</groupId>
                 <artifactId>webdrivermanager</artifactId>
                 <version>${webdrivermanager.version}</version>
-            </dependency>
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- HTML Unit -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>htmlunit-driver</artifactId>
-                <version>${htmlunit.version}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -136,15 +125,6 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-        </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- HTML Unit -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

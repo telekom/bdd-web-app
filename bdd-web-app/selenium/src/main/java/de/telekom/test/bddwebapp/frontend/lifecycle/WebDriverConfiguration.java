@@ -8,7 +8,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
@@ -59,11 +58,17 @@ public interface WebDriverConfiguration {
             case "safari":
                 return loadSafari(extraCapabilities);
             case "htmlunit":
-                return loadHtmlUnit(extraCapabilities);
+                var driver = loadHtmlUnit();
+                if (driver != null) {
+                    return driver;
+                } else {
+                    throw new IllegalArgumentException("HtmlUnit is set as browser, but it is not defined. It needs to be configured manually in the WebDriverConfiguration.");
+                }
             default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
         }
     }
+
 
     default DesiredCapabilities extraCapabilities(String browser) {
         return new DesiredCapabilities();
@@ -225,16 +230,8 @@ public interface WebDriverConfiguration {
         return new SafariDriver(safariOptions);
     }
 
-    default DesiredCapabilities htmlUnitOptions(DesiredCapabilities capabilities) {
-        var htmlUnitCapabilities = new DesiredCapabilities();
-        htmlUnitCapabilities.setBrowserName("htmlunit");
-        htmlUnitCapabilities.setJavascriptEnabled(true);
-        htmlUnitCapabilities.merge(capabilities);
-        return htmlUnitCapabilities;
-    }
-
-    default WebDriver loadHtmlUnit(DesiredCapabilities capabilities) {
-        return new HtmlUnitDriver(htmlUnitOptions(capabilities));
+    default WebDriver loadHtmlUnit() {
+        return null; // HtmlUnit is not supported by default
     }
 
     default void afterLoad(WebDriver driver) {
@@ -275,22 +272,22 @@ public interface WebDriverConfiguration {
      * @return path
      */
     default String getBrowserPath() {
-        var browserPath = System.getProperty("browser.path");
-        if (StringUtils.isNotBlank(browserPath)) {
-            return browserPath;
-        }
-        return null;
+        return getProperty("browser.path");
     }
 
     default String getGridURL() {
-        var urlStr = System.getProperty("gridURL");
-        if (StringUtils.isNotBlank(urlStr)) {
-            return urlStr;
+        return getProperty("gridURL");
+    }
+
+    default String getProperty(String key) {
+        var property = System.getProperty(key);
+        if (StringUtils.isNotBlank(property)) {
+            return property;
         }
         return null;
     }
 
-    private Logger getLogger() {
+    default Logger getLogger() {
         return LoggerFactory.getLogger(WebDriverConfiguration.class);
     }
 

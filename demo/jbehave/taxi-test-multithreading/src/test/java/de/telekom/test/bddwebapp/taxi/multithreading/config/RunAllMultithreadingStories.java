@@ -22,7 +22,7 @@ public class RunAllMultithreadingStories extends RunAllStories {
 
     @Override
     public ApplicationContext getApplicationContext() {
-        System.setProperty("browser", "htmlunit");
+        System.setProperty("headless", "true");
         return ApplicationContextProvider.getApplicationContext();
     }
 

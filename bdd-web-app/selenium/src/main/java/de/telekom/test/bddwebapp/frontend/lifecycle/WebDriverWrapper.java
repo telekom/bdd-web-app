@@ -7,7 +7,6 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -97,10 +96,6 @@ public class WebDriverWrapper {
             log.info("Create screenshot to '{}'", path);
             if (driver == null) {
                 log.error("Can not create screenshot because webdriver is null!");
-                return null;
-            }
-            if (driver instanceof HtmlUnitDriver) {
-                log.error("Can not create screenshots for htmlunit!");
                 return null;
             }
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);

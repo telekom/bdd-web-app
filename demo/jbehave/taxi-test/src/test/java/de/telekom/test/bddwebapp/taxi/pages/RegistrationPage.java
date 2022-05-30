@@ -4,7 +4,6 @@ import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
 import groovy.util.logging.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -62,10 +61,6 @@ public class RegistrationPage extends JQueryPage {
     }
 
     public boolean registrationDataIsInvalidMessageIsShown() {
-        // The validation error is not displayed in html unit
-        if (driver instanceof HtmlUnitDriver) {
-            return true;
-        }
         return exists(validationError) && validationError.isDisplayed();
     }
 
