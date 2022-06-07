@@ -48,13 +48,4 @@ public class NoJsWebDriverConfiguration extends UsefulWebDriverConfiguration {
         return options;
     }
 
-    @Override
-    public DesiredCapabilities htmlUnitOptions(DesiredCapabilities capabilities) {
-        log.info("Use alternative WebDriverConfiguration: noJsWebDriverConfiguration");
-
-        var desiredCapabilities = super.htmlUnitOptions(capabilities);
-        desiredCapabilities.setJavascriptEnabled(false);
-        return desiredCapabilities;
-    }
-
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.AbstractDriverOptions;
@@ -54,11 +55,10 @@ public interface WebDriverConfiguration {
             case "safari":
                 return loadSafari(extraCapabilities);
             case "htmlunit":
-                var driver = loadHtmlUnit();
-                if (driver != null) {
-                    return driver;
-                } else {
-                    throw new IllegalArgumentException("HtmlUnit is set as browser, but it is not defined. It needs to be configured manually in the WebDriverConfiguration.");
+                try{
+                    return loadHtmlUnit();
+                }catch (NoClassDefFoundError noClassDefFoundError){
+                    throw new NoClassDefFoundError("HtmlUnit is optional. You need to add the HtmlUnit dependency in your project manually.");
                 }
             default:
                 throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
@@ -206,7 +206,7 @@ public interface WebDriverConfiguration {
     }
 
     default WebDriver loadHtmlUnit() {
-        return null; // HtmlUnit is not supported by default
+        return new HtmlUnitDriver(true);
     }
 
     default void afterLoad(WebDriver driver) {
@@ -217,11 +217,7 @@ public interface WebDriverConfiguration {
         if (StringUtils.isNotBlank(browser)) {
             return browser;
         }
-        if (isHeadless()) {
-            return "htmlunit";
-        } else {
-            return "chrome";
-        }
+        return "chrome";
     }
 
     default boolean isHeadless() {

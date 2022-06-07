@@ -27,6 +27,9 @@
         <byte-buddy.version>1.12.10</byte-buddy.version>
         <objenesis.version>3.2</objenesis.version>
 
+        <!-- Optional dependencies -->
+        <htmlunit-driver.version>3.61.0</htmlunit-driver.version>
+
         <!-- Deploy/Build dependencies -->
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -116,6 +119,13 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${htmlunit-driver.version}</version>
+            <optional>true</optional>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
