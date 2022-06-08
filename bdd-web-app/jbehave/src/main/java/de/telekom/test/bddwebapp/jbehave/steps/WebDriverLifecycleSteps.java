@@ -30,7 +30,14 @@ public class WebDriverLifecycleSteps {
 
     @BeforeStories
     public void updateDriver() {
-        browserDriverUpdater.updateDriver();
+        if (isUpdateDriver()) {
+            browserDriverUpdater.updateDriver();
+        }
+    }
+
+    public boolean isUpdateDriver() {
+        String updateDriver = System.getProperty("updateDriver");
+        return "false".equalsIgnoreCase(updateDriver) ? false : true;
     }
 
     @BeforeStory
@@ -41,7 +48,6 @@ public class WebDriverLifecycleSteps {
         } else {
             webDriverWrapper.resetAlternativeWebDriverConfiguration();
         }
-
     }
 
     @AfterScenario
