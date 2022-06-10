@@ -16,10 +16,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
 
-        <!-- Framework dependencies -->
-        <bdd-web-app-core.version>2.4-SHAPSHOT</bdd-web-app-core.version>
-        <cucumber.version>7.3.4</cucumber.version>
-
         <!-- Deploy/Build dependencies -->
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -40,37 +36,20 @@
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-core</artifactId>
-                <version>${bdd-web-app-core.version}</version>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bddwebapp-cucumber-api</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-selenium</artifactId>
-                <version>${bdd-web-app-core.version}</version>
+                <version>${project.version}</version>
             </dependency>
-
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-            <!-- Cucumber -->
-            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-            <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-java</artifactId>
-                <version>${cucumber.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-junit</artifactId>
-                <version>${cucumber.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.cucumber</groupId>
-                <artifactId>cucumber-spring</artifactId>
-                <version>${cucumber.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -87,28 +66,13 @@
 
         <dependency>
             <groupId>de.telekom.test</groupId>
+            <artifactId>bddwebapp-cucumber-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.telekom.test</groupId>
             <artifactId>bddwebapp-selenium</artifactId>
         </dependency>
-
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-        <!-- Cucumber -->
-        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-spring</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>

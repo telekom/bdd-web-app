@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.steps;
 
-import de.telekom.test.bddwebapp.cucumber.steps.AbstractCucumberSpringConfigurationSteps;
+import de.telekom.test.bddwebapp.cucumber.steps.AbstractCucumberApiSpringConfigurationSteps;
 import de.telekom.test.bddwebapp.taxi.config.TestConfig;
 import io.cucumber.java.Before;
 import io.cucumber.java.ParameterType;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 @CucumberContextConfiguration
 @ContextConfiguration(classes = TestConfig.class)
-public class CucumberGlueSteps extends AbstractCucumberSpringConfigurationSteps {
+public class CucumberGlueSteps extends AbstractCucumberApiSpringConfigurationSteps {
 
     @Before(order = 0)
     public void initialHook(Scenario scenario) {

@@ -13,9 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
-import static de.telekom.test.bddwebapp.cucumber.steps.ApplicationContextReference.setApplicationContext;
-import static de.telekom.test.bddwebapp.cucumber.steps.ExtendedLifeCycle.*;
-
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
@@ -24,7 +21,7 @@ import static de.telekom.test.bddwebapp.cucumber.steps.ExtendedLifeCycle.*;
  * For details see the file license on the toplevel.
  */
 @Slf4j
-public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps {
+public abstract class AbstractCucumberApiSpringConfigurationSteps extends ApiSteps {
 
     @Autowired
     protected ApplicationContext applicationContext;
@@ -39,71 +36,40 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends ApiSteps 
     protected InteractionParameterConverter interactionParameterConverter;
 
     @Autowired
-    protected CustomizingFeatures customizingStories;
+    protected CustomizingFeatures customizingFeatures;
 
     @Autowired
     protected CurrentFeature currentFeature;
+
+    protected boolean beforeAll = true;
 
     /**
      * Need this method so the cucumber will recognize this class as glue and load spring context configuration
      */
     public void setupBddWebApp(Scenario scenario) {
-        basicSetup(scenario);
-    }
-
-    public void basicSetup(Scenario scenario) {
-        setupApplicationContext();
-        setLogLevel();
-
-        increaseTestCaseCountForBeforeAll();
-        startScenarioInteraction();
-        handleFeature(scenario);
-        startStoryInteraction();
-    }
-
-    public void handleFeature(Scenario scenario) {
-        String featureName = getFeatureNameFromScenario(scenario);
-        increaseTestCaseCountForFeature(featureName);
-        setFeatureNameToCurrentSpringContext(featureName);
-        handleCustomFeatureAnnotations(featureName, scenario);
-    }
-
-    public void handleCustomFeatureAnnotations(String featureName, Scenario scenario) {
-        if (scenario.getSourceTagNames() != null && scenario.getSourceTagNames().stream().anyMatch(s -> s.equals("@restartBrowserBeforeScenario"))) {
-            customizingStories.getRestartBrowserBeforeScenarioThisFeatures().add(featureName);
+        if (beforeAll) {
+            setLogLevel();
         }
+
+        startScenarioInteraction(scenario);
+        currentFeature.beforeScenarioHook(scenario);
+        startStoryInteraction(scenario);
     }
 
-    public void setupApplicationContext() {
-        if (isBeforeAll()) {
-            log.info("Setup application");
-            setApplicationContext(applicationContext);
-        }
-    }
+
 
     public void setLogLevel() {
         ch.qos.logback.classic.Logger rootLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
         rootLogger.setLevel(Level.INFO);
     }
 
-    public String getFeatureNameFromScenario(Scenario scenario) {
-        String uri = scenario.getUri().toString();
-        String feature = uri.replaceFirst(".+/", "");
-        feature = feature.replaceFirst(":.*", "");
-        return feature;
-    }
-
-    public void setFeatureNameToCurrentSpringContext(String featureName) {
-        currentFeature.setFeature(featureName);
-    }
-
-    public void startScenarioInteraction() {
+    public void startScenarioInteraction(Scenario scenario) {
         log.info("Reset scenario interaction");
         scenarioInteraction.startInteraction();
     }
 
-    public void startStoryInteraction() {
-        if (isBeforeFeature()) {
+    public void startStoryInteraction(Scenario scenario) {
+        if (currentFeature.isBeforeFeature()) {
             log.info("Reset story interaction");
             storyInteraction.startInteraction();
         }

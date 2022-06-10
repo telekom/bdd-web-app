@@ -4,6 +4,7 @@ import de.telekom.test.bddwebapp.cucumber.features.CurrentFeature;
 import de.telekom.test.bddwebapp.cucumber.features.CustomizingFeatures;
 import de.telekom.test.bddwebapp.frontend.lifecycle.BrowserDriverUpdater;
 import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverWrapper;
+import io.cucumber.java.Scenario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class WebDriverLifeCycle {
 
     @Autowired
-    protected CurrentFeature currentStory;
+    protected CurrentFeature currentFeature;
     @Autowired
     protected CustomizingFeatures customizingStories;
     @Autowired
@@ -32,18 +33,24 @@ public class WebDriverLifeCycle {
         browserDriverUpdater.updateDriver();
     }
 
-    public void quitBrowserAfterStory() {
+    public void quitBrowser() {
         webDriverWrapper.quit();
     }
 
-    public void quitBrowserAfterScenario() {
-        if (currentStory.isRestartBrowserBeforeScenario()) {
+    public void beforeScenarioHook(Scenario scenario) {
+        restartBrowserBeforeScenario();
+        restartBrowserBeforeFeature();
+    }
+
+    public void restartBrowserBeforeScenario() {
+        if (currentFeature.isRestartBrowserBeforeScenario()) {
             webDriverWrapper.quit();
         }
     }
 
-    public void quitBrowserAfterStories() {
-        webDriverWrapper.quit();
+    public void restartBrowserBeforeFeature() {
+        if (currentFeature.isBeforeFeature()) {
+            webDriverWrapper.quit();
+        }
     }
-
 }

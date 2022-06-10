@@ -17,7 +17,6 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Framework dependencies -->
-        <bdd-web-app-core.version>2.4-SHAPSHOT</bdd-web-app-core.version>
         <selenium.version>4.1.4</selenium.version>
         <webdrivermanager.version>5.1.1</webdrivermanager.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -50,7 +49,7 @@
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-core</artifactId>
-                <version>${bdd-web-app-core.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

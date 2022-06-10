@@ -17,7 +17,6 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <!-- Framework dependencies -->
-        <bdd-web-app-core.version>2.4-SHAPSHOT</bdd-web-app-core.version>
         <cucumber.version>7.3.4</cucumber.version>
 
         <!-- Deploy/Build dependencies -->
@@ -40,7 +39,7 @@
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-core</artifactId>
-                <version>${bdd-web-app-core.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

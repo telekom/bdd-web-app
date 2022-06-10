@@ -1,7 +1,8 @@
 package de.telekom.test.bddwebapp.cucumber.features;
 
+import io.cucumber.java.Scenario;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,26 +17,60 @@ import org.springframework.stereotype.Component;
  * For details see the file license on the toplevel.
  */
 @Component
+@Slf4j
 public class CurrentFeature {
 
-    @Autowired
-    private CustomizingFeatures customizingStories;
+    @Getter
+    private String currentFeature;
 
     @Getter
-    @Setter
-    private String feature;
+    private Integer testCaseCountCurrentFeature = 0;
+
+    @Autowired
+    private CustomizingFeatures customizingFeatures;
 
     public boolean isRestartBrowserBeforeScenario() {
-        return isRestartBrowserBeforeScenarioForAllStories() ||
-                isRestartBrowserBeforeScenarioForCurrentStory();
+        return isRestartBrowserBeforeScenarioForAllStories() || isRestartBrowserBeforeScenarioForCurrentStory();
     }
 
     private boolean isRestartBrowserBeforeScenarioForCurrentStory() {
-        return customizingStories.getRestartBrowserBeforeScenarioThisFeatures().stream().anyMatch(s -> s.equals(feature));
+        return customizingFeatures.getRestartBrowserBeforeScenarioThisFeatures().stream().anyMatch(s -> s.equals(currentFeature));
     }
 
     private boolean isRestartBrowserBeforeScenarioForAllStories() {
-        return customizingStories.isRestartBrowserBeforeScenarioForAllStories();
+        return customizingFeatures.isRestartBrowserBeforeScenarioForAllStories();
     }
 
+    public boolean isBeforeFeature() {
+        return testCaseCountCurrentFeature < 1;
+    }
+
+    public void beforeScenarioHook(Scenario scenario) {
+        String featureNameFromScenario = getFeatureNameFromScenario(scenario);
+        increaseTestCaseCount(featureNameFromScenario);
+        handleCustomFeatureAnnotations(scenario);
+    }
+
+    public void increaseTestCaseCount(String feature) {
+        if (feature.equals(currentFeature)) {
+            testCaseCountCurrentFeature++;
+        } else {
+            log.info("Execution for new feature {} is started", feature);
+            currentFeature = feature;
+            testCaseCountCurrentFeature = 0;
+        }
+    }
+
+    public void handleCustomFeatureAnnotations(Scenario scenario) {
+        if (scenario.getSourceTagNames() != null && scenario.getSourceTagNames().stream().anyMatch(s -> s.equals("@restartBrowserBeforeScenario"))) {
+            customizingFeatures.getRestartBrowserBeforeScenarioThisFeatures().add(currentFeature);
+        }
+    }
+
+    public static String getFeatureNameFromScenario(Scenario scenario) {
+        String uri = scenario.getUri().toString();
+        String feature = uri.replaceFirst(".+/", "");
+        feature = feature.replaceFirst(":.*", "");
+        return feature;
+    }
 }

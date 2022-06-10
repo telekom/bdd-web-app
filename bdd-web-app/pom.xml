@@ -19,8 +19,8 @@
     <modules>
         <module>core</module>
         <module>selenium</module>
-        <module>cucumber</module>
         <module>cucumber-api</module>
+        <module>cucumber</module>
 		<module>jbehave</module>
     </modules>
 

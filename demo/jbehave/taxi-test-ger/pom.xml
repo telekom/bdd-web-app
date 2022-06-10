@@ -11,8 +11,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
 
+        <bdd-web-app.version>2.4-SHAPSHOT</bdd-web-app.version>
         <jbehave.version>4.8.3</jbehave.version>
-        <bdd-web-app.version>2.0</bdd-web-app.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version>
