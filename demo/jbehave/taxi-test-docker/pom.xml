@@ -5,13 +5,13 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-jbehave-demo-taxi-test-docker</artifactId>
-    <version>2.4-SNAPSHOT</version>
+    <version>2.4</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
 
-        <bdd-web-app.version>2.4-SNAPSHOT</bdd-web-app.version>
+        <bdd-web-app.version>2.4</bdd-web-app.version>
         <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
