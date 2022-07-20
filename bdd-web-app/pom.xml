@@ -10,6 +10,9 @@
     <packaging>pom</packaging>
 
     <name>bdd web-app reactor</name>
+    <url>https://github.com/telekom/bdd-web-app</url>
+    <description>Behavior-driven tests for web applications</description>
+    <inceptionYear>2017</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -77,6 +80,10 @@
             <timezone>Europe/Berlin</timezone>
         </developer>
     </developers>
+
+    <organization>
+        <name>Deutsche Telekom IT GmbH</name>
+    </organization>
 
     <scm>
         <connection>scm:git:https://github.com/telekom/bdd-web-app.git</connection>

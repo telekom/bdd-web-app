@@ -14,8 +14,12 @@
 
     <name>bdd-web-app cucumber plugin</name>
     <url>https://github.com/telekom/bdd-web-app</url>
-    <description>Behavior-driven tests for web applications</description>
-    <inceptionYear>2017</inceptionYear>
+
+    <scm>
+        <connection>scm:git:https://github.com/telekom/bdd-web-app.git</connection>
+        <developerConnection>scm:git:git@github.com/telekom/bdd-web-app.git</developerConnection>
+        <url>http://github.com/telekom/bdd-web-app</url>
+    </scm>
 
     <dependencyManagement>
         <dependencies>
