@@ -2,6 +2,9 @@ package de.telekom.test.bddwebapp.gherkinconverter;
 
 import de.telekom.test.bddwebapp.filemanipulator.JBehaveStoryFile;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
+import org.jbehave.core.model.Story;
+import org.jbehave.core.parsers.RegexStoryParser;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -34,8 +37,7 @@ public class JBehaveGherkinConverter {
             log.debug("Convert story {} to gherkin.", jBehaveStoryFile.getStoryFile().getName());
 
             var storyFileReader = new FileReader(jBehaveStoryFile.getStoryFile());
-            var jBehaveReader = new JBehaveReader(storyFileReader);
-            var story = jBehaveReader.read();
+            var story = read(storyFileReader);
             var feature = translator.translate(story);
             feature.setFile(createFeatureFile(jBehaveStoryFile));
 
@@ -46,6 +48,13 @@ public class JBehaveGherkinConverter {
             cucumberFeatures.add(feature);
         }
         return cucumberFeatures;
+    }
+
+    private StoryWrapper read(Reader reader) throws IOException {
+        var storyParser = new RegexStoryParser();
+        String storyAsText = IOUtils.toString(reader);
+        Story story = storyParser.parseStory(storyAsText);
+        return new StoryWrapper(storyAsText, story);
     }
 
     private File createFeatureFile(JBehaveStoryFile jBehaveStoryFile) {

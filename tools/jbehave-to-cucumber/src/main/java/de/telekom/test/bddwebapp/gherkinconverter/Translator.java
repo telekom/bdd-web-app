@@ -5,15 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.StoryResourceNotFound;
-import org.jbehave.core.model.*;
 import org.jbehave.core.model.Scenario;
-
-import static java.util.Collections.emptyList;
-import static org.apache.commons.lang3.StringUtils.*;
+import org.jbehave.core.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static java.util.Collections.emptyList;
+import static org.apache.commons.lang3.StringUtils.*;
 
 /**
  * Based on https://github.com/seize-the-dave/jbehave-to-gherkin.
@@ -21,8 +23,9 @@ import java.util.Map;
 @Slf4j
 public class Translator {
 
-    public FeatureWrapper translate(Story story) {
-        FeatureWrapper featureWrapper = new FeatureWrapper();
+    public FeatureWrapper translate(StoryWrapper storyWrapper) {
+        var featureWrapper = new FeatureWrapper();
+        Story story = storyWrapper.getStory();
         if (!story.getNarrative().asA().isEmpty()) {
             StringBuilder description = new StringBuilder();
             if (!story.getNarrative().inOrderTo().isEmpty()) {
@@ -46,12 +49,37 @@ public class Translator {
             }
             Feature feature = new Feature(noComments(), translate(story.getMeta()), "Feature", story.getDescription().asString(), description.toString(), 1, "");
             featureWrapper.setFeature(feature);
+        } else if (storyWrapper.getStoryAsText().contains("Narrative:")) {
+            Pattern pattern = Pattern.compile("Narrative.\\s.+\\s.+\\s.+\\s");
+            String storyAsText = storyWrapper.getStoryAsText();
+            storyAsText = storyAsText.replaceAll("\r\n", "\n");
+            Matcher matcher = pattern.matcher(storyAsText);
+            boolean matchFound = matcher.find();
+            if (matchFound) {
+                String description = storyAsText.substring(matcher.start() + 11, matcher.end() - 1);
+
+                Feature feature = new Feature(noComments(), translate(story.getMeta()), "Feature", story.getDescription().asString(), description.toString(), 1, "");
+                featureWrapper.setFeature(feature);
+            }
         }
 
         featureWrapper.setBackgroundWrapper(translate(story.getLifecycle()));
         featureWrapper.setScenarios(translateScenarios(story.getScenarios()));
 
         return featureWrapper;
+    }
+
+    public static void main(String args[]) {
+        String s = "Narrative:\n" + "As a user\n" + "I would like to log in with an existing account,\n" + "to make reservations for collective taxis.\n" + "\n" + "Scenario: Redirect to the login page if the session is not present\n" + "When the user opens the login page\n" + "Then the login page is shown\n" + "\n" + "Scenario: Input of invalid log data\n" + "When the user logs in with invalid@user.de password\n" + "Then the login page is shown\n" + "And the user receives the message that the login data is invalid\n" + "\n" + "Scenario: Successful login\n" + "Given registered user as user\n" + "And the opened login page\n" + "When the user logs in with $user.username $user.password\n" + "Then the reservation page is shown\n" + "\n" + "Scenario: Redirect to the log-in with existing session\n" + "When the user opens the login page\n" + "Then the reservation page is shown\n";
+
+        Pattern pattern = Pattern.compile("Narrative.\\s.+\\s");
+        Matcher matcher = pattern.matcher(s);
+        boolean matchFound = matcher.find();
+        if (matchFound) {
+            System.out.println("Match found");
+        } else {
+            System.out.println("Match not found");
+        }
     }
 
     public List<ScenarioWrapper> translateScenarios(List<Scenario> scenarios) {
@@ -131,16 +159,16 @@ public class Translator {
         String stepName = stepParts[1];
         ExamplesTableFactory tableFactory = new ExamplesTableFactory(new MostUsefulConfiguration());
         Keywords keywords = new Keywords();
-        
+
         List<DataTableRow> tableData;
         if (stepName.contains(keywords.examplesTableHeaderSeparator())) {
             String[] parts = split(stepName, keywords.examplesTableHeaderSeparator(), 2);
             stepName = parts[0];
             String stepTableValue = parts[1];
-            try{
+            try {
                 ExamplesTable examplesTable = tableFactory.createExamplesTable(stepTableValue);
                 tableData = translateDataTable(examplesTable);
-            }catch (StoryResourceNotFound storyResourceNotFound){
+            } catch (StoryResourceNotFound storyResourceNotFound) {
                 log.error("Can't convert the following step to table: [{}].", stepTableValue);
                 tableData = noTableData();
             }
