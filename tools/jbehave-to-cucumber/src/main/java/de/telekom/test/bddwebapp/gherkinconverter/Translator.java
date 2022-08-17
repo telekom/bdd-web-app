@@ -69,19 +69,6 @@ public class Translator {
         return featureWrapper;
     }
 
-    public static void main(String args[]) {
-        String s = "Narrative:\n" + "As a user\n" + "I would like to log in with an existing account,\n" + "to make reservations for collective taxis.\n" + "\n" + "Scenario: Redirect to the login page if the session is not present\n" + "When the user opens the login page\n" + "Then the login page is shown\n" + "\n" + "Scenario: Input of invalid log data\n" + "When the user logs in with invalid@user.de password\n" + "Then the login page is shown\n" + "And the user receives the message that the login data is invalid\n" + "\n" + "Scenario: Successful login\n" + "Given registered user as user\n" + "And the opened login page\n" + "When the user logs in with $user.username $user.password\n" + "Then the reservation page is shown\n" + "\n" + "Scenario: Redirect to the log-in with existing session\n" + "When the user opens the login page\n" + "Then the reservation page is shown\n";
-
-        Pattern pattern = Pattern.compile("Narrative.\\s.+\\s");
-        Matcher matcher = pattern.matcher(s);
-        boolean matchFound = matcher.find();
-        if (matchFound) {
-            System.out.println("Match found");
-        } else {
-            System.out.println("Match not found");
-        }
-    }
-
     public List<ScenarioWrapper> translateScenarios(List<Scenario> scenarios) {
         List<ScenarioWrapper> scenarioWrappers = new ArrayList<>();
         for (Scenario scenario : scenarios) {
@@ -103,11 +90,11 @@ public class Translator {
     }
 
     private List<Tag> noTags() {
-        return emptyList();
+        return new ArrayList<>();
     }
 
     private List<Comment> noComments() {
-        return emptyList();
+        return new ArrayList<>();
     }
 
     private Examples translate(ExamplesTable examples) {

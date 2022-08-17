@@ -1,6 +1,7 @@
 package de.telekom.test.bddwebapp.gherkinconverter;
 
 import de.telekom.test.bddwebapp.filemanipulator.JBehaveStoryFile;
+import gherkin.formatter.model.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.jbehave.core.model.Story;
@@ -65,8 +66,7 @@ public class JBehaveGherkinConverter {
         Scanner scanner = new Scanner(storyClassFile);
         if (scanner.findAll("@RestartBrowserBeforeScenario").findAny().isPresent()) {
             log.debug("Found annotation @RestartBrowserBeforeScenario in \"{}\". Add tag to feature.", storyClassFile.getName());
-            // TODO
-          //  feature.getFeature().getTags().add(new Tag("restartBrowserBeforeScenario", feature.getFeature().getTags().size() + 1));
+            feature.getFeature().getTags().add(new Tag("@restartBrowserBeforeScenario", feature.getFeature().getTags().size() + 1));
         }
     }
 
