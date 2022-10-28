@@ -18,7 +18,7 @@ import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.StringUtils.*;
 
 /**
- * Based on https://github.com/seize-the-dave/jbehave-to-gherkin.
+ * Based on <a href="https://github.com/seize-the-dave/jbehave-to-gherkin">...</a>.
  */
 @Slf4j
 public class Translator {

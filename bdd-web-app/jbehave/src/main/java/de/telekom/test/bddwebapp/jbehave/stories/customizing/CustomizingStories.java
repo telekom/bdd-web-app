@@ -21,7 +21,7 @@ import java.util.Map;
 @Component
 public class CustomizingStories {
 
-    private final Map<String, Class> storyClasses = new HashMap();
+    private final Map<String, Class> storyClasses = new HashMap<>();
 
     @Getter
     @Setter

@@ -12,8 +12,8 @@ Feature: Registration
     Given the openend registration page
     When the user register with
       | firstName | lastName | userName                  | password |
-      | Hans      | Müller   | userName+$RANDOM+@test.de |          |
-      | Hans      | Müller   |                           | password |
+      | Hans      | M\u00fcller   | userName+$RANDOM+@test.de |          |
+      | Hans      | M\u00fcller   |                           | password |
     Then the registration page is shown
     And the user receives the message that the registration data is invalid
 
@@ -21,6 +21,6 @@ Feature: Registration
     Given the openend registration page
     When the user register with
       | firstName | lastName | userName                  | password |
-      | Hans      | Müller   | userName+$RANDOM+@test.de | password |
+      | Hans      | M\u00fcller   | userName+$RANDOM+@test.de | password |
     Then the login page is shown
     And the user receives the registered message

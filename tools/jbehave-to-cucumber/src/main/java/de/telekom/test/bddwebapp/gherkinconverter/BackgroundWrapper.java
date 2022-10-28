@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Based on https://github.com/seize-the-dave/jbehave-to-gherkin.
+ * Based on <a href="https://github.com/seize-the-dave/jbehave-to-gherkin">...</a>.
  */
 public class BackgroundWrapper {
     private Background background = new Background(null, null, null, null, null) {

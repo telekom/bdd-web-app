@@ -4,7 +4,7 @@ Use proven patterns for your behavior-driven test project. You can write the exe
 
 The opinionated test framework "bdd-web-app" should solve the usual technical issues for web application regression tests.
 It is based on Spring, Selenium, and Rest-assured. It can work with Cucumber or with JBehave and can be understood as a Plugin for these frameworks.
-The framework will help you managing test data in the lifecycle. The browser instrumentalization driver will be updated automatically. And further, you can work with spring in your test project.
+The framework will help you to manage test data in the lifecycle. The browser instrumentalization driver will be updated automatically. And further, you can work with spring in your test project.
 
 The included sample project allows a quick introduction to the test framework.
 
@@ -30,11 +30,11 @@ If you want to use Cucumber for your web application test project, add this mave
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber</artifactId>
-                <version>2.4</version>
+                <version>2.5-SNAPSHOT</version>
             </dependency>
 ```
 
-The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.4/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber/2.5-SNAPSHOT/jar.
 
 ### Cucumber-API
 
@@ -48,11 +48,11 @@ If you want to use Cucumber for your web application test project, add this mave
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-cucumber-api</artifactId>
-                <version>2.4</version>
+                <version>2.5-SNAPSHOT</version>
             </dependency>
 ```
 
-The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber-api/2.4/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-cucumber-api/2.5-SNAPSHOT/jar.
 
 ## JBehave
 
@@ -68,11 +68,11 @@ If you want to use JBehave for your web application test project, add this maven
             <dependency>
                 <groupId>de.telekom.test</groupId>
                 <artifactId>bddwebapp-jbehave</artifactId>
-                <version>2.4</version>
+                <version>2.5-SNAPSHOT</version>
             </dependency>
 ```
 
-The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.4/jar.
+The framework is also available for other build-automation tools like Gradle. You will find the artifacts here: https://search.maven.org/artifact/de.telekom.test/bddwebapp-jbehave/2.5-SNAPSHOT/jar.
 
 ## Browser support
 

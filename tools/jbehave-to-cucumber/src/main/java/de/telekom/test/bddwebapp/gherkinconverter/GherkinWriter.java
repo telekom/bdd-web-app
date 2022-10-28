@@ -6,7 +6,7 @@ import gherkin.formatter.PrettyFormatter;
 import java.io.Writer;
 
 /**
- * Based on https://github.com/seize-the-dave/jbehave-to-gherkin.
+ * Based on <a href="https://github.com/seize-the-dave/jbehave-to-gherkin">...</a>.
  */
 public class GherkinWriter {
     private final Writer writer;

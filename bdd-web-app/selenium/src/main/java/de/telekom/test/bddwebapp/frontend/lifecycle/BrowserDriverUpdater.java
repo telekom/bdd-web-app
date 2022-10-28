@@ -35,8 +35,8 @@ public class BrowserDriverUpdater {
      * Here you should be careful that the number of 60 requests per hour in the direction of github is not exceeded.
      * This applies to the driver for firefox and opera.
      * <p>
-     * https://github.com/bonigarcia/webdrivermanager
-     * https://developer.github.com/v3/#rate-limiting
+     * <a href="https://github.com/bonigarcia/webdrivermanager">...</a>
+     * <a href="https://developer.github.com/v3/#rate-limiting">...</a>
      */
     public void updateDriver() {
         var currentWebDriverConfiguration = webDriverWrapper.getCurrentWebDriverConfiguration();

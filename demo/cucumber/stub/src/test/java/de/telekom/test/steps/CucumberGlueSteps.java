@@ -6,9 +6,6 @@ import io.cucumber.java.*;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.time.ZonedDateTime;
-import java.util.UUID;
-
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>

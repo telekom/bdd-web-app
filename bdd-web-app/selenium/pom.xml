@@ -1,15 +1,14 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-	http://maven.apache.org/maven-v4_0_0.xsd">
+	https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>de.telekom.test</groupId>
         <artifactId>bdd-web-app</artifactId>
-        <version>2.4</version>
+        <version>2.5-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.telekom.test</groupId>
     <artifactId>bddwebapp-selenium</artifactId>
 
     <name>bdd-web-app selenium module</name>
@@ -18,22 +17,22 @@
     <scm>
         <connection>scm:git:https://github.com/telekom/bdd-web-app.git</connection>
         <developerConnection>scm:git:git@github.com/telekom/bdd-web-app.git</developerConnection>
-        <url>http://github.com/telekom/bdd-web-app</url>
+        <url>https://github.com/telekom/bdd-web-app</url>
     </scm>
 
     <properties>
         <!-- Framework dependencies -->
-        <selenium.version>4.1.4</selenium.version>
-        <webdrivermanager.version>5.1.1</webdrivermanager.version>
+        <selenium.version>4.5.3</selenium.version>
+        <webdrivermanager.version>5.3.0</webdrivermanager.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
 
         <!-- Unit test dependencies -->
-        <spock-core.version>2.2-M1-groovy-4.0</spock-core.version>
-        <byte-buddy.version>1.12.10</byte-buddy.version>
-        <objenesis.version>3.2</objenesis.version>
+        <spock-core.version>2.3-groovy-4.0</spock-core.version>
+        <byte-buddy.version>1.12.18</byte-buddy.version>
+        <objenesis.version>3.3</objenesis.version>
 
         <!-- Optional dependencies -->
-        <htmlunit-driver.version>3.61.0</htmlunit-driver.version>
+        <htmlunit-driver.version>4.5.2</htmlunit-driver.version>
     </properties>
 
     <dependencyManagement>
