@@ -68,8 +68,8 @@ public class CurrentFeature {
     }
 
     public static String getFeatureNameFromScenario(Scenario scenario) {
-        String uri = scenario.getUri().toString();
-        String feature = uri.replaceFirst(".+/", "");
+        var uri = scenario.getUri().toString();
+        var feature = uri.replaceFirst(".+/", "");
         feature = feature.replaceFirst(":.*", "");
         return feature;
     }

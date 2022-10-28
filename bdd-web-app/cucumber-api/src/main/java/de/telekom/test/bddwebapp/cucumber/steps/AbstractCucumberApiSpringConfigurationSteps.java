@@ -47,20 +47,9 @@ public abstract class AbstractCucumberApiSpringConfigurationSteps extends ApiSte
      * Need this method so the cucumber will recognize this class as glue and load spring context configuration
      */
     public void setupBddWebApp(Scenario scenario) {
-        if (beforeAll) {
-            setLogLevel();
-        }
-
         startScenarioInteraction(scenario);
         currentFeature.beforeScenarioHook(scenario);
         startStoryInteraction(scenario);
-    }
-
-
-
-    public void setLogLevel() {
-        ch.qos.logback.classic.Logger rootLogger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME);
-        rootLogger.setLevel(Level.INFO);
     }
 
     public void startScenarioInteraction(Scenario scenario) {

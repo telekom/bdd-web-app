@@ -36,7 +36,6 @@ public abstract class AbstractCucumberSpringConfigurationSteps extends AbstractC
 
     private void beforeAllHook() {
         if(beforeAll){
-            setLogLevel();
             updateWebdriver();
             registerWebdriverShutdownHook();
         }
