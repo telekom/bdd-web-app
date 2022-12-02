@@ -1,0 +1,159 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	https://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.telekom.test</groupId>
+        <artifactId>bdd-web-app</artifactId>
+        <version>3.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bddwebapp-selenium</artifactId>
+
+    <name>bdd-web-app selenium module</name>
+    <url>https://github.com/telekom/bdd-web-app</url>
+
+    <scm>
+        <connection>scm:git:https://github.com/telekom/bdd-web-app.git</connection>
+        <developerConnection>scm:git:git@github.com/telekom/bdd-web-app.git</developerConnection>
+        <url>https://github.com/telekom/bdd-web-app</url>
+    </scm>
+
+    <properties>
+        <!-- Framework dependencies -->
+        <selenium.version>4.6.0</selenium.version>
+        <webdrivermanager.version>5.3.1</webdrivermanager.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+
+        <!-- Unit test dependencies -->
+        <spock-core.version>2.3-groovy-4.0</spock-core.version>
+        <byte-buddy.version>1.12.18</byte-buddy.version>
+        <objenesis.version>3.3</objenesis.version>
+
+        <!-- Optional dependencies -->
+        <htmlunit-driver.version>4.6.0</htmlunit-driver.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- BDD-Web-App -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bddwebapp-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Selenium -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Webdrivermanager -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>${webdrivermanager.version}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Testing -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-core</artifactId>
+                <version>${spock-core.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-buddy.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>${objenesis.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- BDD-Web-App -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bddwebapp-core</artifactId>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Selenium -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${htmlunit-driver.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Webdrivermanager -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Testing -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

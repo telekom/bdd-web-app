@@ -1,0 +1,180 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	https://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.telekom.test</groupId>
+        <artifactId>bdd-web-app</artifactId>
+        <version>3.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bddwebapp-jbehave</artifactId>
+
+    <name>bdd-web-app jbehave plugin</name>
+    <url>https://github.com/telekom/bdd-web-app</url>
+
+    <scm>
+        <connection>scm:git:https://github.com/telekom/bdd-web-app.git</connection>
+        <developerConnection>scm:git:git@github.com/telekom/bdd-web-app.git</developerConnection>
+        <url>https://github.com/telekom/bdd-web-app</url>
+    </scm>
+
+    <properties>
+        <!-- Framework dependencies -->
+        <jbehave.version>4.8.3</jbehave.version>
+        <jbehave-site-resources.version>3.5</jbehave-site-resources.version>
+        <jbehave-junit-runner>2.3.2</jbehave-junit-runner>
+
+        <!-- Unit test dependencies -->
+        <spock-core.version>2.3-groovy-4.0</spock-core.version>
+        <byte-buddy.version>1.12.18</byte-buddy.version>
+        <objenesis.version>3.3</objenesis.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- BDD-Web-App -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bddwebapp-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.telekom.test</groupId>
+                <artifactId>bddwebapp-selenium</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- JBehave -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-core</artifactId>
+                <version>${jbehave.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-maven-plugin</artifactId>
+                <version>${jbehave.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave</groupId>
+                <artifactId>jbehave-core</artifactId>
+                <version>${jbehave.version}</version>
+                <classifier>resources</classifier>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jbehave.site</groupId>
+                <artifactId>jbehave-site-resources</artifactId>
+                <version>${jbehave-site-resources.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>com.github.valfirst</groupId>
+                <artifactId>jbehave-junit-runner</artifactId>
+                <version>${jbehave-junit-runner}</version>
+            </dependency>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Testing -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-core</artifactId>
+                <version>${spock-core.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-buddy.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>${objenesis.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- BDD-Web-App -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bddwebapp-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.telekom.test</groupId>
+            <artifactId>bddwebapp-selenium</artifactId>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- JBehave -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-maven-plugin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-core</artifactId>
+            <classifier>resources</classifier>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jbehave.site</groupId>
+            <artifactId>jbehave-site-resources</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.github.valfirst</groupId>
+            <artifactId>jbehave-junit-runner</artifactId>
+        </dependency>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Testing -->
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.spockframework</groupId>
+            <artifactId>spock-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
