@@ -32,7 +32,7 @@ public class RegistrationController {
     public String addRegistration(RegistrationVO registration, HttpSession session) {
         userService.register(registration);
         session.setAttribute("registration", true);
-        session.setAttribute("username", registration.getUsername());
+        session.setAttribute("username", registration.username());
         return "redirect:login";
     }
 

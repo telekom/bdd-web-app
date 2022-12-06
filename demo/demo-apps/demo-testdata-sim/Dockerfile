@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11-openj9:alpine-jre
+FROM eclipse-temurin:17-alpine
 
 COPY target/testdata-sim.jar testdata-sim.jar
 ENTRYPOINT java $JAVA_OPTS -jar /testdata-sim.jar $MAIN_OPTS

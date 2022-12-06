@@ -26,7 +26,7 @@ public class MigrationTool {
     private List<File> jBehaveSteps;
     private List<FeatureWrapper> cucumberFeatures;
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
         var migrationTool = new MigrationTool();
         migrationTool.enterBasePath();
         migrationTool.scanStoryFiles();
@@ -58,7 +58,7 @@ public class MigrationTool {
         jBehaveSteps = jBehaveStepsScanner.searchForJBehaveSteps();
     }
 
-    private void convertStoriesToGherkin() throws IOException, ClassNotFoundException {
+    private void convertStoriesToGherkin() throws IOException {
         var jBehaveGherkinConverter = new JBehaveGherkinConverter(jBehaveStoryFiles);
         cucumberFeatures = jBehaveGherkinConverter.convertJBehaveToGherkin();
     }

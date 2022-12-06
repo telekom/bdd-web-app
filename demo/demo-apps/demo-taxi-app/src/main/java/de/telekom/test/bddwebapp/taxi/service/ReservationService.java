@@ -2,7 +2,7 @@ package de.telekom.test.bddwebapp.taxi.service;
 
 import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationVO;
 import de.telekom.test.bddwebapp.taxi.domain.Reservation;
-import de.telekom.test.bddwebapp.taxi.domain.User;
+import de.telekom.test.bddwebapp.taxi.domain.Registration;
 import de.telekom.test.bddwebapp.taxi.repositories.ReservationRepository;
 import de.telekom.test.bddwebapp.taxi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +54,7 @@ public class ReservationService {
         return reservationVO;
     }
 
-    private User getUser(String username) {
+    private Registration getUser(String username) {
         return userRepository.getByUsername(username);
     }
 

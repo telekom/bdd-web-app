@@ -1,7 +1,5 @@
 package de.telekom.test.bddwebapp.taxi.controller.vo;
 
-import lombok.Data;
-
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
@@ -9,12 +7,6 @@ import lombok.Data;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Data
-public class ReservationPriceEntryVO {
-
-    private String startTime;
-    private String endTime;
-    private String price;
-    private String passengers;
-
+public record ReservationPriceEntryVO(String startTime, String endTime,
+                                      String price, String passengers) {
 }

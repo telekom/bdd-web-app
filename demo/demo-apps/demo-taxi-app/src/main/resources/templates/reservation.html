@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <title>Reservation - shared taxi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" href="css/sticky-footer.css">
 
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.6.1/jquery.min.js}"></script>
     <script type="text/javascript" src="js/jquery.sse.min.js"></script>
     <script type="text/javascript" src="js/reservation.js"></script>
 </head>
@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label for="date">Date</label>
                     <input class="form-control" id="date" name="date"
-                           th:value="${reservation?.date}" required="true"
+                           th:value="${reservation?.date}" required="required"
                            placeholder="Datum"/>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label for="earliestStartTime">Earliest start time</label>
                     <input class="form-control" id="earliestStartTime" name="earliestStartTime"
-                           th:value="${reservation?.earliestStartTime}" required="true"
+                           th:value="${reservation?.earliestStartTime}" required="required"
                            placeholder="Earliest start time"/>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <label for="latestStartTime">Latest start time</label>
                     <input class="form-control" id="latestStartTime" name="latestStartTime"
-                           th:value="${reservation?.latestStartTime}" required="true"
+                           th:value="${reservation?.latestStartTime}" required="required"
                            placeholder="Latest start time"/>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label for="departure">Point of departure</label>
                     <input class="form-control" id="departure" name="departure"
-                           th:value="${reservation?.departure}" required="true"
+                           th:value="${reservation?.departure}" required="required"
                            placeholder="Point of departure"/>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <label for="destination">Destination</label>
                     <input class="form-control" id="destination" name="destination"
-                           th:value="${reservation?.destination}" required="true"
+                           th:value="${reservation?.destination}" required="required"
                            placeholder="Destination"/>
                 </div>
             </div>

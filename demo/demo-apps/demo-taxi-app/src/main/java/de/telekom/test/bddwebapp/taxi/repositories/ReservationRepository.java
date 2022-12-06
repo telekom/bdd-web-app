@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.repositories;
 
 import de.telekom.test.bddwebapp.taxi.domain.Reservation;
-import de.telekom.test.bddwebapp.taxi.domain.User;
+import de.telekom.test.bddwebapp.taxi.domain.Registration;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -15,8 +15,8 @@ import java.util.List;
  */
 public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
 
-    List<Reservation> findByUser(User user);
+    List<Reservation> findByUser(Registration user);
 
-    void deleteByUser(User user);
+    void deleteByUser(Registration user);
 
 }

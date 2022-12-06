@@ -22,7 +22,7 @@ public class LoginPage extends JQueryPage {
     @FindBy(id = "password")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(css = "button[type='submit']")
     private WebElement submitButton;
 
     @FindBy(partialLinkText = "Register")
@@ -62,10 +62,6 @@ public class LoginPage extends JQueryPage {
     public boolean loginDataIsInvalidMessageIsShown() {
         waitForExisting(alertWarningDiv, 1);
         return alertWarningDiv.getText().contains("invalid");
-    }
-
-    public boolean isUsernameFieldShown() {
-        return exists(usernameInput);
     }
 
     @Override

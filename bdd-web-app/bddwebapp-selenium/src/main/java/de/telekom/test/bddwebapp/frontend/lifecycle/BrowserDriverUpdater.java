@@ -58,20 +58,14 @@ public class BrowserDriverUpdater {
     }
 
     private DriverManagerType mapToDriverManagerType(String browser) {
-        switch (browser.toLowerCase()) {
-            case "firefox":
-                return DriverManagerType.FIREFOX;
-            case "chrome":
-                return DriverManagerType.CHROME;
-            case "edge":
-                return DriverManagerType.EDGE;
-            case "ie":
-            case "internetexplorer":
-                return DriverManagerType.IEXPLORER;
-            case "opera":
-                return DriverManagerType.OPERA;
-        }
-        return null;
+        return switch (browser.toLowerCase()) {
+            case "firefox" -> DriverManagerType.FIREFOX;
+            case "chrome" -> DriverManagerType.CHROME;
+            case "edge" -> DriverManagerType.EDGE;
+            case "ie", "internetexplorer" -> DriverManagerType.IEXPLORER;
+            case "opera" -> DriverManagerType.OPERA;
+            default -> null;
+        };
     }
 
 }

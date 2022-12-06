@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import static java.util.stream.Collectors.toMap;
+import static java.util.stream.IntStream.range;
 
 /**
  * Save the data flat for the test execution.
@@ -53,14 +54,11 @@ public class FlatInteraction implements Interaction {
      * Be careful when saving very large and deep maps as this approach increases the amount of data exponentially!
      */
     public void remember(String key, Object value) {
-        if (value instanceof Map) {
-            ((Map) value).forEach((entryKey, entryValue) -> remember(key + OBJECT_KEY_SEPARATOR + entryKey.toString(), entryValue));
+        if (value instanceof Map map) {
+            map.forEach((entryKey, entryValue) -> remember(key + OBJECT_KEY_SEPARATOR + entryKey.toString(), entryValue));
         }
-        if (value instanceof List) {
-            List list = ((List) value);
-            for (int i = 0; i < list.size(); i++) {
-                remember(key + String.format(LIST_ITEM_FORMAT, i), list.get(i));
-            }
+        if (value instanceof List list) {
+            range(0, list.size()).forEach(i -> remember(key + String.format(LIST_ITEM_FORMAT, i), list.get(i)));
         }
         context.put(key, value);
     }

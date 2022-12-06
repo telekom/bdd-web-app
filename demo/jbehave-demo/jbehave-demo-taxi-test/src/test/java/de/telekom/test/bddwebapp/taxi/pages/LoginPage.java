@@ -22,7 +22,7 @@ public class LoginPage extends JQueryPage {
     @FindBy(id = "password")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(css = "button[type='submit']")
     private WebElement submitButton;
 
     @FindBy(partialLinkText = "Register")

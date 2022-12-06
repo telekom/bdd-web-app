@@ -1,6 +1,5 @@
 package de.telekom.test.bddwebapp.cucumber.steps;
 
-import ch.qos.logback.classic.Level;
 import de.telekom.test.bddwebapp.api.steps.ApiSteps;
 import de.telekom.test.bddwebapp.cucumber.features.CurrentFeature;
 import de.telekom.test.bddwebapp.cucumber.features.CustomizingFeatures;
@@ -9,7 +8,6 @@ import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import de.telekom.test.bddwebapp.interaction.StoryInteraction;
 import io.cucumber.java.Scenario;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 

@@ -43,25 +43,29 @@ public interface WebDriverConfiguration {
             return loadRemoteWebdriver(extraCapabilities);
         }
         switch (browser.toLowerCase()) {
-            case "firefox":
+            case "firefox" -> {
                 return loadFirefox(extraCapabilities);
-            case "chrome":
+            }
+            case "chrome" -> {
                 return loadChrome(extraCapabilities);
-            case "edge":
+            }
+            case "edge" -> {
                 return loadEdge(extraCapabilities);
-            case "ie":
-            case "internetexplorer":
+            }
+            case "ie", "internetexplorer" -> {
                 return loadInternetExplorer(extraCapabilities);
-            case "safari":
+            }
+            case "safari" -> {
                 return loadSafari(extraCapabilities);
-            case "htmlunit":
-                try{
+            }
+            case "htmlunit" -> {
+                try {
                     return loadHtmlUnit();
-                }catch (NoClassDefFoundError noClassDefFoundError){
+                } catch (NoClassDefFoundError noClassDefFoundError) {
                     throw new NoClassDefFoundError("HtmlUnit is optional. You need to add the HtmlUnit dependency in your project manually.");
                 }
-            default:
-                throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
+            }
+            default -> throw new IllegalArgumentException("No browser defined! Given browser is: " + browser);
         }
     }
 
@@ -76,27 +80,20 @@ public interface WebDriverConfiguration {
 
     private Optional<AbstractDriverOptions> getBrowserOptionsForRemoteDriver(DesiredCapabilities capabilities) {
         String browser = getBrowser();
-        switch (browser.toLowerCase()) {
-            case "firefox":
-                return Optional.of(firefoxOptions(capabilities));
-            case "chrome":
-                return Optional.of(chromeOptions(capabilities));
-            case "edge":
-                return Optional.of(edgeOptions(capabilities));
-            case "ie":
-            case "internetexplorer":
-                return Optional.of(internetExplorerOptions(capabilities));
-            case "safari":
-                return Optional.of(safariOptions(capabilities));
-        }
-        return Optional.empty();
+        return switch (browser.toLowerCase()) {
+            case "firefox" -> Optional.of(firefoxOptions(capabilities));
+            case "chrome" -> Optional.of(chromeOptions(capabilities));
+            case "edge" -> Optional.of(edgeOptions(capabilities));
+            case "ie", "internetexplorer" -> Optional.of(internetExplorerOptions(capabilities));
+            case "safari" -> Optional.of(safariOptions(capabilities));
+            default -> Optional.empty();
+        };
     }
 
     default DesiredCapabilities remoteWebDriverOptions(DesiredCapabilities capabilities) {
         var remoteCaps = new DesiredCapabilities();
-        remoteCaps.setJavascriptEnabled(true);
 
-        Optional<AbstractDriverOptions> driverOptions = getBrowserOptionsForRemoteDriver(capabilities);
+        var driverOptions = getBrowserOptionsForRemoteDriver(capabilities);
         driverOptions.ifPresentOrElse(remoteCaps::merge, () -> remoteCaps.merge(capabilities));
         return remoteCaps;
     }
