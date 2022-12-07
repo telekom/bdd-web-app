@@ -9,7 +9,7 @@ When user clicks the link to the registration
 Then the registration page is shown
 
 Scenario: Entering invalid registration data
-Given the openend registration page
+Given the opened registration page
 When the user register with
 |firstName|lastName|userName|password|
 |Hans|Müller|userName+$RANDOM+@test.de||

@@ -47,12 +47,10 @@ public class TestDataBuilder {
                 .onErrorMap(e -> new RuntimeException("Error creation user test data!"))
                 .block();
 
-        var registration = new RegistrationVO();
-        registration.setFirstName(body.getFirst("firstName"));
-        registration.setLastName(body.getFirst("lastName"));
-        registration.setUsername(body.getFirst("username"));
-        registration.setPassword(body.getFirst("password"));
-        return registration;
+        return new RegistrationVO(
+                body.getFirst("firstName"), body.getFirst("lastName"),
+                body.getFirst("username"), body.getFirst("password")
+        );
     }
 
     public ReservationEventVO createExampleReservation(String earliestStartTime, String latestStartTime) {

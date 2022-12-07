@@ -9,7 +9,7 @@ Feature: Registration
     Then the registration page is shown
 
   Scenario: Entering invalid registration data
-    Given the openend registration page
+    Given the opened registration page
     When the user register with
       | firstName | lastName | userName                  | password |
       | Hans      | M\u00fcller   | userName+$RANDOM+@test.de |          |
@@ -18,7 +18,7 @@ Feature: Registration
     And the user receives the message that the registration data is invalid
 
   Scenario: Successful registration
-    Given the openend registration page
+    Given the opened registration page
     When the user register with
       | firstName | lastName | userName                  | password |
       | Hans      | M\u00fcller   | userName+$RANDOM+@test.de | password |

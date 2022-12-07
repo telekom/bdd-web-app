@@ -21,8 +21,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class RegistrationSteps extends AbstractTaxiSteps {
 
-    @Given("the openend registration page")
-    public void theOpenRegistrationPage() {
+    @Given("the opened registration page")
+    public void theOpenedRegistrationPage() {
         theUserOpenTheRegistrationPage();
         theRegistrationPageIsShown();
     }

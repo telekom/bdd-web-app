@@ -11,7 +11,6 @@ import lombok.EqualsAndHashCode;
  * For details see the file license on the toplevel.
  */
 @Data
-@EqualsAndHashCode
 public class ReservationEventVO {
 
     private String username;

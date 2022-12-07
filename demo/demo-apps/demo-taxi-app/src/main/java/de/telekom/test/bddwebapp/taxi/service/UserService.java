@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.service;
 
 import de.telekom.test.bddwebapp.taxi.controller.vo.RegistrationVO;
-import de.telekom.test.bddwebapp.taxi.domain.Registration;
+import de.telekom.test.bddwebapp.taxi.repositories.domain.Registration;
 import de.telekom.test.bddwebapp.taxi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.jcajce.provider.digest.SHA3;

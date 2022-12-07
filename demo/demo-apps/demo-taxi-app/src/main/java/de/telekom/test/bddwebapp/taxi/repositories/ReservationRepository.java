@@ -1,7 +1,7 @@
 package de.telekom.test.bddwebapp.taxi.repositories;
 
-import de.telekom.test.bddwebapp.taxi.domain.Reservation;
-import de.telekom.test.bddwebapp.taxi.domain.Registration;
+import de.telekom.test.bddwebapp.taxi.repositories.domain.Reservation;
+import de.telekom.test.bddwebapp.taxi.repositories.domain.Registration;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

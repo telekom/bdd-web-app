@@ -1,8 +1,11 @@
-package de.telekom.test.bddwebapp.taxi.domain;
+package de.telekom.test.bddwebapp.taxi.repositories.domain;
 
 import lombok.*;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import java.util.Date;
 
 /**
@@ -18,25 +21,20 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
-public class Reservation {
+public class Registration {
 
     @Id
     @GeneratedValue
-    private Long reservationId;
+    private Long userId;
 
-    @ManyToOne
-    @JoinColumn
-    private Registration user;
+    @Column(unique = true)
+    private String username;
 
-    private String date;
+    private String password;
 
-    private String departure;
+    private String firstName;
 
-    private String earliestStartTime;
-
-    private String destination;
-
-    private String latestStartTime;
+    private String lastName;
 
     private Date creationDate;
 

@@ -1,10 +1,6 @@
 package de.telekom.test.bddwebapp.testdata.controller.vo;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -13,17 +9,11 @@ import java.util.List;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Data
-@EqualsAndHashCode
-public class ReservationVO {
-
-    private String date;
-    private String departure;
-    private String earliestStartTime;
-    private String destination;
-    private String latestStartTime;
-    private String message;
-
-    private List<ReservationPriceVO> reservationPrices = new ArrayList<>();
-
+public record ReservationVO(String username,
+                            @NotBlank String date,
+                            @NotBlank String departure,
+                            @NotBlank String earliestStartTime,
+                            @NotBlank String destination,
+                            @NotBlank String latestStartTime,
+                            String message) {
 }

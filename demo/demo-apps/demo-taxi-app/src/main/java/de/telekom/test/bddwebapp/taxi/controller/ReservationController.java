@@ -28,7 +28,8 @@ public class ReservationController {
     @GetMapping("reservation")
     public String reservation(Principal principal, Model model) {
         if (authenticationValidator.isAuthenticated(principal, model)) {
-            model.addAttribute("reservation", reservationService.getReservation(principal.getName()));
+            reservationService.getReservation(principal.getName()).ifPresent(reservation ->
+                    model.addAttribute("reservation", reservation));
             return "reservation";
         }
         return "redirect:login";

@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi;
+package de.telekom.test.bddwebapp.taxi.appconfig;
 
 import de.telekom.test.bddwebapp.taxi.service.UserService;
 import lombok.RequiredArgsConstructor;

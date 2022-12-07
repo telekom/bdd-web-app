@@ -11,11 +11,5 @@ import java.util.List;
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
-@Data
-public class ReservationPriceEventVO {
-
-    private String message;
-
-    private List<ReservationPriceEntryVO> reservationPrices;
-
+public record ReservationPriceEventVO (String message, List<ReservationPriceEntryVO> reservationPrices){
 }

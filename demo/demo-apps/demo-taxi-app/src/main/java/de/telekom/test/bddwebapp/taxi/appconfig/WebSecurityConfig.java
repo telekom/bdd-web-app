@@ -1,4 +1,4 @@
-package de.telekom.test.bddwebapp.taxi;
+package de.telekom.test.bddwebapp.taxi.appconfig;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +25,17 @@ public class WebSecurityConfig  {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
+        return http.authorizeHttpRequests()
                 .requestMatchers("/webjars/**").permitAll()
                 .requestMatchers("/css/**").permitAll()
                 .requestMatchers("/js/**").permitAll()
                 .requestMatchers("/registration/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
-                .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and().
-                authorizeHttpRequests();
-        http.csrf().disable();
-
-        // to use H2 web console
-        http.headers().frameOptions().disable();
-
-        return http.build();
+                .anyRequest().authenticated().and()
+                .formLogin().loginPage("/login").permitAll().and()
+                .logout().permitAll().and()
+                .csrf().disable()
+                .build();
     }
 
     @Autowired

@@ -27,7 +27,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
     @Autowired
     private StoryInteractionParameterConverter storyInteractionParameterConverter;
 
-    @Given("the openend registration page")
+    @Given("the opened registration page")
     public void theOpenRegistrationPage() {
         theUserOpenTheRegistrationPage();
         theRegistrationPageIsShown();

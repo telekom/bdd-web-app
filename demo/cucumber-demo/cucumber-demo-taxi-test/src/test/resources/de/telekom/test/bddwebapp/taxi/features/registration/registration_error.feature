@@ -5,7 +5,7 @@ Feature: Registration Error
   in order to fix the errors quickly.
 
   Scenario: Successful registration
-    Given the openend registration page
+    Given the opened registration page
     When the user register with
       | firstName | lastName | userName                  | password |
       | Hans      | M\u00fcller   | userName+$RANDOM+@test.de | password |
@@ -13,7 +13,7 @@ Feature: Registration Error
     And the user receives the registered message
 
   Scenario: Registration with application error
-    Given the openend registration page
+    Given the opened registration page
     When the user register with
       | firstName | lastName | userName      | password |
       | Hans      | M\u00fcller   | error@test.de | password |
