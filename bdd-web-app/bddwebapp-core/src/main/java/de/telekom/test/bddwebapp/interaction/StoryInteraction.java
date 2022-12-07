@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class StoryInteraction extends FlatInteraction {
 
+    public static final String BDDWEBAPP_VARIANT = "BDDWEBAPP_VARIANT";
+
     @Setter
     private ScenarioInteraction scenarioInteraction;
 

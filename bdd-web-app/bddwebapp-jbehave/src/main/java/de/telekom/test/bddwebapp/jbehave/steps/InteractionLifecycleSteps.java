@@ -27,6 +27,7 @@ public class InteractionLifecycleSteps {
     @BeforeStory
     public void beforeStory() {
         storyInteraction.startInteraction();
+        storyInteraction.remember(StoryInteraction.BDDWEBAPP_VARIANT, "jbehave");
     }
 
     @BeforeScenario(uponType = ScenarioType.NORMAL)

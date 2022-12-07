@@ -51,18 +51,27 @@ public abstract class SeleniumSteps extends ApiSteps {
         try {
             Constructor<T> constructor = expectedPage.getConstructor(WebDriver.class);
             page = constructor.newInstance(driver);
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
         initElements(driver, page);
         page.checkPage();
+        scenarioInteraction.remember(CURRENT_PAGE, page);
         storyInteraction.remember(CURRENT_PAGE, page);
         log.info("Created page object for class " + expectedPage);
         return page;
     }
 
     protected <T extends Page> T getCurrentPage() {
-        return storyInteraction.recall(CURRENT_PAGE);
+        T page = scenarioInteraction.recall(CURRENT_PAGE);
+        if (page == null) {
+            page = storyInteraction.recall(CURRENT_PAGE);
+            if(page != null && "cucumber".contains(storyInteraction.recall(StoryInteraction.BDDWEBAPP_VARIANT))){
+                log.warn("Create the page {} in the current scenario and not in the scenario before to achieve independent scenarios!", page.getClass());
+            }
+        }
+        return page;
     }
 
     protected String getUrlWithHost(String hostIncludingPort, String path) {

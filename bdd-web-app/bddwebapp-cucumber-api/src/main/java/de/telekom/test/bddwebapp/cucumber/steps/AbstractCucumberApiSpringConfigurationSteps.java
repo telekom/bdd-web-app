@@ -59,6 +59,7 @@ public abstract class AbstractCucumberApiSpringConfigurationSteps extends ApiSte
         if (currentFeature.isBeforeFeature()) {
             log.info("Reset story interaction");
             storyInteraction.startInteraction();
+            storyInteraction.remember(StoryInteraction.BDDWEBAPP_VARIANT, "cucumber");
         }
     }
 
