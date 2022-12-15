@@ -4,7 +4,6 @@ import de.telekom.test.bddwebapp.frontend.lifecycle.WebDriverConfiguration;
 import de.telekom.test.bddwebapp.jbehave.steps.RestartBrowserBeforeScenario;
 import de.telekom.test.bddwebapp.jbehave.stories.config.AlternativeWebDriverConfiguration;
 import org.jbehave.core.model.Meta;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -28,8 +27,11 @@ public class CurrentStory {
     private final ThreadLocal<String> storyPath = new ThreadLocal<>();
     private final ThreadLocal<Meta> storyMetaData = new ThreadLocal<>();
 
-    @Autowired
-    private CustomizingStories customizingStories;
+    private final CustomizingStories customizingStories;
+
+    public CurrentStory(CustomizingStories customizingStories) {
+        this.customizingStories = customizingStories;
+    }
 
     public String getStoryPath() {
         return storyPath.get();

@@ -2,7 +2,6 @@ package de.telekom.test.bddwebapp.taxi.customizing.stories.nojs;
 
 import de.telekom.test.bddwebapp.jbehave.stories.config.AlternativeWebDriverConfiguration;
 import de.telekom.test.bddwebapp.taxi.customizing.config.AbstractCustomizingStory;
-import de.telekom.test.bddwebapp.taxi.customizing.config.webdriver.NoJsWebDriverConfiguration;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}

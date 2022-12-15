@@ -58,7 +58,7 @@ public class Translator {
             if (matchFound) {
                 String description = storyAsText.substring(matcher.start() + 11, matcher.end() - 1);
 
-                Feature feature = new Feature(noComments(), translate(story.getMeta()), "Feature", story.getDescription().asString(), description.toString(), 1, "");
+                Feature feature = new Feature(noComments(), translate(story.getMeta()), "Feature", story.getDescription().asString(), description, 1, "");
                 featureWrapper.setFeature(feature);
             }
         }

@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.testdata.controller.vo;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}

@@ -36,7 +36,7 @@ public class WebDriverLifecycleSteps {
     }
 
     public boolean isUpdateDriver() {
-        String updateDriver = System.getProperty("updateDriver");
+        var updateDriver = System.getProperty("updateDriver");
         return !"false".equalsIgnoreCase(updateDriver);
     }
 

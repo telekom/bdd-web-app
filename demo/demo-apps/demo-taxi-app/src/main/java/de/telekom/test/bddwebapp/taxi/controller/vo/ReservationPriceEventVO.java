@@ -1,7 +1,5 @@
 package de.telekom.test.bddwebapp.taxi.controller.vo;
 
-import lombok.Data;
-
 import java.util.List;
 
 /**

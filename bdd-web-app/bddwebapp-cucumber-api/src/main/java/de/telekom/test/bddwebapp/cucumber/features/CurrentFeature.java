@@ -3,7 +3,6 @@ package de.telekom.test.bddwebapp.cucumber.features;
 import io.cucumber.java.Scenario;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,8 +25,11 @@ public class CurrentFeature {
     @Getter
     private Integer testCaseCountCurrentFeature = 0;
 
-    @Autowired
-    private CustomizingFeatures customizingFeatures;
+    private final CustomizingFeatures customizingFeatures;
+
+    public CurrentFeature(CustomizingFeatures customizingFeatures) {
+        this.customizingFeatures = customizingFeatures;
+    }
 
     public boolean isRestartBrowserBeforeScenario() {
         return isRestartBrowserBeforeScenarioForAllStories() || isRestartBrowserBeforeScenarioForCurrentStory();

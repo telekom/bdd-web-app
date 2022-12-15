@@ -1,8 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.pages;
 
 import de.telekom.test.bddwebapp.frontend.page.JQueryPage;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -122,14 +120,7 @@ public class ReservationPage extends JQueryPage {
                 && currentUrl.contains("earliestStartTime") && currentUrl.contains("latestStartTime");
     }
 
-    @AllArgsConstructor
-    @Getter
-    public static class ReservationPrice {
-
-        private final String startTimeAndEndTime;
-        private final String passengers;
-        private final String price;
-
+    public record ReservationPrice(String startTimeAndEndTime, String passengers, String price) {
     }
 
 }

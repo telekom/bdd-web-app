@@ -9,7 +9,6 @@
         <version>3.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.telekom.test</groupId>
     <artifactId>demo-taxi-app</artifactId>
     <version>3.0-SNAPSHOT</version>
 

@@ -19,10 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Steps
 public class InteractionLifecycleSteps {
 
+    protected final ScenarioInteraction scenarioInteraction;
+    protected final StoryInteraction storyInteraction;
+
     @Autowired
-    protected ScenarioInteraction scenarioInteraction;
-    @Autowired
-    protected StoryInteraction storyInteraction;
+    public InteractionLifecycleSteps(ScenarioInteraction scenarioInteraction, StoryInteraction storyInteraction) {
+        this.scenarioInteraction = scenarioInteraction;
+        this.storyInteraction = storyInteraction;
+    }
 
     @BeforeStory
     public void beforeStory() {

@@ -6,7 +6,6 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingInt;
 
@@ -31,7 +30,7 @@ public interface ScannedStepsFactory {
         var selectedSteps = new ArrayList<>();
         var stepsMatchingTestLevel = getApplicationContext().getBeansWithAnnotation(Steps.class).values().stream()
                 .filter(step -> step.getClass().getAnnotation(Steps.class).testLevel() <= testLevel)
-                .collect(Collectors.toList());
+                .toList();
         stepsMatchingTestLevel.forEach(currentStep -> stepsMatchingTestLevel.stream()
                 .filter(step -> currentStep.getClass().isAssignableFrom(step.getClass()) || step.getClass().isAssignableFrom(currentStep.getClass()))
                 .max(comparingInt(step -> step.getClass().getAnnotation(Steps.class).testLevel()))

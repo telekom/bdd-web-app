@@ -18,8 +18,5 @@ public class GherkinWriter {
     public void write(FeatureWrapper gherkin) {
         Formatter formatter = new PrettyFormatter(writer, true, false);
         gherkin.replay(formatter);
-
-        //formatter.eof();
-        //formatter.close();
     }
 }

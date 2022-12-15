@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 
@@ -31,8 +32,7 @@ public class WebDriverWrapper {
 
     public static Class<? extends WebDriverConfiguration> DEFAULT_WEB_DRIVER_CONFIGURATION = UsefulWebDriverConfiguration.class;
 
-    @Autowired
-    private List<WebDriverConfiguration> webDriverConfigurations;
+    private final List<WebDriverConfiguration> webDriverConfigurations;
 
     @Getter
     @Setter
@@ -40,6 +40,11 @@ public class WebDriverWrapper {
 
     @Setter
     private WebDriver driver;
+
+    @Autowired
+    public WebDriverWrapper(List<WebDriverConfiguration> webDriverConfigurations) {
+        this.webDriverConfigurations = webDriverConfigurations;
+    }
 
     public WebDriver getDriver() {
         if (isClosed()) {
@@ -51,6 +56,8 @@ public class WebDriverWrapper {
     public WebDriverConfiguration getCurrentWebDriverConfiguration() {
         return ofNullable(alternativeWebDriverConfiguration)
                 .map(this::getAlternativeWebDriverConfiguration)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .orElse(getDefaultWebDriverConfiguration());
     }
 
@@ -58,10 +65,10 @@ public class WebDriverWrapper {
         this.alternativeWebDriverConfiguration = null;
     }
 
-    public WebDriverConfiguration getAlternativeWebDriverConfiguration(Class<? extends WebDriverConfiguration> alternativeWebDriverConfigurationClass) {
+    public Optional<WebDriverConfiguration> getAlternativeWebDriverConfiguration(Class<? extends WebDriverConfiguration> alternativeWebDriverConfigurationClass) {
         return webDriverConfigurations.stream()
                 .filter(webDriverConfiguration -> webDriverConfiguration.getClass().equals(alternativeWebDriverConfigurationClass))
-                .findFirst().get();
+                .findFirst();
     }
 
     public WebDriverConfiguration getDefaultWebDriverConfiguration() {
@@ -98,8 +105,8 @@ public class WebDriverWrapper {
                 log.error("Can not create screenshot because webdriver is null!");
                 return null;
             }
-            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            File destFile = new File(path);
+            var screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            var destFile = new File(path);
             FileUtils.copyFile(screenshot, destFile);
             return destFile.getAbsolutePath();
         } catch (Exception e) {

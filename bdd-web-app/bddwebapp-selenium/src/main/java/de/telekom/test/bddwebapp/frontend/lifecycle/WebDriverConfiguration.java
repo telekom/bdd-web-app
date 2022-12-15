@@ -78,7 +78,7 @@ public interface WebDriverConfiguration {
         return StringUtils.isNotBlank(getGridURL());
     }
 
-    private Optional<AbstractDriverOptions> getBrowserOptionsForRemoteDriver(DesiredCapabilities capabilities) {
+    private Optional<AbstractDriverOptions<? extends AbstractDriverOptions>> getBrowserOptionsForRemoteDriver(DesiredCapabilities capabilities) {
         String browser = getBrowser();
         return switch (browser.toLowerCase()) {
             case "firefox" -> Optional.of(firefoxOptions(capabilities));

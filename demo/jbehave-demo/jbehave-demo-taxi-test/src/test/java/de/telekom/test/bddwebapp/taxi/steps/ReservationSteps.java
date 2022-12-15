@@ -110,8 +110,8 @@ public class ReservationSteps extends AbstractTaxiSteps {
         ReservationPage reservationPage = getCurrentPage();
         var reservationPrice = reservationPage.getPriceBetweenStartAndEndTime(startTime, endTime);
         assertTrue(reservationPrice.isPresent());
-        assertThat(reservationPrice.get().getPrice(), containsString(price));
-        assertThat(reservationPrice.get().getPassengers(), is(passengers));
+        assertThat(reservationPrice.get().price(), containsString(price));
+        assertThat(reservationPrice.get().passengers(), is(passengers));
     }
 
 }

@@ -3,7 +3,6 @@ package de.telekom.test.bddwebapp.cucumber.steps;
 import de.telekom.test.bddwebapp.interaction.InteractionParameterConverter;
 import io.cucumber.datatable.DataTable;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -24,8 +23,11 @@ import java.util.Map;
 @Slf4j
 public class DataTableInteractionParameterConverter {
 
-    @Autowired
-    private InteractionParameterConverter interactionParameterConverter;
+    private final InteractionParameterConverter interactionParameterConverter;
+
+    public DataTableInteractionParameterConverter(InteractionParameterConverter interactionParameterConverter) {
+        this.interactionParameterConverter = interactionParameterConverter;
+    }
 
     public List<Map<String, Object>> getRowsWithInteractionKey(DataTable testData) {
         var rows = testData.asMaps();
