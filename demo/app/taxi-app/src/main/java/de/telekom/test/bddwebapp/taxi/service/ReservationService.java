@@ -1,23 +1,25 @@
 package de.telekom.test.bddwebapp.taxi.service;
 
 import de.telekom.test.bddwebapp.taxi.controller.vo.ReservationVO;
-import de.telekom.test.bddwebapp.taxi.domain.Reservation;
-import de.telekom.test.bddwebapp.taxi.domain.User;
 import de.telekom.test.bddwebapp.taxi.repositories.ReservationRepository;
 import de.telekom.test.bddwebapp.taxi.repositories.UserRepository;
+import de.telekom.test.bddwebapp.taxi.repositories.domain.Registration;
+import de.telekom.test.bddwebapp.taxi.repositories.domain.Reservation;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.Optional;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2023 Daniel Keiss, Deutsche Telekom IT GmbH
+ * Copyright (c) 2022 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -27,6 +29,7 @@ public class ReservationService {
 
     private final UserRepository userRepository;
     private final ReservationRepository reservationRepository;
+    private final ModelMapper modelMapper = new ModelMapper();
 
     @Transactional
     public void saveReservation(String username, ReservationVO reservationVO) {
@@ -42,19 +45,15 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
-    public ReservationVO getReservation(String username) {
+    public Optional<ReservationVO> getReservation(String username) {
         var user = getUser(username);
         var reservations = reservationRepository.findByUser(user);
-        if (reservations.isEmpty()) {
-            return null;
-        }
-        var reservation = reservations.get(0);
-        var reservationVO = new ReservationVO();
-        copyProperties(reservation, reservationVO);
-        return reservationVO;
+        return reservations.stream()
+                .map(reservation -> modelMapper.map(reservation, ReservationVO.class))
+                .findFirst();
     }
 
-    private User getUser(String username) {
+    private Registration getUser(String username) {
         return userRepository.getByUsername(username);
     }
 

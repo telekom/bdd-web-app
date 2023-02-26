@@ -1,16 +1,14 @@
-package de.telekom.test.bddwebapp.taxi.domain;
+package de.telekom.test.bddwebapp.taxi.repositories.domain;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2023 Daniel Keiss, Deutsche Telekom IT GmbH
+ * Copyright (c) 2022 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -18,6 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Reservation {
 
@@ -27,7 +26,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn
-    private User user;
+    private Registration user;
 
     private String date;
 
@@ -43,16 +42,4 @@ public class Reservation {
 
     private Date modificationDate;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Reservation that = (Reservation) o;
-        return reservationId != null && Objects.equals(reservationId, that.reservationId);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

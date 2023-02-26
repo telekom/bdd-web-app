@@ -1,8 +1,8 @@
 package de.telekom.test.bddwebapp.taxi.service;
 
 import de.telekom.test.bddwebapp.taxi.controller.vo.RegistrationVO;
-import de.telekom.test.bddwebapp.taxi.domain.User;
 import de.telekom.test.bddwebapp.taxi.repositories.UserRepository;
+import de.telekom.test.bddwebapp.taxi.repositories.domain.Registration;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
@@ -18,7 +18,7 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2023 Daniel Keiss, Deutsche Telekom IT GmbH
+ * Copyright (c) 2022 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -33,7 +33,7 @@ public class UserService {
         if ("error@test.de".equals(registration.getUsername())) {
             throw new RuntimeException("unexpected error");
         }
-        var user = new User();
+        var user = new Registration();
         copyProperties(registration, user);
         user.setPassword(sha3hash(registration.getPassword()));
         user.setCreationDate(new Date());
@@ -45,11 +45,11 @@ public class UserService {
         return user != null && checkPassword(password, user);
     }
 
-    private User findUserByUsername(String username) {
+    private Registration findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    private boolean checkPassword(String password, User user) {
+    private boolean checkPassword(String password, Registration user) {
         if (!StringUtils.hasText(user.getPassword()) || !StringUtils.hasText(password)) {
             return false;
         }
