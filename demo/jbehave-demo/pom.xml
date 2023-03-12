@@ -18,11 +18,9 @@
 
     <modules>
         <module>jbehave-demo-taxi-test</module>
-        <module>jbehave-demo-taxi-test-ger</module>
         <module>jbehave-demo-taxi-test-testlevel</module>
         <module>jbehave-demo-taxi-test-customizing</module>
         <module>jbehave-demo-taxi-test-multithreading</module>
-        <module>jbehave-demo-taxi-test-docker</module>
         <module>jbehave-demo-taxi-test-selenium-grid</module>
         <module>jbehave-demo-taxi-test-htmlunit</module>
     </modules>

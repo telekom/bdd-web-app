@@ -22,9 +22,8 @@
 
     <properties>
         <!-- Framework dependencies -->
-        <jbehave.version>4.8.3</jbehave.version>
+        <jbehave.version>5.1</jbehave.version>
         <jbehave-site-resources.version>3.5</jbehave-site-resources.version>
-        <jbehave-junit-runner>2.3.2</jbehave-junit-runner>
 
         <!-- Unit test dependencies -->
         <spock-core.version>2.3-groovy-4.0</spock-core.version>
@@ -77,11 +76,6 @@
                 <artifactId>jbehave-site-resources</artifactId>
                 <version>${jbehave-site-resources.version}</version>
                 <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>com.github.valfirst</groupId>
-                <artifactId>jbehave-junit-runner</artifactId>
-                <version>${jbehave-junit-runner}</version>
             </dependency>
 
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -150,10 +144,6 @@
             <groupId>org.jbehave.site</groupId>
             <artifactId>jbehave-site-resources</artifactId>
             <type>zip</type>
-        </dependency>
-        <dependency>
-            <groupId>com.github.valfirst</groupId>
-            <artifactId>jbehave-junit-runner</artifactId>
         </dependency>
 
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
