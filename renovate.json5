@@ -1,0 +1,101 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'github>renovatebot/.github',
+    'default:pinDigestsDisabled',
+    ':automergeBranch',
+  ],
+  hostRules: [
+    {
+      hostType: 'maven',
+      matchHost: 'https://artifactory.devops.telekom.de/artifactory/',
+      username: 'process.env.ARTIFACTORY_USER',
+      password: 'process.env.ARTIFACTORY_PASSWORD',
+    },
+  ],
+  packageRules: [
+    {
+      description: 'Use docker hub mirror instead of the real thing to prevent running into rate limits.',
+      matchDatasources: [
+        'docker',
+      ],
+      registryUrls: [
+        'dockerhub.devops.telekom.de',
+      ],
+    },
+    {
+      description: 'Trigger breaking release for major updates',
+      matchPackageNames: [
+        'docker',
+        'renovate/renovate',
+        'renovate/node',
+      ],
+      matchUpdateTypes: [
+        'major',
+      ],
+      semanticCommitType: 'feat',
+      commitMessageSuffix: 'BREAKING CHANGE: Major update',
+    },
+    {
+      description: 'Trigger feature release for minor updates',
+      matchPackageNames: [
+        'docker',
+        'renovate/renovate',
+        'renovate/node',
+      ],
+      matchUpdateTypes: [
+        'minor',
+      ],
+      semanticCommitType: 'feat',
+    },
+    {
+      description: 'Trigger fix release for patch updates',
+      matchPackageNames: [
+        'docker',
+        'renovate/renovate',
+        'renovate/node',
+      ],
+      matchUpdateTypes: [
+        'patch',
+        'digest',
+      ],
+      semanticCommitType: 'fix',
+    },
+    {
+      description: 'Allow updates after 3 days (exclude renovate)',
+      excludePackageNames: [
+        'renovate/renovate',
+      ],
+      separateMinorPatch: true,
+      stabilityDays: 3,
+    },
+    {
+      description: 'Allow renovate updates after 1 day',
+      matchPackageNames: [
+        'renovate/renovate',
+      ],
+      stabilityDays: 1,
+    },
+    {
+      description: 'Schedule digest updates daily',
+      matchUpdateTypes: [
+        'digest',
+      ],
+      extends: [
+        'schedule:daily',
+      ],
+    },
+    {
+      matchPackageNames: [
+        'renovate/node',
+      ],
+      versioning: 'node',
+    },
+  ],
+  gitlabci: {
+    fileMatch: [
+      '\\.gitlab-ci\\.yml$',
+    ],
+    pinDigests: true,
+  },
+}

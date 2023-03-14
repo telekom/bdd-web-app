@@ -1,0 +1,75 @@
+.default-maven-build:
+  extends: .runner-build
+  stage: build
+  image: dockerhub.devops.telekom.de/maven:3.9.0-jdk-17-slim
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - .m2
+    policy: pull-push
+  script:
+    - mvn ${MAVEN_CLI_OPTS} -pl ${MAVEN_MODULE} -DskipTests -am install
+  artifacts:
+    paths:
+      - ${ARTIFACT_PATH}
+    expire_in: 1 day
+
+.web-rest-module-maven-build:
+  extends: .default-maven-build
+  variables:
+    MAVEN_MODULE: de.telekom.pbs:pbs-${WEB_REST_MODULE}-web-rest
+    ARTIFACT_PATH: pbs-${WEB_REST_MODULE}/pbs-${WEB_REST_MODULE}-web-rest/target/pbs-${WEB_REST_MODULE}-web-rest.jar
+
+maven-build-pbs-payment-web-rest:
+  extends: .web-rest-module-maven-build
+  variables:
+    WEB_REST_MODULE: "payment"
+
+maven-build-pbs-couponing-web-rest:
+  extends: .web-rest-module-maven-build
+  variables:
+    WEB_REST_MODULE: "couponing"
+
+maven-build-pbs-settlement-web-rest:
+  extends: .web-rest-module-maven-build
+  variables:
+    WEB_REST_MODULE: "settlement"
+
+maven-build-pbs-settlement-documents-web-rest:
+  extends: .default-maven-build
+  variables:
+    MAVEN_MODULE: "de.telekom.pbs:pbs-settlement-documents-web-rest"
+    ARTIFACT_PATH: "pbs-settlement/pbs-settlement-documents-web-rest/target/pbs-settlement-documents-web-rest.jar"
+
+maven-build-pbs-batch-scheduler-web-rest:
+  extends: .web-rest-module-maven-build
+  variables:
+    WEB_REST_MODULE: "batch-scheduler"
+
+maven-build-pbs-compatibility-web-rest:
+  extends: .web-rest-module-maven-build
+  variables:
+    WEB_REST_MODULE: "compatibility"
+
+maven-build-pbs-compatibility-web-soap:
+  extends: .default-maven-build
+  variables:
+    MAVEN_MODULE: "de.telekom.pbs:pbs-compatibility-web-soap"
+    ARTIFACT_PATH: "pbs-compatibility/pbs-compatibility-web-soap/target/pbs-compatibility-web-soap.jar"
+
+maven-build-pbs-checkout-web-rest:
+  extends: .web-rest-module-maven-build
+  variables:
+    WEB_REST_MODULE: "checkout"
+
+maven-build-pbs-checkout-web-ui:
+  extends: .default-maven-build
+  variables:
+    MAVEN_MODULE: "de.telekom.pbs:pbs-checkout-web-ui"
+    ARTIFACT_PATH: "pbs-checkout/pbs-checkout-web-ui/target/pbs-checkout-web-ui.jar"
+
+maven-build-pbs-mapi-adapter:
+  extends: .default-maven-build
+  variables:
+    MAVEN_MODULE: de.telekom.pbs:pbs-mapi-adapter
+    ARTIFACT_PATH: pbs-mapi-adapter/target/pbs-mapi-adapter.jar

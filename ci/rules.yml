@@ -1,0 +1,10 @@
+.rules:
+  default:
+    - if: '$PIPELINE_MODE == "default"'
+  default-manual:
+    - if: '$PIPELINE_MODE == "default"'
+      when: manual
+  deploy:
+    - if: '$PIPELINE_MODE == "default" && $FLAG_DEPLOY'
+  scan:
+    - if: '$PIPELINE_MODE == "scan"'

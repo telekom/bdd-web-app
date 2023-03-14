@@ -1,0 +1,123 @@
+.kaniko-image-build-template:
+  extends: .runner-package
+  image:
+    name: artifactory.devops.telekom.de/gcr.io/kaniko-project/executor:v1.6.0-debug
+    entrypoint: [ "" ]
+  script:
+    - /kaniko/executor
+      --registry-mirror dockerhub.devops.telekom.de
+      --context $CI_PROJECT_DIR
+      --build-arg BUILD_NO
+      --build-arg GIT_BRANCH
+      --build-arg GIT_HASH
+      --build-arg IMAGE_TAG
+      --build-arg IMAGE
+      --dockerfile $DOCKER_FILE
+      --destination $DESTINATION
+      --context $ARTIFACT_PATH
+
+.web-rest-module-docker-build:
+  extends: .kaniko-image-build-template
+  stage: package
+  variables:
+    DOCKER_FILE: Dockerfile
+    ARTIFACT_PATH: pbs-${WEB_REST_MODULE}/pbs-${WEB_REST_MODULE}-web-rest
+    IMAGE_NAME: pbs-${WEB_REST_MODULE}-web-rest
+    DESTINATION: ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${IMAGE_TAG}
+
+docker-build-pbs-config:
+  extends: .kaniko-image-build-template
+  stage: package
+  variables:
+    DOCKER_FILE: docker/pbs-config/Dockerfile
+    ARTIFACT_PATH: docker/pbs-config
+    IMAGE_NAME: pbs-config
+    DESTINATION: ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${IMAGE_TAG}
+  dependencies: []
+  needs: [unit-tests]
+
+docker-build-pbs-payment-web-rest:
+  extends: .web-rest-module-docker-build
+  variables:
+    WEB_REST_MODULE: "payment"
+  dependencies: [maven-build-pbs-payment-web-rest]
+  needs: [maven-build-pbs-payment-web-rest]
+
+docker-build-pbs-couponing-web-rest:
+  extends: .web-rest-module-docker-build
+  variables:
+    WEB_REST_MODULE: "couponing"
+  dependencies: [maven-build-pbs-couponing-web-rest]
+  needs: [maven-build-pbs-couponing-web-rest]
+
+docker-build-pbs-settlement-web-rest:
+  extends: .web-rest-module-docker-build
+  variables:
+    WEB_REST_MODULE: "settlement"
+  dependencies: [maven-build-pbs-settlement-web-rest]
+  needs: [maven-build-pbs-settlement-web-rest]
+
+docker-build-pbs-settlement-documents-web-rest:
+  extends: .kaniko-image-build-template
+  stage: package
+  variables:
+    DOCKER_FILE: Dockerfile
+    ARTIFACT_PATH: pbs-settlement/pbs-settlement-documents-web-rest
+    IMAGE_NAME: pbs-settlement-documents-web-rest
+    DESTINATION: ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${IMAGE_TAG}
+  dependencies: [maven-build-pbs-settlement-documents-web-rest]
+  needs: [maven-build-pbs-settlement-documents-web-rest]
+
+docker-build-pbs-batch-scheduler-web-rest:
+  extends: .web-rest-module-docker-build
+  variables:
+    WEB_REST_MODULE: "batch-scheduler"
+  dependencies: [maven-build-pbs-batch-scheduler-web-rest]
+  needs: [maven-build-pbs-batch-scheduler-web-rest]
+
+docker-build-pbs-compatibility-web-rest:
+  extends: .web-rest-module-docker-build
+  variables:
+    WEB_REST_MODULE: "compatibility"
+  dependencies: [maven-build-pbs-compatibility-web-rest]
+  needs: [maven-build-pbs-compatibility-web-rest]
+
+docker-build-pbs-compatibility-web-soap:
+  extends: .kaniko-image-build-template
+  stage: package
+  variables:
+    DOCKER_FILE: Dockerfile
+    ARTIFACT_PATH: pbs-compatibility/pbs-compatibility-web-soap
+    IMAGE_NAME: pbs-compatibility-web-soap
+    DESTINATION: ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${IMAGE_TAG}
+  dependencies: [maven-build-pbs-compatibility-web-soap]
+  needs: [maven-build-pbs-compatibility-web-soap]
+
+docker-build-pbs-checkout-web-rest:
+  extends: .web-rest-module-docker-build
+  variables:
+    WEB_REST_MODULE: "checkout"
+  dependencies: [maven-build-pbs-checkout-web-rest]
+  needs: [maven-build-pbs-checkout-web-rest]
+
+docker-build-pbs-checkout-web-ui:
+  extends: .kaniko-image-build-template
+  stage: package
+  variables:
+    DOCKER_FILE: Dockerfile
+    ARTIFACT_PATH: pbs-checkout/pbs-checkout-web-ui
+    IMAGE_NAME: pbs-checkout-web-ui
+    DESTINATION: ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${IMAGE_TAG}
+  dependencies: [maven-build-pbs-checkout-web-ui]
+  needs: [maven-build-pbs-checkout-web-ui]
+
+docker-build-pbs-mapi-adapter:
+  extends: .kaniko-image-build-template
+  stage: package
+  variables:
+    DOCKER_FILE: Dockerfile
+    ARTIFACT_PATH: pbs-mapi-adapter
+    IMAGE_NAME: pbs-mapi-adapter
+    DESTINATION: ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${IMAGE_TAG}
+  dependencies: [ maven-build-pbs-mapi-adapter ]
+  needs: [ maven-build-pbs-mapi-adapter ]

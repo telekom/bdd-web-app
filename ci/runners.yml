@@ -1,0 +1,38 @@
+.runner-test:
+  rules:
+    - !reference [.rules, default]
+  tags:
+    - otc_run_docker_m
+
+.runner-build:
+  rules:
+    - !reference [.rules, default]
+  tags:
+    - run_docker
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+
+.runner-package:
+  rules:
+    - !reference [.rules, default]
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+
+.runner-version:
+  rules:
+    - !reference [.rules, default]
+
+.runner-deploy:
+  rules:
+    - !reference [.rules, deploy]
+    - !reference [.rules, default-manual]
+
+.runner-tag-release:
+  rules:
+    - !reference [.rules, default-manual]
