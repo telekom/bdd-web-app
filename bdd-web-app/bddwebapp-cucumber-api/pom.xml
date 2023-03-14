@@ -22,7 +22,7 @@
 
     <properties>
         <!-- Framework dependencies -->
-        <cucumber.version>7.9.0</cucumber.version>
+        <cucumber.version>7.11.1</cucumber.version>
     </properties>
 
     <dependencyManagement>

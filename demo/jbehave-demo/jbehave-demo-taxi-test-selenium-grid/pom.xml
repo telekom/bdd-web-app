@@ -12,9 +12,9 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <bdd-web-app.version>3.0-SNAPSHOT</bdd-web-app.version>
-        <jbehave.version>4.8.3</jbehave.version>
+        <jbehave.version>5.1</jbehave.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     </properties>
 
     <build>
@@ -22,7 +22,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>17</release>
                 </configuration>

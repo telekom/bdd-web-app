@@ -26,8 +26,8 @@
         <jbehave-site-resources.version>3.5</jbehave-site-resources.version>
 
         <!-- Unit test dependencies -->
-        <spock-core.version>2.3-groovy-4.0</spock-core.version>
-        <byte-buddy.version>1.12.18</byte-buddy.version>
+        <spock-core.version>2.4-M1-groovy-4.0</spock-core.version>
+        <byte-buddy.version>1.14.2</byte-buddy.version>
         <objenesis.version>3.3</objenesis.version>
     </properties>
 

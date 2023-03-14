@@ -31,6 +31,7 @@ class SeleniumStepsTest extends Specification {
         seleniumSteps.webDriverWrapper.getDriver() >> Mock(WebDriver)
         seleniumSteps.webDriverWrapper.getDriver().getCurrentUrl() >> "https://github.com/telekom/bdd-web-app?key=value"
         seleniumSteps.storyInteraction = Mock(StoryInteraction)
+        seleniumSteps.scenarioInteraction = Mock(ScenarioInteraction)
         AnyPage.URL = url
         when:
         def page = seleniumSteps.createExpectedPage(AnyPage)
@@ -67,6 +68,7 @@ class SeleniumStepsTest extends Specification {
 
     def "get current page"() {
         given:
+        seleniumSteps.scenarioInteraction = Mock(ScenarioInteraction)
         seleniumSteps.storyInteraction = Mock(StoryInteraction)
         seleniumSteps.storyInteraction.recall("CURRENT_PAGE") >> new AnyPage()
         when:

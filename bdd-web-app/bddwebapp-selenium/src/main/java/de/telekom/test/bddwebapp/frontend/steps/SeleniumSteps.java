@@ -67,7 +67,8 @@ public abstract class SeleniumSteps extends ApiSteps {
         T page = scenarioInteraction.recall(CURRENT_PAGE);
         if (page == null) {
             page = storyInteraction.recall(CURRENT_PAGE);
-            if(page != null && "cucumber".contains(storyInteraction.recall(StoryInteraction.BDDWEBAPP_VARIANT))){
+            String bddVariant = storyInteraction.recall(StoryInteraction.BDDWEBAPP_VARIANT);
+            if(page != null && bddVariant != null && "cucumber".contains(bddVariant)){
                 log.warn("Create the page {} in the current scenario and not in the scenario before to achieve independent scenarios!", page.getClass());
             }
         }

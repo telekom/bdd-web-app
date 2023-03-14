@@ -22,17 +22,17 @@
 
     <properties>
         <!-- Framework dependencies -->
-        <selenium.version>4.6.0</selenium.version>
-        <webdrivermanager.version>5.3.1</webdrivermanager.version>
+        <selenium.version>4.8.1</selenium.version>
+        <webdrivermanager.version>5.3.2</webdrivermanager.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
 
         <!-- Unit test dependencies -->
-        <spock-core.version>2.3-groovy-4.0</spock-core.version>
-        <byte-buddy.version>1.12.18</byte-buddy.version>
+        <spock-core.version>2.4-M1-groovy-4.0</spock-core.version>
+        <byte-buddy.version>1.14.2</byte-buddy.version>
         <objenesis.version>3.3</objenesis.version>
 
         <!-- Optional dependencies -->
-        <htmlunit-driver.version>4.6.0</htmlunit-driver.version>
+        <htmlunit-driver.version>4.8.0</htmlunit-driver.version>
     </properties>
 
     <dependencyManagement>
