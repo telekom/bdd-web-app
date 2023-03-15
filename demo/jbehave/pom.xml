@@ -18,11 +18,9 @@
 
     <modules>
         <module>taxi-test</module>
-        <module>taxi-test-ger</module>
         <module>taxi-test-testlevel</module>
         <module>taxi-test-customizing</module>
         <module>taxi-test-multithreading</module>
-        <module>taxi-test-docker</module>
         <module>taxi-test-selenium-grid</module>
         <module>taxi-test-htmlunit</module>
     </modules>
