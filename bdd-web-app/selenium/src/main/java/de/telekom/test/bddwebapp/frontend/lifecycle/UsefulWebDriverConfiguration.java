@@ -46,6 +46,7 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
             chromeOptions.setHeadless(true);
             chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         }
+        chromeOptions.addArguments("--remote-allow-origins=*");
         capabilities.setCapability("disable-restore-session-state", true);
         capabilities.setCapability("disable-application-cache", true);
         capabilities.setCapability("useAutomationExtension", false);
