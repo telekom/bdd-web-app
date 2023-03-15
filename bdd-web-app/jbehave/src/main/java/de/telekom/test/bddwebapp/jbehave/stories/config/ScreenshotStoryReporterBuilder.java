@@ -2,7 +2,6 @@ package de.telekom.test.bddwebapp.jbehave.stories.config;
 
 import de.telekom.test.bddwebapp.jbehave.report.ScreenshotReportForm;
 import org.jbehave.core.io.CodeLocations;
-import org.jbehave.core.reporters.CrossReference;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.springframework.context.ApplicationContext;
@@ -23,8 +22,7 @@ public interface ScreenshotStoryReporterBuilder {
         return new StoryReporterBuilder()
                 .withFormats(Format.STATS, screenshotReportForm)
                 .withCodeLocation(CodeLocations.codeLocationFromClass(getClass()))
-                .withFailureTrace(true)
-                .withCrossReference(new CrossReference());
+                .withFailureTrace(true);
     }
 
     ApplicationContext getApplicationContext();
