@@ -1,8 +1,0 @@
-stages:
-  - test
-  - build
-  - package
-  - version
-  - deploy
-  - tag-release
-  - renovate

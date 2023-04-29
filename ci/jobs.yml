@@ -1,8 +1,0 @@
-include:
-  - local: 'ci/jobs/test.yml'
-  - local: 'ci/jobs/build.yml'
-  - local: 'ci/jobs/package.yml'
-  - local: 'ci/jobs/version.yml'
-  - local: 'ci/jobs/deploy.yml'
-  - local: 'ci/jobs/tag-release.yml'
-  - local: 'ci/jobs/renovate.yml'
