@@ -31,7 +31,7 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
         var firefoxOptions = new FirefoxOptions();
         if (isHeadless()) {
             log.info("Firefox is set to headless mode");
-            firefoxOptions.setHeadless(true);
+            firefoxOptions.addArguments("-headless");
         }
         capabilities.setCapability("overlappingCheckDisabled", true);
         firefoxOptions.merge(capabilities);
@@ -43,8 +43,7 @@ public class UsefulWebDriverConfiguration implements WebDriverConfiguration {
         var chromeOptions = new ChromeOptions();
         if (isHeadless()) {
             log.info("Chrome is set to headless mode");
-            chromeOptions.setHeadless(true);
-            chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+            chromeOptions.addArguments("--no-sandbox", "--disable-dev-shm-usage", "--headless=new");
         }
         chromeOptions.addArguments("--remote-allow-origins=*");
         capabilities.setCapability("disable-restore-session-state", true);
