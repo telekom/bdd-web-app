@@ -29,7 +29,7 @@ import java.util.Optional;
  *
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
  * <p>
- * Copyright (c) 2022 Daniel Keiss, Deutsche Telekom IT GmbH
+ * Copyright (c) 2023 Daniel Keiss, Deutsche Telekom IT GmbH
  * This file is distributed under the conditions of the Apache License, Version 2.0.
  * For details see the file license on the toplevel.
  */
@@ -112,7 +112,7 @@ public interface WebDriverConfiguration {
         var firefoxOptions = new FirefoxOptions();
         if (isHeadless()) {
             getLogger().info("Firefox is set to headless mode");
-            firefoxOptions.setHeadless(true);
+            firefoxOptions.addArguments("-headless");
         }
         firefoxOptions.merge(capabilities);
         return firefoxOptions;
@@ -132,7 +132,7 @@ public interface WebDriverConfiguration {
         var chromeOptions = new ChromeOptions();
         if (isHeadless()) {
             getLogger().info("Chrome is set to headless mode");
-            chromeOptions.setHeadless(true);
+            chromeOptions.addArguments("--headless=new");
         }
         chromeOptions.merge(capabilities);
         return chromeOptions;
