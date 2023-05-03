@@ -94,7 +94,6 @@ public interface WebDriverConfiguration {
 
     default DesiredCapabilities remoteWebDriverOptions(DesiredCapabilities capabilities) {
         var remoteCaps = new DesiredCapabilities();
-        remoteCaps.setJavascriptEnabled(true);
 
         Optional<AbstractDriverOptions> driverOptions = getBrowserOptionsForRemoteDriver(capabilities);
         driverOptions.ifPresentOrElse(remoteCaps::merge, () -> remoteCaps.merge(capabilities));
@@ -115,7 +114,7 @@ public interface WebDriverConfiguration {
         var firefoxOptions = new FirefoxOptions();
         if (isHeadless()) {
             getLogger().info("Firefox is set to headless mode");
-            firefoxOptions.setHeadless(true);
+            firefoxOptions.addArguments("-headless");
         }
         firefoxOptions.merge(capabilities);
         return firefoxOptions;
@@ -135,7 +134,7 @@ public interface WebDriverConfiguration {
         var chromeOptions = new ChromeOptions();
         if (isHeadless()) {
             getLogger().info("Chrome is set to headless mode");
-            chromeOptions.setHeadless(true);
+            chromeOptions.addArguments("--headless=new");
         }
         chromeOptions.merge(capabilities);
         return chromeOptions;
