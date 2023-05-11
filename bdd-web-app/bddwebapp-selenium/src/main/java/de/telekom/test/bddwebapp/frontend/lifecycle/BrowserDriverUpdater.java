@@ -50,12 +50,7 @@ public class BrowserDriverUpdater {
         }
         log.info("Update driver for " + browser);
 
-        var webDriverManager = WebDriverManager.getInstance(driverManagerType);
-        if (isNotBlank(proxyHost) && isNotBlank(proxyPort)) {
-            webDriverManager.proxy(proxyHost + ":" + proxyPort);
-        }
-        webDriverManager.setup();
-
+        WebDriverManager.getInstance(driverManagerType).setup();
         log.info("Updated instrumentalization driver for " + driverManagerType + "(" + browser + ")");
     }
 
