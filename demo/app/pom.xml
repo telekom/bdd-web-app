@@ -6,7 +6,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>bdd-web-app-demo-apps</artifactId>
-    <version>2.6-SNAPSHOT</version>
+    <version>2.6</version>
     <packaging>pom</packaging>
 
     <parent>
