@@ -6,7 +6,7 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>jbehave-demo</artifactId>
-    <version>3.0-SNAPSHOT</version>
+    <version>3.0</version>
     <packaging>pom</packaging>
 
     <name>bdd web-app jbehave tests</name>

@@ -5,13 +5,13 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>jbehave-demo-taxi-test-testlevel</artifactId>
-    <version>3.0-SNAPSHOT</version>
+    <version>3.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
 
-        <bdd-web-app.version>3.0-SNAPSHOT</bdd-web-app.version>
+        <bdd-web-app.version>3.0</bdd-web-app.version>
         <jbehave.version>5.1</jbehave.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
