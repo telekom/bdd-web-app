@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.telekom.test</groupId>
         <artifactId>bdd-web-app</artifactId>
-        <version>3.0</version>
+        <version>3.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>bddwebapp-jbehave</artifactId>
@@ -22,12 +22,12 @@
 
     <properties>
         <!-- Framework dependencies -->
-        <jbehave.version>5.1</jbehave.version>
+        <jbehave.version>5.1.1</jbehave.version>
         <jbehave-site-resources.version>3.5</jbehave-site-resources.version>
 
         <!-- Unit test dependencies -->
         <spock-core.version>2.4-M1-groovy-4.0</spock-core.version>
-        <byte-buddy.version>1.14.4</byte-buddy.version>
+        <byte-buddy.version>1.14.7</byte-buddy.version>
         <objenesis.version>3.3</objenesis.version>
     </properties>
 

@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.telekom.test</groupId>
         <artifactId>bdd-web-app</artifactId>
-        <version>3.0</version>
+        <version>3.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>bddwebapp-selenium</artifactId>
@@ -22,17 +22,17 @@
 
     <properties>
         <!-- Framework dependencies -->
-        <selenium.version>4.9.0</selenium.version>
-        <webdrivermanager.version>5.3.2</webdrivermanager.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <selenium.version>4.11.0</selenium.version>
+        <webdrivermanager.version>5.5.2</webdrivermanager.version>
+        <commons-lang3.version>3.13.0</commons-lang3.version>
 
         <!-- Unit test dependencies -->
         <spock-core.version>2.4-M1-groovy-4.0</spock-core.version>
-        <byte-buddy.version>1.14.4</byte-buddy.version>
+        <byte-buddy.version>1.14.7</byte-buddy.version>
         <objenesis.version>3.3</objenesis.version>
 
         <!-- Optional dependencies -->
-        <htmlunit-driver.version>4.9.0</htmlunit-driver.version>
+        <htmlunit-driver.version>4.11.0</htmlunit-driver.version>
     </properties>
 
     <dependencyManagement>
