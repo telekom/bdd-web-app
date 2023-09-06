@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
+import static org.springframework.util.StringUtils.hasText;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -50,7 +51,7 @@ public class UserService {
     }
 
     private boolean checkPassword(String password, Registration user) {
-        if (!StringUtils.hasText(user.getPassword()) || !StringUtils.hasText(password)) {
+        if (!hasText(user.getPassword()) || !hasText(password)) {
             return false;
         }
         var hash = sha3hash(password);

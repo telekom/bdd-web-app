@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.security.authentication.UsernamePasswordAuthenticationToken.authenticated;
+import static org.springframework.security.authentication.UsernamePasswordAuthenticationToken.unauthenticated;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -31,27 +35,18 @@ public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvi
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        var name = authentication.getName();
-        var password = getPassword(authentication);
-        var grantedAuths = new ArrayList<GrantedAuthority>();
-        grantedAuths.add(ROLE_USER);
-        var passwordAuthenticationToken = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
-        if (!isPasswordValid(name, password)) {
-            passwordAuthenticationToken.setAuthenticated(false);
-            passwordAuthenticationToken.setDetails("username_password_invalid");
+        if (isAuthenticationValid(authentication)) {
+            return authenticated(authentication.getPrincipal(), authentication.getCredentials(), List.of(ROLE_USER));
+        } else {
+            return unauthenticated(authentication.getPrincipal(), authentication.getCredentials());
         }
-        return passwordAuthenticationToken;
     }
 
-    private boolean isPasswordValid(String name, String password) {
-        if (!StringUtils.hasText(password)) {
+    private boolean isAuthenticationValid(Authentication authentication) {
+        if (authentication.getCredentials() == null) {
             return false;
         }
-        return userService.isUsernameAndPasswordValid(name, password);
-    }
-
-    private String getPassword(Authentication authentication) {
-        return authentication.getCredentials() != null ? authentication.getCredentials().toString() : null;
+        return userService.isUsernameAndPasswordValid(authentication.getName(), authentication.getCredentials().toString());
     }
 
     @Override

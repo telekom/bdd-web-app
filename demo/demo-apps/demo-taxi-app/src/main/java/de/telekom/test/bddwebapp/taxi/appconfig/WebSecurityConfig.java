@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -19,22 +21,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class WebSecurityConfig  {
+public class WebSecurityConfig {
 
     private final CollectiveTaxiAuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests()
-                .requestMatchers("/webjars/**").permitAll()
-                .requestMatchers("/css/**").permitAll()
-                .requestMatchers("/js/**").permitAll()
-                .requestMatchers("/registration/**").permitAll()
-                .requestMatchers("/actuator/**").permitAll()
-                .anyRequest().authenticated().and()
-                .formLogin().loginPage("/login").permitAll().and()
-                .logout().permitAll().and()
-                .csrf().disable()
+        return http.authorizeHttpRequests(registry -> registry
+                        .requestMatchers("/webjars/**", "/css/**", "/js/**", "/registration/**", "/actuator/**").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(configurer -> configurer
+                        .loginPage("/login").permitAll()
+                        .successForwardUrl("/reservation").permitAll()
+                        .failureForwardUrl("/login"))
+                .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }
 

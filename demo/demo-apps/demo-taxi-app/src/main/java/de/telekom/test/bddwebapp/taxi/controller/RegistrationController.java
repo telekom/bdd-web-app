@@ -2,13 +2,12 @@ package de.telekom.test.bddwebapp.taxi.controller;
 
 import de.telekom.test.bddwebapp.taxi.controller.vo.RegistrationVO;
 import de.telekom.test.bddwebapp.taxi.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author Daniel Keiss {@literal <daniel.keiss@telekom.de>}
@@ -23,12 +22,12 @@ public class RegistrationController {
 
     private final UserService userService;
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @GetMapping("/registration")
     public String registration() {
         return "registration";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @PostMapping("/registration")
     public String addRegistration(RegistrationVO registration, HttpSession session) {
         userService.register(registration);
         session.setAttribute("registration", true);

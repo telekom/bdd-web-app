@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.taxi.controller;
 
 
-import de.telekom.test.bddwebapp.taxi.controller.validator.AuthenticationValidator;
 import de.telekom.test.bddwebapp.taxi.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +21,13 @@ import java.security.Principal;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ReservationController {
 
-    private final AuthenticationValidator authenticationValidator;
     private final ReservationService reservationService;
 
     @GetMapping("reservation")
     public String reservation(Principal principal, Model model) {
-        if (authenticationValidator.isAuthenticated(principal, model)) {
-            reservationService.getReservation(principal.getName()).ifPresent(reservation ->
-                    model.addAttribute("reservation", reservation));
-            return "reservation";
-        }
-        return "redirect:login";
+        reservationService.getReservation(principal.getName())
+                .ifPresent(reservation -> model.addAttribute("reservation", reservation));
+        return "reservation";
     }
 
 }
