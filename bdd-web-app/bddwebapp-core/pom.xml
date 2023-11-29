@@ -25,7 +25,7 @@
         <spring.version>6.0.11</spring.version> <!-- usable with spring-boot-starter-test 3.1.x -->
         <jackson.version>2.15.2</jackson.version>
         <restassured.version>5.3.1</restassured.version>
-        <logback-classic.version>1.4.11</logback-classic.version>
+        <logback-classic.version>1.4.12</logback-classic.version>
         <lombok.version>1.18.28</lombok.version>
         <guava.version>32.1.2-jre</guava.version>
         <commons-lang3.version>3.13.0</commons-lang3.version>
