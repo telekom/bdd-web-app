@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.telekom.test</groupId>
         <artifactId>bdd-web-app</artifactId>
-        <version>3.1</version>
+        <version>3.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>bddwebapp-jbehave</artifactId>
@@ -22,12 +22,13 @@
 
     <properties>
         <!-- Framework dependencies -->
-        <jbehave.version>5.1.1</jbehave.version>
+        <jbehave.version>5.2.0</jbehave.version>
         <jbehave-site-resources.version>3.5</jbehave-site-resources.version>
 
         <!-- Unit test dependencies -->
+        <junit-platform-launcher.version>1.10.0</junit-platform-launcher.version>
         <spock-core.version>2.4-M1-groovy-4.0</spock-core.version>
-        <byte-buddy.version>1.14.7</byte-buddy.version>
+        <byte-buddy.version>1.14.10</byte-buddy.version>
         <objenesis.version>3.3</objenesis.version>
     </properties>
 
@@ -81,6 +82,13 @@
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
             <!-- Testing -->
             <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-launcher</artifactId>
+                <version>${junit-platform-launcher.version}</version>
+                <scope>runtime</scope>
+            </dependency>
 
             <dependency>
                 <groupId>org.spockframework</groupId>
@@ -149,6 +157,11 @@
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
         <!-- Testing -->
         <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.spockframework</groupId>

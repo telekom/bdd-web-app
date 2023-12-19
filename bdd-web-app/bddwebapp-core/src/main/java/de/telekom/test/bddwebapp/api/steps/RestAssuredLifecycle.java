@@ -3,9 +3,9 @@ package de.telekom.test.bddwebapp.api.steps;
 import de.telekom.test.bddwebapp.api.RequestInteractionFilter;
 import de.telekom.test.bddwebapp.interaction.ScenarioInteraction;
 import io.restassured.RestAssured;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import jakarta.annotation.PostConstruct;
 
 import java.util.List;
 

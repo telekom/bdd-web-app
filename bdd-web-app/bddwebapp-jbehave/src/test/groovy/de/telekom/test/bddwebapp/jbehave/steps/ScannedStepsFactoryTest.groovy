@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.jbehave.steps
 
-import de.telekom.test.bddwebapp.jbehave.steps.ScannedStepsFactory
-import de.telekom.test.bddwebapp.jbehave.steps.Steps
+
 import org.jbehave.core.configuration.Configuration
 import org.jbehave.core.steps.InstanceStepsFactory
 import org.springframework.context.ApplicationContext

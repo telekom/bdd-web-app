@@ -1,12 +1,7 @@
 package de.telekom.test.bddwebapp.interaction
 
 import de.telekom.test.bddwebapp.interaction.flatinteractiontest.ComplexType
-import jdk.internal.misc.Unsafe
-import org.slf4j.Logger
 import spock.lang.Specification
-
-import static java.util.Arrays.asList
-import static org.apache.commons.lang3.reflect.FieldUtils.*
 
 /**
  * Unit test

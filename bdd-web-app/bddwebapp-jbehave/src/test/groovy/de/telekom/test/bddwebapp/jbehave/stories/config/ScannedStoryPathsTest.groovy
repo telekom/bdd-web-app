@@ -1,6 +1,6 @@
 package de.telekom.test.bddwebapp.jbehave.stories.config
 
-import de.telekom.test.bddwebapp.jbehave.stories.config.ScannedStoryPaths
+
 import org.jbehave.core.configuration.Configuration
 import org.jbehave.core.configuration.MostUsefulConfiguration
 import spock.lang.Specification

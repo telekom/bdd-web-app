@@ -1,7 +1,6 @@
 package de.telekom.test.bddwebapp.jbehave.steps
 
 import de.telekom.test.bddwebapp.interaction.StoryInteraction
-import de.telekom.test.bddwebapp.jbehave.steps.StoryInteractionParameterConverter
 import org.jbehave.core.model.ExamplesTable
 import spock.lang.Specification
 

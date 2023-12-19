@@ -5,16 +5,16 @@
 
     <groupId>de.telekom.test</groupId>
     <artifactId>jbehave-demo-taxi-test-htmlunit</artifactId>
-    <version>3.1</version>
+    <version>3.2-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
 
-        <bdd-web-app.version>3.1</bdd-web-app.version>
-        <jbehave.version>5.1.1</jbehave.version>
-        <commons-lang3.version>3.13.0</commons-lang3.version>
-        <htmlunit-driver.version>4.11.0</htmlunit-driver.version>
+        <bdd-web-app.version>3.2-SNAPSHOT</bdd-web-app.version>
+        <jbehave.version>5.2.0</jbehave.version>
+        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <htmlunit-driver.version>4.13.0</htmlunit-driver.version>
 
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
