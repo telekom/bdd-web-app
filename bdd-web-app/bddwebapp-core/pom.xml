@@ -22,7 +22,7 @@
 
     <properties>
         <!-- Framework dependencies -->
-        <spring.version>6.1.2</spring.version> <!-- usable with spring-boot-starter-test 3.2.x -->
+        <spring.version>6.1.5</spring.version> <!-- usable with spring-boot-starter-test 3.2.x -->
         <jackson.version>2.16.0</jackson.version>
         <restassured.version>5.4.0</restassured.version>
         <logback-classic.version>1.5.3</logback-classic.version>
