@@ -19,7 +19,7 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <!-- Deploy/Build dependencies -->
-        <maven-gpg-plugin.version>3.2.0</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.1</maven-gpg-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
