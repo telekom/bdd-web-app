@@ -28,7 +28,7 @@
         <!-- Unit test dependencies -->
         <junit-platform-launcher.version>1.10.2</junit-platform-launcher.version>
         <spock-core.version>2.4-M1-groovy-4.0</spock-core.version>
-        <byte-buddy.version>1.14.10</byte-buddy.version>
+        <byte-buddy.version>1.14.12</byte-buddy.version>
         <objenesis.version>3.3</objenesis.version>
     </properties>
 
