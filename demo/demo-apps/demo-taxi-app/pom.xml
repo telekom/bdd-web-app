@@ -6,15 +6,15 @@
     <parent>
         <groupId>de.telekom.test</groupId>
         <artifactId>demo-apps</artifactId>
-        <version>3.2</version>
+        <version>3.3</version>
     </parent>
 
     <artifactId>demo-taxi-app</artifactId>
-    <version>3.2</version>
+    <version>3.3</version>
 
     <properties>
         <jquery.version>3.7.1</jquery.version>
-        <bootstrap.version>5.3.2</bootstrap.version>
+        <bootstrap.version>5.3.3</bootstrap.version>
         <bcpg-jdk18on.version>1.77</bcpg-jdk18on.version>
         <commons-lang3.version>3.14.0</commons-lang3.version>
         <modelmapper.version>3.2.0</modelmapper.version>

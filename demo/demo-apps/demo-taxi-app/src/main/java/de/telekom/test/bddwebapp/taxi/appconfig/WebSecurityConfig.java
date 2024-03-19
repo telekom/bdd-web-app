@@ -32,8 +32,9 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin(configurer -> configurer
                         .loginPage("/login").permitAll()
-                        .successForwardUrl("/reservation").permitAll()
-                        .failureForwardUrl("/login"))
+                        .loginProcessingUrl("/perform-login")
+                        .defaultSuccessUrl("/reservation").permitAll()
+                        .failureForwardUrl("/login?error=true"))
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }

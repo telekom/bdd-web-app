@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.telekom.test</groupId>
         <artifactId>bdd-web-app</artifactId>
-        <version>3.2</version>
+        <version>3.3</version>
     </parent>
 
     <artifactId>bddwebapp-cucumber</artifactId>
