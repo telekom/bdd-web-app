@@ -11,16 +11,16 @@ Feature: Registration
   Scenario: Entering invalid registration data
     Given the opened registration page
     When the user register with
-      | firstName | lastName | userName                  | password |
-      | Hans      | M\u00fcller   | userName+$RANDOM+@test.de |          |
-      | Hans      | M\u00fcller   |                           | password |
+      | firstName | lastName | username                  | password |
+      | Hans      | Müller   | username+$RANDOM+@test.de |          |
+      | Hans      | Müller   |                           | password |
     Then the registration page is shown
     And the user receives the message that the registration data is invalid
 
   Scenario: Successful registration
     Given the opened registration page
     When the user register with
-      | firstName | lastName | userName                  | password |
-      | Hans      | M\u00fcller   | userName+$RANDOM+@test.de | password |
+      | firstName | lastName | username                  | password |
+      | Hans      | Müller   | username+$RANDOM+@test.de | password |
     Then the login page is shown
     And the user receives the registered message

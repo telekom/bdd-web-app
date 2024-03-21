@@ -24,10 +24,14 @@
             <div class="alert alert-success">You have successfully registered!</div>
         </div>
     </div>
-    <!--/*@thymesVar id="usernamePasswordInvalid" type="boolean"*/-->
-    <div th:if="${usernamePasswordInvalid}" class="row">
+    <div th:if="${param.error}" class="row">
         <div class="col-lg-6">
-            <div class="alert alert-warning">Your login data is invalid!</div>
+            <div class="alert alert-warning">The login data are invalid.</div>
+        </div>
+    </div>
+    <div th:if="${param.logout}" class="row">
+        <div class="col-lg-6">
+            <div class="alert alert-warning">You have been logged out.</div>
         </div>
     </div>
     <div class="row">

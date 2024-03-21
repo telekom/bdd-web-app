@@ -5,6 +5,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -29,8 +30,15 @@ public class RegistrationSteps extends AbstractTaxiSteps {
 
     @Given("registered user as {}")
     public void registeredUser(String testobject) {
-        testDataSimRequest().post("/testdata/user").then().statusCode(200);
-        storyInteraction.rememberObject(testobject, recallResponseAsMap());
+        theOpenedRegistrationPage();
+        Map<String, Object> registration = Map.of(
+                "firstName", "Max",
+                "lastName", "Mustermann",
+                "username", "max@mustermann" + randomNumeric(8) + ".de",
+                "password", "password1234"
+        );
+        theUserRegister(registration);
+        storyInteraction.rememberObject(testobject, registration);
     }
 
     @When("the user open the registration page")
@@ -48,7 +56,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
         RegistrationPage registrationPage = getCurrentPage();
         registrationPage.setFirstName(testData.get("firstName").toString());
         registrationPage.setLastName(testData.get("lastName").toString());
-        registrationPage.setUsername(testData.get("userName").toString());
+        registrationPage.setUsername(testData.get("username").toString());
         registrationPage.setPassword(testData.get("password").toString());
         registrationPage.submitRegistration();
     }

@@ -11,6 +11,10 @@
             <a class="navbar-brand" href="">Shared taxi</a>
         </li>
     </ul>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
 </nav>
 </body>
 </html>

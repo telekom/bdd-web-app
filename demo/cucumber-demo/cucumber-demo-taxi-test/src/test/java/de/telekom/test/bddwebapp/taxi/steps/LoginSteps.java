@@ -5,6 +5,7 @@ import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
 import static org.junit.Assert.assertTrue;
@@ -18,6 +19,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class LoginSteps extends AbstractTaxiSteps {
 
+    @Autowired
+    private RegistrationSteps registrationSteps;
+
     @Given("the opened login page")
     public void theOpenedLoginPage() {
         theUserOpensTheLoginPage();
@@ -26,13 +30,16 @@ public class LoginSteps extends AbstractTaxiSteps {
 
     @Given("logged in customer {}")
     public void loggedInCustomer(String testobject) {
-        testDataSimRequest().post("/testdata/user").then().statusCode(200);
-        storyInteraction.rememberObject(testobject, recallResponseAsMap());
-        theUserOpensTheLoginPage();
-        theLoginPageIsShown();
-        theUserLogsIn(storyInteraction.recallObjectNotNull(testobject, "username"),
-                storyInteraction.recallObjectNotNull(testobject, "password"));
-        createExpectedPage(ReservationPage.class);
+        if (storyInteraction.recallObjectNotNull(testobject, "username") != null) {
+            theUserOpensTheLoginPage();
+        } else {
+            registrationSteps.registeredUser(testobject);
+            theUserOpensTheLoginPage();
+            theLoginPageIsShown();
+            theUserLogsIn(storyInteraction.recallObjectNotNull(testobject, "username"),
+                    storyInteraction.recallObjectNotNull(testobject, "password"));
+            createExpectedPage(ReservationPage.class);
+        }
     }
 
     @When("the user opens the login page")

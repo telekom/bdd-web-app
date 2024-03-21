@@ -4,4 +4,4 @@ Feature: Reservation
   in order to use any discounts.
 
   Scenario: Reservation is not possible for the given period, because there are no offers available
-    Given example reservation between 10:00 and 10:30
+    Given reservation between 10:00 and 10:30

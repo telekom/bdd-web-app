@@ -18,7 +18,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
     private String taxiAppUrl;
 
-    @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
+    @Value("${reservation-api-sim.url:http://localhost:6000/reservation-api-sim}")
     private String testDataSimUrl;
 
     public void theReservationIsDeletedInTheSimulator() {
@@ -29,7 +29,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
                 .statusCode(200);
     }
 
-    @Given("example reservation between {} and {}")
+    @Given("reservation between {} and {}")
     public void exampleReservation(String earliestStartTime, String latestStartTime) {
         ReservationVO reservation = testDataSimRequest()
                 .given()

@@ -12,10 +12,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * For details see the file license on the toplevel.
  */
 @SpringBootApplication
-public class TestDataSimApplication extends SpringBootServletInitializer {
+public class ReservationApiSimApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestDataSimApplication.class, args);
+        SpringApplication.run(ReservationApiSimApplication.class, args);
     }
 
 }

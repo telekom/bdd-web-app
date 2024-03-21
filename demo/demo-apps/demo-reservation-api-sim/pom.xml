@@ -9,7 +9,7 @@
         <version>3.3</version>
     </parent>
 
-    <artifactId>demo-testdata-sim</artifactId>
+    <artifactId>demo-reservation-api-sim</artifactId>
     <version>3.3</version>
 
     <dependencies>
@@ -55,7 +55,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>testdata-sim</finalName>
+                    <finalName>reservation-api-sim</finalName>
                 </configuration>
             </plugin>
             <plugin>

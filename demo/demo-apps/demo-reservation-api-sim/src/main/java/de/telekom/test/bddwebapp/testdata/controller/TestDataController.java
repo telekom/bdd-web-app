@@ -1,13 +1,15 @@
 package de.telekom.test.bddwebapp.testdata.controller;
 
-import de.telekom.test.bddwebapp.testdata.builder.TestDataBuilder;
 import de.telekom.test.bddwebapp.testdata.config.ReservationSimulatorConfig;
-import de.telekom.test.bddwebapp.testdata.controller.vo.RegistrationVO;
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationEventVO;
 import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEntryVO;
+import de.telekom.test.bddwebapp.testdata.controller.vo.ReservationPriceEventVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Manage the lifecycle of test data.
@@ -23,17 +25,19 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TestDataController {
 
-    private final TestDataBuilder testDataBuilder;
     private final ReservationSimulatorConfig reservationSimulatorConfig;
-
-    @PostMapping("user")
-    public RegistrationVO createNewUser() {
-        return testDataBuilder.createNewUser();
-    }
 
     @PostMapping("reservation")
     public ReservationEventVO createExampleReservation(@RequestParam String earliestStartTime, @RequestParam String latestStartTime) {
-        var reservation = testDataBuilder.createExampleReservation(earliestStartTime, latestStartTime);
+        var reservation = new ReservationEventVO();
+        var tomorrow = new Date(new Date().getTime() + 86400000L);
+        reservation.setDate(new SimpleDateFormat("dd.MM.yyyy").format(tomorrow));
+        reservation.setDeparture("Alexanderplatz, Berlin");
+        reservation.setDestination("Flughafen Berlin-Tegel");
+        reservation.setEarliestStartTime(earliestStartTime);
+        reservation.setLatestStartTime(latestStartTime);
+        reservation.setReservationPriceEvent(new ReservationPriceEventVO("Update reservation price event"));
+
         reservationSimulatorConfig.setCurrentReservation(reservation);
         return reservation;
     }

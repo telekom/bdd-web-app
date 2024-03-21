@@ -22,12 +22,12 @@ public class RegistrationController {
 
     private final UserService userService;
 
-    @GetMapping("/registration")
+    @GetMapping("registration")
     public String registration() {
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("registration")
     public String addRegistration(RegistrationVO registration, HttpSession session) {
         userService.register(registration);
         session.setAttribute("registration", true);

@@ -5,7 +5,7 @@ in order to use any discounts.
 
 Scenario: Reservation is not possible for the given period, because there are no offers available
 Given logged in customer user
-And example reservation between 10:00 and 10:30
+And reservation between 10:00 and 10:30
 When reserve a shared taxi
 Then the reservation is not successful
 

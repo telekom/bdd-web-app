@@ -35,7 +35,7 @@ public class ReservationSteps extends AbstractTaxiSteps {
                 .statusCode(200);
     }
 
-    @Given("example reservation between $earliestStartTime and $latestStartTime")
+    @Given("reservation between $earliestStartTime and $latestStartTime")
     public void exampleReservation(String earliestStartTime, String latestStartTime) {
         var reservation = testDataSimJsonRequest()
                 .given()

@@ -4,6 +4,7 @@ import de.telekom.test.bddwebapp.taxi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -38,7 +39,7 @@ public class CollectiveTaxiAuthenticationProvider implements AuthenticationProvi
         if (isAuthenticationValid(authentication)) {
             return authenticated(authentication.getPrincipal(), authentication.getCredentials(), List.of(ROLE_USER));
         } else {
-            return unauthenticated(authentication.getPrincipal(), authentication.getCredentials());
+            throw new BadCredentialsException("Wrong Credentials");
         }
     }
 

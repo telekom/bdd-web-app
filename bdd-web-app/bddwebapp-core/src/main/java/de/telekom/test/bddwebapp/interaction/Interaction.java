@@ -85,11 +85,11 @@ interface Interaction {
         rememberObject(entityKey.toString(), objectKey, value);
     }
 
-    default void rememberObject(String entityKey, Map<String, Object> object) {
+    default void rememberObject(String entityKey, Map<String, ?> object) {
         remember(entityKey, object);
     }
 
-    default void rememberObject(Enum entityKey, Map<String, Object> object) {
+    default void rememberObject(Enum entityKey, Map<String, ?> object) {
         remember(entityKey.toString(), object);
     }
 

@@ -29,7 +29,7 @@
 
     <modules>
         <module>demo-taxi-app</module>
-        <module>demo-testdata-sim</module>
+        <module>demo-reservation-api-sim</module>
     </modules>
 
 </project>

@@ -22,7 +22,7 @@ import java.util.function.Function;
  * For details see the file license on the toplevel.
  */
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/reservation")
 public class ReservationApiController {
 
     private final ReservationSimulatorConfig reservationSimulatorConfig;
@@ -31,14 +31,14 @@ public class ReservationApiController {
         this.reservationSimulatorConfig = reservationSimulatorConfig;
     }
 
-    @PostMapping(path = "reservations")
+    @PostMapping
     public Mono<ReservationPriceEventVO> createReservation(@Valid ReservationEventVO reservation) {
         ReservationEventVO reserve = reservationSimulatorConfig.reserve(reservation);
         return Mono.just(reserve.getReservationPriceEvent());
     }
 
-    @GetMapping(path = "reservations/{username}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<ReservationPriceEventVO> getReservations(@PathVariable String username) {
+    @GetMapping(path = "{userId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ReservationPriceEventVO> getReservations(@PathVariable Long userId) {
         return Flux.interval(Duration.ofSeconds(1))
                 .map(currentReservationPriceEvent())
                 .distinctUntilChanged();

@@ -27,21 +27,16 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(registry -> registry
-                        .requestMatchers("/webjars/**", "/css/**", "/js/**", "/registration/**", "/actuator/**").permitAll()
+        return http
+                .authorizeHttpRequests(registry -> registry
+                        .requestMatchers("/webjars/**", "/css/**", "/js/**", "/registration/**", "/api/registration/**","/actuator/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(configurer -> configurer
                         .loginPage("/login").permitAll()
-                        .loginProcessingUrl("/perform-login")
-                        .defaultSuccessUrl("/reservation").permitAll()
-                        .failureForwardUrl("/login?error=true"))
-                .csrf(AbstractHttpConfigurer::disable)
+                        .defaultSuccessUrl("/reservation"))
+                .logout(LogoutConfigurer::permitAll)
+                .authenticationProvider(authenticationProvider)
                 .build();
-    }
-
-    @Autowired
-    protected void configureAuthenticationProvider(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(authenticationProvider);
     }
 
 }

@@ -3,9 +3,11 @@ Feature: Reservation
   I would like to be able to make reservations for collective tickets for certain routes in certain time periods
   in order to use any discounts.
 
-  Scenario: Reservation is not possible for the given period, because there are no offers available
+  Background:
     Given logged in customer user
-    And example reservation between 10:00 and 10:30
+    And reservation between 10:00 and 10:30
+
+  Scenario: Reservation is not possible for the given period, because there are no offers available
     When reserve a shared taxi
     Then the reservation is not successful
 

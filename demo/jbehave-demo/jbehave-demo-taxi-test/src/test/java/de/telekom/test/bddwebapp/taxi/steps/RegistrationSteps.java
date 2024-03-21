@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Map;
 
 import static de.telekom.test.bddwebapp.frontend.util.UrlAppender.appendUrl;
+import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -28,15 +29,22 @@ public class RegistrationSteps extends AbstractTaxiSteps {
     private StoryInteractionParameterConverter storyInteractionParameterConverter;
 
     @Given("the opened registration page")
-    public void theOpenRegistrationPage() {
+    public void theOpenedRegistrationPage() {
         theUserOpenTheRegistrationPage();
         theRegistrationPageIsShown();
     }
 
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
-        testDataSimJsonRequest().post("/testdata/user").then().statusCode(200);
-        storyInteraction.rememberObject(testobject, recallResponseAsMap());
+        theOpenedRegistrationPage();
+        Map<String, String> registration = Map.of(
+                "firstName", "Max",
+                "lastName", "Mustermann",
+                "username", "max@mustermann" + randomNumeric(8) + ".de",
+                "password", "password1234"
+        );
+        theUserRegister(registration);
+        storyInteraction.rememberObject(testobject, registration);
     }
 
     @When("the user open the registration page")
@@ -53,7 +61,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
         RegistrationPage registrationPage = getCurrentPage();
         registrationPage.setFirstName(testData.get("firstName"));
         registrationPage.setLastName(testData.get("lastName"));
-        registrationPage.setUsername(testData.get("userName"));
+        registrationPage.setUsername(testData.get("username"));
         registrationPage.setPassword(testData.get("password"));
         registrationPage.submitRegistration();
     }

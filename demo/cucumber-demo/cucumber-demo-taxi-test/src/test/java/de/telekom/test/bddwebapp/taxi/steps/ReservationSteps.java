@@ -3,6 +3,7 @@ package de.telekom.test.bddwebapp.taxi.steps;
 import de.telekom.test.bddwebapp.taxi.pages.ReservationPage;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationPriceVO;
 import de.telekom.test.bddwebapp.taxi.steps.testdata.ReservationVO;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,9 +28,10 @@ public class ReservationSteps extends AbstractTaxiSteps {
     @Value("${taxi-app.url:http://localhost:5000/taxi-app}")
     private String taxiAppUrl;
 
-    @Value("${testdata-sim.url:http://localhost:6000/testdata-sim}")
+    @Value("${reservation-api-sim.url:http://localhost:6000/reservation-api-sim}")
     private String testDataSimUrl;
 
+    @Before
     public void theReservationIsDeletedInTheSimulator() {
         testDataSimRequest()
                 .when()
@@ -38,8 +40,8 @@ public class ReservationSteps extends AbstractTaxiSteps {
                 .statusCode(200);
     }
 
-    @Given("example reservation between {} and {}")
-    public void exampleReservation(String earliestStartTime, String latestStartTime) {
+    @Given("reservation between {} and {}")
+    public void reservation(String earliestStartTime, String latestStartTime) {
         ReservationVO reservation = testDataSimRequest()
                 .given()
                 .queryParam("earliestStartTime", earliestStartTime)
