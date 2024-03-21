@@ -37,7 +37,7 @@ public class RegistrationSteps extends AbstractTaxiSteps {
     @Given("registered user as $testobject")
     public void registeredUser(String testobject) {
         theOpenedRegistrationPage();
-        Map<String, String> registration = Map.of(
+        Map<String, Object> registration = Map.of(
                 "firstName", "Max",
                 "lastName", "Mustermann",
                 "username", "max@mustermann" + randomNumeric(8) + ".de",
@@ -57,12 +57,12 @@ public class RegistrationSteps extends AbstractTaxiSteps {
         storyInteractionParameterConverter.getRowsWithInteractionKey(testData).forEach(this::theUserRegister);
     }
 
-    private void theUserRegister(Map<String, String> testData) {
+    private void theUserRegister(Map<String, ?> testData) {
         RegistrationPage registrationPage = getCurrentPage();
-        registrationPage.setFirstName(testData.get("firstName"));
-        registrationPage.setLastName(testData.get("lastName"));
-        registrationPage.setUsername(testData.get("username"));
-        registrationPage.setPassword(testData.get("password"));
+        registrationPage.setFirstName(testData.get("firstName").toString());
+        registrationPage.setLastName(testData.get("lastName").toString());
+        registrationPage.setUsername(testData.get("username").toString());
+        registrationPage.setPassword(testData.get("password").toString());
         registrationPage.submitRegistration();
     }
 

@@ -6,11 +6,11 @@
     <parent>
         <groupId>de.telekom.test</groupId>
         <artifactId>demo-apps</artifactId>
-        <version>3.3</version>
+        <version>3.2</version>
     </parent>
 
     <artifactId>demo-taxi-app</artifactId>
-    <version>3.3</version>
+    <version>3.2</version>
 
     <properties>
         <jquery.version>3.7.1</jquery.version>
